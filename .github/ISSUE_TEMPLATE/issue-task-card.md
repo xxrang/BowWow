@@ -7,15 +7,6 @@ assignees: ''
 
 ---
 
-# Team Rules: 
-
-### PR 형식
-- [Client] / #88 / edit: readme
-
-### Commit message 형식 - :zap:gitmoji:fire:
-- [title] / body
-- edit: readme
-
 ### Issue 형식
 - [title] / body
 - Issue Card
@@ -38,19 +29,3 @@ assignees: ''
 > - Group: 'client', 'sever'. 
 > - Sprint: 'Sprint_NUMBER__'. 
 > - Urgency: 'High', 'Middle', 'Low'. 
-
-### branch 이름 형식 -
- - feat/login
-
-### 변수 이름 - Camel-case
- - clientLogin
-
-### 파일 & 생성자 이름 - Pascal-case
- - ClientSide
-
-### node & npm 버전 통일 
-- Node v14.17.3
-- NPM v6.14.13
-
-### lint - 
- - recommended
