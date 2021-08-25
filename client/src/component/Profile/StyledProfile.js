@@ -2,19 +2,20 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const StyeldProfile = styled.div`
-  margin: 0;
+  margin: 0 auto;
   box-sizing: border-box;
   padding: 0;
   font-size: 16px;
   padding: 0;
-  height: 100vh;
+  height: 80vh;
   width: 375px;
-  margin: 60px auto;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
 `;
 
 export const StyledProfileInfo = styled.div`
+  box-sizing: border-box;
   /* border: 1px solid black; */
   width: 375px;
   height: 200px;
@@ -84,11 +85,14 @@ export const ProfileBtnLink = styled(Link)`
 `;
 
 export const StyledProfileList = styled.div`
+  > h2 {
+    margin: 15px 0 10px 0;
+  }
   > .list-item-scroll {
     box-sizing: border-box;
-    padding-top: 5px;
+    padding: 15px 0;
     width: 100%;
-    height: 580px;
+    height: 420px;
     /* background: green; */
     overflow: hidden;
     overflow-y: auto;
