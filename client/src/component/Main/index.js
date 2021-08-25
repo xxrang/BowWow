@@ -12,8 +12,8 @@ const Home = () => {
 
   ScrollReveal().reveal('.paw1', { delay: 300 });
   ScrollReveal().reveal('.paw2', { delay: 600 });
-  ScrollReveal().reveal('.paw3', { delay: 1000 }); 
-  ScrollReveal().reveal('.rightBox', { delay: 1400 }); 
+  ScrollReveal().reveal('.paw3', { delay: 900 }); 
+  ScrollReveal().reveal('.rightBox', { delay: 1300 }); 
 
   return (
     <StyledMain>

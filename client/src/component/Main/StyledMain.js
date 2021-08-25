@@ -41,7 +41,7 @@ export const StyledMain  = styled.div`
       width: 150px;
       height: 50px;
       color: #fff;
-      border-radius: 10px 20px;
+      border-radius: 5px;
       margin-top: 30px;
       padding: 10px 25px;
       font-family: 'Ubuntu', sans-serif;
