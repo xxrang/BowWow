@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledUserImgUpload } from "./styledSignUp";
+import { StyledUserImgUpload } from "./StyledSignUp";
 
 const UserImgUpload = ({ userImage, imageHandler }) => {
   return (
@@ -8,13 +8,12 @@ const UserImgUpload = ({ userImage, imageHandler }) => {
       <div className="image-container">
         <label htmlFor="input-image">
           <div className="image-wrapper">
-            <img src={userImage} alt="user-image" />
+            <img src={userImage} alt="user-photo" />
           </div>
         </label>
         <input
           type="file"
           id="input-image"
-          type="file"
           accept="image/jpeg,jpg,svg"
           onChange={imageHandler}
         />
