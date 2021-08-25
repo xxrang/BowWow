@@ -39,11 +39,13 @@ export const StyledNavBar = styled.nav`
       padding-right: 30px;
     >a>button{
       margin : 0 5px;
+      width: 80px;
+      height : 40px;
       border:none;
-      padding :10px 15px;
       border-radius: 10px;
       background: white;
       font-family: lato;
+      font-size : 16px;
     }
   }
 }

@@ -12,6 +12,7 @@ const NavBar = () => {
           <Link to = '/search'><li>Search</li></Link>
           <Link to = '/volunteer'><li>Volunteer</li></Link>
         </div>
+        
         <div className = 'rightNav'>
           <Link to = '/login'><button>Login</button></Link>
           <Link to = '/signup'><button>Signup</button></Link>
