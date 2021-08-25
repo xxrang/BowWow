@@ -1,20 +1,44 @@
-/*기본색상 : #48cfad*/
-
+/*기본색상 : #48cfad
+color:#bcf1e4;
+*/
 html,body{
   margin : 0 ; padding : 0;
   box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
+  /*font-family: 'Lato', sans-serif;*/
 }
-
 /*
-font-family: 'Nanum Gothic Coding', monospace;
-font-family: 'Ubuntu', sans-serif;
+font-family: 'Nanum Gothic Coding', monospace; 
+font-family: 'Ubuntu', sans-serif; ->큰 영문글씨
 */
-
 button:active, button:focus , input:active,input:focus{
   outline :none;
 }
 button {
   cursor: pointer;
 }
-
+/*
+const showPaws = keyframes`
+  from{
+    opacity : 0;
+    transform: translateY(-10px) scale(0.5);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+`   
+const showRightBox = keyframes`
+  from{
+    opacity : 0;
+    transform: translateX(-10px) ;
+  }
+  to{
+    opacity: 1;
+    transform: translateX(0) ;
+  }
+` 
+animation: ${showRightBox} 0.5s;
+animation-delay : 1.5s;
+animation-timing-function: cubic-bezier(1,2,3,4);
+animation-fill-mode: both;
+*/

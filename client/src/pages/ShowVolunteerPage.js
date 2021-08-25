@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ShowVolunteer = () => {
+function ShowVolunteerPage() {
   return (
     <div>
       ShowVolunteer
@@ -8,4 +8,4 @@ const ShowVolunteer = () => {
   )
 }
 
-export default ShowVolunteer
+export default ShowVolunteerPage

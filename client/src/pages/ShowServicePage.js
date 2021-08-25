@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ShowService = () => {
+function ShowServicePage() {
   return (
     <div>
       ShowService
@@ -8,4 +8,4 @@ const ShowService = () => {
   )
 }
 
-export default ShowService
+export default ShowServicePage
