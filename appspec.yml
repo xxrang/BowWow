@@ -3,10 +3,6 @@ os: linux
 files:
   - source: /
     destination: /home/ubuntu/BowWow
-<<<<<<< HEAD
-=======
-
->>>>>>> 1f03379c512c2fd39d7e1ba71102f535491a4f8c
 hooks:
   ApplicationStop:
     - location: scripts/stop.sh
