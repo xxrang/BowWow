@@ -1,7 +1,7 @@
 ---
 name: KPT 회고 이슈카드 마크다운 템플릿
 about: KPT 회고 이슈카드 마크다운 템플릿
-title: KPT 회고 이슈카드 마크다운 템플릿
+title: 'Issue: 이슈카드 마크다운 템플릿'
 labels: ''
 assignees: ''
 
