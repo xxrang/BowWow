@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const StyledSignUp = styled.div`
   margin: 0;
@@ -93,7 +93,7 @@ export const StyledSignUp = styled.div`
   }
 `;
 
-export const NavBtnLink = styled(Link)`
+export const BtnLink = styled(Link)`
   box-sizing: border-box;
 
   background: #fff;

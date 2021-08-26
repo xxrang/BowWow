@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { StyledSignUp, NavBtnLink, ErrorMessage } from "./StyledSignUp";
+import {StyledSignUp, BtnLink,ErrorMessage } from './StyledSignUp'
 import { useForm } from 'react-hook-form';
 import camera from '../../images/bros_blank.jpg'
 import UserImgUpload from './UserImgUpload';
@@ -62,7 +62,7 @@ const SignUp = () => {
         />
         <div className="button-wapper">
           <button type="submit">확인</button>
-          <NavBtnLink to="/">취소</NavBtnLink>
+          <BtnLink to="/">취소</BtnLink>
         </div>
       </form>
     </StyledSignUp>
