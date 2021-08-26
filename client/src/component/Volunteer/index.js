@@ -10,7 +10,7 @@ const Volunteer = () => {
   return (
     <StyledVolunteer>
       <VolunteerList volunteerDog = {volunteerDog}/>
-      <button>More</button>
+      <button className = 'more-btn'>More</button>
     </StyledVolunteer>
   )
 }

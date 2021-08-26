@@ -6,19 +6,19 @@ export const StyledService = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  >.moreBtn,.postBtn{
+  >.more-btn,.post-btn{
     background:#48CFAD ;
     border : none;
     border-radius: 10px;
-    padding: 20px;
     color:white;
+    padding : 10px;
   }
-  >.moreBtn{
+  >.more-btn{
     margin : -20px auto;
     width : 100px;
     font-size: 16px;
   }
-  >.postBtn{
+  >.post-btn{
     width : 100px;
     height : 100px;
     border-radius: 0 0 100px 0;
@@ -32,7 +32,7 @@ export const StyledService = styled.section`
   }
   >button:hover{
       background: #fff;
-      border: 2px solid #48CFAD;
+      border: 1px solid #48CFAD;
       color: #48CFAD;
       transition: all 0.3s ease;
     }
@@ -48,10 +48,12 @@ export const StyledServiceList = styled.div`
 export const StyledServiceListItem = styled.div`
 >div{
   margin: 0 auto;
+  text-align: center;
   padding: 15px;
+  overflow: hidden;
   box-sizing: border-box;
   width: 95%;
-  height: 200px;
+  height: 220px;
   border-radius: 8px;
   background: #fff;
   margin-bottom: 12px;
@@ -62,9 +64,10 @@ export const StyledServiceListItem = styled.div`
   &:hover{
     transform: scale(1.1);
     }
-    >img{
-    width : 90%;
-    height : 60%;
+  >img {
+    width: 100%;
+    height: 70%;
+    object-fit: contain;
   }
-  }
+}
 `

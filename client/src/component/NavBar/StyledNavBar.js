@@ -6,6 +6,7 @@ export const StyledNavBar = styled.nav`
   background :linear-gradient(45deg, #48cfad , #37BC9B) ;
   position : sticky;
   top:0;
+  z-index:10000;
 
 >ul{
   display: flex;

@@ -7,10 +7,11 @@ const Service = () => {
 
   const [ serviceImg, setServiceImg ] = useState(dummySample);
   return (
-    <StyledService>
-      <button className ='postBtn'><p>Post</p></button>
-      <ServiceList serviceImg = {serviceImg}/>
-      <button className ='moreBtn' >More</button>
+    <StyledService id = 'service-container'>
+      <button className ='post-btn'><p>Post</p></button>
+      <ServiceList 
+      serviceImg = {serviceImg} />
+      <button className ='more-btn'>More</button>
     </StyledService>
   );
 }

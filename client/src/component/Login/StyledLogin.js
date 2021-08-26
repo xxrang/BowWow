@@ -60,7 +60,6 @@ export const StyledLogin = styled.div`
       border-radius: 2px;
       white-space: nowrap;
       margin-top: 10px;
-      padding-bottom: 20px;
       width: 320px;
       height: 40px;
       font-size: 16px;
