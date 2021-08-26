@@ -12,8 +12,9 @@ const NavBar = () => {
           <Link to = '/search'><li>Search</li></Link>
           <Link to = '/volunteer'><li>Volunteer</li></Link>
         </div>
+        
         <div className = 'rightNav'>
-          <Link to = '/login'><button>Login</button></Link>
+          <button>Login</button>
           <Link to = '/signup'><button>Signup</button></Link>
         </div>
       </ul>
