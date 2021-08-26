@@ -23,10 +23,13 @@ export const StyledNavBar = styled.nav`
       }
       >li{
         list-style: none;
-        margin : 0 10px;
+        margin : 0 15px;
         font-size: 18px;
         color :white;
         font-family: lato;
+        &:hover{
+          transform: scale(1.1)
+        }
       }
     }
   }
@@ -38,7 +41,9 @@ export const StyledNavBar = styled.nav`
       justify-content: flex-end;
       padding-right: 30px;
     >a>button{
+      color : #48cfad;
       margin : 0 5px;
+      padding-bottom : 5px;
       width: 80px;
       height : 40px;
       border:none;
@@ -46,6 +51,10 @@ export const StyledNavBar = styled.nav`
       background: white;
       font-family: lato;
       font-size : 16px;
+      &:hover{
+          background-color: #48cfad;
+          color : white;
+        }
     }
   }
 }
