@@ -1,10 +1,17 @@
 import React from 'react'
+import {StyledVolunteerListItem} from './StyledVoluteer'
 
-const VolunteerListItem = () => {
+const VolunteerListItem = ({volunteerDog}) => {
+  console.log(volunteerDog)
   return (
-    <div>
-      VolunteerListItem
-    </div>
+    <StyledVolunteerListItem>
+      {volunteerDog.map((el)=>{
+        return <div key = {el.id}>
+          <img src = {el.image} alt = 'dog-img'/>
+          <p>{el.id}번째 강아지</p>
+        </div>
+      })}
+    </StyledVolunteerListItem>
   )
 }
 

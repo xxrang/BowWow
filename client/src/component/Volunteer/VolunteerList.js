@@ -1,10 +1,13 @@
 import React from 'react'
+import VolunteerListItem from './VolunteerListItem'
+import {StyledVolunteerList} from './StyledVoluteer'
 
-const VolunteerList = () => {
+const VolunteerList = ({volunteerDog}) => {
+  //console.log(volunteerDog)
   return (
-    <div>
-      VolunteerList
-    </div>
+    <StyledVolunteerList>
+        <VolunteerListItem volunteerDog = {volunteerDog}/>
+    </StyledVolunteerList>
   )
 }
 
