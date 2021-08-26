@@ -40,7 +40,7 @@ export const StyledNavBar = styled.nav`
       align-items: center;
       justify-content: flex-end;
       padding-right: 30px;
-    >a>button{
+    >a>button, button{
       color : #48cfad;
       margin : 0 5px;
       padding-bottom : 5px;
