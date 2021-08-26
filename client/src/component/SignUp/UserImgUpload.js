@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledUserImgUpload } from "./styledSignUp";
+import { StyledUserImgUpload } from "./StyledSignUp";
 
 const UserImgUpload = ({ userImage, imageHandler }) => {
   return (
