@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Search = () => {
+function LoginPage() {
   return (
     <div>
-      Search
+      Login모달
     </div>
   )
 }
 
-export default Search
+export default LoginPage

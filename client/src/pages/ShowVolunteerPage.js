@@ -1,7 +1,11 @@
 import React from 'react'
 
-const ShowVolunteerPage = () => {
-  return <div>ShowVolunteer</div>;
-};
+function ShowVolunteerPage() {
+  return (
+    <div>
+      ShowVolunteer
+    </div>
+  )
+}
 
-export default ShowVolunteerPage;
+export default ShowVolunteerPage

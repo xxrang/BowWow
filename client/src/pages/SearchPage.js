@@ -1,7 +1,7 @@
 import React from 'react'
 import NavBar from '../component/NavBar'
 
-function VolunteerPage() {
+function SearchPage() {
   return (
     <div>
       <NavBar/>
@@ -9,4 +9,4 @@ function VolunteerPage() {
   )
 }
 
-export default VolunteerPage
+export default SearchPage

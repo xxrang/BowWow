@@ -1,12 +1,11 @@
 import React from 'react'
-import Profile from '../component/Profile';
-import Footer from '../component/Footer';
 
 const ProfilePage = () => {
-  return <>
-    <Profile />
-    <Footer />
-  </>;
+  return (
+    <div>
+      Profile
+    </div>
+  )
 }
 
 export default ProfilePage
