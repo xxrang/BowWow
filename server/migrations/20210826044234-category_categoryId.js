@@ -2,20 +2,15 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add altering commands here.
-     *
-     * Example:
-     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
-     */
+  
      // field 추가
-     await queryInterface.addColumn('category_contents', 'WOWId', Sequelize.INTEGER);
+     await queryInterface.addColumn('category_contents', 'categoy_id', Sequelize.INTEGER);
 
      // foreign key 연결
      await queryInterface.addConstraint('category_contents', {
-       fields: ['WOWId'],
+       fields: ['categoy_id'],
        type: 'foreign key',
-       name: 'FK_any_name_you_want',
+       name: 'FK_category_categoy_id',
        references: {
          table: 'categories',
          field: 'id'
@@ -26,11 +21,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.removeConstraint('category_contents', 'FK_any_name_you_want');
+    await queryInterface.removeColumn('category_contents', 'categoy_id');
   }
 };
