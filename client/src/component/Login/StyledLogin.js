@@ -18,7 +18,6 @@ const showModalBg = keyframes`
     opacity: 1;
   }
 `
-
 const tickle = keyframes`
   0% {
     transform: translateX(-20%);
