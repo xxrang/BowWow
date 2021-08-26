@@ -1,5 +1,5 @@
 import React from 'react';
-import { FooterContainer, LinkBtn } from "./StyledFooter";
+import { FooterContainer } from "./StyledFooter";
 
 const Footer = () => {
   
@@ -14,13 +14,13 @@ const Footer = () => {
         </div>
         <div className="admin-link">
           <span>공동 대표: </span>
-          <LinkBtn to="https://github.com/dydwns2441">허용준 GitHub |</LinkBtn>
-          <LinkBtn to="https://github.com/22sook00.com">
+          <a href="https://github.com/dydwns2441">허용준 GitHub |</a>
+          <a href="https://github.com/22sook00.com">
             {" "}
             이숙영 GitHub |
-          </LinkBtn>
-          <LinkBtn to="https://github.com/xxrang"> 이재랑 GitHub |</LinkBtn>
-          <LinkBtn to="https://github.com/Oh-Myeongjae"> 오명재 GitHub</LinkBtn>
+          </a>
+          <a href="https://github.com/xxrang"> 이재랑 GitHub |</a>
+          <a href="https://github.com/Oh-Myeongjae"> 오명재 GitHub</a>
         </div>
         <small>BowWow © {new Date().getFullYear()} All rights reserved.</small>
       </div>

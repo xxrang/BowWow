@@ -37,14 +37,19 @@ export const FooterContainer = styled.div`
       color: #8c8c8c;
     }
 
-    > .admin-link span, small{
+    > .admin-link span,
+    small {
       color: #8c8c8c;
+    }
+
+    > .admin-link a {
+      text-decoration: none;
+      color: #8c8c8c;
+      cursor: pointer;
     }
   }
 `;
 
 export const LinkBtn = styled(Link)`
-  text-decoration: none;
-  color: #8c8c8c;
-  cursor: pointer;
+  
 `;
