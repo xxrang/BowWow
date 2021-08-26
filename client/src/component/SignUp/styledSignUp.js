@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const StyledSignUp = styled.div`
@@ -170,7 +170,6 @@ export const StyledUserImgUpload = styled.div`
     margin-left: 20px;
     padding-right: 15px;
   }
-
 `;
 
 export const ErrorMessage = styled.p`
