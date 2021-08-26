@@ -3,8 +3,8 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser');
 //express의 req객체에 cookies 속성 부여
 const app = express();
-const port = 80;
-require('dotenv').config();
+const port = 4000;
+require('dotenv').config('');
 //env 환경변수 읽어냄
 
 const controllers = require('./controllers');
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 //req에 body 속성 추가해서 req.body 접근 가능하게 하고 중첩된 객체 표현 허용 x 객체 안에 객체 파싱할 수 있게 하려면 true로 변경
 
 app.use(cors({
-  origin: true,
+  origin: '*',
   credentials: true,
   methods: ['GET','POST','OPTIONS','DELETE','PATCH']
 }))
@@ -45,12 +45,13 @@ app.get('/auth', controllers.auth); //토큰 인증 관련
 app.get('/shelter', controllers.search); //지도 API
 
 /** 유기견 관련 API */
-app.get('/posts/service_list', controllers.service_list); //유기견 게시글 전체 혹은 하나만 보여주기
-app.post('/posts/service_list', controllers.service_list); //유기견 게시글 작성하기
+const service = require('./controllers/posts/Service_list')(app);
+app.use('/posts/service_list', service);
 
 /** 봉사일정 관련 API */
-app.get('/posts/volunteer_list', controllers.volunteer_list); //봉사일정 게시글 전체 혹은 하나만 보여주기
-app.post('/posts/volunteer_list', controllers.volunteer_list); //봉사일정 게시글 작성하기
+const volunteer = require('./controllers/posts/Volunteer_list')(app);
+app.use('/posts/volunteer_list', volunteer);
+
 app.delete('/posts', controllers.post_delete); //게시글 삭제
 
 /** 댓글 API **/
