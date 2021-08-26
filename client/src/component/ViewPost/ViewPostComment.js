@@ -14,7 +14,7 @@ function ViewPostComment({inputRef,comment,commentList,submitComment,handleChang
         <textarea 
         ref = {inputRef} 
         onChange = {handleChangeComment} value = {comment}
-        className = 'post-comment-input' 
+        className = 'post-comment-text' 
         type = 'text' placeholder = '댓글 입력...'/>
       </form>
       <button onClick = {submitComment}
