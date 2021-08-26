@@ -14,7 +14,6 @@ const UserImgUpload = ({ userImage, imageHandler }) => {
         <input
           type="file"
           id="input-image"
-          type="file"
           accept="image/jpeg,jpg,svg"
           onChange={imageHandler}
         />
