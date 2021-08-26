@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import {StyledSignUp, BtnLink,ErrorMessage } from './StyledSignUp'
 import { useForm } from 'react-hook-form';
-import camera from '../../images/bros_blank.jpg'
+import camera from '../../images/bros_blank.jpeg'
 import UserImgUpload from './UserImgUpload';
 
 const SignUp = () => {

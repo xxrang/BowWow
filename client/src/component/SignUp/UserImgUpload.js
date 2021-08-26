@@ -7,18 +7,23 @@ const UserImgUpload = ({ userImage, imageHandler }) => {
       <h3>유저 사진</h3>
       <div className="image-container">
         <label htmlFor="input-image">
+          <div className="image-wrapper">
+            <img src={userImage} alt="user-image" />
+          </div>
         </label>
         <input
           type="file"
           id="input-image"
           accept="image/jpeg,jpg,svg"
+          onChange={imageHandler}
         />
         <div className="img-condition">
           <p>
             등록조건
             <br />
             170x280(px), 25KB 이하,
-            <br />jpg, jpeg, png만 가능
+            <br />
+            jpg, jpeg, png만 가능
           </p>
         </div>
       </div>

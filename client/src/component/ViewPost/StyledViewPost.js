@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const StyledViewPost = styled.div`
   box-sizing: border-box;
-  margin: 50px 220px;
+  margin: 50px auto;
   display: grid;
   height: 63vh;
   width: 70%;

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react'
 import { StyledProfileInfo, ProfileBtnLink } from "./StyledProfile";
-import userPhotos from '../../images/bros_blank.jpg'
+import userPhotos from '../../images/bros_blank.jpeg'
 
 const ProfileInfo = () => {
   return (
