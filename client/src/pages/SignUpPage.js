@@ -1,10 +1,15 @@
 import React from 'react'
+import NavBar from '../component/NavBar';
+import SignUp from '../component/SignUp';
+import Footer from '../component/Footer';
 
 function SignUpPage() {
   return (
-    <div>
-      SignUp
-    </div>
+    <>
+      <NavBar />
+      <SignUp />
+      <Footer />
+    </>
   )
 }
 
