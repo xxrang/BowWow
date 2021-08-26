@@ -1,11 +1,13 @@
 import React from 'react'
+import Footer from '../component/Footer';
 import SignUp from '../component/SignUp';
 
 const SignUpPage = () => {
   return (
-    <div>
+    <>
       <SignUp />
-    </div>
+      <Footer />
+    </>
   );
 };
 

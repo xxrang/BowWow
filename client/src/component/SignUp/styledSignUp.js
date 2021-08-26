@@ -67,18 +67,20 @@ export const StyledSignUp = styled.div`
   > form button {
     border-radius: 10px;
     white-space: nowrap;
-    padding: 12px 30px;
+    margin-right: 10px;
+    width: 100px;
+    height: 48px;
 
+    padding: 10px 30px;
     font-size: 20px;
     font-weight: 700;
+    line-height: 1.5rem;
+
     outline: none;
     border: none;
     cursor: pointer;
     text-align: center;
     transition: all 0.5s ease-in-out;
-    margin-right: 10px;
-    width: 100px;
-    height: 48px;
 
     border: 2px solid #48cfad;
     background: #48cfad;
@@ -101,8 +103,9 @@ export const NavBtnLink = styled(Link)`
   text-align: center;
   white-space: nowrap;
   padding: 10px 30px;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 700;
+  line-height: 1.5rem;
   outline: none;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
@@ -111,7 +114,6 @@ export const NavBtnLink = styled(Link)`
   text-decoration: none;
 
   &:hover {
-    
     background: #48cfad;
     color: #fff;
     border: 2px solid #fff;

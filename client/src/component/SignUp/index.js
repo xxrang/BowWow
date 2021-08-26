@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { StyledSignUp, NavBtnLink, ErrorMessage } from "./styledSignUp";
+import { StyledSignUp, NavBtnLink, ErrorMessage } from "./StyledSignUp";
 import { useForm } from 'react-hook-form';
 import camera from '../../images/bros_blank.jpg'
 import UserImgUpload from './UserImgUpload';
