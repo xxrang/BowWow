@@ -58,8 +58,6 @@ app.post('/comments', controllers.comments); //댓글 작성
 app.delete('/comments', controllers.comments); //댓글 삭제
 app.patch('/comments', controllers.comments); //댓글 수정
 
-
-
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
