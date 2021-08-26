@@ -10,9 +10,11 @@ html,body{
 font-family: 'Nanum Gothic Coding', monospace; 
 font-family: 'Ubuntu', sans-serif; ->큰 영문글씨
 */
-button:active, button:focus , input:active,input:focus{
+button:active, button:focus , input:active,input:focus, textarea:active,textarea:focus{
   outline :none;
 }
 button {
   cursor: pointer;
 }
+
+
