@@ -13,10 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  category_content.init({
-    posts_id: DataTypes.INTEGER,
-    category_id: DataTypes.INTEGER
-  }, {
+  category_content.init({}, {
     sequelize,
     modelName: 'category_content',
   });
