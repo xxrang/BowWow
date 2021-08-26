@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const FooterContainer = styled.div`
   margin: 0;
@@ -48,8 +47,4 @@ export const FooterContainer = styled.div`
       cursor: pointer;
     }
   }
-`;
-
-export const LinkBtn = styled(Link)`
-  
 `;
