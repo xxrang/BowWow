@@ -12,7 +12,6 @@ export const StyledPostForm = styled.div`
   display: nowrap;
   justify-content: center;
   align-items: center;
-
 `;
 
 //UploadImg

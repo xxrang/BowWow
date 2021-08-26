@@ -41,20 +41,32 @@ export const StyledNavBar = styled.nav`
       justify-content: flex-end;
       padding-right: 30px;
     >a>button, button{
-      color : #48cfad;
-      margin : 0 5px;
-      padding-bottom : 5px;
-      width: 80px;
-      height : 40px;
-      border:none;
       border-radius: 10px;
-      background: white;
-      font-family: lato;
-      font-size : 16px;
-      &:hover{
-          background-color: #48cfad;
-          color : white;
-        }
+    white-space: nowrap;
+    width: 100px;
+    height: 48px;
+
+    padding: 10px ;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5rem;
+
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+
+    background: #fff;
+    color: #48cfad;
+    margin : 0 5px;
+    &:hover {
+
+      border: 2px solid #48cfad;
+      background: #48cfad;
+      color: #fff;
+      }
+    }
     }
   }
 }

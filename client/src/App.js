@@ -5,7 +5,7 @@ import PostFormPage from './pages/PostFormPage'
 import ProfilePage from './pages/ProfilePage'
 import ProfileEditPage from './pages/ProfileEditPage'
 import SearchPage from './pages/SearchPage'
-import ShowServicePage from './pages/ShowServicePage'
+import ViewPostPage from './pages/ViewPostPage'
 import ShowVolunteerPage from './pages/ShowVolunteerPage'
 import SignUpPage from './pages/SignUpPage'
 import VolunteerPage from './pages/VolunteerPage'
@@ -21,7 +21,7 @@ function App() {
           <Route path ='/profile' component={ProfilePage}/>
           <Route path ='/profileedit' component={ProfileEditPage}/>
           <Route path ='/search' component={SearchPage}/>
-          <Route path ='/showservice' component={ShowServicePage}/>
+          <Route path ='/viewpost' component={ViewPostPage}/>
           <Route path ='/showvolunteer' component={ShowVolunteerPage}/>
           <Route path ='/signup' component={SignUpPage}/>
           <Route path ='/volunteer' component={VolunteerPage}/>

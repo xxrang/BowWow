@@ -9,14 +9,14 @@ export const StyledService = styled.section`
   >.moreBtn,.postBtn{
     background:#48CFAD ;
     border : none;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 20px;
     color:white;
   }
   >.moreBtn{
     margin : -20px auto;
-    width : 150px;
-    font-size: 20px;
+    width : 100px;
+    font-size: 16px;
   }
   >.postBtn{
     width : 100px;
@@ -31,31 +31,40 @@ export const StyledService = styled.section`
     }
   }
   >button:hover{
-      opacity: 0.7;
-      transform: scale(1.1);
+      background: #fff;
+      border: 2px solid #48CFAD;
+      color: #48CFAD;
       transition: all 0.3s ease;
     }
 `;
 export const StyledServiceList = styled.div`
-
+>div{
   margin : 150px 200px 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 250px 250px 250px; 
-  
-  >div{
-    box-shadow: 3px 3px 3px 3px lightgray;
-    border-radius: 5px;
-    margin :5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+}
+`
+export const StyledServiceListItem = styled.div`
+>div{
+  margin: 0 auto;
+  padding: 15px;
+  box-sizing: border-box;
+  width: 95%;
+  height: 200px;
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
-    >img{
-      width : 90%;
-      height : 60%;
+  &:hover{
+    transform: scale(1.1);
     }
+    >img{
+    width : 90%;
+    height : 60%;
   }
-
+  }
 `
