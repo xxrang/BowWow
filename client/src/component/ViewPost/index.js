@@ -9,17 +9,26 @@ function ViewPost() {
   const [comment,setComment] = useState('')
   const [commentList,setCommentList] = useState(dummySample)
 
+  const limitText = (limit) => limit.length < 100
   const handleChangeComment =(e)=>{
     //console.log(e.target.value);
-    setComment(e.target.value);
+    const limitWord = e.target.value
+    if(limitText(limitWord)){
+      setComment(limitWord)
+    }
   }
   const submitComment = (e) => {
     inputRef.current.focus();
     e.preventDefault();
-    setCommentList([comment,...commentList])
-    setComment('')
-    console.log(comment);
-    console.log(commentList)
+    if(comment!==''){
+      setCommentList([
+        {content:comment,image:dummySample[0].image},...commentList
+      ])
+      setComment('')
+      //console.log(commentList)
+    }else{
+      alert('댓글을 입력하세요')
+    }
   }
   
   //useRef 등록
