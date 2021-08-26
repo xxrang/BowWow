@@ -25,18 +25,20 @@ function Login({modal , loginModalClick}) {
           {/*react-hook-form */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <input {...register("email", { required: true })} 
+            placeholder = 'example@email.com'
             type="email" />
             {errors.email && (
-            <p>없는 이메일 입니다.</p>
+            <p>정확한 이메일주소를 입력하세요.</p>
             )}
             <input {...register("password", { required: true, minLength: 8 })}
+            placeholder = 'password'
             type="password"/>
             {errors.password && (
-            <p>비밀번호가 틀렸습니다.</p>
+            <p>비밀번호를 작성해주세요.</p>
             )}
             <button className = 'oath-btn'>카카오</button>
-            <button className = 'modal-btn' type="submit">Login</button>
-            <Link to = '/signup'><button className = 'modal-btn'>Signup</button></Link>
+            <button className = 'modal-btn' type="submit">로그인</button>
+            <Link to = '/signup'><button className = 'modal-btn'>아직 회원이 아니신가요?</button></Link>
           </form>
         </div>
       </div>

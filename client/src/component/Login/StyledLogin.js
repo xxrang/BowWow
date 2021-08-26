@@ -57,27 +57,25 @@ export const StyledLogin = styled.div`
   }
   >form{
     >.modal-btn, a>.modal-btn{
-      border-radius: 10px;
+      border-radius: 2px;
       white-space: nowrap;
-      margin-top: 20px;
-      width: 100px;
-      height: 48px;
-  
-      padding: 10px ;
-      font-size: 20px;
-      font-weight: 700;
+      margin-top: 10px;
+      padding-bottom: 20px;
+      width: 320px;
+      height: 40px;
+      font-size: 16px;
+      font-weight: 400;
       line-height: 1.5rem;
+      font-family: "Nanum Gothic Coding", monospace;
   
-      outline: none;
       border: none;
-      cursor: pointer;
       text-align: center;
-      transition: all 0.5s ease-in-out;
+      transition: all 0.4s ease-in-out;
       background: #48cfad;
       color: #fff;
   
       &:hover {
-        border: 2px solid #48cfad;
+        border: 1px solid #48cfad;
         background: #fff;
         color: #48cfad;
         }
@@ -88,13 +86,14 @@ export const StyledLogin = styled.div`
       font-family: "Nanum Gothic Coding", monospace;
       border : none;
       width: 320px;
+      margin-top: 12px;
     }
     >input{
       width: 300px;
       border: 1px solid #d9d9d9;
+      margin: 12px 0;
     }
     >input,.oath-btn{
-    margin: 15px 0;
     height: 40px;
     padding-left: 14px;
     border-radius: 4px;
