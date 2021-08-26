@@ -7,15 +7,11 @@ const UserImgUpload = ({ userImage, imageHandler }) => {
       <h3>유저 사진</h3>
       <div className="image-container">
         <label htmlFor="input-image">
-          <div className="image-wrapper">
-            <img src={userImage} alt="user-photo" />
-          </div>
         </label>
         <input
           type="file"
           id="input-image"
           accept="image/jpeg,jpg,svg"
-          onChange={imageHandler}
         />
         <div className="img-condition">
           <p>
