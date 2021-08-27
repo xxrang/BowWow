@@ -32,7 +32,11 @@ export const StyledVolunteerList = styled.div`
 }
 `
 export const StyledVolunteerListItem = styled.div`
->.volunteer-dog-box{
+>a{
+  text-decoration: none;
+  color :black;
+}
+>a>.volunteer-dog-box{
   display: flex;
   align-items: center;
   justify-content: flex-start;

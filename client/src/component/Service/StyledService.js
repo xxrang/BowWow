@@ -46,7 +46,11 @@ export const StyledServiceList = styled.div`
 }
 `
 export const StyledServiceListItem = styled.div`
->div{
+>a{
+  text-decoration: none;
+  color : black;
+}
+>a>div{
   margin: 0 auto;
   text-align: center;
   padding: 15px;

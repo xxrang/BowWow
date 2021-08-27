@@ -1,16 +1,8 @@
 import React,{useState ,useEffect} from 'react'
-import Login from '../Login'
-import {StyledNavBar} from './StyledNavBar'
-import {Link} from 'react-router-dom'
+import { StyledNavBar } from './StyledNavBar'
+import { Link } from 'react-router-dom'
 
-const NavBar = () => {
-  
-  /*모달*/
-  const [modal , setModal] = useState(false);
-  const loginModalClick = () => {
-    //setModal(modal ? false : true)  
-    setModal((prev)=>!prev);
-  }
+const NavBar = ({login}) => {
 
   /*로고 scroll 구현*/
   const [ScrollY, setScrollY] = useState(0);  // 스크롤값을 저장하기 위한 상태
@@ -39,7 +31,6 @@ const NavBar = () => {
     });
     setScrollY(0);  // ScrollY 의 값을 초기화
   }
-
   useEffect(() => {
     const watch = () => {
       window.addEventListener('scroll', handleFollow)
@@ -61,11 +52,19 @@ const NavBar = () => {
           <Link to = '/search'><li>Search</li></Link>
           <Link to = '/volunteer'><li>Volunteer</li></Link>
         </div>
-        
+        {!login ? 
         <div className = 'rightNav'>
-          <Login loginModalClick = {loginModalClick} modal = {modal}>Login</Login>
+          <Link to = '/login'><button>Login</button></Link>
           <Link to = '/signup'><button>Signup</button></Link>
         </div>
+        :
+        <div className = 'rightNav'>
+          <Link to = '/'>
+            <button>로그아웃</button>
+          </Link>
+          <Link to = '/profile'><button>프로필</button></Link>
+        </div>
+        }
       </ul>
     </StyledNavBar>
   );
