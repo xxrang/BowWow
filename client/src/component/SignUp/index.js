@@ -1,67 +1,131 @@
-import React, { useState} from 'react';
+import React, { useState, useHistory, useCallback } from "react";
 import {StyledSignUp, BtnLink,ErrorMessage } from './StyledSignUp'
-import { useForm } from 'react-hook-form';
 import camera from '../../images/bros_blank.jpeg'
 import UserImgUpload from './UserImgUpload';
+import useInput from '../../hooks/useInput';
+// import axios from 'axios';
 
 const SignUp = () => {
+  //* image preview
   const [userImage, setUserImage] = useState(camera);
-  
+  const [imgCheck, setImgCheck] = useState("false");
   const imageHandler = (e) => {
     const reader = new FileReader();
-    
+
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setUserImage(reader.result)
+        setUserImage(reader.result);
       }
     };
     console.log(e.target.files);
     reader.readAsDataURL(e.target.files[0]);
+    setUserImage(e.target.files[0]);
+    setImgCheck("true");
   };
 
-  const { register, handleSubmit,formState: {errors} } = useForm();
-   const onSubmit = (data) => console.log(data);
-  // console.log(watch());
-  console.log("errors:",errors)
+  //* user data
+  //email
+  const [email, onChangeEmail] = useInput("");
+  const [nickname, onChangeNickname] = useInput("");
+  const [introduce, onChangeIntroduce] = useInput("");
+
+  //*user data password
+  const [password, onChangePassword] = useInput("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const onChangePasswordCheck = useCallback(
+    (e) => {
+      setPasswordCheck(e.target.value);
+      setPasswordError(e.target.value !== password);
+    },[password]);
+
+  //* form submit
+  const signupHandler = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (password !== passwordCheck) {
+        return setPasswordError(true);
+      }
+      const user = {
+        email,
+        nickname,
+        introduce,
+        password,
+        userImage,
+        imgCheck,
+      };
+      // axios.post('https://localhost:4000/user/singup',user, {
+      //     headers: {
+      //       'Content-Type': 'multipart/form-data',
+      //     },
+      //     withCredentials: true,
+      //   })
+      console.log(user);
+      // console.log("email:", email,
+      //   "| nickname: ", nickname,
+      //   "| introduce :", introduce,
+      //   "| password :", password,
+      //   "| passwordCheck :", passwordCheck,
+      //   "| image", userImage
+      // );
+
+      alert("회원가입이 완료되었습니다.");
+    },
+    [email, nickname, introduce, password, userImage, imgCheck]
+  );
+
   return (
     <StyledSignUp>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="user-info"></div>
+      <form onSubmit={(e) => { signupHandler(e) }}>
         <label htmlFor="email">이메일</label>
-        <input {...register("email", { required: true })} type="email" />
-        {errors.email && (
-          <ErrorMessage>이메일 형식에 맞게 다시 작성해 주십시오.</ErrorMessage>
-        )}
+        <input
+          name="email"
+          type="email"
+          value={email}
+          required
+          onChange={onChangeEmail}
+        />
         <label htmlFor="password">비밀번호</label>
         <input
-          {...register("password", { required: true, minLength: 8 })}
+          name="password"
           type="password"
+          value={password}
+          onChange={onChangePassword}
+          required
         />
-
         <label htmlFor="passwordCheck">비밀번호 확인</label>
         <input
-          {...register("passwordCheck", { required: true, minLength: 8 })}
+          name="passwordCheck"
           type="password"
+          value={passwordCheck}
+          onChange={onChangePasswordCheck}
+          required
         />
-
+        {passwordError ? (
+          <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>
+        ) : null}
         <UserImgUpload imageHandler={imageHandler} userImage={userImage} />
-
-        {/* <div className="user-info"> */}
         <label htmlFor="nickname">닉네임</label>
         <input
-          {...register("nickname", { required: true, minLength: 3 })}
           type="text"
+          name="nickname"
+          value={nickname}
+          required
+          onChange={onChangeNickname}
         />
-        {errors.nickname && <ErrorMessage>닉네임은 필수입니다.</ErrorMessage>}
-        <label htmlFor="content">유저 소개</label>
+        <label htmlFor="introduce">유저 소개</label>
         <input
-          {...register("content")}
+          name="introduce"
           type="text"
           className="user-info-content"
           placeholder="50자 이내로 입력해주세요."
+          value={introduce}
+          onChange={onChangeIntroduce}
         />
         <div className="button-wapper">
-          <button type="submit">확인</button>
+          <button type="submit">
+            확인
+          </button>
           <BtnLink to="/">취소</BtnLink>
         </div>
       </form>
@@ -69,4 +133,4 @@ const SignUp = () => {
   );
 }
 
-export default SignUp
+export default SignUp;
