@@ -1,12 +1,12 @@
 import React,{useState} from 'react'
 import VolunteerList from './VolunteerList'
-import dummySample from '../Service/dummySample'
+import {initialPosts} from '../dummyData'
 import {StyledVolunteer} from './StyledVoluteer'
 
 
 const Volunteer = () => {
 
-  const [volunteerDog, setVolunteerDog] = useState(dummySample)
+  const [volunteerDog, setVolunteerDog] = useState(initialPosts.MainPosts)
   return (
     <StyledVolunteer>
       <VolunteerList volunteerDog = {volunteerDog}/>

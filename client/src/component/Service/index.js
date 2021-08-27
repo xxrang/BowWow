@@ -1,16 +1,16 @@
 import React ,{useState}from 'react'
 import { StyledService } from './StyledService'
-import dummySample from './dummySample'
+import  {initialPosts} from '../dummyData'
 import ServiceList from './ServiceList'
 
 const Service = () => {
 
-  const [ serviceImg, setServiceImg ] = useState(dummySample);
+  const [ serviceImg, setServiceImg ] = useState(initialPosts.MainPosts);
+  console.log(serviceImg)
   return (
     <StyledService id = 'service-container'>
       <button className ='post-btn'><p>Post</p></button>
-      <ServiceList 
-      serviceImg = {serviceImg} />
+      <ServiceList serviceImg = {serviceImg}/>
       <button className ='more-btn'>More</button>
     </StyledService>
   );

@@ -4,7 +4,8 @@ import {StyledNavBar} from './StyledNavBar'
 import {Link} from 'react-router-dom'
 
 const NavBar = () => {
-
+  
+  /*모달*/
   const [modal , setModal] = useState(false);
   const loginModalClick = () => {
     //setModal(modal ? false : true)  

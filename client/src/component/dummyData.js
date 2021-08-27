@@ -1,0 +1,70 @@
+//
+export const initialPosts = {  
+  MainPosts : [
+    {
+      id: 1, // servc? volunter,
+      User : 
+      {
+        id: 1,
+        email : '',
+        nickname : '',
+        image : '',
+      },
+      Image:'./images/dogSample.jpeg', //db따로, 배열형태, 여러개일경우.
+      title : '',
+      date : '',
+      location : '',
+      mobile : '',
+      content : '',
+      createdAt : '',
+      category : '',
+      Comment : [
+      {
+        User : {
+          id : '',
+          nickname : '',
+          image : ''
+        },
+        content : '',
+      },
+      {
+        User : {
+          id : '',
+          nickname : '',
+          image : ''
+        },
+        content : '',
+      }
+      ]
+    },
+  ],
+}
+
+export const dummyUser = {
+    id : '',
+    nickname : '',
+    email : '',
+    introduce : '',
+    image : '',
+    posts : [], 
+}
+
+// 로그인이 되어있냐 안되어있냐, 상태관리더미
+export const initialState = {
+  isLogedIn : false,
+  user : null,
+}
+
+export const dummyPosts = {
+  id : 2,
+  content : '',
+  User : {
+    id : 1,
+    nickname : '',
+    image : ''
+  },
+  Image : '',
+  Comment : [
+    
+  ]
+}
