@@ -14,14 +14,14 @@ export const initialPosts = {
       date : '',
       location : '',
       mobile : '',
-      content : '',
+      content : '쑥이의 강아지',
       createdAt : '',
       category : '',
       Comment : [
       {
         User : {
           id : '1',
-          nickname : '숙영쓰',
+          nickname : '숙영',
           image : './images/dogSample.jpeg',
         },
         content : 'ㅁㄴㅇㄹ',
@@ -63,7 +63,13 @@ export const dummyPosts = {
     image : ''
   },
   Image : './images/dogSample.jpeg',
-  Comment : [
-    
-  ]
+  Comment : []
 }
+/*
+click 이벤트 시 강아지사진 계속해서 보기
+export const dummyServiceList = {
+  category_id : 1,
+  content : '',
+  image : './images/dogSample.jpeg'
+}
+*/

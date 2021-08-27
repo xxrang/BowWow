@@ -7,7 +7,7 @@ function ViewPostPage({isLogedIn}) {
   return (
     <div>
       <NavBar/>
-      <ViewPost isLogedIn = {isLogedIn}/>로그인핸들러추가
+      <ViewPost isLogedIn = {isLogedIn}/>
       <Footer/>
     </div>
   )

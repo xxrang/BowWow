@@ -2,7 +2,7 @@ import React,{useState ,useEffect} from 'react'
 import { StyledNavBar } from './StyledNavBar'
 import { Link } from 'react-router-dom'
 
-const NavBar = ({login}) => {
+const NavBar = ({isLogedIn}) => {
 
   /*로고 scroll 구현*/
   const [ScrollY, setScrollY] = useState(0);  // 스크롤값을 저장하기 위한 상태
@@ -52,7 +52,7 @@ const NavBar = ({login}) => {
           <Link to = '/search'><li>Search</li></Link>
           <Link to = '/volunteer'><li>Volunteer</li></Link>
         </div>
-        {!login ? 
+        {!isLogedIn ? 
         <div className = 'rightNav'>
           <Link to = '/login'><button>Login</button></Link>
           <Link to = '/signup'><button>Signup</button></Link>

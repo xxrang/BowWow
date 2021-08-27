@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { StyledMain } from './StyledMain'
-import ScrollReveal from 'scrollreveal'
+//import ScrollReveal from 'scrollreveal'
 
 const Home = () => {
 

@@ -1,10 +1,12 @@
 import styled from 'styled-components'
 
 export const StyledVolunteer = styled.section`
-display: flex;
-flex-direction:column;
-align-items: center;
-justify-content: center;
+  width : 100%;
+  height : 800px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
 >.more-btn{
   width : 100px;
   border :none;
@@ -25,10 +27,10 @@ justify-content: center;
 `
 export const StyledVolunteerList = styled.div`
 >div{
-  margin : 150px  0;
-  display: grid;
+  margin : 50px  0;
+  /*display: grid;
   grid-template-columns: 450px 450px ;
-  grid-template-rows: 250px 250px; 
+  grid-template-rows: 250px 250px; */
 }
 `
 export const StyledVolunteerListItem = styled.div`
@@ -37,13 +39,12 @@ export const StyledVolunteerListItem = styled.div`
   color :black;
 }
 >a>.volunteer-dog-box{
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   margin: 0 auto;
+  text-align: center;
   padding: 15px;
+  overflow: hidden;
   box-sizing: border-box;
-  width: 95%;
+  width: 500px;
   height: 220px;
   border-radius: 8px;
   background: #fff;

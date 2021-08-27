@@ -6,11 +6,19 @@ import {StyledVolunteer} from './StyledVoluteer'
 
 const Volunteer = () => {
 
-  const [volunteerDog, setVolunteerDog] = useState(initialPosts.MainPosts)
+  const volunteerDog = initialPosts.MainPosts
+  const [ maxDogList, setMaxDogList ] = useState(6);
+  const slice = volunteerDog.slice(0,maxDogList);
+  const moreButtonHandler = () => {
+    setMaxDogList((prevValue)=>prevValue+6);
+    //console.log(slice)
+    console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`)
+  }
+
   return (
     <StyledVolunteer>
-      <VolunteerList volunteerDog = {volunteerDog}/>
-      <button className = 'more-btn'>More</button>
+      <VolunteerList slice = {slice} volunteerDog = {volunteerDog}/>
+      <button onClick = {moreButtonHandler}className = 'more-btn'>More</button>
     </StyledVolunteer>
   )
 }

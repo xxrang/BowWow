@@ -2,12 +2,12 @@ import React from 'react'
 import ServiceListItem from './ServiceListItem'
 import {StyledServiceList} from './StyledService'
 
-const ServiceList = ({serviceImg }) => {
+const ServiceList = ({slice}) => {
   //console.log(serviceImg)
   return (
     <StyledServiceList>
       <ServiceListItem 
-      serviceImg={serviceImg}/>
+      slice = {slice}/>
     </StyledServiceList>
   )
 }

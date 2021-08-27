@@ -8,12 +8,10 @@ function ViewPostComment(
   commentList,
   submitCommentHandler,
   }) {
-  //console.log(!isLogedIn)
   const [openModal, setOpenModal] = useState(false)
   const closeModal = () => {
     setOpenModal((prev)=>!prev);
   }
-  
   const addCommenthandler = (e) => {
       if (isLogedIn) {
         submitCommentHandler(e,comment)
