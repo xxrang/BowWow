@@ -5,7 +5,8 @@ import PostContent from './PostContent';
 // import camera from '../../images/bros_blank.jpg'
 
 const PostForm = () => {
-const [userImage, setUserImage] = useState(null);
+  const [userImage, setUserImage] = useState(null);
+  console.log(userImage);
 
 const imageHandler = (e) => {
   const reader = new FileReader();
