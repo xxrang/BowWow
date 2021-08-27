@@ -1,6 +1,9 @@
 module.exports = (app) => {
 
     const { post } = require('../../models')
+    const { category_content } = require('../../models');
+    const { category } = require('../../models');
+
     const router = require('express').Router();
     const application = app;
 
@@ -27,20 +30,29 @@ module.exports = (app) => {
         }
     })
     
-    router.post('/', (req, res) => {
-        const { user_id, image, title, date, mobile, content } = req.body;
-        if(!user_id || !title || !date || !mobile || !content){
+    router.post('/', async (req, res) => {
+        const { email, image, title, date, mobile, content} = req.body;
+        /* 클라이언트 axios request.body에 category(dogs || volunteer)로 담겨 들어오니까
+        category === 'dogs'로 들어오면 */ 
+        if(!email || !title || !date || !mobile || !content){
             res.status(422).send({message: 'insufficient parameters supplied'})
         } else {
         post.create({
-            user_id: user_id,
+            email: email,
             image: image,
             title: title,
             date: date,
             mobile: mobile,
             content: content
-        }).then(() => res.status(201).send({message: 'post write success'}))
+        }).then( async () => {
+            await category_content.create({
+                posts_id: req.body.posts_id,
+            }).then( async () => {
+                await category.create({
+                    categoy_id: req.body.category_id
+                }).then((data) => res.status(201).send({message: 'post write success', data}))
+            })
+        })
     }});
-
     return router;
 }

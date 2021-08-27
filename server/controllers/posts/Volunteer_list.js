@@ -40,8 +40,15 @@ module.exports = (app) => {
             location: location,
             mobile: mobile,
             content: content
-        }).then(() => res.status(201).send({message: 'post write success'}))
+        }).then( async () => {
+            await category_content.create({
+                posts_id: req.body.posts_id,
+            }).then( async () => {
+                await category.create({
+                    categoy_id: req.body.category_id
+                }).then((data) => res.status(201).send({message: 'post write success', data}))
+            })
+        })
     }});
-
     return router;
 }

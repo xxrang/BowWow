@@ -35,8 +35,8 @@ app.get('/email_check', controllers.email_check); //이메일 중복확인
 app.get('/nickname', controllers.nickname); //닉네임 중복확인
 
 /** 유저 마이페이지 API **/
-app.get('/profile', controllers.profile); //마이페이지 확인
-app.patch('/profile', controllers.profile); //마이페이지 수정
+const profile = require('./controllers/users/Profile')(app);
+app.use('/profile', profile);
 
 /** 인증 API **/
 app.get('/auth', controllers.auth); //토큰 인증 관련
