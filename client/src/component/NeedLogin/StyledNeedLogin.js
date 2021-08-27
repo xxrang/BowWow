@@ -1,10 +1,54 @@
-import styled from 'styled-components'
-
-export const StyledLogin = styled.div`
->.login-wrapper{
-  width : 375px;
-  height : 63vh;
-  margin : 100px auto 0;
+import styled,{keyframes} from 'styled-components'
+const showModal = keyframes`
+  from {
+    opacity: 0;
+    margin-top: -30px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+`
+const showModalBg = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
+const tickle = keyframes`
+  0% {
+    transform: translateX(-20%);
+  }
+  100% {
+    transform: translateX(10%);
+  }
+`
+export const StyledNeedLogin = styled.section`
+>.modal {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: ${showModalBg} .4s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  >.popup-box {
+  padding: 40px 20px;
+  margin: 0 auto;
+  width: 375px;
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  animation: ${showModal}.4s;
   >h3{
     font-family: "Nanum Gothic Coding", monospace;
     line-height: 30px;
@@ -66,5 +110,19 @@ export const StyledLogin = styled.div`
     clear: both;
     }
     }
+  >.close-btn-x {
+      font-size: 10px;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0;
+      padding: 3px 10px 1px 1px;
+      float: right;
+      &:hover{
+        background: white;
+        border : none;
+        animation: ${tickle} 0.3s 0s ease infinite alternate-reverse;
+      }
+    }
+  }
 }
 `

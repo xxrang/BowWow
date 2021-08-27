@@ -1,4 +1,3 @@
-//
 export const initialPosts = {  
   MainPosts : [
     {
@@ -21,19 +20,19 @@ export const initialPosts = {
       Comment : [
       {
         User : {
-          id : '',
-          nickname : '',
-          image : ''
+          id : '1',
+          nickname : '숙영쓰',
+          image : './images/dogSample.jpeg',
         },
-        content : '',
+        content : 'ㅁㄴㅇㄹ',
       },
       {
         User : {
-          id : '',
-          nickname : '',
-          image : ''
+          id : '2',
+          nickname : '용준',
+          image : './images/dogSample.jpeg'
         },
-        content : '',
+        content : 'ㅇㅇㅇㅇ',
       }
       ]
     },
@@ -63,7 +62,7 @@ export const dummyPosts = {
     nickname : '',
     image : ''
   },
-  Image : '',
+  Image : './images/dogSample.jpeg',
   Comment : [
     
   ]
