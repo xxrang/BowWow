@@ -4,15 +4,23 @@ import NavBar from '../component/NavBar'
 import Service from '../component/Service'
 import Footer from '../component/Footer'
 
-function HomePage() {
+function HomePage({
+  hasAccessToken,
+  logoutHandler,
+  setPostsData,
+  setPostsString,
+}) {
+  
   return (
     <>
-      <Main/>
-      <NavBar/>
-      <Service/>
-      <Footer/>
+      <Main />
+      <NavBar hasAccessToken={hasAccessToken} logoutHandler={logoutHandler}
+  setPostsData = { setPostsData }
+  setPostsString = { setPostsString } />
+      <Service />
+      <Footer />
     </>
-  )
+  );
 }
 
 export default HomePage

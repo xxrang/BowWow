@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledViewPost = styled.div`
   box-sizing: border-box;
@@ -20,94 +21,95 @@ export const StyledViewPostContent = styled.div`
 `;
 
 export const StyledViewPostComment = styled.div`
-/*width : 300px;
+  /*width : 300px;
 height: 500px;*/
-/*background: rgb(220, 248, 235);*/
-display: flex;
-flex-direction: column;
-align-items: center;
-box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-padding : 20px;
-margin-left : 14px;
->.post-comment-form-wrapper{
-  width : 100%;
-  >i{
-    margin-left: 10px;
-  }
-  >.flex-box{
-    display: flex;
-    align-items: center;
-    >.post-comment-text-submit{
-      width : 50px;
-      height : 55px;
-      background: #48cfad;
-      color : white;
-      &:hover{
-        background: #fff;
-        border: 1px solid #48cfad;
-        color : #48cfad;
-        transition: all 0.5s ease-in-out;
+  /*background: rgb(220, 248, 235);*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 20px;
+  margin-left: 14px;
+  > .post-comment-form-wrapper {
+    width: 100%;
+    > i {
+      margin-left: 10px;
+    }
+    > .flex-box {
+      display: flex;
+      align-items: center;
+      > .post-comment-text-submit {
+        width: 50px;
+        height: 55px;
+        background: #48cfad;
+        color: white;
+        &:hover {
+          background: #fff;
+          border: 1px solid #48cfad;
+          color: #48cfad;
+          transition: all 0.5s ease-in-out;
+        }
       }
     }
-  }
-  >.flex-box>form >.post-comment-text,.post-comment-text-submit{
-    margin : 0 5px;
-    border-radius: 5px;
-    border : none;
-  }
-  .flex-box>form>.post-comment-text{
-      width : 200px;
+    > .flex-box > form > .post-comment-text,
+    .post-comment-text-submit {
+      margin: 0 5px;
+      border-radius: 5px;
+      border: none;
+    }
+    .flex-box > form > .post-comment-text {
+      width: 200px;
       padding: 10px;
-      height : 40px;
-      margin-top:10px;
-      border : none;
+      height: 40px;
+      margin-top: 10px;
+      border: none;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
       /*box-shadow: rgb(0, 0, 0, 0.35) 1px 1px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;*/
-  }
-  >.post-comment-wrapper{
-  width : 100%;
-  padding : 0 20px;
-}
-> .list-item-scroll {
-    box-sizing: border-box;
-    padding: 15px 0;
-    width: 100%;
-    height: 420px;
-    /* background: green; */
-    overflow: hidden;
-    overflow-y: auto;
-    
->.post-comment-wrapper>.post-comment-profile-wrapper{
-  display: flex;
-  align-items: center;
-  width : 88%;
-  padding-bottom: 10px;
-  border-bottom: 1px solid grey;
-  >h4{
-      margin-bottom: 12px;
     }
-  >.profile-img{
-    width : 50px;height: 50px;
-    border-radius: 50%;
-    margin : 0 10px;
-  }
-}
->.post-comment-wrapper{
-    margin: 10px;
-    padding : 0;
-    >ul{
-      padding : 0;
-      list-style: none;
-      >li{
-        margin-top : 10px;
-        padding : 10px;
+    > .post-comment-wrapper {
+      width: 100%;
+      padding: 0 20px;
+    }
+    > .list-item-scroll {
+      box-sizing: border-box;
+      padding: 15px 0;
+      width: 100%;
+      height: 420px;
+      /* background: green; */
+      overflow: hidden;
+      overflow-y: auto;
+
+      > .post-comment-wrapper > .post-comment-profile-wrapper {
+        display: flex;
+        align-items: center;
+        width: 88%;
+        padding-bottom: 10px;
+        border-bottom: 1px solid grey;
+        > h4 {
+          margin-bottom: 12px;
+        }
+        > .profile-img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          margin: 0 10px;
+        }
+      }
+      > .post-comment-wrapper {
+        margin: 10px;
+        padding: 0;
+        > ul {
+          padding: 0;
+          list-style: none;
+          > li {
+            margin-top: 10px;
+            padding: 10px;
+          }
+        }
       }
     }
   }
-}
-}
-`
-
+`;
 
 export const StyledViewPostProfile = styled.div`
   box-sizing: border-box;
@@ -123,23 +125,22 @@ export const StyledViewPostProfile = styled.div`
     height: 80px;
     padding: 10px 20px 10px 20px;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    flex: 1 2 1;
 
-    >.profile-img-wrapper {
+    > .profile-img-wrapper {
       padding: 15px;
     }
     > .profile-img-wrapper img {
-      
-      border-radius: 150px;
+      border-radius: 50%;
       border: 1px solid #fff;
-      margin-right: 15px;
+      margin-right: 10px;
     }
 
     > .profile-info-wrapper {
       width: 350px;
       height: 100px;
-      padding-top: 10px;
+      padding-top: 12px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -155,11 +156,6 @@ export const StyledViewPostProfile = styled.div`
       > p {
         margin: 0;
       }
-    }
-    > p {
-      width: 120px;
-      margin-right: 10px;
-      padding: 5px;
     }
   }
 `;
@@ -197,12 +193,12 @@ export const StyledViewPostContentOne = styled.div`
       display: flex;
       justify-content: flex-start;
       margin-bottom: 8px;
-    
-    >.post-info-date {
-      margin-left: 10px;
-    }
-    >.post-info-location {
-      margin-left: 140px;
+
+      > .post-info-date {
+        margin-left: 10px;
+      }
+      > .post-info-location {
+        margin-left: 140px;
       }
     }
 
@@ -214,7 +210,28 @@ export const StyledViewPostContentOne = styled.div`
     > .post-info-content {
       font-size: 16px;
       text-align: start;
-
     }
   }
+`;
+
+export const ProfileInfoBtn = styled.div`
+  align-self: center;
+`;
+
+export const BtnLink = styled(Link)`
+  box-sizing: border-box;
+
+  background: #fff;
+  color: #48cfad;
+  border: 1px solid #48cfad;
+  border-radius: 10px;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 5px 12px;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 20px;
 `;

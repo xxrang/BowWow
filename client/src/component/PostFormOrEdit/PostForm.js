@@ -44,7 +44,7 @@ const PostForm = () => {
       //   }
       // );
     },
-    [post, userImage, imgCheck]
+    [userImage, imgCheck]
   );
   console.log(post);
 

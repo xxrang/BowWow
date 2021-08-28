@@ -1,14 +1,26 @@
-import React, { useState, useHistory, useCallback } from "react";
-import {StyledSignUp, BtnLink,ErrorMessage } from './StyledSignUp'
-import camera from '../../images/bros_blank.jpeg'
+import React, { useState, useCallback, useEffect } from "react";
+import {
+  StyledSignUp,
+  BtnLink,
+  ErrorMessage,
+  InputReadOnly,
+} from "./StyledSignUp";
+// import camera from '../../images/bros_blank.jpeg'
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
 // import axios from 'axios';
+import camera1 from '../../images/9.png';
 
-const SignUp = () => {
-  //* image preview
-  const [userImage, setUserImage] = useState(camera);
-  const [imgCheck, setImgCheck] = useState("false");
+const ProfileEdit = ({ hasAccessToken }) => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  const [email, onChangeEmail, setEmail] = useInput("");
+  const [nickname, onChangeNickname, setNickname] = useInput("");
+  const [introduce, onChangeIntroduce, setIntroduce] = useInput("");
+  const [userImage, setUserImage] = useState("");
+  const [imgCheck, setImgCheck] = useState("true"); // true로 바꿈
+
+  //* image previe
   const imageHandler = (e) => {
     const reader = new FileReader();
 
@@ -25,9 +37,6 @@ const SignUp = () => {
 
   //* user data
   //email
-  const [email, onChangeEmail] = useInput("");
-  const [nickname, onChangeNickname] = useInput("");
-  const [introduce, onChangeIntroduce] = useInput("");
 
   //*user data password
   const [password, onChangePassword] = useInput("");
@@ -37,23 +46,18 @@ const SignUp = () => {
     (e) => {
       setPasswordCheck(e.target.value);
       setPasswordError(e.target.value !== password);
-    },[password]);
+    },
+    [password]
+  );
 
   //* form submit
-  const signupHandler = useCallback(
+  const profileEditHandler = useCallback(
     (e) => {
       e.preventDefault();
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
-      const user = {
-        email,
-        nickname,
-        introduce,
-        password,
-        userImage,
-        imgCheck,
-      };
+      const user = {email,nickname,introduce,password,userImage,imgCheck };
       // axios.post('https://localhost:4000/user/singup',user, {
       //     headers: {
       //       'Content-Type': 'multipart/form-data',
@@ -68,23 +72,52 @@ const SignUp = () => {
       //   "| passwordCheck :", passwordCheck,
       //   "| image", userImage
       // );
-
-      alert("회원가입이 완료되었습니다.");
-    },
-    [email, nickname, introduce, password, userImage, imgCheck]
-  );
+      alert("프로필이 수정되었습니다.");
+    },[password, passwordCheck, email, nickname, introduce, userImage, imgCheck]);
+  //data 불러 오기
+  
+  useEffect(() => {
+    if (hasAccessToken !== undefined) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+    // axios.get('https://localhost:4000/posts/', hasAccessToken, {
+    //   withCredentials: true
+    // }).then((res) => {
+    //   console.log(res.data); //데이터 받아옴
+    //   // email, nickname image, introduce data 들어옴
+    // })
+    const data = {
+      email: "dydwns2441@gmail.com",
+      nickname: "준준",
+      image: { camera1 },
+      introduce: "반갑습니다.",
+    };
+    if (isLogin) {
+      setUserImage(camera1);
+      setEmail(data.email);
+      setNickname(...data.nickname);
+      setIntroduce(data.introduce);
+    }
+  }, [hasAccessToken, isLogin, setEmail, setIntroduce, setNickname]);
 
   return (
     <StyledSignUp>
-      <form onSubmit={(e) => { signupHandler(e) }}>
+      <form
+        onSubmit={(e) => {
+          profileEditHandler(e);
+        }}
+      >
         <label htmlFor="email">이메일</label>
-        <input
-          name="email"
-          type="email"
-          value={email}
-          required
-          onChange={onChangeEmail}
-        />
+        <InputReadOnly
+          type="text"
+            name="email"
+            value={email}
+            readOnly
+            onChange={onChangeEmail}
+          >
+        </InputReadOnly>
         <label htmlFor="password">비밀번호</label>
         <input
           name="password"
@@ -123,14 +156,12 @@ const SignUp = () => {
           onChange={onChangeIntroduce}
         />
         <div className="button-wapper">
-          <button type="submit">
-            확인
-          </button>
+          <button type="submit">확인</button>
           <BtnLink to="/">취소</BtnLink>
         </div>
       </form>
     </StyledSignUp>
   );
-}
+};;
 
-export default SignUp;
+export default ProfileEdit;

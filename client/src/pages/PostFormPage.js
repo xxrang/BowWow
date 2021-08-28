@@ -1,14 +1,26 @@
 import React from 'react'
 import NavBar from '../component/NavBar';
 import Footer from '../component/Footer';
-import PostForm from '../component/PostForm';
+import PostForm from '../component/PostFormOrEdit/PostForm';
 
-const PostFormPage = ({isLogedIn}) => {
-  return <>
-    <NavBar />
-    <PostForm isLogedIn = {isLogedIn}/>
-    <Footer />
-  </>
-}
+const PostFormPage = ({
+  hasAccessToken,
+  logoutHandler,
+  setPostsData,
+  setPostsString,
+}) => {
+  return (
+    <>
+      <NavBar
+        hasAccessToken={hasAccessToken}
+        logoutHandler={logoutHandler}
+        setPostsData={setPostsData}
+        setPostsString={setPostsString}
+      />
+      <PostForm />
+      <Footer />
+    </>
+  );
+};
 
 export default PostFormPage;

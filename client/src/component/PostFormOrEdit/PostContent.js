@@ -4,18 +4,26 @@ import { StyledPostContent, BtnLink, TextArea } from "./StyledPostForm";
 
 import { ErrorMessage } from '../ErrorMessage';
 
-const PostContent = ({ postFormHandler }) => {
-  const {register, handleSubmit, formState: { errors }, } = useForm();
+const PostContent = ( props) => {
+  console.log(props);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title: props.data.title
+    },
+  });
   const onSubmit = (data) => {
-    postFormHandler(data);
+    props.postFormHandler(data);
   };
   console.log(errors);
   return (
     <StyledPostContent>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="title">제목</label>
-        <input
-          id="title"
+        <input id="title"
           {...register("title", { required: true, minLength: 1 })}
           type="text"
         />
@@ -38,7 +46,10 @@ const PostContent = ({ postFormHandler }) => {
 
         <label htmlFor="mobile">연락처</label>
         <input
-          {...register("mobile", {required: true, pattern: /\d{2,3}[- ]\d{3,4}[- ]\d{4}/gi })}
+          {...register("mobile", {
+            required: true,
+            pattern: /\d{2,3}[- ]\d{3,4}[- ]\d{4}/gi,
+          })}
           type="text"
         />
         {errors.mobile && <ErrorMessage>형식에 맞게 입력하세요.</ErrorMessage>}

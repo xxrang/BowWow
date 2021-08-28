@@ -70,5 +70,4 @@ export const StyledNavBar = styled.nav`
     }
     }
   }
-}
-`
+`;

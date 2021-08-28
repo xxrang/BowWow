@@ -44,7 +44,6 @@ export const StyledSignUp = styled.div`
     padding-left: 14px;
     width: 360px;
     height: 40px;
-    background: #fff;
     border: 1px solid #d9d9d9;
     border-radius: 4px;
     flex: none;
@@ -91,6 +90,7 @@ export const StyledSignUp = styled.div`
       border: 2px solid #48cfad;
     }
   }
+
 `;
 
 export const BtnLink = styled(Link)`
@@ -175,4 +175,20 @@ export const StyledUserImgUpload = styled.div`
 export const ErrorMessage = styled.p`
   color: red;
   margin-top: 8px;
+`;
+
+export const InputReadOnly = styled.input`
+  padding: 0;
+  margin: 0;
+  position: static;
+  padding-left: 14px;
+  width: 360px;
+  height: 40px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  flex: none;
+  flex-grow: 0;
+  font-size: 16px;
+  color: #adadad;
+  background-color: #e5e5e5;
 `;

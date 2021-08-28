@@ -1,16 +1,20 @@
 import React from 'react'
 import NavBar from '../component/NavBar';
-import SignUp from '../component/SignUp';
+import Signup from '../component/SignupOrProfileEdit/Signup';
 import Footer from '../component/Footer';
 
-function SignUpPage() {
+function SignUpPage({ setPostsData,setPostsString }) {
   return (
     <>
-      <NavBar />
-      <SignUp />
+      <NavBar
+        setPostsData={setPostsData}
+        setPostsString={setPostsString}
+      />
+      <Signup />
+
       <Footer />
     </>
-  )
+  );
 }
 
 export default SignUpPage

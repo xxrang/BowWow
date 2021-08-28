@@ -1,75 +1,66 @@
-export const initialPosts = {  
-  MainPosts : [
+export const initialPosts = {
+  MainPosts: [
     {
       id: 1, // servc? volunter,
-      User : 
-      {
+      User: {
         id: 1,
-        email : '',
-        nickname : '',
-        image : '',
+        email: "",
+        nickname: "",
+        image: "",
       },
-      Image:'./images/dogSample.jpeg', //db따로, 배열형태, 여러개일경우.
-      title : '',
-      date : '',
-      location : '',
-      mobile : '',
-      content : '쑥이의 강아지',
-      createdAt : '',
-      category : '',
-      Comment : [
-      {
-        User : {
-          id : '1',
-          nickname : '숙영',
-          image : './images/dogSample.jpeg',
+      Image: "./images/dogSample.jpeg", //db따로, 배열형태, 여러개일경우.
+      title: "",
+      date: "",
+      location: "",
+      mobile: "",
+      content: "",
+      createdAt: "",
+      category: "",
+      Comment: [
+        {
+          User: {
+            id: "1",
+            nickname: "숙영쓰",
+            image: "./images/dogSample.jpeg",
+          },
+          content: "반갑습니다.",
         },
-        content : 'ㅁㄴㅇㄹ',
-      },
-      {
-        User : {
-          id : '2',
-          nickname : '용준',
-          image : './images/dogSample.jpeg'
+        {
+          User: {
+            id: "2",
+            nickname: "용준",
+            image: "./images/dogSample.jpeg",
+          },
+          content: "안녕하세요.",
         },
-        content : 'ㅇㅇㅇㅇ',
-      }
-      ]
+      ],
     },
   ],
-}
+};
 
 export const dummyUser = {
-    id : '',
-    nickname : '',
-    email : '',
-    introduce : '',
-    image : '',
-    posts : [], 
-}
+  id: "",
+  nickname: "",
+  email: "",
+  introduce: "",
+  image: "",
+  posts: [],
+};
 
 // 로그인이 되어있냐 안되어있냐, 상태관리더미
 export const initialState = {
-  isLogedIn : false,
-  user : null,
-}
+  isLogedIn: undefined,
+  user: null,
+};
 
 export const dummyPosts = {
-  id : 2,
-  content : '',
-  User : {
-    id : 1,
-    nickname : '',
-    image : ''
+  id: 2,
+  content: "",
+  User: {
+    id: 1,
+    nickname: "",
+    image: "",
   },
-  Image : './images/dogSample.jpeg',
-  Comment : []
-}
-/*
-click 이벤트 시 강아지사진 계속해서 보기
-export const dummyServiceList = {
-  category_id : 1,
-  content : '',
-  image : './images/dogSample.jpeg'
-}
-*/
+  Image: "./images/dogSample.jpeg",
+  Comment: [],
+};

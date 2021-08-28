@@ -1,14 +1,11 @@
-import React from 'react'
-import { StyledViewPostContentOne } from './StyledViewPost';
+import React from "react";
+import { StyledViewPostContentOne } from "./StyledViewPost";
 
 const ViewPostContentOne = () => {
   return (
     <StyledViewPostContentOne>
       <div className="img-wrapper">
-        <img
-          src={require("../../images/9.png").default}
-          alt="백구"
-        />
+        <img src={require("../../images/9.png").default} alt="백구" />
       </div>
       <div className="post-info-all">
         <div className="post-info-two">
@@ -29,6 +26,6 @@ const ViewPostContentOne = () => {
       </div>
     </StyledViewPostContentOne>
   );
-}
+};
 
-export default ViewPostContentOne
+export default ViewPostContentOne;
