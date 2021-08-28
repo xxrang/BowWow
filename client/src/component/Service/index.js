@@ -1,23 +1,23 @@
-import React ,{useEffect, useState}from 'react'
-import { StyledService } from './StyledService'
-import  {initialPosts} from '../dummyData'
-import ServiceList from './ServiceList'
-import axios from 'axios'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { StyledService } from "./StyledService";
+import { initialPosts } from "../dummyData";
+import ServiceList from "./ServiceList";
+import axios from "axios";
 
 const Service = () => {
-
   //const [ serviceImg, setServiceImg ] = useState(initialPosts.MainPosts);
-  const serviceImg = initialPosts.MainPosts
-  const [ maxDogList, setMaxDogList ] = useState(9);
-  const slice = serviceImg.slice(0,maxDogList);
+  const serviceImg = initialPosts.MainPosts;
+  const [maxDogList, setMaxDogList] = useState(9);
+  const slice = serviceImg.slice(0, maxDogList);
 
   const moreButtonHandler = () => {
-    setMaxDogList((prevValue)=>prevValue+9);
+    setMaxDogList((prevValue) => prevValue + 9);
     //console.log(slice)
-    console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`)
-  }
-  useEffect(()=>{
-    axios.get('https://localhost:4000/posts/service_list?category_id',
+    console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`);
+  };
+  /*useEffect(()=>{
+    axios.get('https://localhost:4000/posts/service_list????',
     //data,
     {withCredential : true}
     )
@@ -29,14 +29,21 @@ const Service = () => {
 
     })
   },[])
+  */
 
   return (
-    <StyledService id = 'service-container'>
-      <button className ='post-btn'><p>Post</p></button>
-      <ServiceList slice = {slice} serviceImg = {serviceImg}/>
-      <button onClick = {moreButtonHandler} className ='more-btn'>More</button>
+    <StyledService id="service-container">
+      <ServiceList slice={slice} serviceImg={serviceImg} />
+      <Link to="/postform">
+        <button className="post-btn">
+          <p>Post</p>
+        </button>
+      </Link>
+      <button onClick={moreButtonHandler} className="more-btn">
+        More
+      </button>
     </StyledService>
   );
-}
+};
 
 export default Service;

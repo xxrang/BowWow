@@ -9,13 +9,15 @@ const ServiceListItem = ({slice}) => {
       {slice.map((el)=>{
         return (
           <>
-          <Link to = 'viewpost' >
-            <div className = {'service-img-'+el.id}  key = {el.id} >
-              <img src = {el.Image} alt = 'dog-img'/>
-              <p>{el.content}</p>
-            </div>
-        </Link>
-        </>)
+            <Link to="viewpost">
+              <div className={"service-img-" + el.id} key={el.id}>
+                <p>{el.tempId}</p>
+                <img src={el.Image} alt="dog-img" />
+                <p>{el.content}</p>
+              </div>
+            </Link>
+          </>
+        );
       })}
     </StyledServiceListItem>
   )

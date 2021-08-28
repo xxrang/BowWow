@@ -11,7 +11,7 @@ function LoginPage({
   setPostsString,
 }) {
   return (
-    <div>
+    <>
       <NavBar />
       <Login
         loginHandler={loginHandler}
@@ -21,7 +21,7 @@ function LoginPage({
         setPostsString={setPostsString}
       />
       <Footer />
-    </div>
+    </>
   );
 }
 

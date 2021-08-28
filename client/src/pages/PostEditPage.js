@@ -3,7 +3,7 @@ import NavBar from "../component/NavBar";
 import Footer from "../component/Footer";
 import PostEdit from "../component/PostFormOrEdit/PostEdit";
 
-const PostFormPage = ({
+const PostEditPage = ({
   hasAccessToken,
   logoutHandler,
   setPostsData,
@@ -23,4 +23,4 @@ const PostFormPage = ({
   );
 };
 
-export default PostFormPage;
+export default PostEditPage;

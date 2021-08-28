@@ -13,17 +13,17 @@ export const initialPosts = {
       date: "",
       location: "",
       mobile: "",
-      content: "",
+      content: "쑥이의 강아지",
       createdAt: "",
       category: "",
       Comment: [
         {
           User: {
             id: "1",
-            nickname: "숙영쓰",
+            nickname: "숙영",
             image: "./images/dogSample.jpeg",
           },
-          content: "반갑습니다.",
+          content: "ㅁㄴㅇㄹ",
         },
         {
           User: {
@@ -31,9 +31,69 @@ export const initialPosts = {
             nickname: "용준",
             image: "./images/dogSample.jpeg",
           },
-          content: "안녕하세요.",
+          content: "ㅇㅇㅇㅇ",
         },
       ],
+    },
+    {
+      tempId: 2,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 3,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 4,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 5,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 6,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 7,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 8,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 9,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 10,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 11,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 12,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
+    },
+    {
+      tempId: 13,
+      Image: "./images/dogSample.jpeg",
+      content: "쑥이의 강아지",
     },
   ],
 };
@@ -49,7 +109,7 @@ export const dummyUser = {
 
 // 로그인이 되어있냐 안되어있냐, 상태관리더미
 export const initialState = {
-  isLogedIn: undefined,
+  isLogedIn: false,
   user: null,
 };
 

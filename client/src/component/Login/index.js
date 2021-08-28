@@ -74,5 +74,5 @@ function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
   );
 }
 
-export default Login
+export default Login;
 

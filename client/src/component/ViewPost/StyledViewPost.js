@@ -21,6 +21,7 @@ export const StyledViewPostContent = styled.div`
 `;
 
 export const StyledViewPostComment = styled.div`
+  background-color: #f9f9f9;
   /*width : 300px;
 height: 500px;*/
   /*background: rgb(220, 248, 235);*/
@@ -55,9 +56,9 @@ height: 500px;*/
     .post-comment-text-submit {
       margin: 0 5px;
       border-radius: 5px;
-      border: none;
     }
-    .flex-box > form > .post-comment-text {
+    > .flex-box > form > .post-comment-text {
+      resize: none;
       width: 200px;
       padding: 10px;
       height: 40px;
@@ -78,32 +79,57 @@ height: 500px;*/
       /* background: green; */
       overflow: hidden;
       overflow-y: auto;
-
-      > .post-comment-wrapper > .post-comment-profile-wrapper {
-        display: flex;
-        align-items: center;
-        width: 88%;
-        padding-bottom: 10px;
-        border-bottom: 1px solid grey;
-        > h4 {
-          margin-bottom: 12px;
-        }
-        > .profile-img {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          margin: 0 10px;
-        }
-      }
       > .post-comment-wrapper {
-        margin: 10px;
+        list-style: none;
         padding: 0;
-        > ul {
-          padding: 0;
-          list-style: none;
-          > li {
-            margin-top: 10px;
-            padding: 10px;
+        > .post-comment-list {
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          background-color: #fff;
+          border-radius: 5px;
+          margin: 5px;
+          padding: 5px;
+          > .post-commnet-flexbox {
+            display: flex;
+            justify-content: space-around;
+            > .profile-img {
+              width: 40px;
+              height: 40px;
+              border: 1px solid grey;
+              border-radius: 50%;
+              margin: 10px;
+            }
+            > div {
+              flex: 2;
+            }
+            > div > .post-comment-nickname {
+              margin-bottom: 0;
+              font-weight: 800;
+            }
+            > div > .post-comment-date {
+              font-size: 12px;
+              color: grey;
+              margin-top: 2px;
+            }
+            > .remove-button {
+              height: 30px;
+              border: none;
+              border-radius: 4px;
+              background-color: #fff;
+              color: #48cfad;
+              border: 1px solid #48cfad;
+              padding: 5px;
+              font-size: 12px;
+              &:hover {
+                transition: all 0.4s ease-in-out;
+                background-color: #48cfad;
+                color: #fff;
+              }
+            }
+          }
+          > .post-comment-content {
+            padding: 15px;
+
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
           }
         }
       }
