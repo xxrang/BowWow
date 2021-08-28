@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const StyledViewPost = styled.div`
   box-sizing: border-box;
@@ -111,6 +111,7 @@ height: 500px;*/
   }
 `;
 
+
 export const StyledViewPostProfile = styled.div`
   box-sizing: border-box;
   /* border: 1px solid black; */
@@ -132,6 +133,7 @@ export const StyledViewPostProfile = styled.div`
       padding: 15px;
     }
     > .profile-img-wrapper img {
+      
       border-radius: 50%;
       border: 1px solid #fff;
       margin-right: 10px;
@@ -215,7 +217,7 @@ export const StyledViewPostContentOne = styled.div`
 `;
 
 export const ProfileInfoBtn = styled.div`
-  align-self: center;
+  align-self:center;
 `;
 
 export const BtnLink = styled(Link)`
@@ -233,5 +235,5 @@ export const BtnLink = styled(Link)`
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  margin-top: 20px;
+  margin-top:20px;
 `;

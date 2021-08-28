@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-import React from "react";
+import React from 'react';
 import {
   StyledViewPostProfile,
   BtnLink,
@@ -10,8 +9,7 @@ import userPhotos from "../../images/bros_blank.jpg";
 const ViewPostProfile = () => {
   const deletePost = (e) => {
     console.log(e.target.value);
-  };
-
+  }
   return (
     <StyledViewPostProfile>
       <div className="profile-container">
@@ -24,11 +22,9 @@ const ViewPostProfile = () => {
             haribo <span>2021월 8월 26일</span>
           </p>
         </div>
-        <ProfileInfoBtn>
+        <ProfileInfoBtn >
           <BtnLink to="/postedit">수정</BtnLink>
-          <button type="button" onClick={deletePost}>
-            삭제
-          </button>
+          <button type="button" onClick={deletePost}>삭제</button>
         </ProfileInfoBtn>
       </div>
     </StyledViewPostProfile>

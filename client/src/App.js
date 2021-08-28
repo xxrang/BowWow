@@ -1,26 +1,27 @@
-import "./App.css";
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import PostFormPage from "./pages/PostFormPage";
-import ProfilePage from "./pages/ProfilePage";
-import ProfileEditPage from "./pages/ProfileEditPage";
-import SearchPage from "./pages/SearchPage";
-import ViewPostPage from "./pages/ViewPostPage";
-import SignUpPage from "./pages/SignUpPage";
-import VolunteerPage from "./pages/VolunteerPage";
-import LoginPage from "./pages/LoginPage";
-import PostEditPage from "./pages/PostEditPage";
+import './App.css';
+import React , {useState, useEffect} from 'react'
+import { BrowserRouter,Route ,Switch } from "react-router-dom";
+import HomePage from './pages/HomePage'
+import PostFormPage from './pages/PostFormPage'
+import ProfilePage from './pages/ProfilePage'
+import ProfileEditPage from './pages/ProfileEditPage'
+import SearchPage from './pages/SearchPage'
+import ViewPostPage from './pages/ViewPostPage'
+import SignUpPage from './pages/SignUpPage'
+import VolunteerPage from './pages/VolunteerPage'
+import LoginPage from './pages/LoginPage';
+import PostEditPage from './pages/PostEditPage';
 // import {initialState} from './component/dummyData'
-import axios from "axios";
+import axios from 'axios';
 //루트만 짜기
 function App() {
   const [hasAccessToken, setHasAccessToken] = useState(undefined);
   //let history = useHistory();
-  /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
-  const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
-  const [postsString, setPostsString] = useState(""); //홈 네브바 선택 이름
+  /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */// undefined
+  const [postsData, setPostsData] = useState("");  //홈 네브바에 따른 컨텐츠 보여주시
+  const [postsString, setPostsString] = useState("");  //홈 네브바 선택 이름
 
+  
   useEffect(() => {
     if (postsString !== "") {
       const getPostsData = (postsString) => {

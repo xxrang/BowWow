@@ -1,11 +1,12 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import {StyledLogin} from './StyledLogin'
-import { Link} from 'react-router-dom'
+import { Link, useHistory} from 'react-router-dom'
 // import axios from 'axios';
 //import { initialState } from '../dummyData'
 
 function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
+  let history = useHistory();
   // const [signinSucc, setSigninSucc] = useState(true);
   //formData
   const {
@@ -24,7 +25,7 @@ function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
     //   return data;
     // }).then((accessToken) => {
     //   loginHandler(accessToken);
-    //   window.localStorage.setItem("accessToken", accessToken);
+      // window.localStorage.setItem("accessToken", accessToken);
     //   window.history.go(-1);
     // }).catch((err) => {
     //   console.log(err)
@@ -35,7 +36,7 @@ function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
     setHasAccessToken(accessToken);
     loginHandler(accessToken);
     window.localStorage.setItem("accessToken", accessToken);
-    window.history.go(-1);
+    history.push("/");
   };
 
   return (
