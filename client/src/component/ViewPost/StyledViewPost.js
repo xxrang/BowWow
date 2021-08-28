@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import {Link} from 'react-router-dom'
 
 export const StyledViewPost = styled.div`
   box-sizing: border-box;
@@ -149,23 +150,23 @@ export const StyledViewPostProfile = styled.div`
     height: 80px;
     padding: 10px 20px 10px 20px;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    flex: 1 2 1;
 
-    >.profile-img-wrapper {
+    > .profile-img-wrapper {
       padding: 15px;
     }
     > .profile-img-wrapper img {
       
-      border-radius: 150px;
+      border-radius: 50%;
       border: 1px solid #fff;
-      margin-right: 15px;
+      margin-right: 10px;
     }
 
     > .profile-info-wrapper {
       width: 350px;
       height: 100px;
-      padding-top: 10px;
+      padding-top: 12px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -181,11 +182,6 @@ export const StyledViewPostProfile = styled.div`
       > p {
         margin: 0;
       }
-    }
-    > p {
-      width: 120px;
-      margin-right: 10px;
-      padding: 5px;
     }
   }
 `;
@@ -223,12 +219,12 @@ export const StyledViewPostContentOne = styled.div`
       display: flex;
       justify-content: flex-start;
       margin-bottom: 8px;
-    
-    >.post-info-date {
-      margin-left: 10px;
-    }
-    >.post-info-location {
-      margin-left: 140px;
+
+      > .post-info-date {
+        margin-left: 10px;
+      }
+      > .post-info-location {
+        margin-left: 140px;
       }
     }
 
@@ -240,7 +236,28 @@ export const StyledViewPostContentOne = styled.div`
     > .post-info-content {
       font-size: 16px;
       text-align: start;
-
     }
   }
+`;
+
+export const ProfileInfoBtn = styled.div`
+  align-self:center;
+`;
+
+export const BtnLink = styled(Link)`
+  box-sizing: border-box;
+
+  background: #fff;
+  color: #48cfad;
+  border: 1px solid #48cfad;
+  border-radius: 10px;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 5px 12px;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top:20px;
 `;

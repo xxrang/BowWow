@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{ useState } from 'react'
 import VolunteerList from './VolunteerList'
 import {initialPosts} from '../dummyData'
 import {StyledVolunteer} from './StyledVoluteer'

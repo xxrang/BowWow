@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledUserImgUpload } from "./StyledSignUp";
-
+/* eslint-disable jsx-a11y/img-redundant-alt */
 const UserImgUpload = ({ userImage, imageHandler }) => {
   return (
     <StyledUserImgUpload>

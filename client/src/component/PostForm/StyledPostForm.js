@@ -89,7 +89,7 @@ export const StyledPostContent = styled.div`
     height: 100%;
   }
   > form label {
-    margin: 20px 0 6px 0;
+    margin: 15px 0 6px 0;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -157,6 +157,7 @@ export const StyledPostContent = styled.div`
     height: 35px;
     outline: none;
     padding-left: 14px;
+    margin-bottom: 3px;
   }
 `;
 

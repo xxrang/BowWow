@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from 'react';
 import { StyledPostFormUploadImg } from './StyledPostForm';
 
 const UploadImg = ({ userImage, imageHandler }) => {
-  
+  // console.log(userImage);
 
   return (
     <StyledPostFormUploadImg>
@@ -15,7 +16,7 @@ const UploadImg = ({ userImage, imageHandler }) => {
             type="file"
             name="img"
             id="input-image"
-            accept="image/jpeg,jpg,svg"
+            accept="image/*"
             onChange={imageHandler}
           />
         </div>

@@ -6,7 +6,7 @@ import {initialPosts} from '../dummyData'
 import axios from 'axios'
 //import { initialState } from '../dummyData'
 
-function ViewPost({isLogedIn}) {
+function ViewPost({hasAccessToken}) {
 
   const needLoginHandler = () => {
     console.log('no')
@@ -65,7 +65,6 @@ function ViewPost({isLogedIn}) {
       <ViewPostComment 
       inputRef = {inputRef}
       submitCommentHandler = {submitCommentHandler} 
-      isLogedIn={isLogedIn}
       modal = {modal}
       needLoginHandler = {needLoginHandler}
       loginModalClick = {loginModalClick}

@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from '../component/NavBar';
-import SignUp from '../component/SignUp';
+import SignUp from '../component/SignUp/Signup';
 import Footer from '../component/Footer';
 
 function SignUpPage() {

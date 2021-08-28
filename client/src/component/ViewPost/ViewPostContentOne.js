@@ -6,9 +6,7 @@ const ViewPostContentOne = () => {
     <StyledViewPostContentOne>
       <div className="img-wrapper">
         <img
-          src={require("../../images/9.png").default}
-          alt="백구"
-        />
+          src={require("../../images/9.png").default} alt="백구"/>
       </div>
       <div className="post-info-all">
         <div className="post-info-two">
