@@ -1,4 +1,4 @@
-import React ,{useState}from 'react'
+import React ,{useEffect, useState}from 'react'
 import { StyledService } from './StyledService'
 import  {initialPosts} from '../dummyData'
 import ServiceList from './ServiceList'
@@ -16,6 +16,19 @@ const Service = () => {
     //console.log(slice)
     console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`)
   }
+  useEffect(()=>{
+    axios.get('https://localhost:4000/posts/service_list?category_id',
+    //data,
+    {withCredential : true}
+    )
+    //if category_id 가 1번이면  category_id 1번의 이미지와 컨텐츠요청 받아오는거
+    .then((res)=>{
+      //res.body? chk ? 
+    })
+    .then((data)=>{
+
+    })
+  },[])
 
   return (
     <StyledService id = 'service-container'>
