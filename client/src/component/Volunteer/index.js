@@ -15,12 +15,12 @@ const Volunteer = () => {
     console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`)
   }
 
-  useEffect(()=>{
-    axios.get('https://localhost:4000/posts/service_list?category_id',
+  /*useEffect(()=>{
+    axios.get('https://localhost:4000/posts/volunteer_list?',
     //data,
     {withCredential : true}
     )
-    //if category_id 가 1번이면  category_id 1번의 이미지와 컨텐츠요청 받아오는거
+    //
     .then((res)=>{
       //res.body? chk ? 
     })
@@ -28,7 +28,7 @@ const Volunteer = () => {
 
     })
   },[])
-
+  */
   return (
     <StyledVolunteer>
       <VolunteerList slice = {slice} volunteerDog = {volunteerDog}/>
