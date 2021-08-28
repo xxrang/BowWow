@@ -1,16 +1,38 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import VolunteerList from './VolunteerList'
 import {initialPosts} from '../dummyData'
 import {StyledVolunteer} from './StyledVoluteer'
-
+import axios from 'axios'
 
 const Volunteer = () => {
 
-  const [volunteerDog, setVolunteerDog] = useState(initialPosts.MainPosts)
+  const volunteerDog = initialPosts.MainPosts
+  const [ maxDogList, setMaxDogList ] = useState(6);
+  const slice = volunteerDog.slice(0,maxDogList);
+  const moreButtonHandler = () => {
+    setMaxDogList((prevValue)=>prevValue+6);
+    //console.log(slice)
+    console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`)
+  }
+
+  useEffect(()=>{
+    axios.get('https://localhost:4000/posts/service_list?category_id',
+    //data,
+    {withCredential : true}
+    )
+    //if category_id 가 1번이면  category_id 1번의 이미지와 컨텐츠요청 받아오는거
+    .then((res)=>{
+      //res.body? chk ? 
+    })
+    .then((data)=>{
+
+    })
+  },[])
+
   return (
     <StyledVolunteer>
-      <VolunteerList volunteerDog = {volunteerDog}/>
-      <button className = 'more-btn'>More</button>
+      <VolunteerList slice = {slice} volunteerDog = {volunteerDog}/>
+      <button onClick = {moreButtonHandler}className = 'more-btn'>More</button>
     </StyledVolunteer>
   )
 }

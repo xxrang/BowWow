@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledService = styled.section`
   width : 100%;
-  height : 1100px;
+  height : 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +14,7 @@ export const StyledService = styled.section`
     padding : 10px;
   }
   >.more-btn{
-    margin : -20px auto;
+    margin : 50px auto 20px;
     width : 100px;
     font-size: 16px;
   }
@@ -40,9 +40,13 @@ export const StyledService = styled.section`
 export const StyledServiceList = styled.div`
 >div{
   margin : 150px 200px 0;
-  display: grid;
+  display:flex;
+  flex-wrap: wrap;
+
+  /*display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 250px 250px 250px; 
+  grid-template-rows: 250px 250px 250px; */
+
 }
 `
 export const StyledServiceListItem = styled.div`
@@ -56,7 +60,7 @@ export const StyledServiceListItem = styled.div`
   padding: 15px;
   overflow: hidden;
   box-sizing: border-box;
-  width: 95%;
+  width: 300px;
   height: 220px;
   border-radius: 8px;
   background: #fff;

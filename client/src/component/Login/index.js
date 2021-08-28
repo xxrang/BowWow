@@ -1,20 +1,15 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form';
 import {StyledLogin} from './StyledLogin'
-import {Link,useHistory} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 //import { initialState } from '../dummyData'
 
-function Login({login,loginHandler}) {
+function Login({isLogedIn,loginHandler}) {
 
   //formData
   const { register, handleSubmit,formState: {errors} } = useForm();
   const onSubmit = (data) => {
-    
-    console.log(data);
-    loginHandler();
-    console.log(login)
-    //history.push('/'); 페이지 이동이 되면서 다시 네브바가 Login 으로 됨...
-    //login === false ? <Link to ='/'/> : <></>
+    loginHandler(data);
   }
 
   return (

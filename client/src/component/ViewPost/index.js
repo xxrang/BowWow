@@ -3,6 +3,7 @@ import {StyledViewPost} from './StyledViewPost'
 import ViewPostContent from './ViewPostContent'
 import ViewPostComment from './ViewPostComment'
 import {initialPosts} from '../dummyData'
+import axios from 'axios'
 //import { initialState } from '../dummyData'
 
 function ViewPost({isLogedIn}) {
@@ -30,6 +31,21 @@ function ViewPost({isLogedIn}) {
     
     //axios.post('localhost4000',data) //코멘트데이터
     //axios.get('localhost4000',data) //코멘트데이터
+    axios.post('localhost:4000',
+    {
+      id : '', comment : ''
+    },{
+      withCredentials : true,
+    })
+    .then((res)=>{
+      console.log(res);
+    })
+    .then(()=>{
+
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
     
     
     setCommentList([

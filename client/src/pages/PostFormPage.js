@@ -3,10 +3,10 @@ import NavBar from '../component/NavBar';
 import Footer from '../component/Footer';
 import PostForm from '../component/PostForm';
 
-const PostFormPage = () => {
+const PostFormPage = ({isLogedIn}) => {
   return <>
     <NavBar />
-    <PostForm />
+    <PostForm isLogedIn = {isLogedIn}/>
     <Footer />
   </>
 }
