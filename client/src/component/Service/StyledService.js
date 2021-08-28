@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledService = styled.section`
   width : 100%;
-  height : 800px;
+  height : 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,7 +14,7 @@ export const StyledService = styled.section`
     padding : 10px;
   }
   >.more-btn{
-    margin : 50px auto 20px;
+    margin : 0 auto 80px;
     width : 100px;
     font-size: 16px;
   }
@@ -39,14 +39,13 @@ export const StyledService = styled.section`
 `;
 export const StyledServiceList = styled.div`
 >div{
-  margin : 150px 200px 0;
-  display:flex;
+  /*display:flex;
   flex-wrap: wrap;
-
-  /*display: grid;
+  */
+  margin : 100px 200px 0px;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 250px 250px 250px; */
-
+  grid-template-rows: 250px 250px 250px; 
 }
 `
 export const StyledServiceListItem = styled.div`

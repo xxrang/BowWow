@@ -10,7 +10,8 @@ const ServiceListItem = ({slice}) => {
         return (
           <>
           <Link to = 'viewpost' >
-            <div className = {'service-img-'+el.id}  key = {el.id} >
+            <div className = {'service-img'}  key = {el.id} >
+              <p>{el.tempId}</p>
               <img src = {el.Image} alt = 'dog-img'/>
               <p>{el.content}</p>
             </div>

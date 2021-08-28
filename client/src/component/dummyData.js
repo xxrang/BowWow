@@ -36,6 +36,66 @@ export const initialPosts = {
       }
       ]
     },
+    { 
+      tempId : 2,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    {
+      tempId : 3,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    { 
+      tempId : 4,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    {
+      tempId : 5,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    { 
+      tempId : 6,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    {
+      tempId : 7,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    { 
+      tempId : 8,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    {
+      tempId : 9,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    { 
+      tempId : 10,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    {
+      tempId : 11,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    { 
+      tempId : 12,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    },
+    {
+      tempId : 13,
+      Image:'./images/dogSample.jpeg',
+      content : '쑥이의 강아지',
+    }
   ],
 }
 
@@ -65,11 +125,3 @@ export const dummyPosts = {
   Image : './images/dogSample.jpeg',
   Comment : []
 }
-/*
-click 이벤트 시 강아지사진 계속해서 보기
-export const dummyServiceList = {
-  category_id : 1,
-  content : '',
-  image : './images/dogSample.jpeg'
-}
-*/

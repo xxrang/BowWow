@@ -5,7 +5,7 @@ import {StyledServiceList} from './StyledService'
 const ServiceList = ({slice}) => {
   //console.log(serviceImg)
   return (
-    <StyledServiceList>
+    <StyledServiceList className = 'service-wrapper'>
       <ServiceListItem 
       slice = {slice}/>
     </StyledServiceList>

@@ -5,8 +5,8 @@ export const StyledVolunteer = styled.section`
   height : 800px;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 >.more-btn{
   width : 100px;
   border :none;
@@ -27,10 +27,9 @@ export const StyledVolunteer = styled.section`
 `
 export const StyledVolunteerList = styled.div`
 >div{
-  margin : 50px  0;
-  /*display: grid;
+  display: grid;
   grid-template-columns: 450px 450px ;
-  grid-template-rows: 250px 250px; */
+  grid-template-rows: 250px 250px; 
 }
 `
 export const StyledVolunteerListItem = styled.div`
@@ -52,7 +51,6 @@ export const StyledVolunteerListItem = styled.div`
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
   &:hover{
     transform: scale(1.1);
     }

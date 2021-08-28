@@ -1,4 +1,5 @@
-import React ,{useEffect, useState}from 'react'
+import React ,{useState}from 'react'
+import {Link} from 'react-router-dom'
 import { StyledService } from './StyledService'
 import  {initialPosts} from '../dummyData'
 import ServiceList from './ServiceList'
@@ -16,8 +17,8 @@ const Service = () => {
     //console.log(slice)
     console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`)
   }
-  useEffect(()=>{
-    axios.get('https://localhost:4000/posts/service_list?category_id',
+  /*useEffect(()=>{
+    axios.get('https://localhost:4000/posts/service_list????',
     //data,
     {withCredential : true}
     )
@@ -29,11 +30,12 @@ const Service = () => {
 
     })
   },[])
+  */
 
   return (
     <StyledService id = 'service-container'>
-      <button className ='post-btn'><p>Post</p></button>
       <ServiceList slice = {slice} serviceImg = {serviceImg}/>
+      <Link to ='/postform'><button className ='post-btn'><p>Post</p></button></Link>
       <button onClick = {moreButtonHandler} className ='more-btn'>More</button>
     </StyledService>
   );

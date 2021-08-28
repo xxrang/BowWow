@@ -5,11 +5,9 @@ import HomePage from './pages/HomePage'
 import PostFormPage from './pages/PostFormPage'
 import ProfilePage from './pages/ProfilePage'
 import ProfileEditPage from './pages/ProfileEditPage'
-import SearchPage from './pages/SearchPage'
 import ViewPostPage from './pages/ViewPostPage'
 import ShowVolunteerPage from './pages/ShowVolunteerPage'
 import SignUpPage from './pages/SignUpPage'
-import VolunteerPage from './pages/VolunteerPage'
 import LoginPage from './pages/LoginPage'
 import {initialState} from './component/dummyData'
 //import axios from 'axios';
@@ -43,14 +41,12 @@ function App() {
         <Switch>
           <Route exact path ='/'><HomePage isLogedIn = {isLogedIn}/></Route>
           <Route path ='/postform'><PostFormPage isLogedIn = {isLogedIn}/></Route>
-          <Route path ='/profile'><ProfilePage isLogedIn = {isLogedIn}/></Route>
+          <Route path ='/profile'><ProfilePage  isLogedIn = {isLogedIn}/></Route>
           <Route path ='/profileedit' component={ProfileEditPage}/>
-          <Route path ='/search' component={SearchPage}/>
           <Route path = '/viewpost'><ViewPostPage isLogedIn = {isLogedIn}/></Route>
           <Route path ='/showvolunteer' component={ShowVolunteerPage}/>
-          <Route path = '/login'><LoginPage isLogedIn = {isLogedIn}loginHandler = {loginHandler}/></Route>
+          <Route path = '/login'><LoginPage  isLogedIn = {isLogedIn}loginHandler = {loginHandler}/></Route>
           <Route path ='/signup' component={SignUpPage}/>
-          <Route path ='/volunteer'><VolunteerPage isLogedIn = {isLogedIn}/></Route> {/*뷰포스트페이지로 이동해서 필요없을듯.*/}
         </Switch>
       </BrowserRouter>
     </>

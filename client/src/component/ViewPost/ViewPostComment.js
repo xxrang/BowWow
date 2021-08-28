@@ -13,7 +13,8 @@ function ViewPostComment(
     setOpenModal((prev)=>!prev);
   }
   const addCommenthandler = (e) => {
-      if (isLogedIn) {
+    /*확인 후 바꾸기 */
+      if (!isLogedIn) {
         submitCommentHandler(e,comment)
         console.log('addcommenthandler:', comment)
       } else {
@@ -55,19 +56,25 @@ function ViewPostComment(
       </div>
       
       <div className="list-item-scroll">
-      {commentList.map((el,idx)=>{
-          return (
-            <div key = {idx} className = 'post-comment-wrapper'>
-              <div className = 'post-comment-profile-wrapper'>
-              <img className = 'profile-img' src = {el.image} alt= 'profile-img'/>
-              <h4>{el.nickname}</h4>
-              </div>
-              <ul>
-                <li>{el.content}</li>
-                </ul>
-            </div>
-          )
+        <ul className = 'post-comment-wrapper'>
+          {commentList.map((el,idx)=>{
+            return (
+              <li key = {idx} className = 'post-comment-list'>
+                <div className = 'post-commnet-flexbox'>
+                  <img className = 'profile-img' src = {el.image} alt= 'img'/>
+                  <div>
+                    <p className = 'post-comment-nickname'>{el.nickname}</p>
+                    <p className = 'post-comment-date'>2021.08.28</p>
+                  </div>
+                  <button className ='remove-button'>삭제</button>
+                </div>
+                <div className = 'post-comment-content'>
+                  {el.content}
+                </div>
+              </li>
+            )
           })}
+        </ul>
         </div>
       </div>
       <NeedLogin openModal = {openModal} closeModal = {closeModal} ></NeedLogin>
@@ -79,23 +86,13 @@ export default ViewPostComment
 
 
 /*
-{commentList.map((el,idx)=>{
-          return (
-            <div key = {idx} className = 'post-comment-wrapper'>
-              <div className = 'post-comment-profile-wrapper'>
-              <img className = 'profile-img' src = {el.User.image} alt= 'profile-img'/>
-              <h4>{el.User.nickname}</h4>
-              </div>
-              <ul>
-                <li>{el.content}</li>
-                </ul>
-            </div>
-          )
-        })}
 
-
-      <NeedLogin
-      modal = {modal}
-      loginModalClick = {loginModalClick}
-      />
+  <div key = {idx} className = 'post-comment-profile-wrapper'>
+      <img className = 'profile-img' src = {el.image} alt= 'profile-img'/>
+      <h4>{el.nickname}</h4>
+      <p>2021.08.28</p>
+      <button>삭제</button>
+      <li>{el.content}</li>
+  </div>
 */
+

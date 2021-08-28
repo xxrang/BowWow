@@ -15,7 +15,9 @@ const Volunteer = () => {
     console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`)
   }
 
-  /*useEffect(()=>{
+  /*
+    app.js 로 이동, pos
+    useEffect(()=>{
     axios.get('https://localhost:4000/posts/volunteer_list?',
     //data,
     {withCredential : true}
@@ -31,7 +33,7 @@ const Volunteer = () => {
   */
   return (
     <StyledVolunteer>
-      <VolunteerList slice = {slice} volunteerDog = {volunteerDog}/>
+      <VolunteerList slice = {slice} />
       <button onClick = {moreButtonHandler}className = 'more-btn'>More</button>
     </StyledVolunteer>
   )

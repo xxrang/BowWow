@@ -1,9 +1,12 @@
 import React from 'react'
+import {StyledSearch} from './StyledSearch' 
 
-export const index = () => {
+function Search() {
   return (
-    <div>
-      search
-    </div>
+    <StyledSearch className = 'search-page'>
+      search 페이지
+    </StyledSearch>
   )
 }
+
+export default Search

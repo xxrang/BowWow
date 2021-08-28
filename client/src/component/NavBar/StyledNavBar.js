@@ -15,6 +15,18 @@ export const StyledNavBar = styled.nav`
     height : 80px;
     display: flex;
     align-items: center;
+    >li{
+      list-style: none;
+      cursor: pointer;
+      margin : 0 15px;
+      font-size: 18px;
+      color :white;
+      font-family: lato;
+      &:hover{
+        transform: scale(1.1);
+        transition: all 0.3s ease-in-out;
+      }
+    }
     >a{
       text-decoration: none;
       >img{
@@ -29,7 +41,8 @@ export const StyledNavBar = styled.nav`
         color :white;
         font-family: lato;
         &:hover{
-          transform: scale(1.1)
+          transform: scale(1.1);
+          transition: all 0.3s ease-in-out;
         }
       }
     }
