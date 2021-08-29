@@ -46,6 +46,7 @@ const Service = ({ postsString, postsData, setDataId, dataId, }) => {
 }, [ maxDogList, postsData]);
   return (
     <StyledService id="service-container">
+      
       <ServiceList
         postsData={postsData}
         setDataId={setDataId}

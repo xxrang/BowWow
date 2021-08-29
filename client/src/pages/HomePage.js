@@ -72,22 +72,20 @@ function HomePage({
         setPostsData={setPostsData}
         setPostsString={setPostsString}
       />
-      {curNav === 0 ? (
-        <Service
-          postsData={postsData}
-          postsString={postsString}
-          setDataId={setDataId}
-          DataId={DataId}
-        />
-      ) : curNav === 1 ? (
-        <Search />
+      {postsString === "service" || postsString === "" ? (
+      <Service
+        postsData={postsData}
+        postsString={postsString}
+        setDataId={setDataId}
+        DataId={DataId}
+      />
       ) : (
-        <Volunteer
-          postsData={postsData}
-          postsString={postsString}
-          setDataId={setDataId}
-          DataId={DataId}
-        />
+      <Volunteer
+        postsData={postsData}
+        postsString={postsString}
+        setDataId={setDataId}
+        DataId={DataId}
+      />
       )}
       <Footer />
     </>

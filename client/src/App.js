@@ -16,23 +16,23 @@ import { initialPosts } from "./component/dummyData";
 //루트만 짜기
 function App() {
   const [hasAccessToken, setHasAccessToken] = useState(undefined);
-  const [dataId, setDataId] = useState('');
-  //let history = useHistory();
-  /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
+  const [dataId, setDataId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [postsString, setPostsString] = useState(""); //홈 네브바 선택 이름
+  //let history = useHistory();
+  /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
 
-  console.log("data------",dataId);
+  console.log("data------", dataId);
   useEffect(() => {
-    const { service, volunteer } = initialPosts;
+    const { service, volunteer } = initialPosts; //데이터를 받아왔다 친다.
     console.log("app1:", postsData);
     console.log("app2:", postsString);
-if (postsString === "service" || postsString === "") {
-  setPostsData(service);
-} else if (postsString === "volunteer") {
-  setPostsString("volunteer");
-  setPostsData(volunteer);
-}
+    if (postsString === "service" || postsString === "") {
+      setPostsData(service);
+    } else if (postsString === "volunteer") {
+      setPostsString("volunteer");
+      setPostsData(volunteer);
+    }
     // if (postsString !== "") {
     //   const getPostsData = (postsString) => {
     //     return axios

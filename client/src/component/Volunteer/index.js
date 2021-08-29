@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import VolunteerList from "./VolunteerList";
-import { initialPosts } from "../dummyData";
 import { StyledVolunteer } from "./StyledVoluteer";
 import axios from "axios";
 
-const Volunteer = () => {
-  const volunteerDog = initialPosts.MainPosts;
+const Volunteer = ({ postsData, postsString, setDataId, DataId }) => {
   const [maxDogList, setMaxDogList] = useState(6);
-  const slice = volunteerDog.slice(0, maxDogList);
+  const slice = postsData.slice(0, maxDogList);
   const moreButtonHandler = () => {
     setMaxDogList((prevValue) => prevValue + 6);
     //console.log(slice)
