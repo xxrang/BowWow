@@ -6,6 +6,11 @@ module.exports = (app) => {
     const router = require('express').Router();
     const application = app;
 
+
+    router.get('/', async (req, res) => {
+
+    }),
+    
     router.post('/', async (req, res) => {
         await comment.create({
             content: req.body.content,

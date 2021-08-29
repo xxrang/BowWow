@@ -1,5 +1,6 @@
 const { user } = require('../../models');
 const crypto = require('crypto');
+const {generateAccessToken, sendAccessToken, sendRefreshToken } = require('../tokenFunctions')
 
 module.exports = async (req, res) => {
     
@@ -11,7 +12,12 @@ module.exports = async (req, res) => {
      if(!data){
          res.status(404).send({message: 'invalid user'})
      } else {
-         res.status(200).send({message: 'login ok'})
+         delete data.dataValues.hashpassword;
+         const accessToken = generateAccessToken(data.dataValues);
+        //  const refreshToken = generateAccessToken(data.dataValues);
+         sendAccessToken(res, accessToken)
+        //  sendRefreshToken(res, refreshToken);
+         res.status(200).send({message: 'login ok', data: {accessToken}})
      }
  })
 
