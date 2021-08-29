@@ -94,11 +94,7 @@ function ViewPost({
     //   content: res.data.posts.content,
     //   mobile: res.data.posts.mobile,
     //   image: res.data.posts.image,
-<<<<<<< HEAD
-    //   comment : []배열형태.
-=======
     //   comment: []
->>>>>>> 59f9dc6067f31ada4a1ccc05ca8c14949013aa74
     // });
     // getData();
   });
