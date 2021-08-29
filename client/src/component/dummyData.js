@@ -286,7 +286,11 @@ export const dummyPost = {
   updateAt: "2021-08-31",
   category: "volunteer",
   Comment: [
+<<<<<<< HEAD
     { 
+=======
+    {
+>>>>>>> 59f9dc6067f31ada4a1ccc05ca8c14949013aa74
       id:1,
       User: {
         id: "1",

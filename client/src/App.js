@@ -107,6 +107,7 @@ function App() {
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
+              postId={postId}
             />
           </Route>
           <Route path="/profile">

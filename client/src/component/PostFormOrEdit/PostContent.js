@@ -5,20 +5,16 @@ import { StyledPostContent, BtnLink, TextArea } from "./StyledPostForm";
 import { ErrorMessage } from '../ErrorMessage';
 
 const PostContent = ( props) => {
-  console.log(props);
+  // console.log(props);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-  /*    title: props.data.title */
-    },
-  });
+  } = useForm();
   const onSubmit = (data) => {
-    props.postFormHandler(data);
+    props.postHandler(data);
   };
-  console.log(errors);
+  // console.log(errors);
   return (
     <StyledPostContent>
       <form onSubmit={handleSubmit(onSubmit)}>

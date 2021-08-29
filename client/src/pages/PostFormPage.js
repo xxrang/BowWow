@@ -17,7 +17,7 @@ const PostFormPage = ({
         setPostsData={setPostsData}
         setNavString={setNavString}
       />
-      <PostForm />
+      <PostForm hasAccessToken={hasAccessToken} />
       <Footer />
     </>
   );

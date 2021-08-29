@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 import { 
   StyledViewPostContent,
   StyledViewPostProfile,
@@ -6,6 +7,10 @@ import {
   ProfileInfoBtn
   } 
   from './StyledViewPost'
+=======
+import {StyledViewPostContent} from './StyledViewPost'
+import axios from 'axios';
+>>>>>>> 59f9dc6067f31ada4a1ccc05ca8c14949013aa74
 import { useHistory } from 'react-router-dom';
 //import userPhotos from "../../images/bros_blank.jpg";
 import axios from 'axios';
@@ -43,6 +48,7 @@ function ViewPostContent({
   
   return (
     <StyledViewPostContent>
+<<<<<<< HEAD
     <StyledViewPostProfile>
       <div className="profile-container">
         <div className="profile-img-wrapper">
@@ -78,6 +84,9 @@ function ViewPostContent({
         </div>
       </div>
     </StyledViewPostContentOne>
+=======
+      
+>>>>>>> 59f9dc6067f31ada4a1ccc05ca8c14949013aa74
     </StyledViewPostContent>
   );
 }
