@@ -278,7 +278,7 @@ export const dummyPost = {
     nickname: "쑥이",
     image: "./images/dogSample.jpeg",
   },
-  Image: "./images/dogSample.jpeg", //db따로, 배열형태, 여러개일경우.
+  Image: "../images/bros_blank.jpeg", //db따로, 배열형태, 여러개일경우.
   title: "용산구 준이 유기견 보호소 9월 봉사일정 ",
   date: "2021년 9월 29일",
   location: "서울시 용산구 후암동",
@@ -286,7 +286,8 @@ export const dummyPost = {
   updateAt: "2021-08-31",
   category: "volunteer",
   Comment: [
-    {
+    { 
+      id:1,
       User: {
         id: "1",
         nickname: "쑥이",
@@ -295,6 +296,7 @@ export const dummyPost = {
       content: "와 꼭 가겠습니다 뿅",
     },
     {
+      id:2,
       User: {
         id: "2",
         nickname: "용준",

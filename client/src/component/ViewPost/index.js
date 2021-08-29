@@ -8,11 +8,10 @@ import axios from "axios";
 function ViewPost({
   hasAccessToken,
   logoutHandler,
-  setPostsData,
-  setNavString,
+  setPostsData, //네브바에 따른 데이터
+  setNavString, //네브바에 따른 스트링. 
   postId,
 }) {
-  console.log(dummyPost);
   const needLoginHandler = () => {
     console.log("no");
   };
@@ -23,61 +22,64 @@ function ViewPost({
     setModal((prev) => !prev);
   };
 
-  //코멘트 추가
-  const [commentList, setCommentList] = useState(
-    initialPosts.service[0].Comment
-  );
-  //console.log(commentList)
-
-  const submitCommentHandler = (e, comment) => {
-    console.log("index" + comment);
-    inputRef.current.focus();
-    e.preventDefault();
-    //const commentDummy = (initialPosts.MainPosts[0].Comment[0])
-    //console.log(commentDummy)
-
-    //axios.post('localhost4000',data) //코멘트데이터
-    //axios.get('localhost4000',data) //코멘트데이터
-    axios
-      .post(
-        "localhost:4000",
-        { id: "", comment: "" },
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        console.log(res);
-      })
-      .then(() => {})
-      .catch((err) => {
-        console.log(err);
-      });
-
-    setCommentList([
-      { id: 1, nickname: "숙영", image: "", content: comment },
-      ...commentList,
-    ]);
-  };
   //useRef 등록
   const inputRef = useRef();
   //useEffect
-
   const [userId, setUserId] = useState('');
-  const [userImage, setUserImage] = useState("");
-  const [userNickname, setUserNickname] = useState("");
+  const [userImage, setUserImage] = useState('');
+  const [userNickname, setUserNickname] = useState('');
   const [postInfo, setPostInfo] = useState({});
+  const [commentUserInfo,setCommentUserInfo] = useState([]);
+  const [isLogedIn , setIsLogedIn] = useState(false);
+  //console.log(dummyPost.Comment)
   
+  const [showButton, setShowButton] = useState(false);
+  useEffect(()=>{
+    if(hasAccessToken !== undefined) {
+      setIsLogedIn(true);
+    }
+    //로그인 accesstoken(1) 과 userId 가 일치할 경우 
+    //버튼이 보여야한다. 
+    console.log('userid :'+ dummyPost.User.id)
+    console.log('hasAccessToken :' + hasAccessToken)
+    if( hasAccessToken === dummyPost.User.id ){
+      setShowButton(true);
+    }else{
+      setShowButton(false);
+    }
+    setUserId({
+      id : dummyPost.User.id,
+    })
+    setUserNickname({
+      nickname : dummyPost.User.nickname,
+    })
+    setUserImage({
+      image : dummyPost.User.image,
+    })
+    //console.log(dummyPost)
+    setPostInfo({
+      id : dummyPost.id, 
+      location : dummyPost.location , 
+      mobile : dummyPost.mobile , 
+      title : dummyPost.title,
+      date : dummyPost.date,
+      updateAt : dummyPost.updateAt,
+      content : dummyPost.content,
+      Image : dummyPost.Image
+    })
+    setCommentUserInfo(
+      dummyPost.Comment
+    )
+  },[hasAccessToken, setCommentUserInfo])
 
-  useEffect(() => {
+  /*useEffect(() => {
     inputRef.current.focus();
-
     // const getData = axios.get(`localhost:4000/posts/${postId}`, { withCredentials: true })
     //   .then((res) => {
     //     console.log(res.data)
     //   })
-    console.log("hasAccessToken.", hasAccessToken);
-    console.log("postId.", postId);
+    // console.log("hasAccessToken.", hasAccessToken);
+    // console.log("postId.", postId);
     //* 유저정보 받아야함, nicname, id, userimage,
     // setUserNickname(res.data.posts.nickname);
     // setUserImage(res.data.posts.image);
@@ -92,28 +94,33 @@ function ViewPost({
     //   content: res.data.posts.content,
     //   mobile: res.data.posts.content,
     //   image: res.data.posts.image,
+    //   comment : []배열형태.
     // });
-
     // getData();
   });
+  */
 
   return (
     <StyledViewPost>
       <ViewPostContent
         hasAccessToken={hasAccessToken}
         postId={postId}
+
         userId={userId}
         userImage={userImage}
         userNickname={userNickname}
         postInfo={postInfo}
+        showButton = {showButton}
       />
       <ViewPostComment
         inputRef={inputRef}
         modal={modal}
+        isLogedIn = {isLogedIn}
         needLoginHandler={needLoginHandler}
-        submitCommentHandler={submitCommentHandler}
+        setCommentUserInfo = {setCommentUserInfo}
         loginModalClick={loginModalClick}
         hasAccessToken={hasAccessToken}
+        commentUserInfo = {commentUserInfo}
       />
     </StyledViewPost>
   );

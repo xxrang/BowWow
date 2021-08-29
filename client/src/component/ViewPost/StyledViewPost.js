@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
 
 export const StyledViewPost = styled.div`
   box-sizing: border-box;

@@ -6,23 +6,25 @@ import {initialPosts} from '../dummyData'
 function ViewPostComment({
   inputRef,
   isLogedIn,
+  commentUserInfo,
+  setCommentUserInfo,
   hasAccessToken
   }) {
+
   const [openModal, setOpenModal] = useState(false)
   const closeModal = () => {
     setOpenModal((prev)=>!prev);
   }
-  
+
   const addCommenthandler = (e) => {
     /*확인 후 바꾸기 */
-      if (!isLogedIn) {
+      if (isLogedIn) {
         submitCommentHandler(e,comment)
         setComment('')
       } else {
         setOpenModal(true);
       }
     };
-
 
   //코멘트
   const [comment, setComment] = useState("");
@@ -98,8 +100,9 @@ function ViewPostComment({
         type = 'text' 
         placeholder = '100자 이내로 댓글 입력해주세요.'/>
       </form>
+      
       <button
-      onClick = {(e)=>{addCommenthandler(e)}}
+      onClick = {(e)=>{addCommenthandler(e)}} 
       //로그인 상태면 submitCommentHandler : 아니면 Login 컴포넌트
       //onClick={login === false ? submitCommentHandler : needLoginHandler }
       className = 'post-comment-text-submit'>입력</button>
@@ -107,18 +110,18 @@ function ViewPostComment({
       
       <div className="list-item-scroll">
         <ul className = 'post-comment-wrapper'>
-          {commentList.map((el,idx)=>{
+          {commentUserInfo.map((el)=>{
             return (
-              <li key = {idx} className = 'post-comment-list'>
+              <li key = {el.User.id} className = 'post-comment-list'>
                 <div className = 'post-commnet-flexbox'>
-                  <img className = 'profile-img' src = {el.image} alt= 'img'/>
+                  <img className = 'profile-img' src = {el.User.image} alt= 'img'/>
                   <div>
-                    <p className = 'post-comment-nickname'>{el.nickname}</p>
+                    <p className = 'post-comment-nickname'>{el.User.nickname}</p>
                     <p className = 'post-comment-date'>2021.08.28</p>
                   </div>
                   {/*댓글은 댓글안에서만움직이므로 여기서! 전달해줄곳없다.*/}
                   <button 
-                  onClick = {(e)=>removeCommentHandler(e,el.id)}
+                  onClick = {(e)=>removeCommentHandler(e,el.User.id)}
                   className ='remove-button'>삭제</button>
                 </div>
                 <div className = 'post-comment-content'>
