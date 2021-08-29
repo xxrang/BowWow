@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import {StyledLogin} from './StyledLogin'
 import { Link, useHistory} from 'react-router-dom'
-// import axios from 'axios';
+import axios from 'axios';
 //import { initialState } from '../dummyData'
 
 function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
@@ -14,29 +14,28 @@ function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    // axios.post('http://localhost:4000/user/signin', data, {
-    //   withCredentials: true
-    // }).then((res) => {
-    //   console.log(res.data)
-    //   return res.data.accessToken
-    // }).then((data) => {
-    //   setHasAccessToken(data);
-    //   return data;
-    // }).then((accessToken) => {
-    //   loginHandler(accessToken);
-      // window.localStorage.setItem("accessToken", accessToken);
-    //   window.history.go(-1);
-    // }).catch((err) => {
-    //   console.log(err)
-    //   setSigninSucc(false);
-    // })
-    console.log("data:", data);
-    const accessToken = 1;
-    setHasAccessToken(accessToken);
-    loginHandler(accessToken);
-    window.localStorage.setItem("accessToken", accessToken);
-    history.push("/");
+  const onSubmit =  (data) => {
+    axios.post(
+        "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/login",
+        data,{withCredentials: true,}
+      )
+      .then((res) => {
+        console.log("첫콘솔", res.data);
+        return res.data
+      })
+      .then((data) => {
+        console.log("두번째콘솔", data.accessToken);
+        setHasAccessToken(data.accessToken);
+        return data.accessToken;
+      })
+      .then((accessToken) => {
+        loginHandler(accessToken);
+        window.localStorage.setItem("accessToken", accessToken);
+        history.push('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

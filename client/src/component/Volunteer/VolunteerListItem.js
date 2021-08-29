@@ -10,6 +10,7 @@ const VolunteerListItem = ({ slice }) => {
         return (
           <Link to="/viewpost" key={el.id}>
             <div className="volunteer-dog-box">
+              <p>{el.id}</p>
               <p>{el.content}</p>
               <img src={el.Image} alt="dog-img" />
               <p>봉사활동{el.id}번째 강아지</p>

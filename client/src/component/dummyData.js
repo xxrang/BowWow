@@ -287,6 +287,7 @@ export const dummyPost = {
   category: "volunteer",
   Comment: [
     {
+      id:1,
       User: {
         id: "1",
         nickname: "쑥이",
@@ -295,6 +296,7 @@ export const dummyPost = {
       content: "와 꼭 가겠습니다 뿅",
     },
     {
+      id:2,
       User: {
         id: "2",
         nickname: "용준",

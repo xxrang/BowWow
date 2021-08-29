@@ -2,9 +2,20 @@
 import React from 'react';
 import { StyledPostFormUploadImg } from './StyledPostForm';
 
-const UploadImg = ({ userImage, imageHandler }) => {
+const UploadImg = ({ userImage, setUserImage, setImgCheck }) => {
   // console.log(userImage);
+  const imageHandler = (e) => {
+    const reader = new FileReader();
 
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setUserImage(reader.result);
+      }
+    };
+    console.log(e.target.files);
+    reader.readAsDataURL(e.target.files[0]);
+    setImgCheck("true");
+  };
   return (
     <StyledPostFormUploadImg>
       {userImage ? (

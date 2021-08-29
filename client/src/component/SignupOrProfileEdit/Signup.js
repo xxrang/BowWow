@@ -3,7 +3,7 @@ import {StyledSignUp, BtnLink,ErrorMessage } from './StyledSignUp'
 import camera from '../../images/bros_blank.jpeg'
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
-// import axios from 'axios';
+import axios from 'axios';
 
 const SignUp = () => {
   //* image preview
@@ -54,12 +54,18 @@ const SignUp = () => {
         userImage,
         imgCheck,
       };
-      // axios.post('https://localhost:4000/user/singup',user, {
-      //     headers: {
-      //       'Content-Type': 'multipart/form-data',
-      //     },
-      //     withCredentials: true,
-      //   })
+      axios
+        .post(
+          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",
+          user,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log("첫데이터", res)
+        });
       console.log(user);
       // console.log("email:", email,
       //   "| nickname: ", nickname,

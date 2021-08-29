@@ -84,14 +84,15 @@ function ViewPost({
     // setUser_id(res.data.posts.userId);
     //* 컨텐츠 정보를 받아야함, id, title, updatedAt, date, contnent, location, category
     // setContentInfo({
-    //   post_id: res.data.posts.id
+    //   post_id: res.data.posts.id,
     //   title: res.data.posts.title,
     //   updateAt: res.data.posts.updateAt,
     //   location: res.data.posts.location,
     //   date: res.data.posts.date,
     //   content: res.data.posts.content,
-    //   mobile: res.data.posts.content,
+    //   mobile: res.data.posts.mobile,
     //   image: res.data.posts.image,
+    //   comment: []
     // });
 
     // getData();

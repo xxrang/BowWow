@@ -1,7 +1,5 @@
 import React from 'react'
 import {StyledViewPostContent} from './StyledViewPost'
-import ViewPostProfile from './ViewPostProfile'
-import ViewPostContentOne from "./ViewPostContentOne";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
@@ -25,8 +23,7 @@ function ViewPostContent({ hasAccessToken, postId, postInfo, userId, userImage, 
   
   return (
     <StyledViewPostContent>
-      <ViewPostProfile  />
-      <ViewPostContentOne />
+      
     </StyledViewPostContent>
   );
 }
