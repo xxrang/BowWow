@@ -8,7 +8,7 @@ const VolunteerListItem = ({ slice }) => {
     <StyledVolunteerListItem>
       {slice.map((el) => {
         return (
-          <Link to="/viewpost" key={el.id}>
+          <Link to="/posts" key={el.id}>
             <div className="volunteer-dog-box">
               <p>{el.id}</p>
               <p>{el.content}</p>

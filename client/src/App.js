@@ -134,7 +134,7 @@ function App() {
               setNavString={setNavString}
             />
           </Route>
-          <Route path="/viewpost">
+          <Route path="/posts">
             <ViewPostPage
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}

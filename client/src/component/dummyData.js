@@ -255,13 +255,59 @@ export const initialPosts = {
   ],
 };
 
+// eslint-disable-next-line import/first
+import camera from "../images/9.png";
+
 export const dummyUser = {
-  id: "",
-  nickname: "",
-  email: "",
-  introduce: "",
-  image: "",
-  posts: [],
+  id: 1,
+  nickname: "쭌이쭌이",
+  email: "dydwns2441",
+  introduce: "안녕하세여 만나서 반갑습니다 한번에 연결합시다.",
+  image: camera,
+  posts: [
+    {
+      id: 1,
+      title: "준이의 봉사활동1",
+      content: "준이의 봉사일정을 확인하세요. 정말 재밌을거에요",
+      updateAt: "2021-08-28",
+    },
+    {
+      id: 2,
+      title: "준이의 봉사활동2",
+      content: "준이의 봉사일정을 확인하세요. 시간은 오후 2시부터 시작합니다",
+      updateAt: "2021-08-28",
+    },
+    {
+      id: 3,
+      title: "준이의 봉사활동3",
+      content: "준이의 봉사일정을 확인하세요준이의 봉사일정을 확인하세요",
+      updateAt: "2021-08-27",
+    },
+    {
+      id: 4,
+      title: "준이의 봉사활동4",
+      content: "준이의 봉사일정을 확인하세요준이의 봉사일정을 확인하세요",
+      updateAt: "2021-08-27",
+    },
+    {
+      id: 5,
+      title: "준이의 봉사활동5",
+      content: "준이의 봉사일정을 확인하세요준이의 봉사일정을 확인하세요",
+      updateAt: "2021-08-27",
+    },
+    {
+      id: 6,
+      title: "준이의 봉사활동6",
+      content: "준이의 봉사일정을 확인하세요",
+      updateAt: "2021-08-27",
+    },
+    {
+      id: 7,
+      title: "준이의 봉사활동7",
+      content: "준이의 봉사일정을 확인하세요",
+      updateAt: "2021-08-27",
+    },
+  ],
 };
 
 // 로그인이 되어있냐 안되어있냐, 상태관리더미

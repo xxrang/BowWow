@@ -28,11 +28,14 @@ export const StyledProfileInfo = styled.div`
     justify-content: flex-start;
     align-items: center;
 
-    > .profile-img-wrapper > img {
-      border-radius: 150px;
-      border: 1px solid #fff;
+    > .profile-img-wrapper {
       margin-left: 20px;
-      margin-right: 30px;
+      margin-right: 20px;
+
+      > img {
+        border-radius: 150px;
+        border: 1px solid #bcf1e4;
+      }
     }
 
     > .profile-info-wrapper {
