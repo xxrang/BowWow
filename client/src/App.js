@@ -10,18 +10,29 @@ import ViewPostPage from "./pages/ViewPostPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import PostEditPage from "./pages/PostEditPage";
-// import {initialState} from './component/dummyData'
+import { initialPosts } from "./component/dummyData";
 // import axios from 'axios';
 
 //루트만 짜기
 function App() {
   const [hasAccessToken, setHasAccessToken] = useState(undefined);
+  const [dataId, setDataId] = useState('');
   //let history = useHistory();
   /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [postsString, setPostsString] = useState(""); //홈 네브바 선택 이름
 
+  console.log("data------",dataId);
   useEffect(() => {
+    const { service, volunteer } = initialPosts;
+    console.log("app1:", postsData);
+    console.log("app2:", postsString);
+if (postsString === "service" || postsString === "") {
+  setPostsData(service);
+} else if (postsString === "volunteer") {
+  setPostsString("volunteer");
+  setPostsData(volunteer);
+}
     // if (postsString !== "") {
     //   const getPostsData = (postsString) => {
     //     return axios
@@ -46,7 +57,7 @@ function App() {
     //   };
     //   getAllData();
     // }
-  }, []);
+  }, [postsString]);
 
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {
@@ -76,6 +87,10 @@ function App() {
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setPostsString={setPostsString}
+              postsString={postsString}
+              postsData={postsData}
+              dataId={dataId}
+              setDataId={setDataId}
             />
           </Route>
           <Route path="/postform">
@@ -124,6 +139,7 @@ function App() {
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setPostsString={setPostsString}
+              dataId={dataId}
             />
           </Route>
           <Route path="/login">

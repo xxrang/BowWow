@@ -10,15 +10,19 @@ function LoginPage({
   setPostsData,
   setPostsString,
 }) {
+  // curNav = { curNav };
+  // selectNavHandler = { selectNavHandler };
+  // handleTop = { handleTop };
   return (
     <>
-      <NavBar />
+      <NavBar
+        setPostsData={setPostsData}
+        setPostsString={setPostsString}
+      />
       <Login
         loginHandler={loginHandler}
         setHasAccessToken={setHasAccessToken}
         hasAccessToken={hasAccessToken}
-        setPostsData={setPostsData}
-        setPostsString={setPostsString}
       />
       <Footer />
     </>

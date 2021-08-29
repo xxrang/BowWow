@@ -8,6 +8,7 @@ function ViewPostPage({
   logoutHandler,
   setPostsData,
   setPostsString,
+  dataId,
 }) {
   return (
     <div>
@@ -17,8 +18,7 @@ function ViewPostPage({
         setPostsData={setPostsData}
         setPostsString={setPostsString}
       />
-      <ViewPost hasAccessToken={hasAccessToken} />
-      로그인핸들러추가
+      <ViewPost hasAccessToken={hasAccessToken} dataId={dataId} />
       <Footer />
     </div>
   );

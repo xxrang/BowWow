@@ -39,43 +39,48 @@ export const StyledService = styled.section`
   }
 `;
 export const StyledServiceList = styled.div`
-  > div {
-    /*display:flex;
+  /*display:flex;
   flex-wrap: wrap;
   */
     margin: 100px 200px 0px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 250px 250px 250px;
-  }
-`;
-export const StyledServiceListItem = styled.div`
+
   > a {
     text-decoration: none;
     color: black;
   }
-  > a > div {
-    margin: 0 auto;
-    text-align: center;
-    padding: 15px;
-    overflow: hidden;
-    box-sizing: border-box;
-    width: 300px;
-    height: 220px;
-    border-radius: 8px;
-    background: #fff;
-    margin-bottom: 12px;
-    cursor: pointer;
-    transition: all 0.4s ease-in-out;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+`;
 
-    &:hover {
-      transform: scale(1.1);
-    }
-    > img {
-      width: 100%;
-      height: 70%;
-      object-fit: contain;
-    }
+export const ServiceListWrapper = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  padding: 15px;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 300px;
+  height: 220px;
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: scale(1.1);
   }
+`;
+export const ServiceListP = styled.p`
+margin: 0;
+padding: 0;
+
+`;
+export const ServiceListImg = styled.img`
+  width: 100%;
+  height: 70%;
+  object-fit: contain;
 `;
