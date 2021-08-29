@@ -58,6 +58,8 @@ app.delete('/posts', controllers.post_delete); //게시글 삭제
 app.post('/comments', controllers.comments); //댓글 작성
 app.delete('/comments', controllers.comments); //댓글 삭제
 app.patch('/comments', controllers.comments); //댓글 수정
+const comments = require('./controllers/comment/comments')(app);
+app.use('/comments', comments);
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
