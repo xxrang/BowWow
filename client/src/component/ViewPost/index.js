@@ -31,17 +31,15 @@ function ViewPost({
   const [postInfo, setPostInfo] = useState({});
   const [commentUserInfo,setCommentUserInfo] = useState([]);
   const [isLogedIn , setIsLogedIn] = useState(false);
-  //console.log(dummyPost.Comment)
-  
   const [showButton, setShowButton] = useState(false);
   useEffect(()=>{
     if(hasAccessToken !== undefined) {
       setIsLogedIn(true);
     }
-    //로그인 accesstoken(1) 과 userId 가 일치할 경우 
-    //버튼이 보여야한다. 
-    console.log('userid :'+ dummyPost.User.id)
-    console.log('hasAccessToken :' + hasAccessToken)
+    // 로그인 accesstoken(1) 과 userId 가 일치할 경우 
+    // 버튼이 보여야한다. 
+    // console.log('userid :'+ dummyPost.User.id)
+    // console.log('hasAccessToken :' + hasAccessToken)
     if( hasAccessToken === dummyPost.User.id ){
       setShowButton(true);
     }else{
@@ -74,9 +72,10 @@ function ViewPost({
 
   /*useEffect(() => {
     inputRef.current.focus();
-    // const getData = axios.get(`localhost:4000/posts/${postId}`, { withCredentials: true })
+    //const getData = axios.get(`localhost:4000/posts/${postId}`
+    // , { withCredentials: true })
     //   .then((res) => {
-    //     console.log(res.data)
+    //    console.log(res.data)
     //   })
     // console.log("hasAccessToken.", hasAccessToken);
     // console.log("postId.", postId);
@@ -93,12 +92,14 @@ function ViewPost({
     //   date: res.data.posts.date,
     //   content: res.data.posts.content,
     //   mobile: res.data.posts.mobile,
-    //   image: res.data.posts.image,
-<<<<<<< HEAD
-    //   comment : []배열형태.
-=======
-    //   comment: []
->>>>>>> 59f9dc6067f31ada4a1ccc05ca8c14949013aa74
+    //   Image: res.data.posts.Image,
+    //   Comment : [
+                    res.data.posts.id,
+                    res.data.posts.User.id,
+                    res.data.posts.User.nickname,
+                    res.data.posts.User.image,
+                    res.data.posts.content
+                  ]
     // });
     // getData();
   });
@@ -119,6 +120,7 @@ function ViewPost({
       <ViewPostComment
         inputRef={inputRef}
         modal={modal}
+        showButton = {showButton}
         isLogedIn = {isLogedIn}
         needLoginHandler={needLoginHandler}
         setCommentUserInfo = {setCommentUserInfo}

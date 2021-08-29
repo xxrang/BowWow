@@ -8,24 +8,8 @@ function ViewPostComment({
   isLogedIn,
   commentUserInfo,
   setCommentUserInfo,
-  hasAccessToken
+  showButton,
   }) {
-
-  const [openModal, setOpenModal] = useState(false)
-  const closeModal = () => {
-    setOpenModal((prev)=>!prev);
-  }
-
-  const addCommenthandler = (e) => {
-    /*확인 후 바꾸기 */
-      if (isLogedIn) {
-        submitCommentHandler(e,comment)
-        setComment('')
-      } else {
-        setOpenModal(true);
-      }
-    };
-
   //코멘트
   const [comment, setComment] = useState("");
   //글자 100자 제한
@@ -36,39 +20,56 @@ function ViewPostComment({
       setComment(limitWord)
     }
   }
+  // 모달
+  const [openModal, setOpenModal] = useState(false)
+  const closeModal = () => {
+    setOpenModal((prev)=>!prev);
+  }
+  const submitCommenthandler = (e) => {
+    /*확인 후 바꾸기 */
+      if (isLogedIn) {
+        addCommentHandler(e,comment)
+        setComment('')
+      } else {
+        setOpenModal(true);
+      }
+    };
+
   //코멘트 추가
   const comments = initialPosts.service[0].Comment
-  const [commentList,setCommentList] = useState(comments)
   //코멘트 삭제위한 id역할의 숫자
   const [listNum,setListNum] = useState(1);
 
-  const submitCommentHandler = (e,comment) => {
-    //console.log('index'+comment)
+  const addCommentHandler = (e,comment) => {
     inputRef.current.focus();
     e.preventDefault();
     //const commentDummy = (initialPosts.MainPosts[0].Comment[0])
     //console.log(commentDummy)
     
     //axios.post('localhost4000',data) //코멘트데이터
-    //axios.get('localhost4000',data) //코멘트데이터
-    /*axios.post('localhost:4000',
+    //axios.get('localhost4000',data) 
+    /*axios.post('localhost:4000/comments',
     {
       id : '', comment : ''
     },{
       withCredentials : true,
     })
     .then((res)=>{
-      console.log(res);
+      console.log(res.data);
     })
-    .then(()=>{
-
+    .then((data)=>{
+      console.log()
     })
     .catch((err)=>{
       console.log(err)
     })*/
+    
     if(comment !== ''){
-      setCommentList([
-        {id : listNum ,nickname : comments[0].User.nickname,image : comments[0].User.image ,content : comment},...commentList
+      setCommentUserInfo([
+        {id : listNum ,
+        nickname : comments[0].User.nickname,
+        image : comments[0].User.image ,
+        content : comment},...commentUserInfo
       ])
       setListNum(listNum+1);
     }else{
@@ -79,10 +80,10 @@ function ViewPostComment({
 
   //id 와 일치하지 않는값만 필터링.
   const removeCommentHandler = (e,delComment) => {
-    const remove = commentList.filter((el)=>{
+    const remove = commentUserInfo.filter((el)=>{
       return el.id !== delComment
     })
-    setCommentList(remove)
+    setCommentUserInfo(remove)
   }
 
   return (
@@ -91,7 +92,7 @@ function ViewPostComment({
         <i className="fas fa-comment-dots"> 댓글 </i>
 
       <div className = 'flex-box'>
-      <form >
+      <form>
         <textarea 
         ref = {inputRef} 
         onChange = {ChangeCommentHandler} 
@@ -102,7 +103,8 @@ function ViewPostComment({
       </form>
       
       <button
-      onClick = {(e)=>{addCommenthandler(e)}} 
+      //onClick = {(e)=>{addCommenthandler(e)}} 
+      onClick = {(e)=>{submitCommenthandler(e)}}
       //로그인 상태면 submitCommentHandler : 아니면 Login 컴포넌트
       //onClick={login === false ? submitCommentHandler : needLoginHandler }
       className = 'post-comment-text-submit'>입력</button>
@@ -112,17 +114,21 @@ function ViewPostComment({
         <ul className = 'post-comment-wrapper'>
           {commentUserInfo.map((el)=>{
             return (
-              <li key = {el.User.id} className = 'post-comment-list'>
+              <li key = {el.id} className = 'post-comment-list'>
                 <div className = 'post-commnet-flexbox'>
-                  <img className = 'profile-img' src = {el.User.image} alt= 'img'/>
+                  <img className = 'profile-img' src = {el.image} alt= 'img'/>
                   <div>
-                    <p className = 'post-comment-nickname'>{el.User.nickname}</p>
+                    <p className = 'post-comment-nickname'>{el.nickname}</p>
                     <p className = 'post-comment-date'>2021.08.28</p>
                   </div>
-                  {/*댓글은 댓글안에서만움직이므로 여기서! 전달해줄곳없다.*/}
+
+                  { showButton ?
                   <button 
-                  onClick = {(e)=>removeCommentHandler(e,el.User.id)}
+                  onClick = {(e)=>removeCommentHandler(e,el.id)}
                   className ='remove-button'>삭제</button>
+                  :
+                  null
+                  }
                 </div>
                 <div className = 'post-comment-content'>
                   {el.content}

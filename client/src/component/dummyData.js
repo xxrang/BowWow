@@ -264,12 +264,6 @@ export const dummyUser = {
   posts: [],
 };
 
-// 로그인이 되어있냐 안되어있냐, 상태관리더미
-export const initialState = {
-  isLogedIn: false,
-  user: null,
-};
-
 export const dummyPost = {
   id: 2,
   content: "안녕하세요 용준입니다. 프로젝트 1등하겠습니다.",
@@ -286,11 +280,7 @@ export const dummyPost = {
   updateAt: "2021-08-31",
   category: "volunteer",
   Comment: [
-<<<<<<< HEAD
-    { 
-=======
     {
->>>>>>> 59f9dc6067f31ada4a1ccc05ca8c14949013aa74
       id:1,
       User: {
         id: "1",

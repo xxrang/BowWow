@@ -59,7 +59,7 @@ function HomePage({
     //console.log(curNav)
     console.log(idx);
   };
-
+//
   return (
     <>
       <Main handleClickForService={handleClickForService} />
@@ -79,14 +79,17 @@ function HomePage({
           setPostId={setPostId}
           postId={postId}
         />
-      ) : (
+      ) : 
+      navString === "volunteer" ? ( 
         <Volunteer
           postsData={postsData}
           navString={navString}
           setPostId={setPostId}
           postId={postId}
         />
-      )}
+      )
+        : (<Search/>)
+        }
       <Footer />
     </>
   );

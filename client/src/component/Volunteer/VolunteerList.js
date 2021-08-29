@@ -1,12 +1,31 @@
 import React from 'react'
-import VolunteerListItem from './VolunteerListItem'
-import {StyledVolunteerList} from './StyledVoluteer'
+import {StyledVolunteerList } from './StyledVoluteer'
+import { useHistory } from 'react-router-dom'
 
-const VolunteerList = ({slice}) => {
+const VolunteerList = ({slice ,setPostId }) => {
   //console.log(volunteerDog)
+  let history = useHistory();
+  //console.log(serviceImg)
+
+  const postClickHandler = (id) => {
+    const dataId = id;
+    setPostId(dataId);
+    return history.push(`/viewpost/${id}`);
+  };
   return (
     <StyledVolunteerList>
-      <VolunteerListItem slice={slice} />
+      {slice.map((el) => {
+        return (
+          <div
+            onClick= {() => {postClickHandler(el.id)}}
+            key={el.id}
+            className={"service-img-" + el.id}>
+            <p>{el.id}</p>
+            <img src={el.Image} alt="dog-img" />
+            <p>{el.content}</p>
+          </div>
+        );
+      })}
     </StyledVolunteerList>
   );
 }

@@ -21,7 +21,6 @@ const NavBar = ({
     const postsString = string;
     setNavString(postsString);
     
-    
     history.push("/");
     // return axios;
     // .get(`https://localhost:4000`, {
@@ -36,7 +35,11 @@ const NavBar = ({
     // .catch((err) => alert("정보를 받아오는데 실패하였습니다."));
   };
 
-  const menu = [{ name: "service" }, { name: "search" }, { name: "volunteer" }];
+  const menu = [
+    { name: "service" },
+    { name: "search" }, 
+    { name: "volunteer" }
+  ];
 
   useEffect(() => {
     if (hasAccessToken !== undefined) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import VolunteerList from "./VolunteerList";
 import { StyledVolunteer } from "./StyledVoluteer";
 // import axios from "axios";
@@ -13,24 +13,24 @@ const Volunteer = ({ postsData, navString, setPostId, postId }) => {
   };
 
   /*
-    app.js 로 이동, pos
+    포스트 아이디에 따라 페이지 나뉜다. 
     useEffect(()=>{
-    axios.get('https://localhost:4000/posts/volunteer_list?',
-    //data,
-    {withCredential : true}
+    axios.get('https://localhost:4000/volunteer/${postId}',
+    { withCredentials: true }
     )
-    //
     .then((res)=>{
-      //res.body? chk ? 
+      console.log(res.data)
     })
     .then((data)=>{
-
+      console.log(data)
     })
   },[])
   */
   return (
     <StyledVolunteer>
-      <VolunteerList slice={slice} />
+      <VolunteerList 
+      slice={slice} 
+      setPostId = {setPostId}/>
       <button onClick={moreButtonHandler} className="more-btn">
         More
       </button>

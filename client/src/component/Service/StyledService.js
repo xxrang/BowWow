@@ -46,11 +46,6 @@ export const StyledServiceList = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 250px 250px 250px;
-
-  > a {
-    text-decoration: none;
-    color: black;
-  }
 `;
 
 export const ServiceListWrapper = styled.div`

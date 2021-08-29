@@ -20,8 +20,7 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
     setSlice(postsData.slice(0, maxDogList));
   };
   /*useEffect(()=>{
-    axios.get('https://localhost:4000/posts/service_list????',
-    //data,
+    axios.get('https://localhost:4000/service',
     {withCredential : true}
     )
     //if category_id 가 1번이면  category_id 1번의 이미지와 컨텐츠요청 받아오는거
@@ -40,7 +39,7 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
     } else {
       return null;
     }
-    console.log("postsData service::::", postsData);
+    //console.log("postsData service::::", postsData);
   }, [maxDogList, postsData]);
   return (
     <StyledService id="service-container">
