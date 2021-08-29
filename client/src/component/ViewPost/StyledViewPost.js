@@ -61,9 +61,9 @@ margin-left : 14px;
       resize: none;
       width : 200px;
       padding: 10px;
-      height : 40px;
-      margin-top:10px;
-      border : none;
+      height: 40px;
+      margin-top: 10px;
+      border: none;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
       /*box-shadow: rgb(0, 0, 0, 0.35) 1px 1px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;*/
   }

@@ -8,18 +8,19 @@ function ViewPostPage({
   logoutHandler,
   setPostsData,
   setPostsString,
+  dataId,
 }) {
   return (
-    <>
+    <div>
       <NavBar
         hasAccessToken={hasAccessToken}
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setPostsString={setPostsString}
       />
-      <ViewPost hasAccessToken={hasAccessToken} />
+      <ViewPost hasAccessToken={hasAccessToken} dataId={dataId} />
       <Footer />
-    </>
+    </div>
   );
 }
 

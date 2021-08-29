@@ -8,14 +8,14 @@ function SearchPage({
   setPostsString,
 }) {
   return (
-    <>
+    <div>
       <NavBar
         hasAccessToken={hasAccessToken}
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setPostsString={setPostsString}
       />
-    </>
+    </div>
   );
 }
 

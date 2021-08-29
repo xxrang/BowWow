@@ -3,8 +3,8 @@ import NeedLogin from '../NeedLogin'
 import {StyledViewPostComment} from './StyledViewPost'
 import {initialPosts} from '../dummyData'
 
-function ViewPostComment(
-  {inputRef,
+function ViewPostComment({
+  inputRef,
   isLogedIn,
   hasAccessToken
   }) {
@@ -21,10 +21,11 @@ function ViewPostComment(
       } else {
         setOpenModal(true);
       }
-    }
-  
+    };
+
+
   //코멘트
-  const [comment,setComment] = useState('')
+  const [comment, setComment] = useState("");
   //글자 100자 제한
   const limitText = (limit) => limit.length < 100
   const ChangeCommentHandler =(e)=>{
@@ -34,7 +35,7 @@ function ViewPostComment(
     }
   }
   //코멘트 추가
-  const comments = initialPosts.MainPosts[0].Comment
+  const comments = initialPosts.service[0].Comment
   const [commentList,setCommentList] = useState(comments)
   //코멘트 삭제위한 id역할의 숫자
   const [listNum,setListNum] = useState(1);
@@ -83,10 +84,9 @@ function ViewPostComment(
   }
 
   return (
-    
     <StyledViewPostComment>
-      <div className = 'post-comment-form-wrapper'>
-      <i className="fas fa-comment-dots"> 댓글 </i>
+      <div className="post-comment-form-wrapper">
+        <i className="fas fa-comment-dots"> 댓글 </i>
 
       <div className = 'flex-box'>
       <form >
@@ -130,9 +130,9 @@ function ViewPostComment(
         </ul>
         </div>
       </div>
-      <NeedLogin openModal = {openModal} closeModal = {closeModal} ></NeedLogin>
+      <NeedLogin openModal={openModal} closeModal={closeModal}></NeedLogin>
     </StyledViewPostComment>
-  )
+  );
 }
 
 export default ViewPostComment

@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import {StyledSignUp, BtnLink,ErrorMessage } from './StyledSignUp'
 import camera from '../../images/bros_blank.jpeg'
-import UserImgUpload from './UserImgUpload'
+import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
 // import axios from 'axios';
 
