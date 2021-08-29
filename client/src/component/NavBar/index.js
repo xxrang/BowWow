@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { StyledNavBar } from "./StyledNavBar";
 import { Link, useHistory } from "react-router-dom";
 // import axios from "axios";
-import { initialPosts } from "../dummyData";
 //setPostsData : 데이터를 가져왔을 때 응답받았을 떄 데이터. -> 응답받으면 상태변화를 준다.
 //setPostsString : 스트링으로 데이터 요청을 보내고
 //
 const NavBar = ({
   hasAccessToken,
   setPostsData,
-  setPostsString,
+  setNavString,
   handleTop,
   logoutHandler,
 }) => {
@@ -20,7 +19,7 @@ const NavBar = ({
     
     console.log("네브바 선택::::",string)
     const postsString = string;
-    setPostsString(postsString);
+    setNavString(postsString);
     
     
     history.push("/");

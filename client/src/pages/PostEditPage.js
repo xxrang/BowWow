@@ -7,7 +7,7 @@ const PostEditPage = ({
   hasAccessToken,
   logoutHandler,
   setPostsData,
-  setPostsString,
+  setNavString,
 }) => {
   return (
     <>
@@ -15,7 +15,7 @@ const PostEditPage = ({
         hasAccessToken={hasAccessToken}
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
-        setPostsString={setPostsString}
+        setNavString={setNavString}
       />
       <PostEdit hasAccessToken={hasAccessToken} />
       <Footer />

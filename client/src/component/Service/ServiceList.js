@@ -7,13 +7,13 @@ import {
   ServiceListImg,
 } from "./StyledService";
 
-const ServiceList = ({ setDataId, slice }) => {
+const ServiceList = ({ setPostId, slice }) => {
   let history = useHistory();
   //console.log(serviceImg)
 
   const postClickHandler = (id) => {
     const dataId = id;
-    setDataId(dataId);
+    setPostId(dataId);
     return history.push(`/viewpost/${id}`);
   };
   return (

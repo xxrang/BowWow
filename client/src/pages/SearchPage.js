@@ -5,7 +5,7 @@ function SearchPage({
   hasAccessToken,
   logoutHandler,
   setPostsData,
-  setPostsString,
+  setNavString,
 }) {
   return (
     <div>
@@ -13,7 +13,7 @@ function SearchPage({
         hasAccessToken={hasAccessToken}
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
-        setPostsString={setPostsString}
+        setNavString={setNavString}
       />
     </div>
   );

@@ -4,12 +4,11 @@ import {
   StyledViewPostProfile,
   ProfileInfoBtn,
 } from "./StyledViewPost";
-import {Link,useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import userPhotos from "../../images/bros_blank.jpg";
 //import axios from 'axios'
 
 const ViewPostProfile = ({hasAccessToken}) => {
-  
   let history = useHistory();
   const deletePostHandler = (e) => {
     console.log(e.target.value);
@@ -56,7 +55,7 @@ const ViewPostProfile = ({hasAccessToken}) => {
         </div>
         {/*hasAccessToken 이 작성자와 일치한다면*/}
         <ProfileInfoBtn >
-          <Link to="/postedit">수정</Link>
+          <button onClick={() => { history.push('/postedit')}}>수정</button>
           <button type="button" onClick={deletePostHandler}>삭제</button>
         </ProfileInfoBtn>
         {/*

@@ -7,7 +7,7 @@ const ProfilePage = ({
   hasAccessToken,
   logoutHandler,
   setPostsData,
-  setPostsString,
+  setNavString,
 }) => {
   return (
     <>
@@ -15,7 +15,7 @@ const ProfilePage = ({
         hasAccessToken={hasAccessToken}
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
-        setPostsString={setPostsString}
+        setNavString={setNavString}
       />
       <Profile />
       <Footer />

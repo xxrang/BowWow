@@ -32,7 +32,7 @@ function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
     //   setSigninSucc(false);
     // })
     console.log("data:", data);
-    const accessToken = 8;
+    const accessToken = 1;
     setHasAccessToken(accessToken);
     loginHandler(accessToken);
     window.localStorage.setItem("accessToken", accessToken);

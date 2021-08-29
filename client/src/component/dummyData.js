@@ -270,14 +270,37 @@ export const initialState = {
   user: null,
 };
 
-export const dummyPosts = {
+export const dummyPost = {
   id: 2,
-  content: "",
+  content: "안녕하세요 용준입니다. 프로젝트 1등하겠습니다.",
   User: {
     id: 1,
-    nickname: "",
-    image: "",
+    nickname: "쑥이",
+    image: "./images/dogSample.jpeg",
   },
-  Image: "./images/dogSample.jpeg",
-  Comment: [],
+  Image: "./images/dogSample.jpeg", //db따로, 배열형태, 여러개일경우.
+  title: "용산구 준이 유기견 보호소 9월 봉사일정 ",
+  date: "2021년 9월 29일",
+  location: "서울시 용산구 후암동",
+  mobile: "010-1009-1009",
+  updateAt: "2021-08-31",
+  category: "volunteer",
+  Comment: [
+    {
+      User: {
+        id: "1",
+        nickname: "쑥이",
+        image: "./images/dogSample.jpeg",
+      },
+      content: "와 꼭 가겠습니다 뿅",
+    },
+    {
+      User: {
+        id: "2",
+        nickname: "용준",
+        image: "./images/dogSample.jpeg",
+      },
+      content: "앗 저는 시간이 안될거같네요",
+    },
+  ],
 };

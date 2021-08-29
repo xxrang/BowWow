@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import VolunteerList from "./VolunteerList";
 import { StyledVolunteer } from "./StyledVoluteer";
-import axios from "axios";
+// import axios from "axios";
 
-const Volunteer = ({ postsData, postsString, setDataId, DataId }) => {
+const Volunteer = ({ postsData, navString, setPostId, postId }) => {
   const [maxDogList, setMaxDogList] = useState(6);
   const slice = postsData.slice(0, maxDogList);
   const moreButtonHandler = () => {

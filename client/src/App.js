@@ -16,21 +16,21 @@ import { initialPosts } from "./component/dummyData";
 //루트만 짜기
 function App() {
   const [hasAccessToken, setHasAccessToken] = useState(undefined);
-  const [dataId, setDataId] = useState("");
+  const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
-  const [postsString, setPostsString] = useState(""); //홈 네브바 선택 이름
+  const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
   //let history = useHistory();
   /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
 
-  console.log("data------", dataId);
+  console.log("data------", postId);
   useEffect(() => {
     const { service, volunteer } = initialPosts; //데이터를 받아왔다 친다.
-    console.log("app1:", postsData);
-    console.log("app2:", postsString);
-    if (postsString === "service" || postsString === "") {
+    // console.log("app1:", postsData);
+    // console.log("app2:", navString);
+    if (navString === "service" || navString === "") {
       setPostsData(service);
-    } else if (postsString === "volunteer") {
-      setPostsString("volunteer");
+    } else if (navString === "volunteer") {
+      setNavString("volunteer");
       setPostsData(volunteer);
     }
     // if (postsString !== "") {
@@ -57,7 +57,7 @@ function App() {
     //   };
     //   getAllData();
     // }
-  }, [postsString]);
+  }, [navString, postsData]);
 
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {
@@ -86,11 +86,11 @@ function App() {
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
-              setPostsString={setPostsString}
-              postsString={postsString}
+              setNavString={setNavString}
+              navString={navString}
               postsData={postsData}
-              dataId={dataId}
-              setDataId={setDataId}
+              postId={postId}
+              setPostId={setPostId}
             />
           </Route>
           <Route path="/postform">
@@ -98,7 +98,7 @@ function App() {
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
-              setPostsString={setPostsString}
+              setNavString={setNavString}
             />
           </Route>
           <Route path="/postedit">
@@ -106,7 +106,7 @@ function App() {
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
-              setPostsString={setPostsString}
+              setNavString={setNavString}
             />
           </Route>
           <Route path="/profile">
@@ -114,7 +114,7 @@ function App() {
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
-              setPostsString={setPostsString}
+              setNavString={setNavString}
             />
           </Route>
           <Route path="/profileedit">
@@ -122,7 +122,7 @@ function App() {
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
-              setPostsString={setPostsString}
+              setNavString={setNavString}
             />
           </Route>
           <Route path="/search">
@@ -130,7 +130,7 @@ function App() {
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
-              setPostsString={setPostsString}
+              setNavString={setNavString}
             />
           </Route>
           <Route path="/viewpost">
@@ -138,8 +138,8 @@ function App() {
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
-              setPostsString={setPostsString}
-              dataId={dataId}
+              setNavString={setNavString}
+              postId={postId}
             />
           </Route>
           <Route path="/login">
@@ -148,13 +148,13 @@ function App() {
               setHasAccessToken={setHasAccessToken}
               hasAccessToken={hasAccessToken}
               setPostsData={setPostsData}
-              setPostsString={setPostsString}
+              setNavString={setNavString}
             />
           </Route>
           <Route path="/signup">
             <SignUpPage
               setPostsData={setPostsData}
-              setPostsString={setPostsString}
+              setNavString={setNavString}
             />
           </Route>
         </Switch>

@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { StyledService } from "./StyledService";
 import ServiceList from "./ServiceList";
-import axios from "axios";
+// import axios from "axios";
 
-const Service = ({ postsString, postsData, setDataId, dataId, }) => {
-  
-  const [count, setCount] = useState(0);
-  console.log("render:", count);
+const Service = ({ navString, postsData, setPostId, postId }) => {
+  // const [count, setCount] = useState(0);
+  // console.log("render:", count);
   const [maxDogList, setMaxDogList] = useState(9);
   const [slice, setSlice] = useState([]);
-  console.log("slice-------", slice )
+  // console.log("slice-------", slice);
   //const [ serviceImg, setServiceImg ] = useState(initialPosts.MainPosts);
-  
 
   const moreButtonHandler = () => {
     setMaxDogList(maxDogList + 9);
@@ -36,21 +34,20 @@ const Service = ({ postsString, postsData, setDataId, dataId, }) => {
   },[])
   */
   useEffect(() => {
-  setCount(count + 1);
-  if (postsData) {
-    setSlice(postsData.slice(0, maxDogList));
-  } else {
-    return null;
-  }
-    console.log("postsData service::::",postsData);
-}, [ maxDogList, postsData]);
+    // setCount(count + 1);
+    if (postsData) {
+      setSlice(postsData.slice(0, maxDogList));
+    } else {
+      return null;
+    }
+    console.log("postsData service::::", postsData);
+  }, [maxDogList, postsData]);
   return (
     <StyledService id="service-container">
-      
       <ServiceList
         postsData={postsData}
-        setDataId={setDataId}
-        dataId={dataId}
+        setPostId={setPostId}
+        postId={postId}
         slice={slice}
       />
       <Link to="/postform">

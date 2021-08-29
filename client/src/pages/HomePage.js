@@ -10,11 +10,11 @@ function HomePage({
   hasAccessToken,
   logoutHandler,
   setPostsData,
-  setPostsString,
   postsData,
-  postsString,
-  setDataId,
-  DataId
+  setNavString,
+  navString,
+  setPostId,
+  postId,
 }) {
   /*스크롤 상태저장*/
   const [ScrollY, setScrollY] = useState(0);
@@ -70,22 +70,22 @@ function HomePage({
         hasAccessToken={hasAccessToken}
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
-        setPostsString={setPostsString}
+        setNavString={setNavString}
       />
-      {postsString === "service" || postsString === "" ? (
-      <Service
-        postsData={postsData}
-        postsString={postsString}
-        setDataId={setDataId}
-        DataId={DataId}
-      />
+      {navString === "service" || navString === "" ? (
+        <Service
+          postsData={postsData}
+          navString={navString}
+          setPostId={setPostId}
+          postId={postId}
+        />
       ) : (
-      <Volunteer
-        postsData={postsData}
-        postsString={postsString}
-        setDataId={setDataId}
-        DataId={DataId}
-      />
+        <Volunteer
+          postsData={postsData}
+          navString={navString}
+          setPostId={setPostId}
+          postId={postId}
+        />
       )}
       <Footer />
     </>
