@@ -3,14 +3,13 @@ import {StyledVolunteerList } from './StyledVoluteer'
 import { useHistory } from 'react-router-dom'
 
 const VolunteerList = ({slice ,setPostId }) => {
-  //console.log(volunteerDog)
   let history = useHistory();
   //console.log(serviceImg)
 
   const postClickHandler = (id) => {
     const dataId = id;
     setPostId(dataId);
-    return history.push(`/viewpost/${id}`);
+    return history.push(`/posts/${id}`);
   };
   return (
     <StyledVolunteerList>
