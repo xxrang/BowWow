@@ -1,14 +1,12 @@
 import React from 'react'
-import Footer from '../component/Footer'
 import NavBar from '../component/NavBar'
-import Profile from '../component/Profile'
 
-const ProfilePage = ({
+function SearchPage({
   hasAccessToken,
   logoutHandler,
   setPostsData,
   setPostsString,
-}) => {
+}) {
   return (
     <>
       <NavBar
@@ -17,10 +15,8 @@ const ProfilePage = ({
         setPostsData={setPostsData}
         setPostsString={setPostsString}
       />
-      <Profile />
-      <Footer />
     </>
   );
-};
+}
 
-export default ProfilePage
+export default SearchPage

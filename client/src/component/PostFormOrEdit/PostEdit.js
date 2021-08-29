@@ -27,7 +27,7 @@ const PostEdit = ({ hasAccessToken }) => {
 
   //*데이터 편집 후 전송
   const [post, setPost] = useState("");
-  const postHandler = useCallback(
+  const patchHandler = useCallback(
     (data) => {
       const { title, category, date, location, mobile, content } = data;
       setPost({
@@ -42,7 +42,7 @@ const PostEdit = ({ hasAccessToken }) => {
       });
       // console.log(data)
 
-      // axios.put("https://localhost:4000/posts", post, {
+      // axios.patch("https://localhost:4000/posts", post, {
       //   headers: {"Content-Type": "multipart/form-data",},
       //   withCredentials: true,
       //   }
@@ -83,7 +83,7 @@ const PostEdit = ({ hasAccessToken }) => {
   return (
     <StyledPostForm>
       <UploadImg imageHandler={imageHandler} userImage={userImage} />
-      <PostContent postFormHandler={postHandler} data={data} />
+      <PostContent postFormHandler={patchHandler} data={data} />
     </StyledPostForm>
   );
 };

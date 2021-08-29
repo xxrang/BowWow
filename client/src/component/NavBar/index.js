@@ -6,7 +6,7 @@ import axios from 'axios'
 //setPostsData : 데이터를 가져왔을 때 응답받았을 떄 데이터. -> 응답받으면 상태변화를 준다. 
 //setPostsString : 스트링으로 데이터 요청을 보내고 
 //
-const NavBar = ({  setPostsData ,setPostsString ,isLogedIn , handleTop}) => {
+const NavBar = ({ setPostsData ,setPostsString ,isLogedIn , handleTop}) => {
 
   let history = useHistory();
 

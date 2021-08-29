@@ -20,20 +20,12 @@ export const initialPosts = {
       Comment : [
       {
         User : {
-          id : '1',
-          nickname : '숙영',
+          id : 1,
+          nickname : '닉네임',
           image : './images/dogSample.jpeg',
         },
-        content : 'ㅁㄴㅇㄹ',
+        content : '',
       },
-      {
-        User : {
-          id : '2',
-          nickname : '용준',
-          image : './images/dogSample.jpeg'
-        },
-        content : 'ㅇㅇㅇㅇ',
-      }
       ]
     },
     { 

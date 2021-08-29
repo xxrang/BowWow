@@ -41,9 +41,10 @@ margin-left : 14px;
     align-items: center;
     >.post-comment-text-submit{
       width : 50px;
-      height : 55px;
+      height : 60px;
       background: #48cfad;
       color : white;
+      border : none;
       &:hover{
         background: #fff;
         border: 1px solid #48cfad;
@@ -111,12 +112,15 @@ margin-left : 14px;
           >.remove-button{
             height : 30px;
             border : none;
-            border-radius: 4px;
             background-color: #fff;
             color : #48cfad;
             border : 1px solid #48cfad;
-            padding: 5px;
             font-size: 12px;
+
+            border-radius: 5px;
+            white-space: nowrap;
+            font-weight: 400;
+            padding: 5px 12px;
             &:hover{
               transition: all 0.4s ease-in-out;
               background-color: #48cfad;
@@ -137,50 +141,46 @@ margin-left : 14px;
 
 
 export const StyledViewPostProfile = styled.div`
-  box-sizing: border-box;
-  /* border: 1px solid black; */
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 80px;
-
+  
   > .profile-container {
     box-sizing: border-box;
     width: 100%;
-    height: 80px;
-    padding: 10px 20px 10px 20px;
+    height : 80px;
+    padding: 0 30px;
+    margin : 15px 0 0 0 ;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex: 1 2 1;
 
     > .profile-img-wrapper {
-      padding: 15px;
     }
     > .profile-img-wrapper img {
-      
       border-radius: 50%;
       border: 1px solid #fff;
       margin-right: 10px;
     }
 
     > .profile-info-wrapper {
-      width: 350px;
-      height: 100px;
-      padding-top: 12px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       margin-right: auto;
 
       > h2 {
-        margin: 12px 0 0 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      > p {
         margin: 0;
+        padding-top: 5px;
+      }
+      > p {
+        margin: 5px 0 0 0;
+        font-weight : 700;
+        font-size: 18px;
+        >span{
+          font-size: 12px;
+          color :grey;
+          margin-left : 3px;
+          font-weight : 400;
+        }
       }
     }
   }
@@ -242,22 +242,25 @@ export const StyledViewPostContentOne = styled.div`
 
 export const ProfileInfoBtn = styled.div`
   align-self:center;
-`;
-
-export const BtnLink = styled(Link)`
-  box-sizing: border-box;
-
-  background: #fff;
-  color: #48cfad;
-  border: 1px solid #48cfad;
-  border-radius: 10px;
-  text-align: center;
-  white-space: nowrap;
-  font-size: 12px;
-  font-weight: 400;
-  padding: 5px 12px;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  margin-top:20px;
+  margin-top: -30px;
+  >a,button {
+    box-sizing: border-box;
+    background: #fff;
+    color: #48cfad;
+    border: 1px solid #48cfad;
+    border-radius: 5px;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 5px 12px;
+    outline: none;
+    text-decoration: none;
+    margin : -15px 5px;
+    &:hover{
+      background-color: #48cfad;
+      color :#fff;
+      transition: all 0.4s ease-in-out;
+    }
+  }
 `;

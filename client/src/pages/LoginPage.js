@@ -3,15 +3,26 @@ import NavBar from '../component/NavBar';
 import Login from '../component/Login';
 import Footer from '../component/Footer';
 
-function LoginPage({isLogedIn,loginHandler}) {
-
+function LoginPage({
+  setHasAccessToken,
+  hasAccessToken,
+  loginHandler,
+  setPostsData,
+  setPostsString,
+}) {
   return (
-    <div>
-      <NavBar isLogedIn = {isLogedIn} loginHandler = {loginHandler}/>
-      <Login isLogedIn = {isLogedIn} loginHandler = {loginHandler}/>
+    <>
+      <NavBar />
+      <Login
+        loginHandler={loginHandler}
+        setHasAccessToken={setHasAccessToken}
+        hasAccessToken={hasAccessToken}
+        setPostsData={setPostsData}
+        setPostsString={setPostsString}
+      />
       <Footer />
-    </div>
-  )
+    </>
+  );
 }
 
 export default LoginPage

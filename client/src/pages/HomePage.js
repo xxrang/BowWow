@@ -6,7 +6,12 @@ import Search from '../component/Search'
 import Volunteer from '../component/Volunteer'
 import Footer from '../component/Footer'
 
-function HomePage() {
+function HomePage({
+  hasAccessToken,
+  logoutHandler,
+  setPostsData,
+  setPostsString,
+}) {
   
   /*스크롤 상태저장*/
   const [ScrollY, setScrollY] = useState(0);  
@@ -55,8 +60,11 @@ function HomePage() {
     <>
       <Main handleClickForService = {handleClickForService}/>
       <NavBar curNav = {curNav} 
-      selectNavHandler = {selectNavHandler} 
-      handleTop = {handleTop} 
+        selectNavHandler = {selectNavHandler} 
+        handleTop={handleTop}
+        hasAccessToken={hasAccessToken} logoutHandler={logoutHandler}
+        setPostsData = { setPostsData }
+        setPostsString = { setPostsString }
       />
       {curNav === 0 ? <Service /> : curNav === 1 ? <Search/> : <Volunteer/>}
       <Footer/>

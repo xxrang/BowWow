@@ -37,8 +37,8 @@ const PostForm = () => {
         imgCheck,
       });
       // console.log(data)
-
-      // axios.post("https://localhost:4000/posts", post, {
+      // 하나로 합쳐줘서 보내준다. 
+      // axios.patch("https://localhost:4000/posts", post, {
       //   headers: {"Content-Type": "multipart/form-data",},
       //   withCredentials: true,
       //   }

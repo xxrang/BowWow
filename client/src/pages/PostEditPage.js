@@ -1,9 +1,9 @@
-import React from 'react'
-import Footer from '../component/Footer'
-import NavBar from '../component/NavBar'
-import Profile from '../component/Profile'
+import React from "react";
+import NavBar from "../component/NavBar";
+import Footer from "../component/Footer";
+import PostEdit from "../component/PostFormOrEdit/PostEdit";
 
-const ProfilePage = ({
+const PostEditPage = ({
   hasAccessToken,
   logoutHandler,
   setPostsData,
@@ -17,10 +17,10 @@ const ProfilePage = ({
         setPostsData={setPostsData}
         setPostsString={setPostsString}
       />
-      <Profile />
+      <PostEdit hasAccessToken={hasAccessToken} />
       <Footer />
     </>
   );
 };
 
-export default ProfilePage
+export default PostEditPage;

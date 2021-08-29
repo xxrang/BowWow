@@ -2,9 +2,7 @@ import React, { useState,useRef,useEffect } from 'react'
 import {StyledViewPost} from './StyledViewPost'
 import ViewPostContent from './ViewPostContent'
 import ViewPostComment from './ViewPostComment'
-import {initialPosts} from '../dummyData'
 import axios from 'axios'
-//import { initialState } from '../dummyData'
 
 function ViewPost({hasAccessToken}) {
 
@@ -17,41 +15,6 @@ function ViewPost({hasAccessToken}) {
     //setModal(modal ? false : true)  
     setModal((prev)=>!prev);
   }
-
-  //코멘트 추가
-  const [commentList,setCommentList] = useState(initialPosts.MainPosts[0].Comment)
-  //console.log(commentList)
-  
-  const submitCommentHandler = (e,comment) => {
-    console.log('index'+comment)
-    inputRef.current.focus();
-    e.preventDefault();
-    //const commentDummy = (initialPosts.MainPosts[0].Comment[0])
-    //console.log(commentDummy)
-    
-    //axios.post('localhost4000',data) //코멘트데이터
-    //axios.get('localhost4000',data) //코멘트데이터
-    axios.post('localhost:4000',
-    {
-      id : '', comment : ''
-    },{
-      withCredentials : true,
-    })
-    .then((res)=>{
-      console.log(res);
-    })
-    .then(()=>{
-
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-    
-    
-    setCommentList([
-      {id :1 ,nickname : '숙영',image : '' ,content : comment},...commentList
-    ])
-  }
   //useRef 등록
   const inputRef = useRef();
   //useEffect
@@ -61,14 +24,14 @@ function ViewPost({hasAccessToken}) {
   
   return (
     <StyledViewPost>
-      <ViewPostContent/>
+      <ViewPostContent 
+      hasAccessToken={hasAccessToken}/>
       <ViewPostComment 
       inputRef = {inputRef}
-      submitCommentHandler = {submitCommentHandler} 
       modal = {modal}
       needLoginHandler = {needLoginHandler}
       loginModalClick = {loginModalClick}
-      commentList = {commentList}
+      hasAccessToken={hasAccessToken}
       />
     </StyledViewPost>
   )

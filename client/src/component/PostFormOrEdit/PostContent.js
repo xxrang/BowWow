@@ -12,7 +12,7 @@ const PostContent = ( props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      title: props.data.title
+  /*    title: props.data.title */
     },
   });
   const onSubmit = (data) => {
