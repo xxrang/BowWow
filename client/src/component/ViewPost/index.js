@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { StyledViewPost } from "./StyledViewPost";
 import ViewPostContent from "./ViewPostContent";
 import ViewPostComment from "./ViewPostComment";
-import { initialPosts, dummyPost } from "../dummyData";
-import axios from "axios";
+import { dummyPost } from "../dummyData";
+// import axios from "axios";
 
 function ViewPost({
   hasAccessToken,
@@ -69,7 +69,7 @@ function ViewPost({
     setCommentUserInfo(
       dummyPost.Comment
     )
-  },[hasAccessToken, setCommentUserInfo])
+  },[hasAccessToken, setCommentUserInfo, showButton])
 
   /*useEffect(() => {
     inputRef.current.focus();
