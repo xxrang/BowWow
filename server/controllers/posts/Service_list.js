@@ -31,19 +31,19 @@ module.exports = (app) => {
     })
     
     router.post('/', async (req, res) => {
-        const { email, image, title, date, mobile, content} = req.body;
+        const { email, image, title, mobile, user_id, content} = req.body;
         /* 클라이언트 axios request.body에 category(dogs || volunteer)로 담겨 들어오니까
         category === 'dogs'로 들어오면 */ 
-        if(!email || !title || !date || !mobile || !content){
+        if(!email || !title || !mobile || !content || !user_id){
             res.status(422).send({message: 'insufficient parameters supplied'})
         } else {
         post.create({
             email: email,
             image: image,
             title: title,
-            date: date,
             mobile: mobile,
-            content: content
+            content: content,
+            user_id: user_id
         }).then( async () => {
             await category_content.create({
                 posts_id: req.body.posts_id,
