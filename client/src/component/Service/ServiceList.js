@@ -14,7 +14,7 @@ const ServiceList = ({ setPostId, slice }) => {
   const postClickHandler = (id) => {
     const dataId = id;
     setPostId(dataId);
-    return history.push(`/viewpost/${id}`);
+    return history.push(`/posts/${id}`);
   };
   return (
     <StyledServiceList>

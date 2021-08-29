@@ -17,7 +17,7 @@ const ProfilePage = ({
         setPostsData={setPostsData}
         setNavString={setNavString}
       />
-      <Profile />
+      <Profile hasAccessToken={hasAccessToken} />
       <Footer />
     </>
   );

@@ -56,17 +56,22 @@ const SignUp = () => {
       };
       axios
         .post(
-          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",
+          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com//users/signup",
           user,
           {
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
             withCredentials: true,
           }
         )
         .then((res) => {
-          console.log("첫데이터", res)
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      console.log(user);
+      
       // console.log("email:", email,
       //   "| nickname: ", nickname,
       //   "| introduce :", introduce,

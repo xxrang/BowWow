@@ -9,17 +9,15 @@ import {
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
-import camera1 from '../../images/9.png';
+import { useHistory } from "react-router-dom";
+import { dummyUser } from "../dummyData";
 
 const ProfileEdit = ({ hasAccessToken }) => {
-  const [isLogin, setIsLogin] = useState(false);
+  const history = useHistory();
 
-  const [email, onChangeEmail, setEmail] = useInput("");
-  const [nickname, onChangeNickname, setNickname] = useInput("");
-  const [introduce, onChangeIntroduce, setIntroduce] = useInput("");
+  //이미지 상태관리
   const [userImage, setUserImage] = useState("");
   const [imgCheck, setImgCheck] = useState("true"); // true로 바꿈
-
   //* image previe
   const imageHandler = (e) => {
     const reader = new FileReader();
@@ -35,10 +33,11 @@ const ProfileEdit = ({ hasAccessToken }) => {
     setImgCheck("true");
   };
 
-  //* user data
-  //email
+  //*user data state
+  const [email, onChangeEmail, setEmail] = useInput("");
+  const [nickname, onChangeNickname, setNickname] = useInput("");
+  const [introduce, onChangeIntroduce, setIntroduce] = useInput("");
 
-  //*user data password
   const [password, onChangePassword] = useInput("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
@@ -53,61 +52,74 @@ const ProfileEdit = ({ hasAccessToken }) => {
   //* form submit
   const profileEditHandler = useCallback(
     (e) => {
+      //accesstoken으로 유저 아이디 만들어서 마지막에 같이 전달
       e.preventDefault();
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
-      const user = {email,nickname,introduce,password,userImage,imgCheck };
-      axios.post('http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com//users/signup'
-        ,user, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          withCredentials: true,
-        })
-        .then((res)=>{
-          console.log(res)
-        })
-        .catch((err)=>{
-          console.log(err)
-        })
+      const user = {
+        email,
+        nickname,
+        introduce,
+        password,
+        userImage,
+        imgCheck,
+      };
+      console.log(user);
+      // axios.patch(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com//users/profileedit/${user_id}`
+      //   ,user, {headers: {'Content-Type': 'multipart/form-data',},
+      //     withCredentials: true,
+      //   })
+      //   .then((res)=>{
+      //     console.log(res)
+      //   })
+      //   .catch((err)=>{
+      //     console.log(err)
+      //   })
+      alert("프로필이 수정되었습니다.");
+      // history.push("/");
       // console.log(user);
-      // console.log("email:", email,
+      // console.log("user_id": id
+      //   "| email:", email,
       //   "| nickname: ", nickname,
       //   "| introduce :", introduce,
       //   "| password :", password,
       //   "| passwordCheck :", passwordCheck,
       //   "| image", userImage
       // );
-      alert("프로필이 수정되었습니다.");
-    },[password, passwordCheck, email, nickname, introduce, userImage, imgCheck]);
-  //data 불러 오기
+      
+    },
+    [password, passwordCheck, email, nickname, introduce, userImage, imgCheck]
+  );
   
+  //data 불러 오기
+  //로그인 상태관리
+  const [isLogedIn, setIsLogedIn] = useState(false);
   useEffect(() => {
     if (hasAccessToken !== undefined) {
-      setIsLogin(true);
+      setIsLogedIn(true);
     } else {
-      setIsLogin(false);
+      setIsLogedIn(false);
     }
-    // axios.get('https://localhost:4000/posts/', hasAccessToken, {
+    // axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/${userid}`, hasAccessToken, {
     //   withCredentials: true
     // }).then((res) => {
     //   console.log(res.data); //데이터 받아옴
-    //   // email, nickname image, introduce data 들어옴
+    // id, email, nickname image, introduce data 들어옴
     // })
-    const data = {
-      email: "dydwns2441@gmail.com",
-      nickname: "준준",
-      image: { camera1 },
-      introduce: "반갑습니다.",
-    };
-    if (isLogin) {
-      setUserImage(camera1);
-      setEmail(data.email);
-      setNickname(...data.nickname);
-      setIntroduce(data.introduce);
+    if (isLogedIn) {
+      setEmail(dummyUser.email);
+      setIntroduce(dummyUser.introduce);
+      setUserImage(dummyUser.image);
+      setNickname(dummyUser.nickname);
     }
-  }, [hasAccessToken, isLogin, setEmail, setIntroduce, setNickname]);
+  }, [
+    hasAccessToken,
+    isLogedIn,
+    setEmail,
+    setIntroduce,
+    setNickname,
+  ]);
 
   return (
     <StyledSignUp>
@@ -119,12 +131,11 @@ const ProfileEdit = ({ hasAccessToken }) => {
         <label htmlFor="email">이메일</label>
         <InputReadOnly
           type="text"
-            name="email"
-            value={email}
-            readOnly
-            onChange={onChangeEmail}
-          >
-        </InputReadOnly>
+          name="email"
+          value={email}
+          readOnly
+          onChange={onChangeEmail}
+        ></InputReadOnly>
         <label htmlFor="password">비밀번호</label>
         <input
           name="password"
@@ -169,6 +180,6 @@ const ProfileEdit = ({ hasAccessToken }) => {
       </form>
     </StyledSignUp>
   );
-};;
+};;;;
 
 export default ProfileEdit;

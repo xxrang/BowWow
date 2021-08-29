@@ -15,27 +15,28 @@ function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
     formState: { errors },
   } = useForm();
   const onSubmit =  (data) => {
-    /*axios.post(
-        "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/login",
-        data,{withCredentials: true,}
-      )
-      .then((res) => {
-        console.log("첫콘솔", res.data);
-        return res.data
-      })
-      .then((data) => {
-        console.log("두번째콘솔", data.accessToken);
-        setHasAccessToken(data.accessToken);
-        return data.accessToken;
-      })
-      .then((accessToken) => {
-        loginHandler(accessToken);
-        window.localStorage.setItem("accessToken", accessToken);
-        history.push('/');
-      })
-      .catch((err) => {
-        console.log(err);
-      });*/
+    // axios.post(
+    //     "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/login",
+    //     data,{withCredentials: true,}
+    //   )
+    //   .then((res) => {
+    //     console.log("첫콘솔", res.data);
+    //     return res.data
+    //   })
+    //   .then((data) => {
+    //     console.log("두번째콘솔", data.accessToken);
+    //     setHasAccessToken(data.accessToken);
+    //     return data.accessToken;
+    //   })
+    //   .then((accessToken) => {
+    //     loginHandler(accessToken);
+    //     window.localStorage.setItem("accessToken", accessToken);
+    //     history.push('/');
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
     console.log("data:", data);
     const accessToken = 1;
     setHasAccessToken(accessToken);

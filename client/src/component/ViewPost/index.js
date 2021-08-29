@@ -36,11 +36,12 @@ function ViewPost({
     if(hasAccessToken !== undefined) {
       setIsLogedIn(true);
     }
-    // 로그인 accesstoken(1) 과 userId 가 일치할 경우 
-    // 버튼이 보여야한다. 
-    // console.log('userid :'+ dummyPost.User.id)
-    // console.log('hasAccessToken :' + hasAccessToken)
-    if( hasAccessToken === dummyPost.User.id ){
+    console.log(showButton);
+    //로그인 accesstoken(1) 과 userId 가 일치할 경우 
+    //버튼이 보여야한다. 
+    console.log('userid :', dummyPost.User.id)
+    console.log('hasAccessToken :', hasAccessToken)
+    if( Number(hasAccessToken) === dummyPost.User.id ){
       setShowButton(true);
     }else{
       setShowButton(false);
@@ -110,7 +111,6 @@ function ViewPost({
       <ViewPostContent
         hasAccessToken={hasAccessToken}
         postId={postId}
-
         userId={userId}
         userImage={userImage}
         userNickname={userNickname}
