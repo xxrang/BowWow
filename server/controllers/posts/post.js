@@ -69,8 +69,9 @@ const application = app;
             }}),
 
         router.patch('/', upload.single('input-image'), async (req, res) => {
-            const {title, date, location, content, mobile} = req.body;
+            const {title, date, location, content, mobile, category} = req.body;
             const image = req.file.location;
+
         await post.update({
             title: title,
             date: date,
@@ -79,8 +80,18 @@ const application = app;
             mobile: mobile,
             image: image
         }, {where : {id : req.query.id}})
-        .then((data) => {
-            if(data){
+        .then(() => {
+        
+        if(category === 'service'){
+            await category_content.update({
+                category_id: 1
+            })
+        } else if(category === 'volunteer'){
+            await category_content.update({
+                category_id: 2
+            })
+        }}).then((data) => {
+            if(data) {
                 res.status(200).send({message: 'success to update'})
             } else {
                 res.status(404).send({message: 'fail to update'})
