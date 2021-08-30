@@ -58,8 +58,6 @@ app.use('/volunteer', volunteer);
 const posts = require('./controllers/posts/post')(app);
 app.use('/posts', posts);
 
-app.delete('/posts', controllers.post_delete); //게시글 삭제
-
 /** 댓글 API **/
 const comment = require('./controllers/comment/comments')(app);
 app.use('/comments', comment);

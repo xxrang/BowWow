@@ -46,15 +46,14 @@ const application = app;
                     content: content,
                     user_id: req.body.userId
                 })
-                console.log(data)
+
                   await category_content.create({
                         categoy_id: 1,
                         posts_id: data.id
-                    }, {include : [{ model: post}]})
-                    .then((data) => res.status(201).send({message: 'post write success', data}))
+                    }).then((data) => res.status(201).send({message: 'post write success', data}))
                 
             } else if(req.body.category === 'volunteer'){
-                post.create({
+                const data2 = await post.create({
                     image: image,
                     title: title,
                     mobile: mobile,
@@ -63,15 +62,13 @@ const application = app;
                     date: date,
                     user_id: req.body.userId
              })
-             .then( async () => {
                 await category_content.create({
-                    categoy_id: 2
-                }, {include: [{ model: category_content }]}).then((data) => res.status(201).send({message: 'post write success', data}))
-            })
-        }
-    }),
+                    categoy_id: 2,
+                    posts_id: data2.id
+                }).then((data) => res.status(201).send({message: 'post write success', data}))
+            }}),
 
-    router.patch('/', upload.single('input-image'), async (req, res) => {
+        router.patch('/', upload.single('input-image'), async (req, res) => {
         await post.update({
             content: req.body.content
         }, {where : {id : req.query.id}})
@@ -82,6 +79,17 @@ const application = app;
                 res.status(404).send({message: 'fail to update'})
             }
         })
+    }),
+        router.delete('/', async (req, res) => {
+        await post.destroy({where : {id : req.query.id}})
+        .then((data) => {
+            if(data){
+            res.status(200).send({message: 'ok'})
+            } else {
+            res.status(404).send({message: 'invalid page'})
+            }
+        })
     })
+
     return router;
 }
