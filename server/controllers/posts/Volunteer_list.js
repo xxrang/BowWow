@@ -27,7 +27,7 @@ module.exports = (app) => {
         }
     })
     
-    router.post('/', upload.single('image'), (req, res) => {
+    router.post('/', upload.single('input-image'), (req, res) => {
         const { user_id, title, date, location, mobile, content } = req.body;
         const image = req.files.location;
         if(!user_id || !title || !date || !location || !mobile || !content){

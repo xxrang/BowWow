@@ -30,7 +30,7 @@ module.exports = (app) => {
         }
     })
     
-    router.post('/', upload.single('image'), async (req, res) => {
+    router.post('/', upload.single('input-image'), async (req, res) => {
         const { email, image, title, mobile, user_id, content} = req.body;
         const image = req.files.location;
         /* 클라이언트 axios request.body에 category(dogs || volunteer)로 담겨 들어오니까
