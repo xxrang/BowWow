@@ -83,13 +83,11 @@ const application = app;
         .then(() => {
         
         if(category === 'service'){
-            await category_content.update({
-                category_id: 1
-            })
+            await category_content.update(
+            {category_id: 1} , {where : { posts_id: req.query.id }})
         } else if(category === 'volunteer'){
-            await category_content.update({
-                category_id: 2
-            })
+            await category_content.update(
+                {category_id: 2}, {where: { posts_id: req.query.id }})
         }}).then((data) => {
             if(data) {
                 res.status(200).send({message: 'success to update'})
