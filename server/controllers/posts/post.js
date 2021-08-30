@@ -69,8 +69,7 @@ const application = app;
             }}),
 
         router.patch('/', upload.single('input-image'), async (req, res) => {
-            try {
-            const {title, date, location, content, mobile, category} = req.body;
+            const {title, date, location, content, mobile} = req.body;
             const image = req.file.location;
 
         await post.update({
@@ -89,28 +88,33 @@ const application = app;
         //     await category_content.update(
         //         {category_id: 2}, {where: { posts_id: req.query.id }})
         // }}).then((data) => {
-        if(category === 'service'){
-            await category_content.update({
-                    category_id:1}, { where : { posts_id : req.query.id }})
-            } else if(category === 'volunteer'){
-                await category_content.update({
-                    category_id:2}, { where : { posts_id : req.query.id }})
-                }
-            res.status(200).send({message: 'success to update'})
-        } catch (err) {
-            res.status(404).send({message: 'fail to update'})
-        }
+        // if(category === 'service'){
+        //     await category_content.update({
+        //             category_id:1}, { where : { posts_id : req.query.id }})
+        //     } else if(category === 'volunteer'){
+        //         await category_content.update({
+        //             category_id:2}, { where : { posts_id : req.query.id }})
+        //         }
+        .then((data) => {
+            if(data){
+                res.status(200).send({message: 'success to update'})
+            } else {
+                res.status(404).send({message: 'fail to update'})
+            }
+        })
     }),    
 
         router.delete('/', async (req, res) => {
-        await post.destroy({where : {id : req.query.id}})
-        .then((data) => {
-            if(data){
-            res.status(200).send({message: 'ok'})
-            } else {
+        try {
+            await post.destroy({where : {id : req.query.id}})
+            await comment.destroy({where: { posts_id: req.query.id}})
+            await category_content({where: { posts_id: req.query.id}})
+            .then(() => {
+                res.status(200).send({message: 'ok'})
+            })
+        } catch (err) {
             res.status(404).send({message: 'invalid page'})
-            }
-        })
+        }
     })
 
     return router;
