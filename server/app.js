@@ -35,7 +35,7 @@ app.post('/users/logout', controllers.signout); //로그아웃
 app.get('/email_check', controllers.email_check); //이메일 중복확인
 app.get('/nickname', controllers.nickname); //닉네임 중복확인
 
-/** 유저 마이페이지 API **/
+/** 유저 d 마이페이지 API **/
 const profile = require('./controllers/users/Profile')(app);
 app.use('/profile', profile);
 
