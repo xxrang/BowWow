@@ -7,28 +7,21 @@ module.exports = (app) => {
     const router = require('express').Router();
     const application = app;
 
-    router.get('/', (req,res) => {
-        if(req.query.id){
-            post.findOne({ where : { id: req.query.id }})
-            //req.query(URI?req.query)로 받아올건지 req.params(URI/:id)로 받아올건지 axios 요청시 의견조율해야함
-            .then((data) => {
-                if(data){
-                    res.status(200).send({message: 'load success', service : data})
-                } else {
-                    res.status(404).send({message: 'load fail'})
-                } 
+    
+     router.get('/', async (req, res) => {
+            category_content.findAll({
+                include : [{
+                    model: post
+                }], where : { categoy_id : 1}
             })
-        } else {
-            post.findAll({})
             .then((data) => {
             if(data){
-                res.status(200).send({message: 'ok', service : data })
+                res.status(200).send({message: 'ok', data : { posts: data }})
             } else {
                 res.status(404).send({message: 'load fail'})
             }
-        })
-        }
-    })
+            })
+        }),
     
     router.post('/', upload.single('input-image'), async (req, res) => {
         const { email, title, mobile, user_id, content} = req.body;

@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 
 
 /** 유저 관련 API **/
-app.post('/users/signup',controllers.signup); //회원가입
+app.use('/users/signup',controllers.signup); //회원가입
 app.post('/users/login', controllers.login); //로그인
 app.post('/users/logout', controllers.signout); //로그아웃
 app.get('/email_check', controllers.email_check); //이메일 중복확인
@@ -52,6 +52,9 @@ app.use('/service', service);
 /** 봉사일정 관련 API */
 const volunteer = require('./controllers/posts/Volunteer_list')(app);
 app.use('/volunteer', volunteer);
+
+/* 게시글 보여주기 API */
+app.get('/posts', controllers.posts);
 
 app.delete('/posts', controllers.post_delete); //게시글 삭제
 

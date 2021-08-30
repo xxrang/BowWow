@@ -10,5 +10,6 @@ module.exports = {
     volunteer_list: require('./posts/Volunteer_list'),
     post_delete: require('./posts/Post_delete'),
     comments: require('./comment/comments'),
-    search: require('./posts/Search')
+    search: require('./posts/Search'),
+    posts: require('./posts/post')
 }

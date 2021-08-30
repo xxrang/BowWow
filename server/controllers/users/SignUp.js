@@ -7,7 +7,7 @@ const router = require('express').Router();
 // = async (req, res) => {
 router.post('/', upload.single('input-image'), async (req, res) => { 
 const { email, nickname, password, introduce} = req.body;
-const image = req.files.location;
+const image = req.file.location;
 
  if(!email || !password ){
      return res.status(422).json({message: 'insufficient parameters supplied'});
