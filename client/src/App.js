@@ -35,12 +35,13 @@ function App() {
     // if (postsString !== "") {
     //   const getPostsData = (postsString) => {
     //     return axios
-    //       .get(`https://localhost:4000/`, {
+    //       .get("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/service", 
+    //         {
     //         params: { posts: postsString },
     //         withCredentials: true,
     //       })
     //       .then((res) => {
-    //         const data = res.data.data.data;
+    //         const data = res.data.data.postData;
     //         setPostsData(data);
     //       });
     //   };
@@ -48,7 +49,8 @@ function App() {
     // } else {
     //   const getAllData = () => {
     //     return axios
-    //       .get("https://localhost:4000/", { withCredentials: true })
+    //       .get(""http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/volunteer",", 
+    //       { withCredentials: true })
     //       .then((res) => {
     //         const data = res.data.data.data;
     //         setPostsData(data);

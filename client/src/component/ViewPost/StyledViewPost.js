@@ -52,11 +52,11 @@ margin-left : 14px;
       }
     }
   }
-  >.flex-box>form >.post-comment-text,.post-comment-text-submit{
+  >.flex-box >.post-comment-text,.post-comment-text-submit{
     margin : 0 5px;
     border-radius: 5px;
   }
-  >.flex-box>form>.post-comment-text{
+  >.flex-box >.post-comment-text{
       resize: none;
       width : 200px;
       padding: 10px;

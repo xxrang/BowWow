@@ -32,15 +32,16 @@ function ViewPost({
   const [commentUserInfo,setCommentUserInfo] = useState([]);
   const [isLogedIn , setIsLogedIn] = useState(false);
   const [showButton, setShowButton] = useState(false);
+  
   useEffect(()=>{
+    inputRef.current.focus();
+
     if(hasAccessToken !== undefined) {
       setIsLogedIn(true);
     }
     console.log(showButton);
-    //로그인 accesstoken(1) 과 userId 가 일치할 경우 
-    //버튼이 보여야한다. 
-    console.log('userid :', dummyPost.User.id)
-    console.log('hasAccessToken :', hasAccessToken)
+    // console.log('userid :', dummyPost.User.id)
+    // console.log('hasAccessToken :', hasAccessToken)
     if( Number(hasAccessToken) === dummyPost.User.id ){
       setShowButton(true);
     }else{

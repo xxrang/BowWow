@@ -1,5 +1,6 @@
-import React,{useState} from 'react'
+import React,{ useState } from 'react'
 import NeedLogin from '../NeedLogin'
+import useInput from '../../hooks/useInput'
 import {StyledViewPostComment} from './StyledViewPost'
 import {initialPosts} from '../dummyData'
 
@@ -10,74 +11,37 @@ function ViewPostComment({
   setCommentUserInfo,
   showButton,
   }) {
-  //코멘트
-  const [comment, setComment] = useState("");
-  //글자 100자 제한
-  const limitText = (limit) => limit.length < 100
-  const ChangeCommentHandler =(e)=>{
-    const limitWord = e.target.value
-    if(limitText(limitWord) && limitWord !== ''){
-      setComment(limitWord)
-    }
-  }
+  //코멘트 더미
+  const comments = initialPosts.service[0].Comment
+  //초기 코멘트  
+  const [comment, onChangeComment , setComment] = useInput("");
   // 모달
   const [openModal, setOpenModal] = useState(false)
   const closeModal = () => {
     setOpenModal((prev)=>!prev);
   }
-  const submitCommenthandler = (e) => {
-    /*확인 후 바꾸기 */
-      if (isLogedIn) {
-        addCommentHandler(e,comment)
-        setComment('')
-      } else {
-        setOpenModal(true);
-      }
-    };
-
-  //코멘트 추가
-  const comments = initialPosts.service[0].Comment
   //코멘트 삭제위한 id역할의 숫자
-  const [listNum,setListNum] = useState(1);
-
-  const addCommentHandler = (e,comment) => {
-    inputRef.current.focus();
-    e.preventDefault();
-    //const commentDummy = (initialPosts.MainPosts[0].Comment[0])
-    //console.log(commentDummy)
-    
-    //axios.post('localhost4000',data) //코멘트데이터
-    //axios.get('localhost4000',data) 
-    /*axios.post('localhost:4000/comments',
-    {
-      id : '', comment : ''
-    },{
-      withCredentials : true,
-    })
-    .then((res)=>{
-      console.log(res.data);
-    })
-    .then((data)=>{
-      console.log()
-    })
-    .catch((err)=>{
-      console.log(err)
-    })*/
-    
-    if(comment !== ''){
-      setCommentUserInfo([
-        {id : listNum ,
-        nickname : comments[0].User.nickname,
-        image : comments[0].User.image ,
-        content : comment},...commentUserInfo
-      ])
-      setListNum(listNum+1);
+  const [listNum,setListNum] = useState(3);
+  const addCommentHandler = (comment) => {
+    if(isLogedIn){
+      if(comment !== ''){
+        setCommentUserInfo([
+          {id : listNum ,
+          nickname : comments[0].User.nickname,
+          image : comments[0].User.image ,
+          content : comment},...commentUserInfo
+        ])
+        setListNum(listNum+1);
+        setComment(comment)
+        setComment('')
+      }else{
+        //모달로 해야할..꽈 ?
+        alert('댓글을 입력하세요.')
+      }
     }else{
-      //모달로 해야할..꽈 ?
-      alert('댓글을 입력하세요.')
+      setOpenModal(true);
     }
   }
-
   //id 와 일치하지 않는값만 필터링.
   const removeCommentHandler = (e,delComment) => {
     /* axios.delete(`localhost:4000/comments`)
@@ -101,29 +65,26 @@ function ViewPostComment({
         <i className="fas fa-comment-dots"> 댓글 </i>
 
       <div className = 'flex-box'>
-      <form>
         <textarea 
+        required
         ref = {inputRef} 
-        onChange = {ChangeCommentHandler} 
+        type = 'text' 
+        name="comment"
+        onChange = {onChangeComment} 
         value = {comment}
         className = 'post-comment-text' 
-        type = 'text' 
         placeholder = '100자 이내로 댓글 입력해주세요.'/>
-      </form>
       
       <button
-      //onClick = {(e)=>{addCommenthandler(e)}} 
-      onClick = {(e)=>{submitCommenthandler(e)}}
-      //로그인 상태면 submitCommentHandler : 아니면 Login 컴포넌트
-      //onClick={login === false ? submitCommentHandler : needLoginHandler }
+      onClick = {()=>addCommentHandler(comment)}
       className = 'post-comment-text-submit'>입력</button>
       </div>
       
       <div className="list-item-scroll">
         <ul className = 'post-comment-wrapper'>
-          {commentUserInfo.map((el)=>{
+          {commentUserInfo.map((el,idx)=>{
             return (
-              <li key = {el.id} className = 'post-comment-list'>
+              <li key = {idx} className = 'post-comment-list'>
                 <div className = 'post-commnet-flexbox'>
                   <img className = 'profile-img' src = {el.image} alt= 'img'/>
                   <div>

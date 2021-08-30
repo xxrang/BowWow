@@ -8,7 +8,7 @@ import {
   from './StyledViewPost'
 import { useHistory } from 'react-router-dom';
 //import userPhotos from "../../images/bros_blank.jpg";
-import axios from 'axios';
+//import axios from 'axios';
 
 function ViewPostContent({ 
   hasAccessToken, 
@@ -30,7 +30,9 @@ function ViewPostContent({
     const deletePostHandler = () => {
       /* axios.delete(localhost:4000/${postId})
       .then((res) => {
+        alert('삭제되었습니다.')
         console.log(삭제되었습니다.)
+        history.push('/')
       })
       .catch(err => {
         console.log(err);
