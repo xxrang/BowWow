@@ -1,10 +1,10 @@
 const { user } = require('../../models');
 const crypto = require('crypto');
-// const upload = require('../../module/multer');
+const upload = require('../../module/multer');
 
-module.exports = async (req, res) => {
-
-//  router.post('/', upload.array('image',4), async (req, res) => { })
+ module.exports =
+// = async (req, res) => {
+router.post('/', upload.single('input-image'), async (req, res) => { 
 const { email, nickname, password, introduce} = req.body;
 const image = req.files.location;
 
@@ -34,4 +34,4 @@ const image = req.files.location;
             })
         }
     })
-}
+})
