@@ -47,7 +47,7 @@ const PostForm = ({ hasAccessToken }) => {
     }
     
     
-  },[hasAccessToken])
+  },[hasAccessToken, history])
   return (
     <StyledPostForm>
       <UploadImg

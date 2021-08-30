@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import Main from '../component/Main'
 import NavBar from '../component/NavBar'
 import Service from '../component/Service'
-import Search from '../component/Search'
 import Volunteer from '../component/Volunteer'
 import Footer from '../component/Footer'
+import Loding from '../component/Loading'
 
 function HomePage({
   hasAccessToken,
@@ -79,17 +79,16 @@ function HomePage({
           setPostId={setPostId}
           postId={postId}
         />
-      ) : 
-      navString === "volunteer" ? ( 
+      ) : navString === "volunteer" ? (
         <Volunteer
           postsData={postsData}
           navString={navString}
           setPostId={setPostId}
           postId={postId}
         />
-      )
-        : (<Search/>)
-        }
+      ) : (
+        <Loding />
+      )}
       <Footer />
     </>
   );

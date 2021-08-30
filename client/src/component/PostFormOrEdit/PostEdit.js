@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { StyledPostForm, TextArea, BtnLink, StyledPostContent } from "./StyledPostForm";
+import { StyledPostForm, TextArea, StyledPostContent } from "./StyledPostForm";
 import UploadImg from "./UploadImg";
 // import axios from "axios";
 import camera1 from '../../images/bros_blank.jpeg';
