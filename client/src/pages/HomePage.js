@@ -4,7 +4,7 @@ import NavBar from '../component/NavBar'
 import Service from '../component/Service'
 import Volunteer from '../component/Volunteer'
 import Footer from '../component/Footer'
-//import Loding from '../component/Loading'
+import Loding from '../component/Loading'
 import Search from '../component/Search'
 
 function HomePage({
@@ -24,12 +24,16 @@ function HomePage({
   };
   const navBar = document.getElementById('navBar')
   /*맨 위로 이동*/
+  const navBar = document.getElementById('navBar')
+  
+  /*맨 위로 이동*/
   const handleClickForService = () => {
     window.scrollTo({
       top: navBar.offsetTop,
       behavior: "smooth",
     });
     setScrollY(navBar); // ScrollY 의 값을 초기화
+
   };
   /*로고 scroll 구현*/
   const handleTop = () => {
@@ -64,7 +68,8 @@ function HomePage({
 //
   return (
     <>
-      <Main handleClickForService={handleClickForService} />
+        <Main handleClickForService={handleClickForService} />
+      
       <NavBar
         curNav={curNav}
         selectNavHandler={selectNavHandler}

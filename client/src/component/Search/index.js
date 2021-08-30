@@ -5,7 +5,6 @@ import SearchMap from './SearchMap'
 import SearchMapList from './SearchMapList'
 
 function Search() {
-
   const inputRef = useRef();
 
   useEffect(()=>{
@@ -19,6 +18,7 @@ function Search() {
         <SearchMapList/>
       </div>
       <SearchMap/>
+
   </StyledSearch>;
 }
 

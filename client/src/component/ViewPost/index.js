@@ -3,6 +3,7 @@ import { StyledViewPost } from "./StyledViewPost";
 import ViewPostContent from "./ViewPostContent";
 import ViewPostComment from "./ViewPostComment";
 import { dummyPost } from "../dummyData";
+import axios from "axios";
 // import axios from "axios";
 
 function ViewPost({
@@ -25,109 +26,84 @@ function ViewPost({
   //useRef 등록
   const inputRef = useRef();
   //useEffect
-  const [userId, setUserId] = useState('');
-  const [userImage, setUserImage] = useState('');
-  const [userNickname, setUserNickname] = useState('');
+  const [userInfo, setUserInfo] = useState({})
   const [postInfo, setPostInfo] = useState({});
-  const [commentUserInfo,setCommentUserInfo] = useState([]);
+  const [commentInfo, setCommentInfo] = useState([]);
+  
   const [isLogedIn , setIsLogedIn] = useState(false);
   const [showButton, setShowButton] = useState(false);
+
+  console.log("커멘트인포!!!!!!", commentInfo);
+  console.log("포스트 인포:::-----", postInfo);
   
-  useEffect(()=>{
+
+  useEffect(() => {
     inputRef.current.focus();
 
-    if(hasAccessToken !== undefined) {
+    if (hasAccessToken !== undefined) {
       setIsLogedIn(true);
     }
-    console.log(showButton);
+    // console.log(showButton);
     // console.log('userid :', dummyPost.User.id)
     // console.log('hasAccessToken :', hasAccessToken)
-    if( Number(hasAccessToken) === dummyPost.User.id ){
+    if (Number(hasAccessToken) === dummyPost.User.id) {
       setShowButton(true);
-    }else{
+    } else {
       setShowButton(false);
     }
-    setUserId({
-      id : dummyPost.User.id,
-    })
-    setUserNickname({
-      nickname : dummyPost.User.nickname,
-    })
-    setUserImage({
-      image : dummyPost.User.image,
-    })
-    //console.log(dummyPost)
-    setPostInfo({
-      id : dummyPost.id, 
-      location : dummyPost.location , 
-      mobile : dummyPost.mobile , 
-      title : dummyPost.title,
-      date : dummyPost.date,
-      updateAt : dummyPost.updateAt,
-      content : dummyPost.content,
-      Image : dummyPost.Image
-    })
-    setCommentUserInfo(
-      dummyPost.Comment
-    )
-  },[hasAccessToken, setCommentUserInfo, showButton])
+    console.log(postId);
+    axios
+      .get(
+        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log("--------res.data-------", res.data);
+        setUserInfo({
+          userId: res.data.data.posts.user.id,
+          nickname: res.data.data.posts.user.nickname,
+          userImage: res.data.data.posts.user.image,
+        });
+        setPostInfo({
+          id: res.data.data.posts.id,
+          title: res.data.data.posts.title,
+          content: res.data.data.posts.content,
+          location: res.data.data.posts.location,
+          mobile: res.data.data.posts.mobile,
+          date: res.data.data.posts.date,
+          image: res.data.data.posts.image,
+          updatedAt: res.data.data.posts.updatedAt,
+        });
+        setCommentInfo(res.data.data.comment.reverse());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-  /*useEffect(() => {
-    inputRef.current.focus();
-    //const getData = axios.get(`localhost:4000/posts/${postId}`
-    // , { withCredentials: true })
-    //   .then((res) => {
-    //    console.log(res.data)
-    //   })
-    // console.log("hasAccessToken.", hasAccessToken);
-    // console.log("postId.", postId);
-    //* 유저정보 받아야함, nicname, id, userimage,
-    // setUserNickname(res.data.posts.nickname);
-    // setUserImage(res.data.posts.image);
-    // setUser_id(res.data.posts.userId);
-    //* 컨텐츠 정보를 받아야함, id, title, updatedAt, date, contnent, location, category
-    // setContentInfo({
-    //   post_id: res.data.posts.id,
-    //   title: res.data.posts.title,
-    //   updateAt: res.data.posts.updateAt,
-    //   location: res.data.posts.location,
-    //   date: res.data.posts.date,
-    //   content: res.data.posts.content,
-    //   mobile: res.data.posts.mobile,
-    //   Image: res.data.posts.Image,
-    //   Comment : [
-                    res.data.posts.id,
-                    res.data.posts.User.id,
-                    res.data.posts.User.nickname,
-                    res.data.posts.User.image,
-                    res.data.posts.content
-                  ]
-    // });
-    // getData();
-  });
-  */
+
 
   return (
     <StyledViewPost>
       <ViewPostContent
         hasAccessToken={hasAccessToken}
         postId={postId}
-        userId={userId}
-        userImage={userImage}
-        userNickname={userNickname}
+        userInfo={userInfo}
         postInfo={postInfo}
-        showButton = {showButton}
+        showButton={showButton}
       />
       <ViewPostComment
         inputRef={inputRef}
         modal={modal}
-        showButton = {showButton}
-        isLogedIn = {isLogedIn}
+        showButton={showButton}
+        isLogedIn={isLogedIn}
         needLoginHandler={needLoginHandler}
-        setCommentUserInfo = {setCommentUserInfo}
+        setCommentInfo={setCommentInfo}
         loginModalClick={loginModalClick}
         hasAccessToken={hasAccessToken}
-        commentUserInfo = {commentUserInfo}
+        commentInfo={commentInfo}
+        postId={postId}
+        userInfo={userInfo}
       />
     </StyledViewPost>
   );

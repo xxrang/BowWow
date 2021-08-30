@@ -12,12 +12,13 @@ const PostContent = ( props) => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    props.postHandler(data);
+    console.log(data)
+    // props.postHandler(data);
   };
   // console.log(errors);
   return (
     <StyledPostContent>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={ handleSubmit(onSubmit) }>
         <label htmlFor="title">제목</label>
         <input id="title"
           {...register("title", { required: true, minLength: 1 })}

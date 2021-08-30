@@ -18,7 +18,7 @@ export const StyledSignUp = styled.div`
     height: 900px;
     display: flex;
     flex-direction: column;
-    padding-top: 80px;
+    padding-top: 40px;
   }
 
   > form .image-container > input {
@@ -52,7 +52,20 @@ export const StyledSignUp = styled.div`
   }
 
   > form .user-info-content {
+    padding: 0;
+    margin: 0;
+    position: static;
+    padding-top:10px;
+    padding-left: 14px;
+    width: 360px;
+    height: 40px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    flex: none;
+    flex-grow: 0;
+    font-size: 16px;
     height: 80px;
+    resize:none;
   }
 
   > form > .button-wapper {
@@ -90,7 +103,6 @@ export const StyledSignUp = styled.div`
       border: 2px solid #48cfad;
     }
   }
-
 `;
 
 export const BtnLink = styled(Link)`

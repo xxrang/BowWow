@@ -4,8 +4,10 @@ import camera from '../../images/bros_blank.jpeg'
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 const SignUp = () => {
+  let history = useHistory();
   //* image preview
   const [userImage, setUserImage] = useState(camera);
   const [imgCheck, setImgCheck] = useState("false");
@@ -46,34 +48,26 @@ const SignUp = () => {
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
-      const user = {
-        email,
-        nickname,
-        introduce,
-        password,
-        userImage,
-        imgCheck,
-      };
+
       const userdate = new FormData();
-      userdate.append("email",email)
-      userdate.append("nickname",nickname)
-      userdate.append("introduce",introduce)
-      userdate.append("password",password)
-      userdate.append("input-image",e.target[3].files[0])
-      userdate.append("imgCheck",imgCheck)
+      userdate.append("email", email);
+      userdate.append("nickname", nickname);
+      userdate.append("introduce", introduce);
+      userdate.append("password", password);
+      userdate.append("input-image", e.target[3].files[0]);
+      userdate.append("imgCheck", imgCheck);
       axios
         .post(
           "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",
-          user,
+          userdate,
           {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
+            headers: { "Content-Type": "multipart/form-data" },
             withCredentials: true,
           }
         )
         .then((res) => {
           console.log(res);
+          history.push('/')
         })
         .catch((err) => {
           console.log(err);
@@ -132,7 +126,7 @@ const SignUp = () => {
           onChange={onChangeNickname}
         />
         <label htmlFor="introduce">유저 소개</label>
-        <input
+        <textarea
           name="introduce"
           type="text"
           className="user-info-content"

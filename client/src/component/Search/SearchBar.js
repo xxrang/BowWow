@@ -14,3 +14,4 @@ function SearchBar({inputRef}) {
 }
 
 export default SearchBar
+
