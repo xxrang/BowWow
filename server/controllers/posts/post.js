@@ -88,11 +88,7 @@ const application = app;
         //     await category_content.update(
         //         {category_id: 2}, {where: { posts_id: req.query.id }})
         // }}).then((data) => {
-            
-        .then( async (err) => {        
-                res.status(404).send({message: 'fail to update'})
-                return 
-            })  
+        .then( async () => {
             if(category === 'service'){
                 await category_content.update({
                     category_id:1}, { where : { posts_id : req.query.id }})
@@ -101,6 +97,10 @@ const application = app;
                     category_id:2}, { where : { posts_id : req.query.id }})
                 }
             res.status(200).send({message: 'success to update'})
+        })    
+        .then((err) => {        
+                res.status(404).send({message: 'fail to update'})
+            })  
         }),
 
         router.delete('/', async (req, res) => {
