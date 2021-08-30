@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const upload = require('./module/multer');
 //express의 req객체에 cookies 속성 부여
 const app = express();
-const port = 80;
+const port = 4000;
 require('dotenv').config();
 //env 환경변수 읽어냄
 

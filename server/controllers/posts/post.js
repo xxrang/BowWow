@@ -1,4 +1,5 @@
 const { post, user, comment} = require('../../models');
+const nickname = require('../check/nickname');
 
 module.exports = async (req, res) => {
 
@@ -6,11 +7,7 @@ module.exports = async (req, res) => {
             await post.findOne({ where : { id: id },
              include: [{
                  model: user,
-             }]}).then(() => {
-                await comment.findOne({ where : { posts_id: id},
-                incdlue: [{ 
-                    model: user
-                }]})
+             }, {model: comment, attribute: nickname, email, image}]
             }).then((data) => {
                 if(data){
                     res.status(200).send({message: 'load success', service : {data}})
