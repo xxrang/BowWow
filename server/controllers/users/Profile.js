@@ -27,12 +27,13 @@ module.exports = (app) => {
     router.patch('/', upload.single('input-image'), async (req, res) => {
         
         
-            const { nickname, password } = req.body;
+            const { nickname, password, introduce} = req.body;
             const image = req.file.location
             const hashpassword = crypto.createHash('sha512').update(password).digest('hex');
             await user.update({ 
                 nickname: nickname,
                 password: hashpassword,
+                introduce: introduce,
                 image: image
                  },
                 { where : {id : req.query.id }} 

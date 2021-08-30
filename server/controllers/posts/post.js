@@ -1,8 +1,9 @@
 const { post, user, comment} = require('../../models');
-const nickname = require('../check/nickname');
-
+const upload = require('../../module/multer')
+const router = require('express').Router();
 module.exports = async (req, res) => {
 
+        router.get('/', async (req, res) => {
             const { id } = req.query
             // await post.findOne({ where : { id: id },
             //  include: [{
@@ -26,4 +27,41 @@ module.exports = async (req, res) => {
                 } else {
                     res.status(200).send({message: 'ok', data : { posts: data1, comment: data2 }})
                 }
+        }),
+            
+        router.post('/', upload.single('input-image'), async (req, res) => {
+            const {title, date, location, content, mobile} = req.body;
+            const image = req.file.location;
+                /* 클라이언트 axios request.body에 category(dogs || volunteer)로 담겨 들어오니까
+                category === 'dogs'로 들어오면 */ 
+            if(!email || !title || !mobile || !content){
+                res.status(422).send({message: 'insufficient parameters supplied'})
+            } else if(req.body.category === 'service'){
+                post.create({
+                    image: image,
+                    title: title,
+                    mobile: mobile,
+                    content: content
+                }).then( async () => {
+                    await category_content.create({
+                        posts_id: req.body.posts_id,
+                        categoy_id: 1
+                    }).then((data) => res.status(201).send({message: 'post write success', data}))
+                })
+        } else if(req.body.category === 'volunteer'){
+            post.create({
+                image: image,
+                title: title,
+                mobile: mobile,
+                content: content,
+                location: location,
+                date: date
+            }).then( async () => {
+                await category_content.create({
+                    posts_id: req.body.posts_id,
+                    categoy_id: 2
+                }).then((data) => res.status(201).send({message: 'post write success', data}))
+            })
         }
+    })
+}

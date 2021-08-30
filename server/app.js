@@ -55,7 +55,7 @@ const volunteer = require('./controllers/posts/Volunteer_list')(app);
 app.use('/volunteer', volunteer);
 
 /* 게시글 보여주기 API */
-app.get('/posts', controllers.posts);
+app.use('/posts', controllers.posts);
 
 app.delete('/posts', controllers.post_delete); //게시글 삭제
 
