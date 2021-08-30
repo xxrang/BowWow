@@ -19,7 +19,6 @@ const image = req.file.location;
         if(duplicate_User){
             res.status(409).send({message: 'email exists'}) //계정 중복 가입
         } else {
-
             const hashpassword = crypto.createHash('sha512').update(password).digest('hex');
 
             user.create({

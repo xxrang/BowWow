@@ -9,7 +9,7 @@ module.exports = (app) => {
     router.get('/', async (req, res) => {
 
         await user.findAll({ 
-            where : { email: req.query.id }})
+            where : { id: req.query.id }})
             .then((data) => {
                 if(data) {
                     //createdAt, updatedAt 삭제하고 보여주기
@@ -23,11 +23,13 @@ module.exports = (app) => {
     router.patch('/', async (req, res) => {
         
         if(req.query.id){
-            const { nickname, password } = req.body
+            const { nickname, password, image} = req.body
             const hashpassword = crypto.createHash('sha512').update(password).digest('hex');
             await user.update({ 
                 nickname: nickname,
-                password: hashpassword },
+                password: hashpassword,
+                image: image
+                 },
                 { where : {id : req.query.id }} 
                 ).then((data) => {
                     if(data){
