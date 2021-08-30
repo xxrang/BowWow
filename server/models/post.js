@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.post.hasMany(models.category_content,{foreignKey: "posts_id", sourceKey: 'id'})
-      models.post.hasOne(models.comment,{foreignKey: "posts_id", sourceKey: 'id'})
+
+      models.post.hasMany(models.comment,{foreignKey: "posts_id", sourceKey: 'id'})
 
       models.post.belongsTo(models.user,{foreignKey: "user_id", sourceKey: 'id'})
 

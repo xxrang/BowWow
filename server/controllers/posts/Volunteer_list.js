@@ -27,7 +27,7 @@ module.exports = (app) => {
         }
     })
     
-    router.post('/', (req, res) => {
+    router.post('/', upload.array('image',4), (req, res) => {
         const { user_id, image, title, date, location, mobile, content } = req.body;
         if(!user_id || !title || !date || !location || !mobile || !content){
             res.status(422).send({message: 'insufficient parameters supplied'})

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
+const upload = require('./module/multer');
 //express의 req객체에 cookies 속성 부여
 const app = express();
 const port = 4000;
@@ -28,7 +29,7 @@ app.get("/", (req, res) => {
 
 
 /** 유저 관련 API **/
-app.post('/users/signup', controllers.signup); //회원가입
+app.post('/users/signup', upload.array('image',4), controllers.signup); //회원가입
 app.post('/users/login', controllers.login); //로그인
 app.post('/users/logout', controllers.signout); //로그아웃
 app.get('/email_check', controllers.email_check); //이메일 중복확인
@@ -46,11 +47,11 @@ app.get('/shelter', controllers.search); //지도 API
 
 /** 유기견 관련 API */
 const service = require('./controllers/posts/Service_list')(app);
-app.use('/posts/service_list', service);
+app.use('/service', service);
 
 /** 봉사일정 관련 API */
 const volunteer = require('./controllers/posts/Volunteer_list')(app);
-app.use('/posts/volunteer_list', volunteer);
+app.use('/volunteer', volunteer);
 
 app.delete('/posts', controllers.post_delete); //게시글 삭제
 

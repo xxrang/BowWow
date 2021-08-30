@@ -2,13 +2,20 @@ module.exports = (app) => {
 
     const { comment } = require('../../models');
     const { user } = require('../../models');
-    const { post } = require('../../models');
     const router = require('express').Router();
     const application = app;
 
 
     router.get('/', async (req, res) => {
-
+        await comment.findAll({
+        })
+            .then((data) => {
+                if(data){
+                    res.status(200).send({message: 'ok'})
+                } else {
+                    res.status(404).send({message: 'fail'})
+                }
+            })
     }),
     
     router.post('/', async (req, res) => {

@@ -12,10 +12,10 @@ module.exports = async (req, res) => {
      if(!data){
          res.status(404).send({message: 'invalid user'})
      } else {
-         delete data.dataValues.hashpassword;
-         const accessToken = generateAccessToken(data.dataValues);
+        //  delete data.dataValues.hashpassword;
+        //  const accessToken = generateAccessToken(data.dataValues);
         //  const refreshToken = generateAccessToken(data.dataValues);
-         sendAccessToken(res, accessToken)
+        //  sendAccessToken(res, accessToken)
         //  sendRefreshToken(res, refreshToken);
          res.status(200).send({message: 'login ok', data: {accessToken}})
      }

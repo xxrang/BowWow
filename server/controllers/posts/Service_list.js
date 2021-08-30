@@ -30,7 +30,7 @@ module.exports = (app) => {
         }
     })
     
-    router.post('/', async (req, res) => {
+    router.post('/', upload.array('image',4), async (req, res) => {
         const { email, image, title, mobile, user_id, content} = req.body;
         /* 클라이언트 axios request.body에 category(dogs || volunteer)로 담겨 들어오니까
         category === 'dogs'로 들어오면 */ 
@@ -47,11 +47,8 @@ module.exports = (app) => {
         }).then( async () => {
             await category_content.create({
                 posts_id: req.body.posts_id,
-            }).then( async () => {
-                await category.create({
-                    categoy_id: req.body.category_id
-                }).then((data) => res.status(201).send({message: 'post write success', data}))
-            })
+                categoy_id: req.body.category_id
+            }).then((data) => res.status(201).send({message: 'post write success', data}))
         })
     }});
     return router;
