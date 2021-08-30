@@ -19,7 +19,7 @@ function ViewPostContent({
   userNickname,
   showButton }) {
   let history = useHistory();
-  console.log("2:::",showButton);
+  //console.log("2:::",showButton);
   //const { id } = userId
   const { nickname } = userNickname
   const { image } = userImage

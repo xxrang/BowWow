@@ -80,6 +80,15 @@ function ViewPostComment({
 
   //id 와 일치하지 않는값만 필터링.
   const removeCommentHandler = (e,delComment) => {
+    /* axios.delete(`localhost:4000/comments`)
+      .then((res) => {
+        console.log(삭제되었습니다.)
+      })
+      .catch(err => {
+        console.log(err);
+        alert('게시글 삭제에 실패했습니다.')
+      })
+    */
     const remove = commentUserInfo.filter((el)=>{
       return el.id !== delComment
     })
