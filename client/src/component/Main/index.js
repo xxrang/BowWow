@@ -32,7 +32,7 @@ const Home = ({ handleClickForService }) => {
             <span
               style={{ color: "#48cfad", fontSize: "32px", fontWeight: "800" }}
             >
-              BowWow123
+              BowWow
             </span>{" "}
             와 함께하세요.{" "}
           </p>
