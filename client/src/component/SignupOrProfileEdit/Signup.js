@@ -48,6 +48,7 @@ const SignUp = () => {
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
+
       const userdate = new FormData();
       userdate.append("email", email);
       userdate.append("nickname", nickname);

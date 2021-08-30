@@ -55,7 +55,8 @@ function App() {
           setPostsData(data);
         });
     }
-  }, [navString]);
+}, [navString]);
+
 
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {

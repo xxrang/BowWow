@@ -1,68 +1,17 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from 'react'
+import {StyledSearchBar} from './StyledSearch'
 
-const styledSearchBar = styled.div`
-  width: 375px;
-
-  > searchInputs {
-    width: 375px;
-
-    > input {
-      width: 375px;
-    }
-  }
-`;
-
-function SearchBar({ placeholder, data }) {
-  const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState("");
-
-  const handleData = (e) => {
-    const searchWord = e.target.value;
-    setWordEntered(searchWord);
-    const newFiltered = data.filter((el) => {
-      return el.title.toLowerCase().includes(searchWord.toLowerCase());
-    });
-    if (searchWord.length === 0) {
-      setFilteredData([]);
-    } else {
-      setFilteredData(newFiltered);
-    }
-  };
-
-  const clearInput = () => {
-    setFilteredData([]);
-    setWordEntered("");
-  };
+function SearchBar({inputRef}) {
   return (
-    <styledSearchBar className="search">
-      <div className="searchInputs">
-        <input
-          type="text"
-          placeholder={placeholder}
-          value={wordEntered}
-          onChange={handleData}
-        />
-      </div>
-      {filteredData.length !== 0 && (
-        <div className="dataResult">
-          {filteredData.slice(0, 15).map((value, key) => {
-            return (
-              <a
-                className="dataItem"
-                href={value.link}
-                target="_blank"
-                rel="noreferrer"
-                onClick={clearInput}
-              >
-                <p>{value.title}</p>
-              </a>
-            );
-          })}
-        </div>
-      )}
-    </styledSearchBar>
-  );
+    <StyledSearchBar>
+      <input 
+      ref = {inputRef}
+      type = 'text' 
+      placeholder = '유기견 보호소를 검색하세요.'/>
+      <button>검색</button>
+    </StyledSearchBar>
+  )
 }
 
-export default SearchBar;
+export default SearchBar
+

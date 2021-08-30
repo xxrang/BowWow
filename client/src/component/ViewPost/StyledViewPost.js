@@ -20,9 +20,6 @@ export const StyledViewPostContent = styled.div`
 
 export const StyledViewPostComment = styled.div`
 background-color: #f9f9f9;
-/*width : 300px;
-height: 500px;*/
-/*background: rgb(220, 248, 235);*/
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -232,7 +229,10 @@ export const StyledViewPostContentOne = styled.div`
     > .post-info-content {
       font-size: 16px;
       text-align: start;
-      box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
+      border-radius : 2px;
+      padding : 10px;
+      box-shadow : inset 1px 3px 3px 1px rgba(0, 0, 0, 0.1);
+
     }
   }
 `;

@@ -39,7 +39,6 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
     } else {
       return null;
     }
-    //console.log("postsData service::::", postsData);
   }, [maxDogList, postsData]);
   return (
     <StyledService id="service-container">
@@ -49,14 +48,13 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
         postId={postId}
         slice={slice}
       />
-      <Link to="/postform">
-        <button className="post-btn">
-          <p>Post</p>
-        </button>
-      </Link>
-      <button onClick={moreButtonHandler} className="more-btn">
+      <div className = 'btn-box'>
+      <button 
+      onClick={moreButtonHandler} 
+      className="buttons more-btn">
         More
       </button>
+      </div>
     </StyledService>
   );
 };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledNavBar = styled.nav`
   width: 100%;
   height : 80px;
-  background :linear-gradient(45deg, #48cfad , #37BC9B) ;
+  background : #37BC9B;
   position : sticky;
   top:0;
   z-index:10000;
@@ -19,12 +19,28 @@ export const StyledNavBar = styled.nav`
       list-style: none;
       cursor: pointer;
       margin : 0 15px;
-      font-size: 18px;
+      font-size: 22px;
       color :white;
-      font-family: lato;
       &:hover{
         transform: scale(1.1);
         transition: all 0.3s ease-in-out;
+      }
+      >a>.buttons{
+        border: none;
+        border-radius: 10px;
+        color: white;
+        width: 100px;
+        height: 40px;
+        margin : 5px 5px 50px;
+        background: #fff;
+        border: 1px solid #48cfad;
+        color: #48cfad;
+        &:hover{
+        background: #48cfad;
+        border: none;
+        color: #fff;
+        transition: all 0.3s ease;
+        }
       }
     }
     >a{

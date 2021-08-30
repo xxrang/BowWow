@@ -25,7 +25,14 @@ function ViewPostContent({
   //console.log(postInfo);
 
     const deletePostHandler = () => {
-      /* axios.delete(localhost:4000/${postId})
+      /* 
+      axios.delete("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts")
+      ,doby 부분 : {
+        postId : 
+      }
+      ,{
+        withCredentials: true
+      }
       .then((res) => {
         alert('삭제되었습니다.')
         console.log(삭제되었습니다.)

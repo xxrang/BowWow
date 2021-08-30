@@ -1,42 +1,44 @@
 import styled from "styled-components";
 
+const mainColor = '#48cfad';
+
 export const StyledService = styled.section`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  > .more-btn,
-  .post-btn {
-    background: #48cfad;
+  >.btn-box{
+    text-align: center;
+    margin-top : 30px;
+    > .buttons, a>.buttons {
+    background: ${mainColor};
     border: none;
     border-radius: 10px;
     color: white;
-    padding: 10px;
-  }
-  > .more-btn {
-    margin: 0 auto 80px;
     width: 100px;
+    height: 40px;
     font-size: 16px;
+    margin : 5px 5px 50px;
   }
-  > .post-btn {
-    width: 100px;
-    height: 100px;
-    border-radius: 0 0 100px 0;
-    margin-top: -78px;
-    position: sticky;
-    top: 79px;
-    > p {
-      margin: -20px 0 0 -10px;
-      font-size: 20px;
+  >a>.buttons{
+    background: #fff;
+    border: 1px solid #48cfad;
+    color: #48cfad;
+    &:hover{
+    background: #48cfad;
+    border: none;
+    color: #fff;
+    transition: all 0.3s ease;
     }
   }
-  > button:hover {
+  >.more-btn:hover {
     background: #fff;
     border: 1px solid #48cfad;
     color: #48cfad;
     transition: all 0.3s ease;
   }
+}
 `;
 export const StyledServiceList = styled.div`
   /*display:flex;
@@ -64,18 +66,24 @@ export const ServiceListWrapper = styled.div`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
-
   &:hover {
     transform: scale(1.1);
+    background : rgba(0, 0, 0, 0.1);
+    overflow:hidden;
+    opacity : 0.9;
   }
 `;
 export const ServiceListP = styled.p`
-margin: 0;
+margin: 12px 0 0 0 ;
 padding: 0;
-
+font-size: 20px;
+font-weight : 500;
+text-align : left;
 `;
 export const ServiceListImg = styled.img`
   width: 100%;
   height: 70%;
   object-fit: contain;
+  background: rgba(0,0,0,0.1);
+  padding : 10px 0;
 `;

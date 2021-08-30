@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyledNavBar } from "./StyledNavBar";
 import { Link, useHistory } from "react-router-dom";
+
 // import axios from "axios";
 //setPostsData : 데이터를 가져왔을 때 응답받았을 떄 데이터. -> 응답받으면 상태변화를 준다.
 //setPostsString : 스트링으로 데이터 요청을 보내고
@@ -49,6 +50,7 @@ const NavBar = ({
     }
   }, [hasAccessToken]);
   return (
+
     <StyledNavBar id="navBar">
       <ul>
         <div className="leftNav">
@@ -68,6 +70,9 @@ const NavBar = ({
               </li>
             );
           })}
+          <Link to="/postform">
+            <li className="post">Post</li>
+          </Link>
         </div>
         {!isLogedIn ? (
           <div className="rightNav">
