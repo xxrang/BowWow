@@ -23,18 +23,5 @@ module.exports = (app) => {
             })
         })
 
-    /*router.patch('/', async (req, res) => {
-        await comment.update({
-            content: req.body.content
-        }, {where : {id : req.query.id}})
-        .then((data) => {
-            if(data){
-                res.status(200).send({message: 'success to update'})
-            } else {
-                res.status(404).send({message: 'fail to update'})
-            }
-        })
-    })*/
-
     return router;
 }

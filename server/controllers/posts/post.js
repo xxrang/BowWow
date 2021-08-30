@@ -1,7 +1,9 @@
-const { post, user, comment} = require('../../models');
+module.exports = (app) => {
+
+const { post, user, comment } = require('../../models');
 const upload = require('../../module/multer')
 const router = require('express').Router();
-module.exports = async (req, res) => {
+const application = app;
 
         router.get('/', async (req, res) => {
             const { id } = req.query
@@ -63,5 +65,19 @@ module.exports = async (req, res) => {
                 }).then((data) => res.status(201).send({message: 'post write success', data}))
             })
         }
+    }),
+
+    router.patch('/', upload.single('input-image'), async (req, res) => {
+        await post.update({
+            content: req.body.content
+        }, {where : {id : req.query.id}})
+        .then((data) => {
+            if(data){
+                res.status(200).send({message: 'success to update'})
+            } else {
+                res.status(404).send({message: 'fail to update'})
+            }
+        })
     })
+    return router;
 }
