@@ -1,14 +1,12 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { StyledPostForm, TextArea, StyledPostContent } from "./StyledPostForm";
+import { StyledPostForm, TextArea } from "./StyledPostForm";
 import UploadImg from "./UploadImg";
 import axios from "axios";
-import camera1 from '../../images/bros_blank.jpeg';
 import useInput from '../../hooks/useInput';
 import { useHistory } from "react-router-dom";
 
-const PostEdit = ({ hasAccessToken, postId }) => {
-  const history = useHistory();
-  
+const PostEdit = ({ hasAccessToken, postId, setPostId }) => {
+  let history = useHistory();
   const [title, onChangeTitle, setTitle] = useInput("");
   const [category, onChangeCategory, setCategory] = useInput("");
   const [date, onChangeDate, setDate] = useInput("");
@@ -18,70 +16,106 @@ const PostEdit = ({ hasAccessToken, postId }) => {
   //* 이미지 미리보기
   const [image, setImage] = useState("");
   const [imgCheck, setImgCheck] = useState("true");
-  
+  const imageHandler = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImage(reader.result);
+      }
+    };
+    console.log(e.target.files);
+    reader.readAsDataURL(e.target.files[0]);
+    setImgCheck("true");
+  };
 
   //*데이터 편집 후 전송
- 
-  const patchHandler = useCallback(() => {
+
+  const patchHandler = useCallback(
+    (e) => {
       // console.log(data)
-      const userdate = new FormData();
-      userdate.append("title", title);
-      userdate.append("category", category);
-      userdate.append("date", date);
-      userdate.append("location", location);
-      // userdate.append("image", e.target[3].files[0]);
-      userdate.append("imgCheck", imgCheck);
-      userdate.append("content", content);
-      userdate.append("mobile", mobile);
-      axios.patch(`https://localhost:4000/posts/{postId}`, userdate, {
-        headers: { "Content-Type": "multipart/form-data" },
-        withCredentials: true,
-      }).then((res) => {
-        console.log(res.data);
-        alert("게시글이 수정되었습니다.");
-        history.push("/");
-      })
-      
+      e.preventDefault();
+      const userdata = new FormData();
+      userdata.append("title", title);
+      userdata.append("category", category);
+      userdata.append("date", date);
+      userdata.append("location", location);
+      userdata.append("input-image", e.target[0].files[0]);
+      userdata.append("imgCheck", imgCheck);
+      userdata.append("content", content);
+      userdata.append("mobile", mobile);
+      axios
+        .patch(
+          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
+          userdata,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+            withCredentials: true,
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          alert("게시글이 수정되었습니다.");
+          window.location.replace("/");
+        });
     },
-    [title, category, date, location, mobile, content, imgCheck, history]
+    [title, category, date, location, imgCheck, content, mobile, postId]
   );
 
   const cancelHandler = () => {
     alert("게시글이 수정이 취소되었습니다.");
     history.goBack();
-  }
+  };
 
+  // console.log("content", content)
+  // console.log("postId", postId)
   useEffect(() => {
-    // axios.get(`https://localhost:4000/posts/{postId}`, hasAccessToken, {
-    //   withCredentials: true
-    // }).then((res) => {
-    //   console.log(res.data); //데이터 받아옴
-    //   // title, locaion, mobile, content, image, imgcheck, date, category
-    // })
-    setImage({ camera1 });
-    setTitle("뚱이입니다");
-    setCategory("dogs");
-    setDate("2021-09-21");
-    setLocation("서울시 용산구 후암동 345-12");
-    setMobile("010-7185-2791");
-    setContent(
-      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est aliquam maiores deserunt ipsam. Qui laborum exercitationem commodi ab consectetur voluptatum obcaecati iure facere ipsum. Autem, impedit quaerat! Similique cumque dicta ipsam debitis quam, aut mollitia, natus laudantium repellendus minima eos! Quas amet natus molestias, exercitationem voluptates quidem molestiae ea blanditiis, sit delectus adipisci, accusamus doloremque mollitia cum architecto quae! Dolores cupiditate repudiandae praesentium odio, corporis suscipit quia doloribus. Nisi quae voluptas sequi a magnam. Eum animi eos, molestiae quisquam quos recusandae consequuntur! Similique velit molestiae asperiores earum? Reiciendis quidem earum saepe ab sapiente dolorum quam consectetur alias id, exercitationem facilis facere vel praesentium ratione ut tempore. Exercitationem, natus ipsam. Doloremque sapiente, odio ut tenetur quis optio iusto vel fuga accusantium, deleniti distinctio odit. Quisquam aspernatur minus aperiam est provident ullam soluta maiores eligendi, reiciendis dolore natus commodi pariatur quidem et libero deserunt, nesciunt, dolores illo. Quos nulla perspiciatis est commodi sint repellat reiciendis corporis harum! Possimus odio nemo, labore veniam eos amet, ipsam necessitatibus officiis cumque ratione quo sunt molestias aliquam vero ut rem? Ipsum sapiente minus doloribus modi expedita qui numquam impedit corporis dicta pariatur hic esse vero blanditiis quae molestias, corrupti vel sed aperiam cum itaque ipsam repellat sequi. Quae ipsa maiores veniam dolorem similique deserunt minima est commodi quia. Dolore molestias perferendis facilis architecto eaque animi omnis ut explicabo cumque voluptatibus minus amet delectus cum neque esse enim dicta minima itaque recusandae porro, blanditiis nostrum? Iure iusto dolor accusantium voluptas velit molestiae ex ducimus assumenda omnis rerum."
-    );
-    setImage(camera1);
-  }, [setCategory, setContent, setDate, setLocation, setMobile, setTitle]);
+    axios
+      .get(
+        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log(res.data); //데이터 받아옴
+        // title, locaion, mobile, content, image, imgcheck, date, category,
+        console.log(res.data.data.posts.category_contents[0].category_id);
+        if (res.data.data.posts.category_contents[0].category_id === 1) {
+          setCategory("service");
+        } else {
+          setCategory("volunteer");
+        }
+        // setCategory(res.data.data.post);
+        setContent(res.data.data.posts.content);
+        setDate(res.data.data.posts.date);
+        setLocation(res.data.data.posts.location);
+        setMobile(res.data.data.posts.mobile);
+        setTitle(res.data.data.posts.title);
+        setImage(res.data.data.posts.image);
+        // setPostId(res.data.data.posts.id);
+      });
+  }, [
+    postId,
+    setCategory,
+    setContent,
+    setDate,
+    setLocation,
+    setMobile,
+    setPostId,
+    setTitle,
+  ]);
   // console.log(data);
   // console.log(userImage);
 
   // pattern: /\d{2,3}[- ]\d{3,4}[- ]\d{4}/gi;
   return (
     <StyledPostForm>
-      <UploadImg setImage={setImage} setImgCheck={setImgCheck} image={image} />
-      <StyledPostContent>
-        <form
-          onSubmit={(e) => {
-            patchHandler(e)
-          }}
-        >
+      <form
+        onSubmit={(e) => {
+          patchHandler(e);
+        }}
+      >
+        <UploadImg image={image} imageHandler={imageHandler} />
+        <div className="form-data">
           <label htmlFor="title">제목</label>
           <input
             type="text"
@@ -101,7 +135,7 @@ const PostEdit = ({ hasAccessToken, postId }) => {
             onChange={onChangeCategory}
           >
             <option value="">선택하세요</option>
-            <option value="dogs">유기견 소개</option>
+            <option value="service">유기견 소개</option>
             <option value="volunteer">봉사 일정 공유</option>
           </select>
 
@@ -143,8 +177,8 @@ const PostEdit = ({ hasAccessToken, postId }) => {
             <button type="submit">확인</button>
             <button onClick={cancelHandler}>취소</button>
           </div>
-        </form>
-      </StyledPostContent>
+        </div>
+      </form>
     </StyledPostForm>
   );
 };

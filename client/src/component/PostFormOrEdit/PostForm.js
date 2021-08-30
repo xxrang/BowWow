@@ -1,8 +1,7 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback} from "react";
 import {
   StyledPostForm,
   TextArea,
-  StyledPostContent,
 } from "./StyledPostForm";
 import UploadImg from './UploadImg';
 import { useHistory } from "react-router-dom";
@@ -21,54 +20,79 @@ const PostForm = ({ hasAccessToken }) => {
   //* 이미지 미리보기
   const [image, setImage] = useState("");
   const [imgCheck, setImgCheck] = useState("true");
+  // console.log(image);
   
-  
+  const imageHandler = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImage(reader.result);
+      }
+    };
+    // console.log(e.target.files);
+    reader.readAsDataURL(e.target.files[0]);
+    setImage(e.target.files[0]);
+    setImgCheck("true");
+  };
   //*데이터 편집 후 전송
   
-  const postHandler = useCallback(
-    (e) => {
-      const userdata = new FormData();
-      userdata.append("title", title);
-      userdata.append("category", category);
-      userdata.append("date", date);
-      userdata.append("location", location);
-      userdata.append("image", e.target[3].files[0]);
-      userdata.append("content", content);
-      userdata.append("mobile", mobile);
-      userdata.append("imgCheck", imgCheck);
-      // console.log(data)
-      // 하나로 합쳐줘서 보내준다.
-      // axios.post("https://localhost:4000/posts", userdate, {
-      //   headers: { "Content-Type": "multipart/form-data" },
-      //   withCredentials: true,
-      // });
+  const postHandler = useCallback((e) => {
+    const inputImage = e.target[0].files[0];
+    console.log(e);
+    console.log(inputImage);
+    // console.log(location);
+    // console.log("타켓", e.target[0]);
+    e.preventDefault();
+    const userdata = new FormData();
+    userdata.append("userId", hasAccessToken);
+    userdata.append("title", title);
+    userdata.append("category", category);
+    userdata.append("date", date);
+    userdata.append("location", location);
+    userdata.append("input-image", inputImage);
+    userdata.append("content", content);
+    userdata.append("mobile", mobile);
+    userdata.append("imgCheck", imgCheck);
+    // 하나로 합쳐줘서 보내준다.
+    axios
+      .post(
+        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts`,
+        userdata,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        alert("게시글이 작성되었습니다.");
+        window.location.replace("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("게시글 작성에 실패했습니다. 다시 시도해주세요.");
+      });
 
-      console.log("userdata", userdata);
-    },
-    [category, content, date, imgCheck, location, mobile, title]
+    // console.log("userdata", userdata);
+  },
+    [category, content, date, hasAccessToken, imgCheck, location, mobile, title]
   );
 
 const cancelHandler = () => {
   alert("게시글 작성이 취소되었습니다.");
   history.goBack();
 };
-  useEffect(() => {
-    if (!hasAccessToken) {
-      alert('로그인이 필요한 서비스입니다.')
-      history.push('/')
-    }
-    
-    
-  },[hasAccessToken, history])
+  
   return (
     <StyledPostForm>
-      <UploadImg setImage={setImage} setImgCheck={setImgCheck} image={image} />
-      <StyledPostContent>
-        <form
-          onSubmit={(e) => {
-            postHandler(e);
-          }}
-        >
+      <form
+        onSubmit={(e) => {
+          postHandler(e);
+        }}
+      >
+        <UploadImg image={image} imageHandler={imageHandler} />
+        <div className="form-data">
           <label htmlFor="title">제목</label>
           <input
             type="text"
@@ -88,7 +112,7 @@ const cancelHandler = () => {
             onChange={onChangeCategory}
           >
             <option value="">선택하세요</option>
-            <option value="dogs">유기견 소개</option>
+            <option value="service">유기견 소개</option>
             <option value="volunteer">봉사 일정 공유</option>
           </select>
 
@@ -130,8 +154,8 @@ const cancelHandler = () => {
             <button type="submit">확인</button>
             <button onClick={cancelHandler}>취소</button>
           </div>
-        </form>
-      </StyledPostContent>
+        </div>
+      </form>
     </StyledPostForm>
   );
 }

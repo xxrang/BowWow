@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { StyledService } from "./StyledService";
 import ServiceList from "./ServiceList";
 // import axios from "axios";
@@ -11,7 +10,7 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
   const [slice, setSlice] = useState([]);
   // console.log("slice-------", slice);
   //const [ serviceImg, setServiceImg ] = useState(initialPosts.MainPosts);
-
+// console.log(postsData, postId, navString)
   const moreButtonHandler = () => {
     setMaxDogList(maxDogList + 9);
     //console.log(slice)
@@ -19,19 +18,7 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
 
     setSlice(postsData.slice(0, maxDogList));
   };
-  /*useEffect(()=>{
-    axios.get('https://localhost:4000/service',
-    {withCredential : true}
-    )
-    //if category_id 가 1번이면  category_id 1번의 이미지와 컨텐츠요청 받아오는거
-    .then((res)=>{
-      //res.body? chk ? 
-    })
-    .then((data)=>{
 
-    })
-  },[])
-  */
   useEffect(() => {
     // setCount(count + 1);
     if (postsData) {

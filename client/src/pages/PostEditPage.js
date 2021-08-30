@@ -18,7 +18,10 @@ const PostEditPage = ({
         setPostsData={setPostsData}
         setNavString={setNavString}
       />
-      <PostEdit hasAccessToken={hasAccessToken} postId={postId} />
+      <PostEdit
+        hasAccessToken={hasAccessToken}
+        postId={postId}
+      />
       <Footer />
     </>
   );

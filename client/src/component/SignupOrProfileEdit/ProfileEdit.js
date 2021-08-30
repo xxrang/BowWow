@@ -9,11 +9,9 @@ import {
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
-import { dummyUser } from "../dummyData";
+// import { dummyUser } from "../dummyData";
 
 const ProfileEdit = ({ hasAccessToken }) => {
-  const history = useHistory();
 
   //이미지 상태관리
   const [userImage, setUserImage] = useState("");
@@ -40,7 +38,7 @@ const ProfileEdit = ({ hasAccessToken }) => {
 
   const [password, onChangePassword] = useInput("");
   const [passwordCheck, setPasswordCheck] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
+  const [passwordError, setPasswordError] = useState(true);
   const onChangePasswordCheck = useCallback(
     (e) => {
       setPasswordCheck(e.target.value);
@@ -48,8 +46,8 @@ const ProfileEdit = ({ hasAccessToken }) => {
     },
     [password]
   );
-
-  //* form submit
+    
+  //! form submit
   const profileEditHandler = useCallback(
     (e) => {
       //accesstoken으로 유저 아이디 만들어서 마지막에 같이 전달
@@ -65,33 +63,27 @@ const ProfileEdit = ({ hasAccessToken }) => {
       userdate.append("input-image", e.target[3].files[0]);
       userdate.append("imgCheck", imgCheck);
 
-      // axios.patch(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/profileedit/${user_id}`
-      //   ,userdate, {headers: {'Content-Type': 'multipart/form-data',},
-      //     withCredentials: true,
-      //   })
-      //   .then((res)=>{
-      //     console.log(res)
-      //   })
-      //   .catch((err)=>{
-      //     console.log(err)
-      //   })
-      alert("프로필이 수정되었습니다.");
-      // history.push("/");
-      // console.log(user);
-      // console.log("user_id": id
-      //   "| email:", email,
-      //   "| nickname: ", nickname,
-      //   "| introduce :", introduce,
-      //   "| password :", password,
-      //   "| passwordCheck :", passwordCheck,
-      //   "| image", userImage
-      // );
+      axios.patch(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=1`
+        //id에 어세스토큰 해독하고 유저아이들
+        ,userdate, {headers: {'Content-Type': 'multipart/form-data',},
+          withCredentials: true,
+        })
+        .then((res)=>{
+          console.log(res.data)
+          alert("게시글이 수정되었습니다.")
+          window.location.replace("/");
+        })
+        .catch((err)=>{
+          console.log(err)
+          alert("게시글 수정에 실패했습니다. 다시 시도해주세요.")
+        })
     },
-    [password, passwordCheck, email, nickname, introduce, userImage, imgCheck]
+    [password, passwordCheck, email, nickname, introduce, imgCheck]
   );
   
-  //data 불러 오기
+  //! data 불러 오기
   //로그인 상태관리
+  // console.log(email, nickname, introduce, userImage);
   const [isLogedIn, setIsLogedIn] = useState(false);
   useEffect(() => {
     if (hasAccessToken !== undefined) {
@@ -99,18 +91,17 @@ const ProfileEdit = ({ hasAccessToken }) => {
     } else {
       setIsLogedIn(false);
     }
-    // axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/${userid}`, hasAccessToken, {
-    //   withCredentials: true
-    // }).then((res) => {
-    //   console.log(res.data); //데이터 받아옴
+    axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=1`, {
+      withCredentials: true
+    }).then((res) => {
+      console.log("프로필수정", res.data); //데이터 받아옴
     // id, email, nickname image, introduce data 들어옴
-    // })
-    if (isLogedIn) {
-      setEmail(dummyUser.email);
-      setIntroduce(dummyUser.introduce);
-      setUserImage(dummyUser.image);
-      setNickname(dummyUser.nickname);
-    }
+      setEmail(res.data.data[0].email);
+      setIntroduce(res.data.data[0].introduce);
+      setUserImage(res.data.data[0].image);
+      setNickname(res.data.data[0].nickname);
+    })
+      
   }, [
     hasAccessToken,
     isLogedIn,
@@ -163,7 +154,7 @@ const ProfileEdit = ({ hasAccessToken }) => {
           onChange={onChangeNickname}
         />
         <label htmlFor="introduce">유저 소개</label>
-        <input
+        <textarea
           name="introduce"
           type="text"
           className="user-info-content"
