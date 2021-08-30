@@ -2,6 +2,7 @@ module.exports = (app) => {
 
     const { post } = require('../../models')
     const router = require('express').Router();
+    const upload = require('../../module/multer')
     const application = app;
 
     router.get('/', (req,res) => {
