@@ -321,7 +321,7 @@ export const dummyPost = {
   Image: "../images/bros_blank.jpeg", //db따로, 배열형태, 여러개일경우.
   title: "용산구 준이 유기견 보호소 9월 봉사일정 ",
   date: "2021년 9월 29일",
-  location: "서울시 용산구 후암동",
+  location: "서울시 용산구 후암동 유기견 보호소",
   mobile: "010-1009-1009",
   updateAt: "2021-08-31",
   category: "volunteer",

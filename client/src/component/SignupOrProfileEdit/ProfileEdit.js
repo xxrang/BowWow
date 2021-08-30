@@ -57,17 +57,16 @@ const ProfileEdit = ({ hasAccessToken }) => {
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
-      const user = {
-        email,
-        nickname,
-        introduce,
-        password,
-        userImage,
-        imgCheck,
-      };
-      console.log(user);
-      // axios.patch(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com//users/profileedit/${user_id}`
-      //   ,user, {headers: {'Content-Type': 'multipart/form-data',},
+      const userdate = new FormData();
+      userdate.append("email", email);
+      userdate.append("nickname", nickname);
+      userdate.append("introduce", introduce);
+      userdate.append("password", password);
+      userdate.append("input-image", e.target[3].files[0]);
+      userdate.append("imgCheck", imgCheck);
+
+      // axios.patch(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/profileedit/${user_id}`
+      //   ,userdate, {headers: {'Content-Type': 'multipart/form-data',},
       //     withCredentials: true,
       //   })
       //   .then((res)=>{
@@ -87,7 +86,6 @@ const ProfileEdit = ({ hasAccessToken }) => {
       //   "| passwordCheck :", passwordCheck,
       //   "| image", userImage
       // );
-      
     },
     [password, passwordCheck, email, nickname, introduce, userImage, imgCheck]
   );

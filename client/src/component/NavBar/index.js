@@ -49,7 +49,7 @@ const NavBar = ({
     }
   }, [hasAccessToken]);
   return (
-    <StyledNavBar>
+    <StyledNavBar id="navBar">
       <ul>
         <div className="leftNav">
           {/*로고 */}

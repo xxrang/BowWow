@@ -14,17 +14,14 @@ function ViewPostContent({
   hasAccessToken, 
   postId, 
   postInfo, 
-  userId, 
-  userImage, 
-  userNickname,
+  userInfo,
   showButton }) {
   let history = useHistory();
   //console.log("2:::",showButton);
   //const { id } = userId
-  const { nickname } = userNickname
-  const { image } = userImage
+  const { userId, nickname, userImage } = userInfo;
   
-  const { title, mobile, updateAt, content, date, location, Image } = postInfo
+  const { title, mobile, content, date,updatedAt, location, Image } = postInfo
   //console.log(postInfo);
 
     const deletePostHandler = () => {
@@ -46,13 +43,13 @@ function ViewPostContent({
         <StyledViewPostProfile>
           <div className="profile-container">
             <div className="profile-img-wrapper">
-              <img src={image} alt="user" width="60px" height="60px" />
+              <img src={userImage} alt="user" width="60px" height="60px" />
             </div>
             <div className="profile-info-wrapper">
               <h2>{title}</h2>
               <p>
                 {nickname}
-                <span>{date}</span>
+                <span>{updatedAt}</span>
               </p>
             </div>
             {showButton ? (
@@ -64,8 +61,7 @@ function ViewPostContent({
                 >
                   수정
                 </button>
-                <button type="button" onClick={deletePostHandler}
-                >
+                <button type="button" onClick={deletePostHandler}>
                   삭제
                 </button>
               </ProfileInfoBtn>
@@ -78,8 +74,12 @@ function ViewPostContent({
           </div>
           <div className="post-info-all">
             <div className="post-info-two">
-              <div>봉사 날짜: </div>
-              <div className="post-info-date">{updateAt}</div>
+              {date ? (
+                <div className="post-info-date">봉사 날짜: {date}</div>
+              ) : (
+                <div className="post-info-date"></div>
+              )}
+
               <div className="post-info-location">{location}</div>
             </div>
             <div className="post-info-mobile">{mobile}</div>

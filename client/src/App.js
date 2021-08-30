@@ -9,8 +9,8 @@ import ViewPostPage from "./pages/ViewPostPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import PostEditPage from "./pages/PostEditPage";
-import { initialPosts } from "./component/dummyData";
-// import axios from 'axios';
+// import { initialPosts } from "./component/dummyData";
+import axios from 'axios';
 
 //루트만 짜기
 function App() {
@@ -23,42 +23,39 @@ function App() {
 
   // console.log("data------", postId);
   useEffect(() => {
-    const { service, volunteer } = initialPosts; //데이터를 받아왔다 친다.
+    // const { service, volunteer } = initialPosts; //데이터를 받아왔다 친다.
     // console.log("app1:", postsData);
     // console.log("app2:", navString);
-    if (navString === "service" || navString === "") {
-      setPostsData(service);
-    } else if (navString === "volunteer") {
-      setNavString("volunteer");
-      setPostsData(volunteer);
-    }
-    // if (postsString !== "") {
-    //   const getPostsData = (postsString) => {
-    //     return axios
-    //       .get("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/service", 
-    //         {
-    //         params: { posts: postsString },
-    //         withCredentials: true,
-    //       })
-    //       .then((res) => {
-    //         const data = res.data.data.postData;
-    //         setPostsData(data);
-    //       });
-    //   };
-    //   getPostsData(postsString);
-    // } else {
-    //   const getAllData = () => {
-    //     return axios
-    //       .get(""http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/volunteer",", 
-    //       { withCredentials: true })
-    //       .then((res) => {
-    //         const data = res.data.data.data;
-    //         setPostsData(data);
-    //       });
-    //   };
-    //   getAllData();
+    // if (navString === "service" || navString === "") {
+    //   setPostsData(service);
+    // } else if (navString === "volunteer") {
+    //   setNavString("volunteer");
+    //   setPostsData(volunteer);
     // }
-  }, [navString, postsData]);
+    if (navString === "" || navString === "service") {
+      return axios
+        .get(
+          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/service",
+          { withCredentials: true }
+        )
+        .then((res) => {
+          console.log(res.data);
+          const data = res.data.data.posts;
+          setPostsData(data);
+        });
+    } else if (navString === "volunteer") {
+      return axios
+        .get(
+          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/volunteer",
+          { withCredentials: true }
+        )
+        .then((res) => {
+          console.log(res.data);
+          const data = res.data.data.posts;
+          setPostsData(data);
+        });
+    }
+  }, [navString]);
 
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {

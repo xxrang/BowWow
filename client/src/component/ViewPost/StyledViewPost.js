@@ -4,7 +4,6 @@ export const StyledViewPost = styled.div`
   box-sizing: border-box;
   margin: 50px auto;
   display: grid;
-  height: 63vh;
   width: 70%;
   grid-template-columns: 2fr 1fr;
 `;
@@ -38,6 +37,7 @@ margin-left : 14px;
   >.flex-box{
     display: flex;
     align-items: center;
+    margin-top : 12px;
     >.post-comment-text-submit{
       width : 50px;
       height : 60px;
@@ -61,10 +61,9 @@ margin-left : 14px;
       width : 200px;
       padding: 10px;
       height: 40px;
-      margin-top: 10px;
       border: none;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
-      /*box-shadow: rgb(0, 0, 0, 0.35) 1px 1px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;*/
+      box-shadow: rgb(0, 0, 0, 0.35) 1px 1px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
   }
   >.post-comment-wrapper{
   width : 100%;
@@ -136,7 +135,7 @@ margin-left : 14px;
     }
   }  
 }
-`
+`;
 
 
 export const StyledViewPostProfile = styled.div`
@@ -208,7 +207,7 @@ export const StyledViewPostContentOne = styled.div`
   > .post-info-all {
     margin: 0 auto;
     width: 550px;
-    padding: 0px 20px;
+    padding: 0px 40px;
     font-style: normal;
 
     font-size: 17px;
@@ -216,25 +215,24 @@ export const StyledViewPostContentOne = styled.div`
 
     > .post-info-two {
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       margin-bottom: 8px;
 
       > .post-info-date {
-        margin-left: 10px;
       }
       > .post-info-location {
-        margin-left: 140px;
       }
     }
 
     > .post-info-mobile {
-      margin-left: 435px;
+      text-align: right;
       margin-bottom: 12px;
     }
 
     > .post-info-content {
       font-size: 16px;
       text-align: start;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
     }
   }
 `;
