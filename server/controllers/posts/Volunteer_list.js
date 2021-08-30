@@ -10,7 +10,7 @@ module.exports = (app) => {
         await category_content.findAll({
                 include : [{
                     model: post
-                }], where : { categoy_id : 1}
+                }], where : { categoy_id : 2}
             })
             .then((data) => {
             if(data){

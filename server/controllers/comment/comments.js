@@ -7,11 +7,15 @@ module.exports = (app) => {
 
 
     router.get('/', async (req, res) => {
-        await comment.findAll({
+        const data2 = await comment.findAll({
+            where: { posts_id : req.query.id },
+            include: {
+                model: user
+            }
         })
             .then((data) => {
                 if(data){
-                    res.status(200).send({message: 'ok'})
+                    res.status(200).send({message: 'ok', data : { comment : data2}})
                 } else {
                     res.status(404).send({message: 'fail'})
                 }
