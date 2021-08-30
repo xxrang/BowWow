@@ -4,10 +4,8 @@ import camera from '../../images/bros_blank.jpeg'
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
 
 const SignUp = () => {
-  let history = useHistory();
   //* image preview
   const [userImage, setUserImage] = useState(camera);
   const [imgCheck, setImgCheck] = useState("false");
@@ -42,9 +40,8 @@ const SignUp = () => {
     },[password]);
 
   //* form submit
-  const signupHandler = useCallback(
-    (e) => {
-      e.preventDefault();
+  const signupHandler = useCallback((e) => {
+      // e.preventDefault();
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
@@ -66,24 +63,18 @@ const SignUp = () => {
           }
         )
         .then((res) => {
-          console.log(res);
-          history.push('/')
+          console.log(res.data);
+          alert("회원가입에 성공하였습니다.")
+          window.location.replace("/");
         })
         .catch((err) => {
           console.log(err);
+          alert('중복된 이메일이 있습니다. 다시 입력해주세요.')
         });
-      
-      // console.log("email:", email,
-      //   "| nickname: ", nickname,
-      //   "| introduce :", introduce,
-      //   "| password :", password,
-      //   "| passwordCheck :", passwordCheck,
-      //   "| image", userImage
-      // );
 
-      alert("회원가입이 완료되었습니다.");
+      //중복된 이메일이 있습니다는 뜨는데, 회원가입 완료시에는 다른메시지가 뜨게하고, 홈으로이동
     },
-    [password, passwordCheck, email, nickname, introduce, userImage, imgCheck]
+    [password, passwordCheck, email, nickname, introduce, imgCheck]
   );
 
   return (
