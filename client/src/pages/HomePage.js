@@ -23,9 +23,7 @@ function HomePage({
     setScrollY(window.pageYOffset); // window 스크롤 값을 ScrollY에 저장
   };
   const navBar = document.getElementById('navBar')
-  /*맨 위로 이동*/
-  const navBar = document.getElementById('navBar')
-  
+    
   /*맨 위로 이동*/
   const handleClickForService = () => {
     window.scrollTo({
