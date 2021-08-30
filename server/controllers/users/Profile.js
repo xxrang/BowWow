@@ -2,13 +2,14 @@ module.exports = (app) => {
 
     const { user } = require('../../models')
     const router = require('express').Router();
+    const upload = require('../../module/multer');
     const crypto = require('crypto');
     const application = app;
 
     router.get('/', async (req, res) => {
 
         await user.findAll({ 
-            where : { email: req.body.email }})
+            where : { email: req.query.id }})
             .then((data) => {
                 if(data) {
                     //createdAt, updatedAt 삭제하고 보여주기
