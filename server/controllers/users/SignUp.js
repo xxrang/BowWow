@@ -1,6 +1,7 @@
 const { user } = require('../../models');
 const crypto = require('crypto');
 const upload = require('../../module/multer');
+const router = require('express').Router();
 
  module.exports =
 // = async (req, res) => {
