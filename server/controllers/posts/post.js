@@ -80,22 +80,29 @@ const application = app;
             mobile: mobile,
             image: image
         }, {where : {id : req.query.id}})
-        .then(() => {
-        
-        if(category === 'service'){
-            await category_content.update(
-            {category_id: 1} , {where : { posts_id: req.query.id }})
-        } else if(category === 'volunteer'){
-            await category_content.update(
-                {category_id: 2}, {where: { posts_id: req.query.id }})
-        }}).then((data) => {
-            if(data) {
-                res.status(200).send({message: 'success to update'})
-            } else {
+        // .then((err) => {async () => {
+        // if(category === 'service'){
+        //     await category_content.update(
+        //     {category_id: 1} , {where : { posts_id: req.query.id }})
+        // } else if(category === 'volunteer'){
+        //     await category_content.update(
+        //         {category_id: 2}, {where: { posts_id: req.query.id }})
+        // }}).then((data) => {
+            
+        .then( async (err) => {        
                 res.status(404).send({message: 'fail to update'})
-            }
-        })
-    }),
+                return 
+            })  
+            if(category === 'service'){
+                await category_content.update({
+                    category_id:1}, { where : { posts_id : req.query.id }})
+            } else if(category === 'volunteer'){
+                await category_content.update({
+                    category_id:2}, { where : { posts_id : req.query.id }})
+                }
+            res.status(200).send({message: 'success to update'})
+        }),
+
         router.delete('/', async (req, res) => {
         await post.destroy({where : {id : req.query.id}})
         .then((data) => {
