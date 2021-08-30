@@ -69,8 +69,15 @@ const application = app;
             }}),
 
         router.patch('/', upload.single('input-image'), async (req, res) => {
+            const {title, date, location, content, mobile} = req.body;
+            const image = req.file.location;
         await post.update({
-            content: req.body.content
+            title: title,
+            date: date,
+            location: location,
+            content: content,
+            mobile: mobile,
+            image: image
         }, {where : {id : req.query.id}})
         .then((data) => {
             if(data){
