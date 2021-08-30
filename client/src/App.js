@@ -5,7 +5,6 @@ import HomePage from "./pages/HomePage";
 import PostFormPage from "./pages/PostFormPage";
 import ProfilePage from "./pages/ProfilePage";
 import ProfileEditPage from "./pages/ProfileEditPage";
-import SearchPage from "./pages/SearchPage";
 import ViewPostPage from "./pages/ViewPostPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
@@ -127,12 +126,6 @@ function App() {
             />
           </Route>
           <Route path="/search">
-            <SearchPage
-              hasAccessToken={hasAccessToken}
-              logoutHandler={logoutHandler}
-              setPostsData={setPostsData}
-              setNavString={setNavString}
-            />
           </Route>
           <Route path="/posts">
             <ViewPostPage
