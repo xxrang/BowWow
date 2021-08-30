@@ -9,7 +9,7 @@ export const StyeldProfile = styled.div`
   padding: 0;
   height: 80vh;
   width: 375px;
-  margin-top: 60px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
 `;

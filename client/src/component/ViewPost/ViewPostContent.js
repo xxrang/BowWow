@@ -27,59 +27,66 @@ function ViewPostContent({
   const { title, mobile, updateAt, content, date, location, Image } = postInfo
   //console.log(postInfo);
 
-  //console.log('==='+hasAccessToken)
-
-  const deletePostHandler = () => {
-    axios.delete(`localhost:4000/posts:${postId}`)
+    const deletePostHandler = () => {
+      /* axios.delete(localhost:4000/${postId})
       .then((res) => {
-        alert('게시글이 삭제되었습니다.')
-        history.push('/')
+        console.log(삭제되었습니다.)
       })
       .catch(err => {
         console.log(err);
         alert('게시글 삭제에 실패했습니다.')
       })
-  };
-  
-  return (
-    <StyledViewPostContent>
-    <StyledViewPostProfile>
-      <div className="profile-container">
-        <div className="profile-img-wrapper">
-          <img src = {image} alt="user-photo" width="60px" height="60px" />
-        </div>
-        <div className="profile-info-wrapper">
-          <h2>{title}</h2>
-          <p>{nickname}<span>{date}</span></p>
-        </div>
-        { showButton ?
-        <ProfileInfoBtn >
-          <button onClick={() => { history.push('/postedit')}}>수정</button>
-          <button type="button" onClick={deletePostHandler}>삭제</button>
-        </ProfileInfoBtn>
-        : 
-        null}
-      </div>
-    </StyledViewPostProfile>
-    <StyledViewPostContentOne>
-      <div className="img-wrapper">
-        <img src={Image} alt="백구" />
-      </div>
-      <div className="post-info-all">
-        <div className="post-info-two">
-          <div>봉사 날짜: </div>
-          <div className="post-info-date">{updateAt}</div>
-          <div className="post-info-location">{location}</div>
-        </div>
-        <div className="post-info-mobile">{mobile}</div>
+    */
+    };
+    
+    return (
+      <StyledViewPostContent>
+        <StyledViewPostProfile>
+          <div className="profile-container">
+            <div className="profile-img-wrapper">
+              <img src={image} alt="user" width="60px" height="60px" />
+            </div>
+            <div className="profile-info-wrapper">
+              <h2>{title}</h2>
+              <p>
+                {nickname}
+                <span>{date}</span>
+              </p>
+            </div>
+            {showButton ? (
+              <ProfileInfoBtn>
+                <button
+                  onClick={() => {
+                    history.push("/postedit");
+                  }}
+                >
+                  수정
+                </button>
+                <button type="button" onClick={deletePostHandler}
+                >
+                  삭제
+                </button>
+              </ProfileInfoBtn>
+            ) : null}
+          </div>
+        </StyledViewPostProfile>
+        <StyledViewPostContentOne>
+          <div className="img-wrapper">
+            <img src={Image} alt="백구" />
+          </div>
+          <div className="post-info-all">
+            <div className="post-info-two">
+              <div>봉사 날짜: </div>
+              <div className="post-info-date">{updateAt}</div>
+              <div className="post-info-location">{location}</div>
+            </div>
+            <div className="post-info-mobile">{mobile}</div>
 
-        <div className="post-info-content">
-          {content}
-        </div>
-      </div>
-    </StyledViewPostContentOne>
-    </StyledViewPostContent>
-  );
-}
+            <div className="post-info-content">{content}</div>
+          </div>
+        </StyledViewPostContentOne>
+      </StyledViewPostContent>
+    );
+  }
 
 export default ViewPostContent

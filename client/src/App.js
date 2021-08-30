@@ -21,7 +21,7 @@ function App() {
   //let history = useHistory();
   /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
 
-  console.log("data------", postId);
+  // console.log("data------", postId);
   useEffect(() => {
     const { service, volunteer } = initialPosts; //데이터를 받아왔다 친다.
     // console.log("app1:", postsData);
@@ -124,8 +124,6 @@ function App() {
               setPostsData={setPostsData}
               setNavString={setNavString}
             />
-          </Route>
-          <Route path="/search">
           </Route>
           <Route path="/posts">
             <ViewPostPage

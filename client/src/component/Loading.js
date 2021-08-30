@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import styled from 'styled-components';
 import loadingImg from '../images/loadingPaw.gif'
 
@@ -8,8 +8,7 @@ export const StyledLoading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
-;
+`;
 
 function Loading() {
   return (
