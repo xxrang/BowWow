@@ -69,6 +69,7 @@ const application = app;
             }}),
 
         router.patch('/', upload.single('input-image'), async (req, res) => {
+            try {
             const {title, date, location, content, mobile, category} = req.body;
             const image = req.file.location;
 
@@ -88,20 +89,18 @@ const application = app;
         //     await category_content.update(
         //         {category_id: 2}, {where: { posts_id: req.query.id }})
         // }}).then((data) => {
-        .then( async () => {
-            if(category === 'service'){
-                await category_content.update({
+        if(category === 'service'){
+            await category_content.update({
                     category_id:1}, { where : { posts_id : req.query.id }})
             } else if(category === 'volunteer'){
                 await category_content.update({
                     category_id:2}, { where : { posts_id : req.query.id }})
                 }
             res.status(200).send({message: 'success to update'})
-        })    
-        .then((err) => {        
-                res.status(404).send({message: 'fail to update'})
-            })  
-        }),
+        } catch (err) {
+            res.status(404).send({message: 'fail to update'})
+        }
+    }),    
 
         router.delete('/', async (req, res) => {
         await post.destroy({where : {id : req.query.id}})
