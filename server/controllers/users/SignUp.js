@@ -1,9 +1,12 @@
 const { user } = require('../../models');
 const crypto = require('crypto');
+// const upload = require('../../module/multer');
 
 module.exports = async (req, res) => {
 
- const { email, nickname, password, introduce, userImage} = req.body;
+//  router.post('/', upload.array('image',4), async (req, res) => { })
+const { email, nickname, password, introduce} = req.body;
+const image = req.files.location;
 
  if(!email || !password ){
      return res.status(422).json({message: 'insufficient parameters supplied'});
@@ -23,7 +26,7 @@ module.exports = async (req, res) => {
                 nickname: nickname,
                 password: hashpassword,
                 introduce: introduce,
-                image: userImage,
+                image: image,
             }).then((user) => {
                if(user){
                    res.status(201).send({message: 'ok'})

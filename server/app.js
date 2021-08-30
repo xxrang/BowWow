@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 
 
 /** 유저 관련 API **/
-app.post('/users/signup', upload.array('image',4), controllers.signup); //회원가입
+app.post('/users/signup', upload.single('image'), controllers.signup); //회원가입
 app.post('/users/login', controllers.login); //로그인
 app.post('/users/logout', controllers.signout); //로그아웃
 app.get('/email_check', controllers.email_check); //이메일 중복확인
