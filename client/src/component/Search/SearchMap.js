@@ -18,12 +18,9 @@ function SearchMap() {
   }, []);
 
   return (
-    <StyledSearchMap>
-     <div
-      className="map"
-      ref={container}
-    ></div>
+    <StyledSearchMap className="map" ref={container}>
     </StyledSearchMap>
+
   )
 }
 
