@@ -32,25 +32,26 @@ const application = app;
         }),
             
         router.post('/', upload.single('input-image'), async (req, res) => {
-            const {title, date, location, content, mobile} = req.body;
+            const {title, date, content, mobile} = req.body;
             const image = req.file.location;
                 /* 클라이언트 axios request.body에 category(dogs || volunteer)로 담겨 들어오니까
                 category === 'dogs'로 들어오면 */ 
             if(!title || !mobile || !content){
                 res.status(422).send({message: 'insufficient parameters supplied'})
             } else if(req.body.category === 'service'){
-              await post.create({
+              const data = await post.create({
                     image: image,
                     title: title,
                     mobile: mobile,
                     content: content,
                     user_id: req.body.userId
                 })
-                .then( async () => {
-                    await category_content.create({
-                        categoy_id: 1
-                    }, {include : [{ model: category_content}]}).then((data) => res.status(201).send({message: 'post write success', data}))
-                })
+                console.log(data)
+                  await category_content.create({
+                        categoy_id: 1,
+                        posts_id: data.id
+                    }, {include : [{ model: post}]})
+                    .then((data) => res.status(201).send({message: 'post write success', data}))
                 
             } else if(req.body.category === 'volunteer'){
                 post.create({
