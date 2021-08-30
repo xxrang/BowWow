@@ -1,13 +1,9 @@
 module.exports = (app) => {
 
-    const { post } = require('../../models')
-    const { category_content } = require('../../models');
-    const { category } = require('../../models');
-    const upload = require('../../module/multer')
+    const { post, category_content } = require('../../models')
     const router = require('express').Router();
     const application = app;
 
-    
      router.get('/', async (req, res) => {
             category_content.findAll({
                 include : [{

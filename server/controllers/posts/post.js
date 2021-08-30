@@ -7,18 +7,6 @@ const application = app;
 
         router.get('/', async (req, res) => {
             const { id } = req.query
-            // await post.findOne({ where : { id: id },
-            //  include: [{
-            //      model: user,
-            //  }, {model: comment, include: [{ model: user}, 
-            //     where : {}] }]
-            // }).then((data) => {
-            //     if(data){
-            //         res.status(200).send({message: 'load success', service : {data}})
-            //     } else {
-            //         res.status(404).send({message: 'load fail'})
-            //     } //아이디, 닉네임, 유저 이미지
-            // })
             const data1 = await post.findOne({ where: { id: id } ,
                 include : [{model: user}, {model: category_content}]})
             const data2 = await comment.findAll({ where: { posts_id: id },
@@ -37,7 +25,7 @@ const application = app;
             
                 /* 클라이언트 axios request.body에 category(dogs || volunteer)로 담겨 들어오니까
                 category === 'dogs'로 들어오면 */ 
-            if(!title || !mobile || !content || !image){
+            if(!title || !mobile || !content){
                 res.status(422).send({message: 'insufficient parameters supplied'})
             } else if(req.body.category === 'service'){
               const data = await post.create({
@@ -47,12 +35,10 @@ const application = app;
                     content: content,
                     user_id: req.body.userId
                 })
-                console.log(data.id)
                const data2 = await category_content.create({
                         category_id: 1,
                         posts_id: data.id
                     })
-                    console.log(data2.id)
                 return res.status(201).send({message: 'post write success', data, data2})
 
             } else if(req.body.category === 'volunteer'){
@@ -83,21 +69,6 @@ const application = app;
             mobile: mobile,
             image: image
         }, {where : {id : req.query.id}})
-        // .then((err) => {async () => {
-        // if(category === 'service'){
-        //     await category_content.update(
-        //     {category_id: 1} , {where : { posts_id: req.query.id }})
-        // } else if(category === 'volunteer'){
-        //     await category_content.update(
-        //         {category_id: 2}, {where: { posts_id: req.query.id }})
-        // }}).then((data) => {
-        // if(category === 'service'){
-        //     await category_content.update({
-        //             category_id:1}, { where : { posts_id : req.query.id }})
-        //     } else if(category === 'volunteer'){
-        //         await category_content.update({
-        //             category_id:2}, { where : { posts_id : req.query.id }})
-        //         }
         .then((data) => {
             if(data){
                 res.status(200).send({message: 'success to update'})
@@ -108,17 +79,14 @@ const application = app;
     }),    
 
         router.delete('/', async (req, res) => {
-        try {
             await post.destroy({where : {id : req.query.id}})
             await comment.destroy({where: { posts_id: req.query.id}})
-            await category_content({where: { posts_id: req.query.id}})
+            await category_content.destroy({where: { posts_id: req.query.id}})
             .then(() => {
                 res.status(200).send({message: 'ok'})
             })
-        } catch (err) {
             res.status(404).send({message: 'invalid page'})
-        }
-    })
+        })   
 
     return router;
 }
