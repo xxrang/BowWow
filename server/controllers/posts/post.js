@@ -20,7 +20,7 @@ const application = app;
             //     } //아이디, 닉네임, 유저 이미지
             // })
             const data1 = await post.findOne({ where: { id: id } ,
-                include : [{ model: user }]})
+                include : [{model: user}, {model: category_content}]})
             const data2 = await comment.findAll({ where: { posts_id: id },
                 include: [{ model: user }]})
                 
@@ -48,7 +48,7 @@ const application = app;
                 })
 
                   await category_content.create({
-                        categoy_id: 1,
+                        category_id: 1,
                         posts_id: data.id
                     }).then((data) => res.status(201).send({message: 'post write success', data}))
                 
@@ -63,7 +63,7 @@ const application = app;
                     user_id: req.body.userId
              })
                 await category_content.create({
-                    categoy_id: 2,
+                    category_id: 2,
                     posts_id: data2.id
                 }).then((data) => res.status(201).send({message: 'post write success', data}))
             }}),
