@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const upload = require('./module/multer');
 //express의 req객체에 cookies 속성 부여
 const app = express();
-const port = 4000;
+const port = 80;
 require('dotenv').config();
 //env 환경변수 읽어냄
 
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 //req에 body 속성 추가해서 req.body 접근 가능하게 하고 중첩된 객체 표현 허용 x 객체 안에 객체 파싱할 수 있게 하려면 true로 변경
 
 app.use(cors({
-  origin: '*',
+  origin: true,
   credentials: true,
   methods: ['GET','POST','OPTIONS','DELETE','PATCH']
 }))

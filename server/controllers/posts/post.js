@@ -1,15 +1,19 @@
 const { post, user, comment} = require('../../models');
 
 module.exports = async (req, res) => {
-        
-            const data1 = await post.findOne({ where : { id: req.query.id },
+
+            const { id } = req.query
+            await post.findOne({ where : { id: id },
              include: [{
                  model: user,
-             }]}).then( async () => {
-                await comment.findOne({ where : { posts_id: req.query.id}})
-            }).then((data2) => {
-                if(data2){
-                    res.status(200).send({message: 'load success', service : {data1, data2}})
+             }]}).then(() => {
+                await comment.findOne({ where : { posts_id: id},
+                incdlue: [{ 
+                    model: user
+                }]})
+            }).then((data) => {
+                if(data){
+                    res.status(200).send({message: 'load success', service : {data}})
                 } else {
                     res.status(404).send({message: 'load fail'})
                 } //아이디, 닉네임, 유저 이미지
