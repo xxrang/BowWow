@@ -20,8 +20,12 @@ module.exports = async (req, res) => {
                 include : [{ model: user }]})
             const data2 = await comment.findOne({ where: { posts_id: id },
                 include: [{ model: user }]})
-            
-                res.status(200).send({message: 'ok', data : { posts: data1, comment: data2 }})
+                
+                if(data2.length === 1){
+                res.status(200).send({message: 'ok', data : { posts: data1, comment: [...[], data2 ]}})
+                } else {
+                    res.status(200).send({message: 'ok', data : { posts: data1, comment: data2 }})
+                }
             
 
                 

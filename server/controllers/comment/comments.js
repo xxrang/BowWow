@@ -7,7 +7,7 @@ module.exports = (app) => {
 
 
     router.get('/', async (req, res) => {
-        const data2 = await comment.findAll({
+        await comment.findAll({
             where: { posts_id : req.query.id },
             include: {
                 model: user
@@ -15,7 +15,7 @@ module.exports = (app) => {
         })
             .then((data) => {
                 if(data){
-                    res.status(200).send({message: 'ok', data : { comment : data2}})
+                    res.status(200).send({message: 'ok', data : { comment : data}})
                 } else {
                     res.status(404).send({message: 'fail'})
                 }
@@ -25,9 +25,9 @@ module.exports = (app) => {
     router.post('/', async (req, res) => {
         await comment.create({
             content: req.body.content,
-            user_id: req.body.user_id,
+            user_id: req.body.userId,
             //user_id 관계키 시퀄라이즈 수정하기
-            posts_id: req.body.posts_id
+            posts_id: req.body.postId
             }).then((data) => {
             res.status(201).send({message: 'ok', data})
         })
