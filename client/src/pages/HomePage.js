@@ -4,7 +4,8 @@ import NavBar from '../component/NavBar'
 import Service from '../component/Service'
 import Volunteer from '../component/Volunteer'
 import Footer from '../component/Footer'
-import Loding from '../component/Loading'
+//import Loding from '../component/Loading'
+import Search from '../component/Search'
 
 function HomePage({
   hasAccessToken,
@@ -21,13 +22,14 @@ function HomePage({
   const handleFollow = () => {
     setScrollY(window.pageYOffset); // window 스크롤 값을 ScrollY에 저장
   };
+  const navBar = document.getElementById('navBar')
   /*맨 위로 이동*/
   const handleClickForService = () => {
     window.scrollTo({
-      top: 810,
+      top: navBar.offsetTop,
       behavior: "smooth",
     });
-    setScrollY(810); // ScrollY 의 값을 초기화
+    setScrollY(navBar); // ScrollY 의 값을 초기화
   };
   /*로고 scroll 구현*/
   const handleTop = () => {
@@ -87,7 +89,7 @@ function HomePage({
           postId={postId}
         />
       ) : (
-        <Loding />
+        <Search />
       )}
       <Footer />
     </>

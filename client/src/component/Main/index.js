@@ -1,6 +1,7 @@
 import React from "react";
 import { StyledMain } from "./StyledMain";
 //import ScrollReveal from 'scrollreveal'
+import Fade from "react-reveal/Fade"
 
 const Home = ({ handleClickForService }) => {
   /*ScrollReveal({
@@ -17,6 +18,7 @@ const Home = ({ handleClickForService }) => {
 
   return (
     <StyledMain>
+      <Fade bottm>
       <div className="pawImgs">
         <img className="paw1" src="../images/paw.jpg" alt="paw" />
         <img className="paw2" src="../images/paw.jpg" alt="paw" />
@@ -40,6 +42,7 @@ const Home = ({ handleClickForService }) => {
           <span className="shape">Get Start!</span>
         </button>
       </div>
+      </Fade>
     </StyledMain>
   );
 };

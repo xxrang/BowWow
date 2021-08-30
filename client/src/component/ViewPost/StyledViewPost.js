@@ -4,7 +4,6 @@ export const StyledViewPost = styled.div`
   box-sizing: border-box;
   margin: 50px auto;
   display: grid;
-  height: 63vh;
   width: 70%;
   grid-template-columns: 2fr 1fr;
 `;
@@ -21,9 +20,6 @@ export const StyledViewPostContent = styled.div`
 
 export const StyledViewPostComment = styled.div`
 background-color: #f9f9f9;
-/*width : 300px;
-height: 500px;*/
-/*background: rgb(220, 248, 235);*/
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -38,6 +34,7 @@ margin-left : 14px;
   >.flex-box{
     display: flex;
     align-items: center;
+    margin-top : 12px;
     >.post-comment-text-submit{
       width : 50px;
       height : 60px;
@@ -61,7 +58,6 @@ margin-left : 14px;
       width : 200px;
       padding: 10px;
       height: 40px;
-      margin-top: 10px;
       border: none;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
       /*box-shadow: rgb(0, 0, 0, 0.35) 1px 1px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;*/
@@ -235,6 +231,9 @@ export const StyledViewPostContentOne = styled.div`
     > .post-info-content {
       font-size: 16px;
       text-align: start;
+      border-radius : 2px;
+      padding : 10px;
+      box-shadow : inset 1px 3px 3px 1px rgba(0, 0, 0, 0.1);
     }
   }
 `;

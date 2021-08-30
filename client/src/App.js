@@ -32,33 +32,25 @@ function App() {
       setNavString("volunteer");
       setPostsData(volunteer);
     }
-    // if (postsString !== "") {
-    //   const getPostsData = (postsString) => {
-    //     return axios
-    //       .get("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/service", 
-    //         {
-    //         params: { posts: postsString },
+    // if (postsString !== "" || postString === 'service') {
+    //   return axios.get("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/service", 
+    //       {
     //         withCredentials: true,
     //       })
     //       .then((res) => {
-    //         const data = res.data.data.postData;
+    //         const data = res.data.postData;
     //         setPostsData(data);
     //       });
     //   };
-    //   getPostsData(postsString);
-    // } else {
-    //   const getAllData = () => {
-    //     return axios
-    //       .get(""http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/volunteer",", 
+    // } else if(postString === 'volunteer') {
+    //     return axios.get("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/volunteer", 
     //       { withCredentials: true })
     //       .then((res) => {
-    //         const data = res.data.data.data;
+    //         const data = res.data.data;
     //         setPostsData(data);
     //       });
-    //   };
-    //   getAllData();
-    // }
-  }, [navString, postsData]);
+    //   }
+    }, [navString , postsData]);
 
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {

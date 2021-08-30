@@ -54,9 +54,16 @@ const SignUp = () => {
         userImage,
         imgCheck,
       };
+      const userdate = new FormData();
+      userdate.append("email",email)
+      userdate.append("nickname",nickname)
+      userdate.append("introduce",introduce)
+      userdate.append("password",password)
+      userdate.append("input-image",e.target[3].files[0])
+      userdate.append("imgCheck",imgCheck)
       axios
         .post(
-          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com//users/signup",
+          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",
           user,
           {
             headers: {

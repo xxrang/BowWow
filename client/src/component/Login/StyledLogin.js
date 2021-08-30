@@ -9,8 +9,10 @@ export const StyledLogin = styled.div`
     font-family: "Nanum Gothic Coding", monospace;
     line-height: 30px;
     letter-spacing: -1px;
+    text-align: center;
   }
   >form{
+    text-align: center;
     >.modal-btn, a>.modal-btn{
       border-radius: 2px;
       white-space: nowrap;

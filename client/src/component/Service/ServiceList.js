@@ -27,8 +27,9 @@ const ServiceList = ({ setPostId, slice }) => {
             }}
             key={el.id}
             className={"service-img-" + el.id}>
-            <ServiceListP>{el.id}</ServiceListP>
-            <ServiceListImg src={el.Image} alt="dog-img" />
+            <ServiceListImg 
+            className = 'service-img'
+            src={el.Image} alt="dog-img" />
             <ServiceListP>{el.content}</ServiceListP>
           </ServiceListWrapper>
         );

@@ -44,7 +44,14 @@ function ViewPostComment({
   }
   //id 와 일치하지 않는값만 필터링.
   const removeCommentHandler = (e,delComment) => {
-    /* axios.delete(`localhost:4000/comments`)
+    /* 
+    axios.delete("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments")
+      ,doby 부분 : {
+        comment : 
+      }
+      ,{
+        withCredentials: true
+      }
       .then((res) => {
         console.log(삭제되었습니다.)
       })
