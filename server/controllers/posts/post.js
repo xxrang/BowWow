@@ -18,9 +18,11 @@ module.exports = async (req, res) => {
             // })
             const data1 = await post.findOne({ where: { id: id } ,
                 include : [{ model: user }, {model: comment}]})
-            const data2 = await comment.findOne({ where: { posts_id: id },
+            const comment = await comment.findOne({ where: { posts_id: id },
                 include: [{ model: user }]})
             
-                res.status(200).send({message: 'ok', data: {posts: data1, data2}})
+                res.status(200).send({message: 'ok', data : { posts: data1, comment}})
             
+
+                
         }
