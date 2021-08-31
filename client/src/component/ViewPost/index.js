@@ -59,8 +59,9 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
           date: res.data.data.posts.date,
           image: res.data.data.posts.image,
           updatedAt: res.data.data.posts.updatedAt,
+          userId: res.data.data.posts.user.id
         });
-        // console.log(res.data.data.comment.reverse())
+        console.log("Elduyd", res.data.data.comment.reverse())
         setCommentInfo(res.data.data.comment.reverse());
 
         return axios
@@ -87,7 +88,7 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
           });
       })
       .catch((err) => {
-        console.log("포스트요청 에러", err);
+        console.log("포스트보기요청 에러", err);
       });
           
   }, [hasAccessToken, postId, userInfo.userId]);
@@ -100,6 +101,7 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
         userInfo={userInfo}
         postInfo={postInfo}
         showButton={showButton}
+        isLogedIn={isLogedIn}
       />
       <ViewPostComment
         inputRef={inputRef}

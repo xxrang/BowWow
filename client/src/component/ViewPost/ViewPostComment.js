@@ -3,7 +3,7 @@ import NeedLogin from '../NeedLogin'
 import useInput from '../../hooks/useInput'
 import { StyledViewPostComment } from './StyledViewPost';
 import axios from 'axios';
-import {calulateDate} from '../../hooks/calulateDate';
+import userPic from "../../images/bros_blank.jpeg";
 
 function ViewPostComment({
   inputRef,
@@ -123,15 +123,15 @@ function ViewPostComment({
                     <div className="post-commnet-flexbox">
                       <img
                         className="profile-img"
-                        // src={el.user.image}
+                        src={el.user.image}
                         alt="img"
                       />
                       <div>
                         <p className="post-comment-nickname">
-                          {/* {el.user.nickname} */}
+                          {el.user.nickname}
                         </p>
                         <p className="post-comment-date">
-                          {calulateDate(el.updatedAt)}
+                          {el.updatedAt}
                         </p>
                       </div>
                       <button

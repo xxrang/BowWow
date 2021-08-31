@@ -4,7 +4,7 @@ import {StyledLogin} from './StyledLogin'
 import { Link, useHistory} from 'react-router-dom'
 import axios from 'axios';
 //import { initialState } from '../dummyData'
-
+axios.defaults.baseURL = "http://localhost:3000";
 function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
   let history = useHistory()
   //? 로그인 완료시 모달 용   
@@ -24,11 +24,11 @@ function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
         console.log("첫콘솔", res.data.data.accesstoken);
         console.log("refresh", res.data.data.refreshtoken)
         // setHasAccessToken(res.data);
-        setIsLogedIn(res.data.data.userinfo.id);
+        // setIsLogedIn(res.data.data.userinfo.id);
         loginHandler(res.data.data.userinfo.id);
         document.cookie = "accesstoken" + "=" + res.data.data.accesstoken;
         document.cookie = "refreshtoken" + "=" + res.data.data.refreshtoken;
-        console.log(document.cookie.split(" "));
+        // console.log(document.cookie.split(" "));
         history.push("/");
       })
       .catch((err) => {

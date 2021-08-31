@@ -21,17 +21,20 @@ const ServiceList = ({ setPostId, slice }) => {
       {slice.map((el) => {
         return (
           <ServiceListWrapper
-            onClick={() => { postClickHandler(el.id)}}
-            key={el.id}
-            id = 'columns'
-            className={"service-img-" + el.id}>
+            onClick={() => {
+              postClickHandler(el.post.id);
+            }}
+            key={el.post.id}
+            id="columns"
+            className={"service-img-" + el.post.id}
+          >
             <Fade top>
-            <figure className = 'pic'>
-              <img src={el.post.image} alt="dog-img" />
-              <figcaption className = 'pic-caption bottom-to-top'>
-              <h1 className = 'title'>{el.post.title}</h1>
-              </figcaption>
-            </figure>
+              <figure className="pic">
+                <img src={el.post.image} alt="dog-img" />
+                <figcaption className="pic-caption bottom-to-top">
+                  <h1 className="title">{el.post.title}</h1>
+                </figcaption>
+              </figure>
             </Fade>
           </ServiceListWrapper>
         );

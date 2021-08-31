@@ -14,8 +14,9 @@ const NavBar = ({
   handleTop,
   logoutHandler,
   isLogedIn,
+  
 }) => {
-console.log("navlogin", isLogedIn)
+// console.log("navlogin", isLogedIn)
   let history = useHistory();
 
   const selectNavHandler = (string) => {
@@ -31,28 +32,11 @@ console.log("navlogin", isLogedIn)
 
   const accessPost = useCallback(() => {
     if (isLogedIn) {
-      axios
-        .get(
-          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth",
-          {
-            headers: {
-              accesstoken: document.cookie.split(" ")[1].split("=")[1],
-              refreshtoken: document.cookie.split(" ")[2].split("=")[1],
-            },
-          }
-        )
-        .then((res) => {
-          console.log("포스트 눌렀을때 요청 받는거,", res.data.data.userinfo);
-          window.location.replace("/postform");
-          if (res.data.message === "fail") {
-            window.location.replace("/");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      history.push('/postform')
+    } else {
+      alert("로그인이 필요한 서비스입니다.");
     }
-  },[isLogedIn])
+  },[history, isLogedIn])
 
 
   return (
@@ -76,12 +60,12 @@ console.log("navlogin", isLogedIn)
             );
           })}
           <button
-            onClick={accessPost}
+            onClick={ accessPost}
           >
             <li className="post">Post</li>
           </button>
         </div>
-        {isLogedIn === "" ? (
+        {!isLogedIn ? (
           <div className="rightNav">
             <Link to="/login">
               <button>로그인</button>
