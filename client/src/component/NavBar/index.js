@@ -18,10 +18,9 @@ const NavBar = ({
 
   const selectNavHandler = (string) => {
     
-    console.log("네브바 선택::::",string)
+    //console.log("네브바 선택::::",string)
     const postsString = string;
     setNavString(postsString);
-    
     history.push("/");
     // return axios;
     // .get(`https://localhost:4000`, {
@@ -77,19 +76,20 @@ const NavBar = ({
         {!isLogedIn ? (
           <div className="rightNav">
             <Link to="/login">
-              <button>Login</button>
+              <button>로그인</button>
             </Link>
             <Link to="/signup">
-              <button>Signup</button>
+              <button>회원가입</button>
             </Link>
           </div>
         ) : (
           <div className="rightNav">
-            <Link to="/">
-              <button onClick={logoutHandler}>로그아웃</button>
-            </Link>
             <Link to="/profile">
               <button onClick={()=> {history.push('/profile')}}>프로필</button>
+            </Link>
+
+            <Link to="/">
+              <button onClick={logoutHandler}>로그아웃</button>
             </Link>
           </div>
         )}

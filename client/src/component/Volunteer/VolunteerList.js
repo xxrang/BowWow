@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyledVolunteerList } from './StyledVoluteer'
+import {StyledVolunteerList,ServiceVolunteerWrapper } from './StyledVoluteer'
 import { useHistory } from 'react-router-dom'
 
 const VolunteerList = ({slice ,setPostId }) => {
@@ -12,17 +12,17 @@ const VolunteerList = ({slice ,setPostId }) => {
     return history.push(`/posts/${id}`);
   };
   return (
-    <StyledVolunteerList>
+    <StyledVolunteerList className = 'volunteer-list-container'>
       {slice.map((el) => {
         return (
-          <div
+          <ServiceVolunteerWrapper
             onClick= {() => {postClickHandler(el.id)}}
             key={el.id}
             className={"service-img-" + el.id}>
-            <p>{el.id}</p>
             <img src={el.Image} alt="dog-img" />
-            <p>{el.content}</p>
-          </div>
+            <h1>{el.title}</h1>
+            <p>{el.updatedAt}</p>
+          </ServiceVolunteerWrapper>
         );
       })}
     </StyledVolunteerList>
