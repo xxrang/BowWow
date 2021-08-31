@@ -4,7 +4,7 @@ require('dotenv').config();
 module.exports = {
 
     generateAccessToken: (data) => {
-        let token = sign(data, process.env.ACCESS_SECRET, { expiresIn: "5m" })
+        let token = sign(data, process.env.ACCESS_SECRET, { expiresIn: "5s" })
         return token;
     },
 
@@ -33,4 +33,11 @@ module.exports = {
         }
     },
 
+    checkAccess: (accessToken) => {
+        try {
+            return verify(accessToken, process.env.ACCESS_SECRET);
+        } catch (err) {
+            return null;
+        }
+    }
 }
