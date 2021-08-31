@@ -1,7 +1,7 @@
 const { user } = require('../../models');
 const crypto = require('crypto');
 const {generateAccessToken, sendAccessToken, sendRefreshToken, generateRefreshToken } = require('../tokenFunctions')
-
+require('dotenv').config();
 module.exports = async (req, res) => {
     
  const { email, password } = req.body;

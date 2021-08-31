@@ -11,11 +11,8 @@ module.exports = async (req, res) => {
         res.status(200).send({message: 'token ok'})
     } else { //액세스 토큰이 유효하지 않으면
         const userdata = checkRefresh(refresh); //리프레쉬 토큰 검증
-        // console.log("*********** userdata ************",userdata)
         if(!userdata){
-            console.log("****************")
-            res.status(401).send({ message : 'fail'})
-            //클라이언트쪽에서 메세지 캐치해서 메인 화면으로 이동 시키기
+            res.send({ message : 'fail'})
         } else {
             delete userdata.password
             const accessToken = generateAccessToken(userdata);
