@@ -9,6 +9,7 @@ function LoginPage({
   loginHandler,
   setPostsData,
   setNavString,
+  setIsLogedIn,
 }) {
   // curNav = { curNav };
   // selectNavHandler = { selectNavHandler };
@@ -19,7 +20,7 @@ function LoginPage({
       <Login
         loginHandler={loginHandler}
         setHasAccessToken={setHasAccessToken}
-        hasAccessToken={hasAccessToken}
+        setIsLogedIn={setIsLogedIn}
       />
       <Footer />
     </>

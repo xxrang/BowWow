@@ -14,7 +14,9 @@ import axios from 'axios';
 
 //루트만 짜기
 function App() {
-  const [hasAccessToken, setHasAccessToken] = useState(undefined);
+
+  const [isLogedIn, setIsLogedIn] = useState(false);
+const [hasAccessToken, setHasAccessToken] = useState(undefined);
   const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
@@ -82,6 +84,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <HomePage
+              isLogedIn={isLogedIn}
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
@@ -143,6 +146,7 @@ function App() {
               hasAccessToken={hasAccessToken}
               setPostsData={setPostsData}
               setNavString={setNavString}
+              setIsLogedIn={setIsLogedIn}
             />
           </Route>
           <Route path="/signup">

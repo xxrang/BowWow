@@ -2,31 +2,24 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const StyeldProfile = styled.div`
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding: 0;
+  margin: 60px auto;
+  margin-bottom: 50px;
   font-size: 16px;
-  padding: 0;
-  height: 80vh;
   width: 375px;
-  margin-top: 40px;
   display: flex;
   flex-direction: column;
 `;
 
 export const StyledProfileInfo = styled.div`
-  box-sizing: border-box;
-  /* border: 1px solid black; */
-  width: 375px;
+  width: 100%;
+  margin: 0 auto;
   height: 200px;
   border-bottom: 2px solid #000;
 
   > .profile-container {
     height: 100px;
-    padding: 20px 0;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: space-around;
 
     > .profile-img-wrapper {
       margin-left: 20px;
@@ -34,7 +27,7 @@ export const StyledProfileInfo = styled.div`
 
       > img {
         border-radius: 150px;
-        border: 1px solid #bcf1e4;
+        border: 1px solid #e8e8e8;
       }
     }
 
@@ -43,29 +36,37 @@ export const StyledProfileInfo = styled.div`
       height: 100px;
       display: flex;
       flex-direction: column;
+      justify-content: flex-end;
       align-items: flex-start;
-      justify-content: flex-start;
     }
     > .profile-info-wrapper > .profile-info-nickname-btn {
+      height: 100%;
+      width:100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      font-size: 24px;
+      font-size: 28px;
 
       > h3 {
-        margin-right: 10px;
+        margin-right: 15px;
+        align-self: flex-end;
       }
     }
 
-    > .profile-info-wrapper p {
-      margin-top: -18px;
+    > .profile-info-wrapper {
+      > .profile-info-email {
+        font-size:16px;
+        margin: 5px 0 12px 0 ;
+      }
     }
   }
 
   > .profile-info-content {
+    
+    margin: 25px auto 10px;
     display: block;
     width: 335px;
-    height: 40px;
+    height: 50px;
     text-align: center;
     padding: 0 20px 0 20px;
   }
@@ -85,31 +86,35 @@ export const ProfileBtnLink = styled(Link)`
   outline: none;
   cursor: pointer;
   text-decoration: none;
+  align-self: flex-start;
+  margin: 5px 15px 0 0;
 `;
 
 export const StyledProfileList = styled.div`
   > h2 {
-    margin: 15px 0 10px 0;
+    margin: 25px 0 0 0;
+    padding-left: 10px;
   }
   > .list-item-scroll {
+    margin-top: 20px;
     box-sizing: border-box;
-    padding: 15px 0;
     width: 100%;
     height: 420px;
     /* background: green; */
     overflow: hidden;
     overflow-y: auto;
 
-    /* &::-webkit-scrollbar {
-      width: 8px;
-      background: gray;
+    &::-webkit-scrollbar {
+      background-color: #fff;
+      width: 5px;
+      height: 8px;
+      padding-top: 1px;
     }
 
     &::-webkit-scrollbar-thumb {
-      height: 10%;
-      background: white;
-      border-radius: 6px;
-    } */
+      background-color: #48cfad;
+      border-radius: 150px;
+    }
   }
 
   /* > .list-item-scroll::-webkit-scrollbar {
@@ -130,24 +135,30 @@ export const StyledProfileListItem = styled.div`
   transition: all 0.4s ease-in-out;
   /* border: 2px solid black; */
   //box-shadow
-  /* box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12); */
+    0 100px 80px rgba(0, 0, 0, 0.12);
 
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
 
   > .list-item-wrapper {
     display: flex;
     margin: 8px 0 12px 0;
     justify-content: space-between;
+
+    > h4 {
+      margin: 0;
+      font-size: 18px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
   //태그
-  > .list-item-wrapper h3 {
-    margin: 0;
-  }
 
   > p {
+    font-size:14px;
     //3가지 말줄임 표
     overflow: hidden;
     text-overflow: ellipsis;

@@ -15,13 +15,14 @@ const Volunteer = ({ postsData, navString, setPostId, postId }) => {
 
   useEffect(() => {
     // setCount(count + 1);
-    // if (postsData) {
-      // setSlice(postsData.slice(0, maxDogList));
-    // } else {
-      // return null;
-    // }
-    if (initialPosts) {
-      setSlice(initialPosts.volunteer.slice(0, maxDogList));
+
+    /*if (postsData) {
+      setSlice(postsData.slice(0, maxDogList));
+    } else {
+      return null;
+    }*/
+    if (postsData) {
+      setSlice(postsData.slice(0, maxDogList));
     } else {
       return null;
     }

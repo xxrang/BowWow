@@ -1,11 +1,14 @@
 import React, { useState, useCallback } from "react";
-import {StyledSignUp, BtnLink,ErrorMessage } from './StyledSignUp'
+import { StyledSignUp} from './StyledSignUp'
+import { ErrorMessage } from '../ErrorMessage';
 import camera from '../../images/bros_blank.jpeg'
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
 
 const SignUp = () => {
+  
+  
   //* image preview
   const [userImage, setUserImage] = useState(camera);
   const [imgCheck, setImgCheck] = useState("false");
@@ -33,16 +36,31 @@ const SignUp = () => {
   const [password, onChangePassword] = useInput("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const [passwordValidatedCheck, setPasswordValidatedCheck] = useState(false);
+  
   const onChangePasswordCheck = useCallback(
     (e) => {
       setPasswordCheck(e.target.value);
       setPasswordError(e.target.value !== password);
     },[password]);
 
+  const validatedPassword = useCallback(
+    (e) => {
+      let regPassword = new RegExp(/^[a-zA-Z0-9]{8,12}$/);
+      let emailCheck = new RegExp(
+        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+      );
+      console.log(passwordValidatedCheck);
+      if (regPassword.test(e)) {
+        return setPasswordValidatedCheck(true);
+      }
+    },
+    [password]
+  );
   //* form submit
   const signupHandler = useCallback((e) => {
-      // e.preventDefault();
       if (password !== passwordCheck) {
+        // e.preventDefault();
         return setPasswordError(true);
       }
 
@@ -53,10 +71,7 @@ const SignUp = () => {
       userdate.append("password", password);
       userdate.append("input-image", e.target[3].files[0]);
       userdate.append("imgCheck", imgCheck);
-      axios
-        .post(
-          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",
-          userdate,
+      axios.post("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",userdate,
           {
             headers: { "Content-Type": "multipart/form-data" },
             withCredentials: true,
@@ -79,7 +94,11 @@ const SignUp = () => {
 
   return (
     <StyledSignUp>
-      <form onSubmit={(e) => { signupHandler(e) }}>
+      <form
+        onSubmit={(e) => {
+          signupHandler(e);
+        }}
+      >
         <label htmlFor="email">이메일</label>
         <input
           name="email"
@@ -88,6 +107,7 @@ const SignUp = () => {
           required
           onChange={onChangeEmail}
         />
+
         <label htmlFor="password">비밀번호</label>
         <input
           name="password"
@@ -126,10 +146,14 @@ const SignUp = () => {
           onChange={onChangeIntroduce}
         />
         <div className="button-wapper">
-          <button type="submit">
-            확인
+          <button type="submit">확인</button>
+          <button
+            onClick={() => {
+              window.history.back();
+            }}
+          >
+            취소
           </button>
-          <BtnLink to="/">취소</BtnLink>
         </div>
       </form>
     </StyledSignUp>

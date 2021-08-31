@@ -16,13 +16,14 @@ function HomePage({
   navString,
   setPostId,
   postId,
+  isLogedIn,
 }) {
   /*스크롤 상태저장*/
   const [ScrollY, setScrollY] = useState(0);
   const handleFollow = () => {
     setScrollY(window.pageYOffset); // window 스크롤 값을 ScrollY에 저장
   };
-  const navBar = document.getElementById('navBar')
+  const navBar = document.getElementById("navBar");
   /*맨 위로 이동*/
   const handleClickForService = () => {
     window.scrollTo({
@@ -30,7 +31,6 @@ function HomePage({
       behavior: "smooth",
     });
     setScrollY(navBar); // ScrollY 의 값을 초기화
-
   };
   /*로고 scroll 구현*/
   const handleTop = () => {
@@ -62,11 +62,11 @@ function HomePage({
     //console.log(curNav)
     console.log(idx);
   };
-//
+  //
   return (
     <>
-        <Main handleClickForService={handleClickForService} />
-      
+      <Main handleClickForService={handleClickForService} />
+
       <NavBar
         curNav={curNav}
         selectNavHandler={selectNavHandler}
@@ -75,6 +75,7 @@ function HomePage({
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setNavString={setNavString}
+        isLogedIn={isLogedIn}
       />
       {navString === "service" || navString === "" ? (
         <Service

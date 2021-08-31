@@ -1,13 +1,13 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useForm } from 'react-hook-form';
 import {StyledLogin} from './StyledLogin'
-import { Link, useHistory} from 'react-router-dom'
+import { Link} from 'react-router-dom'
 import axios from 'axios';
 //import { initialState } from '../dummyData'
 
-function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
-  let history = useHistory();
-  // const [signinSucc, setSigninSucc] = useState(true);
+function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
+  //? 로그인 완료시 모달 용   
+  // const [signinSuccess, setSigninSuccess] = useState(false);
   //formData
   const {
     register,
@@ -20,26 +20,21 @@ function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
         data,{withCredentials: true,}
       )
       .then((res) => {
-        console.log("첫콘솔", res.data);
-        console.log(res.data.data.accesstoken);
-        setHasAccessToken(res.data.data.accesstoken);
-        return res.data.data.accesstoken
+        console.log("첫콘솔", res.data.data.userinfo.id);
+        setHasAccessToken(res.data.data.userinfo.id);
+        
+        return res.data.data.userinfo.id;
       })
-      .then((accessToken) => {
-        loginHandler(accessToken);
-        window.localStorage.setItem("accessToken", accessToken);
-        history.push('/');
+      .then((userId) => {
+        loginHandler(userId);
+        setIsLogedIn(true);
+        window.location.replace("/");
       })
       .catch((err) => {
-        console.log(err);
+        console.log("login에러", err);
+        alert("로그인에 실패하였습니다.")
       });
 
-    // console.log("data:", data);
-    // const accessToken = 1;
-    // setHasAccessToken(accessToken);
-    // loginHandler(accessToken);
-    // window.localStorage.setItem("accessToken", accessToken);
-    // history.push("/");
   };
 
   return (
