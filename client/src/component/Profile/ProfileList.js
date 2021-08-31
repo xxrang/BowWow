@@ -2,18 +2,22 @@ import React from 'react'
 import { StyledProfileList, StyledProfileListItem } from "./StyledProfile";
 
 const ProfileList = ({ userPosts }) => {
+  console.log("프로파일 리스트:", userPosts)
+  // if (userPosts.length === 0) return null;
+
   return (
     <StyledProfileList>
       <h2>내 글 목록</h2>
       <div className="list-item-scroll">
-          {userPosts.map((post) => {
+        {userPosts &&
+          userPosts.map((post) => {
             return (
               <StyledProfileListItem key={post.id}>
                 <div className="list-item-wrapper">
                   <h3>{post.title}</h3>
-                  <div>{post.updateAt}</div>
+                  <div>{post.updatedAt}</div>
                 </div>
-                <p>{ post.content}</p>
+                <p>{post.content}</p>
               </StyledProfileListItem>
             );
           })}

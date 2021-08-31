@@ -2,26 +2,15 @@
 import React from 'react';
 import { StyledPostFormUploadImg } from './StyledPostForm';
 
-const UploadImg = ({ image, setImage, setImgCheck }) => {
+const UploadImg = ({ image, imageHandler }) => {
   // console.log(userImage);
-  const imageHandler = (e) => {
-    const reader = new FileReader();
 
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setImage(reader.result);
-      }
-    };
-    console.log(e.target.files);
-    reader.readAsDataURL(e.target.files[0]);
-    setImgCheck("true");
-  };
   return (
     <StyledPostFormUploadImg>
       {image ? (
         <div className="img-container">
           <label htmlFor="input-image">
-            <img src={image} alt="user-image" />
+            <img src={image} alt="post" />
           </label>
           <input
             type="file"

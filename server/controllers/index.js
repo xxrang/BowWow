@@ -8,7 +8,6 @@ module.exports = {
     nickname: require('./check/nickname'),
     service_list: require('./posts/Service_list'),
     volunteer_list: require('./posts/Volunteer_list'),
-    post_delete: require('./posts/Post_delete'),
     comments: require('./comment/comments'),
     search: require('./posts/Search'),
     posts: require('./posts/post')

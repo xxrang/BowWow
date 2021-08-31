@@ -4,7 +4,7 @@ import NavBar from '../component/NavBar'
 import Service from '../component/Service'
 import Volunteer from '../component/Volunteer'
 import Footer from '../component/Footer'
-import Loding from '../component/Loading'
+// import Loding from '../component/Loading'
 import Search from '../component/Search'
 
 function HomePage({
@@ -23,7 +23,6 @@ function HomePage({
     setScrollY(window.pageYOffset); // window 스크롤 값을 ScrollY에 저장
   };
   const navBar = document.getElementById('navBar')
-    
   /*맨 위로 이동*/
   const handleClickForService = () => {
     window.scrollTo({

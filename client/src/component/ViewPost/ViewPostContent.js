@@ -8,7 +8,7 @@ import {
   from './StyledViewPost'
 import { useHistory } from 'react-router-dom';
 //import userPhotos from "../../images/bros_blank.jpg";
-//import axios from 'axios';
+import axios from 'axios';
 
 function ViewPostContent({ 
   hasAccessToken, 
@@ -16,33 +16,25 @@ function ViewPostContent({
   postInfo, 
   userInfo,
   showButton }) {
+  
   let history = useHistory();
-  //console.log("2:::",showButton);
-  //const { id } = userId
-  const { userId, nickname, userImage } = userInfo;
+  const { nickname, userImage } = userInfo;
   
   const { title, mobile, content, date,updatedAt, location, Image } = postInfo
   //console.log(postInfo);
 
     const deletePostHandler = () => {
-      /* 
-      axios.delete("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts")
-      ,doby 부분 : {
-        postId : 
-      }
-      ,{
-        withCredentials: true
-      }
+      axios.delete(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`
+      ,{withCredentials: true})
       .then((res) => {
-        alert('삭제되었습니다.')
-        console.log(삭제되었습니다.)
-        history.push('/')
+        console.log("삭제", res.data)
+        alert("삭제되었습니다.");
+        window.location.replace("/");
       })
       .catch(err => {
         console.log(err);
         alert('게시글 삭제에 실패했습니다.')
       })
-    */
     };
     
     return (
