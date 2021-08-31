@@ -46,7 +46,7 @@ const SignUp = () => {
   const signupHandler = useCallback(
     (e) => {
       if (password !== passwordCheck) {
-        e.preventDefault();
+        //e.preventDefault();
         return setPasswordError(true);
       }
 
