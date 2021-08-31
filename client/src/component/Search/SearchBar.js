@@ -1,10 +1,10 @@
 import React from 'react'
 import {StyledSearchBar} from './StyledSearch'
 
-function SearchBar({inputRef , submitHandler}) {
+function SearchBar({inputRef , submitHandler,setKeyword}) {
   return (
     <StyledSearchBar className = 'search-bar'>
-      <form onSubmit = {(e)=>submitHandler(e)}>
+      <form onSubmit={submitHandler}>
         <input 
         ref = {inputRef}
         type = 'text' 

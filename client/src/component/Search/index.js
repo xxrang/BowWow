@@ -1,4 +1,4 @@
-import React , {useEffect,useRef} from "react";
+import React , {useState,useEffect,useRef} from "react";
 import { StyledSearch } from "./StyledSearch";
 import SearchBar from './SearchBar'
 import SearchMap from './SearchMap'
@@ -10,20 +10,27 @@ function Search() {
     inputRef.current.focus();
   })
 
+  const [Keyword, setKeyword] = useState("이태원맛집");
+//  const [Keyword123213, setKeyword] = useState([data]);
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(e.target[0].value)
     console.log('지도찾기')
+    setKeyword(e.target[0].value)
   }
+
+  
 
   return <StyledSearch className="search-page">
       <div className = 'searchWrapper'>
         <SearchBar 
+        setKeyword={setKeyword}
         inputRef={inputRef}
         submitHandler = {submitHandler}
         />
         <SearchMapList/>
       </div>
-      <SearchMap/>
+      <SearchMap Keyword={Keyword}/>
 
   </StyledSearch>;
 }
