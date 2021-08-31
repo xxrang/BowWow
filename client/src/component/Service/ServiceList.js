@@ -9,7 +9,7 @@ import Fade from "react-reveal/Fade"
 
 const ServiceList = ({ setPostId, slice }) => {
   let history = useHistory();
-  //console.log(serviceImg)
+  // console.log(slice)
 
   const postClickHandler = (id) => {
     const dataId = id;
@@ -25,7 +25,7 @@ const ServiceList = ({ setPostId, slice }) => {
             key={el.id}
             id = 'columns'
             className={"service-img-" + el.id}>
-              <Fade top>
+            <Fade top>
             <figure className = 'pic'>
               <img src={el.image} alt="dog-img" />
               <figcaption className = 'pic-caption bottom-to-top'>

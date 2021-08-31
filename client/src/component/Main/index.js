@@ -7,11 +7,6 @@ const Home = ({ handleClickForService }) => {
 
   return (
     <StyledMain>
-      {/*<BackgroundCircle>
-        <div></div>
-        <div></div>
-        <div></div>
-      </BackgroundCircle>*/}
       <Fade left>
       <div className="logo-box stagger-wrapper">
         <img className="logo" src="../images/logo.png" alt="logoImg/" />
@@ -24,9 +19,12 @@ const Home = ({ handleClickForService }) => {
             </span>{" "}
             와 <br/>함께하세요.{" "}
           </h1>
+          
+        <Fade bottom>
         <button onClick={handleClickForService}>
           <span className = 'shape stagger-item'>Get Start!</span>
         </button>
+        </Fade>
         </div>
       </div>
       </Fade>

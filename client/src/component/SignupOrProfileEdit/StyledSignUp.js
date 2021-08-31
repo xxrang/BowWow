@@ -2,23 +2,18 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const StyledSignUp = styled.div`
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   height: 100vh;
   width: 375px;
-  margin: 20px auto;
-  /* border: 1px solid gray; */
+  margin : 60px auto;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   font-family: "Nanum Gothic Coding", monospace;
-  /* justify-content: center; */
-  /* align-items: center; */
   > form {
-    height: 900px;
+    height: 800px;
     display: flex;
     flex-direction: column;
-    padding-top: 40px;
   }
 
   > form .image-container > input {

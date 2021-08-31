@@ -7,13 +7,13 @@ display: flex;
 justify-content: center;
 align-items: center;
 width : 100%;
-height : 100vh;
+height : 95vh;
 >.searchWrapper{
   width :375px;
   height : 500px;
   background: ${searchMainColor};
   border-radius : ${borderRadius};
-  margin-right : 10px;
+  margin : -30px 10px 0 0;
   text-align: center;
 }
 `;

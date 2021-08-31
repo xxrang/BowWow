@@ -15,7 +15,7 @@ function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
     formState: { errors },
   } = useForm();
   const onSubmit =  (data) => {
-    /*axios.post(
+    axios.post(
         "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/login",
         data,{withCredentials: true,}
       )
@@ -32,14 +32,14 @@ function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
       })
       .catch((err) => {
         console.log(err);
-      });*/
+      });
 
-     console.log("data:", data);
-     const accessToken = 1;
-     setHasAccessToken(accessToken);
-     loginHandler(accessToken);
-     window.localStorage.setItem("accessToken", accessToken);
-     history.push("/");
+    // console.log("data:", data);
+    // const accessToken = 1;
+    // setHasAccessToken(accessToken);
+    // loginHandler(accessToken);
+    // window.localStorage.setItem("accessToken", accessToken);
+    // history.push("/");
   };
 
   return (

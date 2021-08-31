@@ -4,6 +4,7 @@ import ViewPostContent from "./ViewPostContent";
 import ViewPostComment from "./ViewPostComment";
 import { dummyPost } from "../dummyData";
 import axios from "axios";
+axios.defaults.withCredentials=true;
 
 function ViewPost({
   hasAccessToken,
@@ -32,10 +33,9 @@ function ViewPost({
   const [isLogedIn , setIsLogedIn] = useState(false);
   const [showButton, setShowButton] = useState(false);
 
-  // console.log("커멘트인포!!!!!!", commentInfo);
-  // console.log("포스트 인포:::-----", postInfo);
+  console.log("커멘트인포!!!!!!", commentInfo);
+  console.log("포스트 인포:::-----", postInfo);
   
-
   useEffect(() => {
     inputRef.current.focus();
 
@@ -51,13 +51,12 @@ function ViewPost({
       setShowButton(false);
     }
     console.log(postId);
-    axios
-      .get(
+    axios.get(
         `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("--------res.data-------", res.data);
+        // console.log("--------res.data-------", res.data);
         setUserInfo({
           userId: res.data.data.posts.user.id,
           nickname: res.data.data.posts.user.nickname,
@@ -73,15 +72,18 @@ function ViewPost({
           image: res.data.data.posts.image,
           updatedAt: res.data.data.posts.updatedAt,
         });
+        // console.log(res.data.data.comment.reverse())
         setCommentInfo(res.data.data.comment.reverse());
-        
+        //return;
+      })
+      .then(()=>{
+        axios
+        .get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`)
       })
       .catch((err) => {
         console.log(err);
       });
   }, [hasAccessToken, postId]);
-
-
 
   return (
     <StyledViewPost>

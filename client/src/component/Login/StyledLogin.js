@@ -10,6 +10,7 @@ export const StyledLogin = styled.div`
     line-height: 30px;
     letter-spacing: -1px;
     text-align: center;
+    margin-bottom: 20px;
   }
   >form{
     text-align: center;
@@ -47,7 +48,7 @@ export const StyledLogin = styled.div`
     >input{
       width: 300px;
       border: 1px solid #d9d9d9;
-      margin: 12px 0;
+      margin: 20px 0 0;
     }
     >input,.oath-btn{
     height: 40px;

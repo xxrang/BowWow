@@ -15,7 +15,7 @@ function ViewPostComment({
   hasAccessToken,
 }) {
   // const comments = commentInfo.pop();
-  // console.log("1번코멘트:", commentInfo);
+  console.log("1번코멘트:", commentInfo);
   // console.log("user--------", commentInfo.user.image);
   //초기 코멘트
   const [comment, onChangeComment, setComment] = useInput("");
@@ -128,12 +128,12 @@ function ViewPostComment({
                     <div className="post-commnet-flexbox">
                       <img
                         className="profile-img"
-                        src={el.user.image}
+                        // src={el.user.image}
                         alt="img"
                       />
                       <div>
                         <p className="post-comment-nickname">
-                          {el.user.nickname}
+                          {/* {el.user.nickname} */}
                         </p>
                         <p className="post-comment-date">{el.updatedAt}</p>
                       </div>
