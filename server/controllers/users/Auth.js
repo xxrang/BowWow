@@ -3,12 +3,13 @@ const { isAuthorized, checkRefresh } = require('../../controllers/tokenFunctions
 const { user } = require('../../models');
 
 module.exports = async (req, res) => {
-    // console.log("********req********",req.headers['cookie'].split('accessToken=')[1].split(';')[0])
+    console.log("********req********",req.headers['authorized']) // access
+    console.log("********req********",req.headers['cookie']) // refresh
     // console.log("********accessTokenData********",accessTokenData)
-    const accessToken = req.headers['cookie'].split('accessToken=')[1].split(';')[0]
-    if(accessToken){
+    // const accessToken = req.headers['cookie'].split('accessToken=')[1].split(';')[0]
+    // if(accessToken){
         
-    }
+    // }
     const accessTokenData = isAuthorized(req);
     
     if(!accessTokenData){

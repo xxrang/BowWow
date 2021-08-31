@@ -1,5 +1,4 @@
-const {sign, verify, TokenExpiredError} = require('jsonwebtoken');
-const {user} = require('../../models');
+const {sign, verify} = require('jsonwebtoken');
 require('dotenv').config();
 
 module.exports = {
@@ -15,36 +14,15 @@ module.exports = {
     },
 
     sendAccessToken: (res, accessToken) => {
-        
         res.cookie('accessToken', accessToken, {
             sameSite:'none',httpOnly:true,secure:true,path:'/'
         })
     },
 
-    sendRefreshToken : async (res, refreshToken) => {
+    sendRefreshToken : (res, refreshToken) => {
        res.cookie('refreshToken', refreshToken, {
            sameSite:'none', httpOnly:true, secure:true, path: '/'
        })
-    },
-
-    isAuthorized: (req) => {
-        const authorization = req.headers['cookie']
-        console.log("********** auth ***********",authorization)
-        if(!authorization){
-            return null
-        }
-        const token = authorization.split('accessToken=')[1].split(';')[0]
-            try {
-            const data = verify(token, process.env.ACCESS_SECRET);
-            console.log("********** data ******",data)
-            return data
-            } catch {
-                const token = authorization.split('refreshToken=')[1].split(';')[0]
-                if(checkRefresh(token)){
-                    generateAccessToken()
-                }
-            }
-            
     },
 
     checkRefresh: (refreshToken) => {
