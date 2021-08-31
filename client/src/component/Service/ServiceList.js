@@ -23,13 +23,12 @@ const ServiceList = ({ setPostId, slice }) => {
           <ServiceListWrapper
             onClick=
             {() => {
-              postClickHandler(el.post.id);
+              postClickHandler(el.id);
             }}
-            key={el.post.id}
-            className={"service-img-" + el.post.id}>
-            <ServiceListP>{el.post.id}</ServiceListP>
-            <ServiceListImg src={el.post.image} alt="dog-img" />
-            <ServiceListP>{el.post.title}</ServiceListP>
+            key={el.id}
+            className={"service-img-" + el.id}>
+            <ServiceListImg src={el.image} alt="dog-img" />
+            <ServiceListP>{el.title}</ServiceListP>
           </ServiceListWrapper>
         );
       })}

@@ -1,48 +1,36 @@
 import React from "react";
 import { StyledMain } from "./StyledMain";
-//import ScrollReveal from 'scrollreveal'
 import Fade from "react-reveal/Fade"
+import MainSlider from "./MainSlider";
 
 const Home = ({ handleClickForService }) => {
-  /*ScrollReveal({
-    reset: true,
-    delay: 300,
-    duration: 400,
-  });
-  
-  ScrollReveal().reveal('.paw1', { delay: 300 });
-  ScrollReveal().reveal('.paw2', { delay: 600 });
-  ScrollReveal().reveal('.paw3', { delay: 900 }); 
-  ScrollReveal().reveal('.rightBox', { delay: 1200 }); 
-  */
 
   return (
     <StyledMain>
-      <Fade bottm>
-      <div className="pawImgs">
-        <img className="paw1" src="../images/paw.jpg" alt="paw" />
-        <img className="paw2" src="../images/paw.jpg" alt="paw" />
-        <img className="paw3" src="../images/paw.jpg" alt="paw" />
-      </div>
-      <div className="rightBox">
+      {/*<BackgroundCircle>
+        <div></div>
+        <div></div>
+        <div></div>
+      </BackgroundCircle>*/}
+      <Fade left>
+      <div className="logo-box stagger-wrapper">
         <img className="logo" src="../images/logo.png" alt="logoImg/" />
-        <div className="homeText">
-          <p>유기견 보호 커뮤니티,</p>
-          <p>
-            <span
-              style={{ color: "#48cfad", fontSize: "32px", fontWeight: "800" }}
-            >
+        <div className="home-text">
+          <h1 className = 'stagger-item'>유기견 보호 커뮤니티,</h1>
+          <h1 className = 'stagger-item'>
+            <span 
+            style={{ color: "#48cfad", fontSize: "52px", fontWeight: "800" }}>
               BowWow
             </span>{" "}
-            와 함께하세요.{" "}
-          </p>
-        </div>
-
+            와 <br/>함께하세요.{" "}
+          </h1>
         <button onClick={handleClickForService}>
-          <span className="shape">Get Start!</span>
+          <span className = 'shape stagger-item'>Get Start!</span>
         </button>
+        </div>
       </div>
       </Fade>
+      <MainSlider/>
     </StyledMain>
   );
 };

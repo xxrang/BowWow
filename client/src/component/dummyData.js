@@ -6,10 +6,10 @@ export const initialPosts = {
         id: 1,
         email: "",
         nickname: "",
-        image: "",
+        image: "./images/dogSample.jpeg",
       },
-      Image: "./images/dogSample.jpeg", //db따로, 배열형태, 여러개일경우.
-      title: "",
+      image: "./images/dogSample.jpeg", //db따로, 배열형태, 여러개일경우.
+      title: "서비스 강아지",
       date: "",
       location: "",
       mobile: "",
@@ -102,16 +102,17 @@ export const initialPosts = {
       User: {
         id: 1,
         email: "",
-        nickname: "",
-        image: "",
+        nickname: "쑥이",
+        image: "./images/dogSample.jpeg",
       },
       Image: "./images/dogSample.jpeg", //db따로, 배열형태, 여러개일경우.
-      title: "",
+      title: "봉사활동 다녀왔어요~",
       date: "",
       location: "",
       mobile: "",
       content: "준이의 봉사활동 1",
       createdAt: "",
+      updatedAt: '2021.09.01',
       category: "",
       Comment: [
         {

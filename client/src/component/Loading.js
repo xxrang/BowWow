@@ -8,6 +8,7 @@ export const StyledLoading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  animation-iteration-count: infinite;
 `;
 
 function Loading() {

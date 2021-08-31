@@ -24,9 +24,6 @@ function HomePage({
   };
   const navBar = document.getElementById('navBar')
   /*맨 위로 이동*/
-  const navBar = document.getElementById('navBar')
-  
-  /*맨 위로 이동*/
   const handleClickForService = () => {
     window.scrollTo({
       top: navBar.offsetTop,
