@@ -1,27 +1,28 @@
 import styled from 'styled-components';
+const mainColor = '#3dc2a1';
+
+
 
 export const StyledPostForm = styled.div`
-  box-sizing: border-box;
-  padding: 0;
   /* border: 1px solid black; */
-  margin: 50px auto;
-  padding: 0 300px;
+  margin: 60px auto ;
+  margin-bottom: 50px;
 
   > form {
     display: flex;
-    display: nowrap;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 
     > .form-data {
-      width: 50%;
-      padding: 5px;
+      margin: 0 15px;
+      width: 375px;
+      /* padding: 0 15px; */
       height: 680px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      padding-left: 15px;
       height: 100%;
 
       > label {
@@ -30,16 +31,18 @@ export const StyledPostForm = styled.div`
         font-weight: 700;
         font-size: 18px;
         line-height: 24px;
+
+        > span {
+          font-size: 12px;
+          color: ${mainColor};
+        }
       }
 
-      > #title {
-        font-size: 20px;
-      }
       > input {
         position: static;
-        padding-left: 14px;
+        padding: 0 0 2px 10px;
         width: 360px;
-        height: 28px;
+        height: 32px;
         background: #fff;
         border: 1px solid #d9d9d9;
         border-radius: 4px;
@@ -47,9 +50,18 @@ export const StyledPostForm = styled.div`
         flex-grow: 0;
         font-size: 16px;
       }
+      > #mobile {
+        font-family: "Lato", sans-serif;
 
+
+        &::placeholder {
+          line-height: 1.8rem;
+          font-size: 12px;
+        }
+      }
       > #date-picker {
-        width: 200px;
+        font-family: "Lato", sans-serif;
+        width: 360px;
         font-size: 16px;
       }
 
@@ -61,9 +73,12 @@ export const StyledPostForm = styled.div`
         width: 360px;
 
         > button {
+          &:first-child {
+            margin-right: 15px;
+          }
+
           border-radius: 10px;
           white-space: nowrap;
-          margin-right: 10px;
           font-size: 19px;
           line-height: 1.3rem;
           padding: 9px 22px;
@@ -84,6 +99,18 @@ export const StyledPostForm = styled.div`
             color: #48cfad;
             border: 2px solid #48cfad;
           }
+
+          &:last-child {
+            border: 2px solid #48cfad;
+            background: #fff;
+            color: #48cfad;
+
+            &:hover {
+              border: 2px solid #48cfad;
+              background: #48cfad;
+              color: #fff;
+            }
+          }
         }
       }
 
@@ -102,11 +129,14 @@ export const StyledPostForm = styled.div`
 //UploadImg
 export const StyledPostFormUploadImg = styled.div`
   /* border: 1px solid red; */
-  width: 50%;
-  height: 55vh;
+  width: 375px;
+  height: 530px;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* padding: 0 15px; */
+  margin-bottom:15px;
+  margin: 0 15px;
 
   > .img-container {
     /* border: 1px solid gray; */
@@ -116,6 +146,7 @@ export const StyledPostFormUploadImg = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 10px;
 
     > label > img {
       width: 100%;
@@ -167,7 +198,7 @@ export const TextArea = styled.textarea`
   outline: none;
   width: 360px;
   height: 150px;
-  padding: 10px 0 0 14px;
+  padding: 10px 0 0 10px;
   font-size: 16px;
   resize: none;
   box-sizing: border-box;

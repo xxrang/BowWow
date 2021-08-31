@@ -1,10 +1,13 @@
 import React from 'react'
 import { StyledProfileList, StyledProfileListItem } from "./StyledProfile";
+import { calulateDate } from "../../hooks/calulateDate";
 
 const ProfileList = ({ userPosts }) => {
+
   console.log("프로파일 리스트:", userPosts)
   // if (userPosts.length === 0) return null;
 
+  
   return (
     <StyledProfileList>
       <h2>내 글 목록</h2>
@@ -14,8 +17,8 @@ const ProfileList = ({ userPosts }) => {
             return (
               <StyledProfileListItem key={post.id}>
                 <div className="list-item-wrapper">
-                  <h3>{post.title}</h3>
-                  <div>{post.updatedAt}</div>
+                  <h4>{post.title}</h4>
+                  <div>{calulateDate(post.updatedAt)}</div>
                 </div>
                 <p>{post.content}</p>
               </StyledProfileListItem>

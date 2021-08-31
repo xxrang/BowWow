@@ -57,7 +57,10 @@ const PostEdit = ({ hasAccessToken, postId, setPostId }) => {
           console.log(res.data);
           alert("게시글이 수정되었습니다.");
           window.location.replace("/");
-        });
+        }).catch((err) => {
+          console.log(err);
+          alert("게시글 수정이 실패했습니다. 새로고침 후 다시 시도 해 주세요")
+        })
     },
     [title, category, date, location, imgCheck, content, mobile, postId]
   );
@@ -116,7 +119,9 @@ const PostEdit = ({ hasAccessToken, postId, setPostId }) => {
       >
         <UploadImg image={image} imageHandler={imageHandler} />
         <div className="form-data">
-          <label htmlFor="title">제목</label>
+          <label htmlFor="title">
+            제목<span> (필수)</span>
+          </label>
           <input
             type="text"
             value={title}
@@ -126,7 +131,9 @@ const PostEdit = ({ hasAccessToken, postId, setPostId }) => {
             name="title"
           />
 
-          <label htmlFor="category">카테고리</label>
+          <label htmlFor="category">
+            카테고리<span> (필수)</span>
+          </label>
           <select
             required
             name="categoty"
@@ -139,7 +146,9 @@ const PostEdit = ({ hasAccessToken, postId, setPostId }) => {
             <option value="volunteer">봉사 일정 공유</option>
           </select>
 
-          <label htmlFor="date">날짜</label>
+          <label htmlFor="date">
+            날짜<span> (카테고리가 봉사일 경우 필수)</span>
+          </label>
           <input
             id="date-picker"
             name="date"
@@ -148,7 +157,9 @@ const PostEdit = ({ hasAccessToken, postId, setPostId }) => {
             type="date"
           />
 
-          <label htmlFor="location">보호소 위치</label>
+          <label htmlFor="location">
+            보호소 위치<span> (카테고리가 봉사일 경우 필수)</span>
+          </label>
           <input
             name="location"
             value={location}
@@ -156,12 +167,16 @@ const PostEdit = ({ hasAccessToken, postId, setPostId }) => {
             type="text"
           />
 
-          <label htmlFor="mobile">연락처</label>
+          <label htmlFor="mobile">
+            연락처<span> (필수)</span>
+          </label>
           <input
             name="mobile"
             value={mobile}
             onChange={onChangeMobile}
             type="text"
+            placeholder="Ex) 010-0000-0000"
+            id="mobile"
           />
 
           <label htmlFor="content">컨텐츠</label>

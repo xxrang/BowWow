@@ -45,11 +45,8 @@ function ViewPost({
     // console.log(showButton);
     // console.log('userid :', dummyPost.User.id)
     // console.log('hasAccessToken :', hasAccessToken)
-    if (Number(hasAccessToken) === dummyPost.User.id) {
-      setShowButton(true);
-    } else {
-      setShowButton(false);
-    }
+
+    
     console.log(postId);
     axios
       .get(
@@ -58,6 +55,15 @@ function ViewPost({
       )
       .then((res) => {
         console.log("--------res.data-------", res.data);
+        //! hasAccessToken에서 유저아이디를 뽑아내고, 포스트의 유저아이디가 같을 경우에 버튼을 보여준다.
+        //! 이걸 확인하면 버튼이 보여지면 포스트에딧이나 삭제에도 문제가 없다.
+        //! 다른 사람은 버튼을 보지못하니까
+        //! 이건 언제 하느냐....? get요청하고, 거기서 유저정보 받아오면
+        if (Number(hasAccessToken) === res.data.data.posts.user.id) {
+          setShowButton(true);
+        } else {
+          setShowButton(false);
+        }
         setUserInfo({
           userId: res.data.data.posts.user.id,
           nickname: res.data.data.posts.user.nickname,
@@ -74,7 +80,6 @@ function ViewPost({
           updatedAt: res.data.data.posts.updatedAt,
         });
         setCommentInfo(res.data.data.comment.reverse());
-        
       })
       .catch((err) => {
         console.log(err);

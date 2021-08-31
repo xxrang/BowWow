@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyledService } from "./StyledService";
 import ServiceList from "./ServiceList";
-import {initialPosts} from '../dummyData'
 // import axios from "axios";
 
 const Service = ({ navString, postsData, setPostId, postId }) => {
@@ -9,9 +8,10 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
   // console.log("render:", count);
   const [maxDogList, setMaxDogList] = useState(9);
   const [slice, setSlice] = useState([]);
-  // console.log("slice-------", slice);
+  console.log("slice-------", slice);
   //const [ serviceImg, setServiceImg ] = useState(initialPosts.MainPosts);
 // console.log(postsData, postId, navString)
+  
   const moreButtonHandler = () => {
     setMaxDogList(maxDogList + 9);
     //console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`);
@@ -26,8 +26,8 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
     } else {
       return null;
     }*/
-    if (initialPosts) {
-      setSlice(initialPosts.service.slice(0, maxDogList));
+    if (postsData) {
+      setSlice(postsData.slice(0, maxDogList));
     } else {
       return null;
     }

@@ -8,6 +8,8 @@ import { useHistory } from "react-router-dom";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 const PostForm = ({ hasAccessToken }) => {
   const history = useHistory();
 
@@ -60,8 +62,7 @@ const PostForm = ({ hasAccessToken }) => {
         `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts`,
         userdata,
         {
-          headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true,
+          headers: { "Content-Type": "multipart/form-data" }
         }
       )
       .then((res) => {
@@ -73,8 +74,6 @@ const PostForm = ({ hasAccessToken }) => {
         console.log(err);
         alert("게시글 작성에 실패했습니다. 다시 시도해주세요.");
       });
-
-    // console.log("userdata", userdata);
   },
     [category, content, date, hasAccessToken, imgCheck, location, mobile, title]
   );
@@ -93,7 +92,9 @@ const cancelHandler = () => {
       >
         <UploadImg image={image} imageHandler={imageHandler} />
         <div className="form-data">
-          <label htmlFor="title">제목</label>
+          <label htmlFor="title">
+            제목<span> (필수)</span>
+          </label>
           <input
             type="text"
             value={title}
@@ -103,7 +104,9 @@ const cancelHandler = () => {
             name="title"
           />
 
-          <label htmlFor="category">카테고리</label>
+          <label htmlFor="category">
+            카테고리<span> (필수)</span>
+          </label>
           <select
             required
             name="categoty"
@@ -116,16 +119,20 @@ const cancelHandler = () => {
             <option value="volunteer">봉사 일정 공유</option>
           </select>
 
-          <label htmlFor="date">날짜</label>
+          <label htmlFor="date">
+            날짜<span> (카테고리가 봉사일 경우 필수)</span>
+          </label>
           <input
             id="date-picker"
             name="date"
             value={date}
             onChange={onChangeDate}
-            type="date"
+            type="datetime-local"
           />
 
-          <label htmlFor="location">보호소 위치</label>
+          <label htmlFor="location">
+            위치 <span> (카테고리가 봉사일 경우 필수)</span>
+          </label>
           <input
             name="location"
             value={location}
@@ -133,12 +140,16 @@ const cancelHandler = () => {
             type="text"
           />
 
-          <label htmlFor="mobile">연락처</label>
+          <label htmlFor="mobile">
+            연락처<span> (필수)</span>
+          </label>
           <input
             name="mobile"
             value={mobile}
             onChange={onChangeMobile}
             type="text"
+            placeholder="Ex) 010-0000-0000"
+            id="mobile"
           />
 
           <label htmlFor="content">컨텐츠</label>

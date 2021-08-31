@@ -9,6 +9,7 @@ import {
 import { useHistory } from 'react-router-dom';
 //import userPhotos from "../../images/bros_blank.jpg";
 import axios from 'axios';
+// import { calulateDate } from '../../hooks/calulateDate';
 
 function ViewPostContent({ 
   hasAccessToken, 
@@ -16,13 +17,16 @@ function ViewPostContent({
   postInfo, 
   userInfo,
   showButton }) {
-  
   let history = useHistory();
+  if (!postInfo && !userInfo && !postInfo) {
+    return null;
+  }
   const { nickname, userImage } = userInfo;
   
-  const { title, mobile, content, date,updatedAt, location, Image } = postInfo
+  const { title, mobile, content, date,updatedAt, location, image } = postInfo
   //console.log(postInfo);
-
+  // console.log(updatedAt);
+  // let newDate = calulateDate(updatedAt).then((res) => res);
     const deletePostHandler = () => {
       axios.delete(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`
       ,{withCredentials: true})
@@ -36,7 +40,7 @@ function ViewPostContent({
         alert('게시글 삭제에 실패했습니다.')
       })
     };
-    
+    // console.log(updatedAt)
     return (
       <StyledViewPostContent>
         <StyledViewPostProfile>
@@ -69,7 +73,7 @@ function ViewPostContent({
         </StyledViewPostProfile>
         <StyledViewPostContentOne>
           <div className="img-wrapper">
-            <img src={Image} alt="백구" />
+            <img src={image} alt="백구" />
           </div>
           <div className="post-info-all">
             <div className="post-info-two">

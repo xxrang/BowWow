@@ -1,15 +1,12 @@
 import React, { useState, useCallback, useEffect } from "react";
 import {
   StyledSignUp,
-  BtnLink,
-  ErrorMessage,
   InputReadOnly,
 } from "./StyledSignUp";
-// import camera from '../../images/bros_blank.jpeg'
+import { ErrorMessage } from "../ErrorMessage";
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
-// import { dummyUser } from "../dummyData";
 
 const ProfileEdit = ({ hasAccessToken }) => {
 
@@ -164,7 +161,7 @@ const ProfileEdit = ({ hasAccessToken }) => {
         />
         <div className="button-wapper">
           <button type="submit">확인</button>
-          <BtnLink to="/">취소</BtnLink>
+          <button onClick={() => { window.history.back() }}>취소</button>
         </div>
       </form>
     </StyledSignUp>

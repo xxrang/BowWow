@@ -34,8 +34,8 @@ const Volunteer = ({ postsData, navString, setPostId, postId }) => {
     } else {
       return null;
     }*/
-    if (initialPosts) {
-      setSlice(initialPosts.volunteer.slice(0, maxDogList));
+    if (postsData) {
+      setSlice(postsData.slice(0, maxDogList));
     } else {
       return null;
     }

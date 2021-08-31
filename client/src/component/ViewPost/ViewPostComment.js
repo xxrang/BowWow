@@ -3,6 +3,7 @@ import NeedLogin from '../NeedLogin'
 import useInput from '../../hooks/useInput'
 import { StyledViewPostComment } from './StyledViewPost';
 import axios from 'axios';
+import {calulateDate} from '../../hooks/calulateDate';
 
 function ViewPostComment({
   inputRef,
@@ -59,7 +60,6 @@ function ViewPostComment({
                 });
             });
         } else if (comment.length === 0) {
-          //모달로 해야할..꽈 ?
           alert("댓글을 입력하세요.");
         }
       } else {
@@ -135,7 +135,9 @@ function ViewPostComment({
                         <p className="post-comment-nickname">
                           {el.user.nickname}
                         </p>
-                        <p className="post-comment-date">{el.updatedAt}</p>
+                        <p className="post-comment-date">
+                          {calulateDate(el.updatedAt)}
+                        </p>
                       </div>
                       <button
                         onClick={() => {
