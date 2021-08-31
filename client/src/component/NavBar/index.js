@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { StyledNavBar } from "./StyledNavBar";
 import { Link, useHistory } from "react-router-dom";
 import axios from 'axios'
@@ -13,11 +13,12 @@ const NavBar = ({
   setNavString,
   handleTop,
   logoutHandler,
-  isLogedIn,
+  // isLogedIn,
+  // setIsLogedIn
 }) => {
 
   let history = useHistory();
-
+  const [isLogedIn, setIsLogedIn] = useState(false);
   const selectNavHandler = (string) => {
     //console.log("네브바 선택::::",string)
     // const postsString = string;
@@ -38,11 +39,24 @@ const NavBar = ({
       // }
       setPostsData(datas);
       history.push("/");
+      console.log(document.cookie);
     })
     .catch((err) => alert("정보를 받아오는데 실패하였습니다."));
   };
 
-  const menu = [{ name: "service" }, { name: "search" }, { name: "volunteer" }];
+  const menu = [
+    { name: "service" }, 
+    { name: "search" }, 
+    { name: "volunteer" }
+  ];
+
+  useEffect(()=>{
+    if(hasAccessToken !== undefined){
+      setIsLogedIn(true)
+    }else{
+      setIsLogedIn(false)
+    }
+  },[hasAccessToken])
 
 
   return (
@@ -69,7 +83,7 @@ const NavBar = ({
             <li className="post">Post</li>
           </Link>
         </div>
-        {/* {!isLogedIn ? ( */}
+        {!isLogedIn ? (
           <div className="rightNav">
             <Link to="/login">
               <button>로그인</button>

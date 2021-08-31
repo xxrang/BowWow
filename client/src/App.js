@@ -16,7 +16,7 @@ import axios from 'axios';
 function App() {
 
   const [isLogedIn, setIsLogedIn] = useState(false);
-const [hasAccessToken, setHasAccessToken] = useState(undefined);
+  const [hasAccessToken, setHasAccessToken] = useState(undefined);
   const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
@@ -85,6 +85,7 @@ const [hasAccessToken, setHasAccessToken] = useState(undefined);
           <Route exact path="/">
             <HomePage
               isLogedIn={isLogedIn}
+              setIsLogedIn = {setIsLogedIn}
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
@@ -101,6 +102,7 @@ const [hasAccessToken, setHasAccessToken] = useState(undefined);
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
+              isLogedIn = {isLogedIn}
             />
           </Route>
           <Route path="/postedit">
@@ -110,6 +112,7 @@ const [hasAccessToken, setHasAccessToken] = useState(undefined);
               setPostsData={setPostsData}
               setNavString={setNavString}
               postId={postId}
+              isLogedIn = {isLogedIn}
             />
           </Route>
           <Route path="/profile">
@@ -118,16 +121,20 @@ const [hasAccessToken, setHasAccessToken] = useState(undefined);
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
+              isLogedIn = {isLogedIn}
+              setIsLogedIn ={setIsLogedIn}
             />
           </Route>
           <Route path="/profileedit">
             <ProfileEditPage
+              isLogedIn = {isLogedIn}
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
               setPostId={setPostId}
               postId={postId}
+              setIsLogedIn ={setIsLogedIn}
             />
           </Route>
           <Route path="/posts">

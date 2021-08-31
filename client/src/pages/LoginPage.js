@@ -16,7 +16,9 @@ function LoginPage({
   // handleTop = { handleTop };
   return (
     <>
-      <NavBar setPostsData={setPostsData} setNavString={setNavString} />
+      <NavBar 
+      setPostsData={setPostsData} 
+      setNavString={setNavString} />
       <Login
         loginHandler={loginHandler}
         setHasAccessToken={setHasAccessToken}

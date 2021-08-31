@@ -8,7 +8,6 @@ import axios from 'axios';
 
 const SignUp = () => {
   
-  
   //* image preview
   const [userImage, setUserImage] = useState(camera);
   const [imgCheck, setImgCheck] = useState("false");
@@ -36,27 +35,13 @@ const SignUp = () => {
   const [password, onChangePassword] = useInput("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  const [passwordValidatedCheck, setPasswordValidatedCheck] = useState(false);
   
   const onChangePasswordCheck = useCallback(
     (e) => {
       setPasswordCheck(e.target.value);
       setPasswordError(e.target.value !== password);
     },[password]);
-
-  const validatedPassword = useCallback(
-    (e) => {
-      let regPassword = new RegExp(/^[a-zA-Z0-9]{8,12}$/);
-      let emailCheck = new RegExp(
-        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
-      );
-      console.log(passwordValidatedCheck);
-      if (regPassword.test(e)) {
-        return setPasswordValidatedCheck(true);
-      }
-    },
-    [password]
-  );
+  
   //* form submit
   const signupHandler = useCallback((e) => {
       if (password !== passwordCheck) {

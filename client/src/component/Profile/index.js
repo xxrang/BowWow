@@ -3,8 +3,9 @@ import { StyeldProfile } from "./StyledProfile";
 import ProfileInfo from './ProfileInfo';
 import ProfileList from './ProfileList';
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
-const Profile = ({ hasAccessToken }) => {
+const Profile = ({ hasAccessToken , isLogedIn ,setIsLogedIn }) => {
 
   // console.logconsole.log(showTime(date));("profile:", hasAccessToken);
   // console.log("dummyuser:", dummyUser)
@@ -16,10 +17,7 @@ const Profile = ({ hasAccessToken }) => {
     if (hasAccessToken !== undefined) {
       //! 어세스 토큰에서 유저아이디를 가져와서 get요청한다.
     }
-      // userId = ""
-      //${userId}
-      axios
-        .get(
+      axios.get(
           `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=1`,
           { withCredentials: true }
         )
@@ -38,6 +36,13 @@ const Profile = ({ hasAccessToken }) => {
           });
           setUserPosts(profile.data[0].posts);
         })
+        //get auth 확인하기
+        .then(()=>{
+          axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`)
+        })
+        .then(()=>{
+          axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=userid`)
+        })
         .catch((err) => {
           console.log(err);
           // alert("데이터 불러오기를 실패했습ㄴ디ㅏ.")
@@ -45,11 +50,14 @@ const Profile = ({ hasAccessToken }) => {
     }, [hasAccessToken]);
     //accessToken을 가지고 userId 확인해야함
     
-
   return (
     <StyeldProfile>
-      <ProfileInfo userInfo={userInfo} />
-      <ProfileList userPosts={userPosts} />
+      <ProfileInfo 
+      userInfo={userInfo}
+      isLogedIn = {isLogedIn} />
+      <ProfileList 
+      userPosts={userPosts} 
+      isLogedIn = {isLogedIn} />
     </StyeldProfile>
   );
 }
