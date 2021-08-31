@@ -28,6 +28,7 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
   console.log("커멘트인포!!!!!!", commentInfo);
   console.log("포스트 인포:::-----", postInfo);
 
+  console.log("postId",postId)
   useEffect(() => {
     inputRef.current.focus();
 
@@ -43,7 +44,7 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
         // ! 이걸 확인하면 버튼이 보여지면 포스트에딧이나 삭제에도 문제가 없다.
         // ! 다른 사람은 버튼을 보지못하니까
         // ! 이건 언제 하느냐....? get요청하고, 거기서 유저정보 받아오면
-        
+
         setUserInfo({
           userId: res.data.data.posts.user.id,
           nickname: res.data.data.posts.user.nickname,
@@ -60,26 +61,35 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
           updatedAt: res.data.data.posts.updatedAt,
         });
         // console.log(res.data.data.comment.reverse())
-        // setCommentInfo(res.data.data.comment.reverse());
-      })
-      .then(() => {
-        return axios.get(
-          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`
-        ).then((res) => {
-          // if (res.data.data.userinfo.id === userInfo.userId) {
-          //   setShowButton(true);
-          // } else {
-          //   setShowButton(false);
-          // }
-            console.log("auth 유저정보", res.data);
-          console.log("유저인포-유저아이디", userInfo.userId)
-        }).catch((err) => {
-          console.log("auth에러", err)
-        })
+        setCommentInfo(res.data.data.comment.reverse());
+
+        return axios
+          .get(
+            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+            {
+              headers: {
+                accesstoken: document.cookie.split(" ")[1].split("=")[1],
+                refreshtoken: document.cookie.split(" ")[2].split("=")[1],
+              },
+            }
+          )
+          .then((res) => {
+            if (res.data.data.userinfo === userInfo.userId) {
+              setShowButton(true);
+            } else {
+              setShowButton(false);
+            }
+            console.log("auth 유저정보", res.data.data.userinfo);
+            console.log("유저인포-유저아이디", userInfo.userId);
+          })
+          .catch((err) => {
+            console.log("auth에러", err);
+          });
       })
       .catch((err) => {
-        console.log("포스트요청 에러",err);
+        console.log("포스트요청 에러", err);
       });
+          
   }, [hasAccessToken, postId, userInfo.userId]);
 
   return (

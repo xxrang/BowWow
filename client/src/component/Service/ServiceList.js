@@ -27,9 +27,9 @@ const ServiceList = ({ setPostId, slice }) => {
             className={"service-img-" + el.id}>
             <Fade top>
             <figure className = 'pic'>
-              <img src={el.image} alt="dog-img" />
+              <img src={el.post.image} alt="dog-img" />
               <figcaption className = 'pic-caption bottom-to-top'>
-              <h1 className = 'title'>{el.title}</h1>
+              <h1 className = 'title'>{el.post.title}</h1>
               </figcaption>
             </figure>
             </Fade>
