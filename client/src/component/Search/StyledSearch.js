@@ -18,22 +18,28 @@ height : 100vh;
 }
 `;
 export const StyledSearchBar = styled.div`
-padding : 30px 0;
->input {
-  width : 65%; 
-  height : 40px;
-  font-size: 20px;
+display: flex;
+justify-content: center;
+align-items: center;
+>form {
+  margin : 30px 0px;
+}
+>form > input {
+  font-size: 16px;
+  width : 240px;
+  height : 42px;
+  padding : 0 10px;
+  border-radius : 5px 0 0 5px;
   border:none;
-  border-radius: 5px;
-  padding-left: 10px;
 }
 >button{
   background: #fff;
-  border : none;
-  border-radius: 5px;
-  color : ${searchMainColor};
+  width : 50px;
   height : 42px;
-  margin-left : 10px;
+  font-size :20px;
+  border : none;
+  border-radius: 0 5px 5px 0;
+  color : ${searchMainColor};
   &:hover{
     transition: all 0.3s ease-in-out;
     background:#48cfad;

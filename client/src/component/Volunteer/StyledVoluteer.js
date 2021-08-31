@@ -1,15 +1,16 @@
 import styled from 'styled-components'
 
 export const StyledVolunteer = styled.section`
+  
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 0 200px 0px;
+  align-items: center;
+
 >.more-btn{
   border :none;
-  margin: 80px auto 0px;
   width: 100px;
   font-size: 16px;
   padding : 10px;
@@ -17,6 +18,7 @@ export const StyledVolunteer = styled.section`
   border-radius: 5px;
   background-color: #48cfad;
   color : white;
+  margin : 50px 0;
   :hover{
     background: #fff;
     border: 1px solid #48CFAD;
@@ -26,31 +28,45 @@ export const StyledVolunteer = styled.section`
 }
 `
 export const StyledVolunteerList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  grid-template-rows: 200px 200px; 
-  margin: 100px 200px 0px;
->div{
+  display: flex;
+  flex-wrap: wrap;
+  margin : 100px 200px 0;
+`
+export const ServiceVolunteerWrapper = styled.div`
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
   text-align: center;
   padding: 15px;
-  overflow: hidden;
   box-sizing: border-box;
+  /* width: 450px; */
   height: 220px;
   border-radius: 8px;
   background: #fff;
+  margin-bottom: 12px;
   cursor: pointer;
   transition: all 0.4s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  &:hover{
-    transform: scale(1.1);
-    }
+  &:hover {
+    background : rgba(0, 0, 0, 0.1);
+    overflow:hidden;
+    opacity : 0.9;
+  }
   >img {
-    height: 70%;
-    object-fit: contain;
+    width: 50%;
+    height: 100%;
+    object-fit: contain;  
+    background: rgba(0,0,0,0.1);
+    padding : 10px 0;
+    overflow: hidden;
+    &:hover{
+      transform: scale(1.1);
+      backface-visibility: hidden;
+      transition: all 0.4s ease-in-out;
+    }
   }
-  >p{
-    margin-left: 20px;
-  }
-}
-
+  >h1{
+    margin: 10px 20px;
+    font-size: 30px;
+  } 
 `
