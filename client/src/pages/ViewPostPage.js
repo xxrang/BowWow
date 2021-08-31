@@ -9,6 +9,7 @@ function ViewPostPage({
   setPostsData,
   setNavString,
   postId,
+  isLogedIn,
 }) {
   return (
     <div>
@@ -17,8 +18,13 @@ function ViewPostPage({
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setNavString={setNavString}
+        isLogedIn={isLogedIn}
       />
-      <ViewPost hasAccessToken={hasAccessToken} postId={postId} />
+      <ViewPost
+        hasAccessToken={hasAccessToken}
+        postId={postId}
+        isLogedIn={isLogedIn}
+      />
       <Footer />
     </div>
   );

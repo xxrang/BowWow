@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { StyledNavBar } from "./StyledNavBar";
 import { Link, useHistory } from "react-router-dom";
 import axios from 'axios'
@@ -13,35 +13,17 @@ const NavBar = ({
   setNavString,
   handleTop,
   logoutHandler,
-  // isLogedIn,
-  // setIsLogedIn
+  isLogedIn,
+  setIsLogedIn
 }) => {
 
   let history = useHistory();
-  const [isLogedIn, setIsLogedIn] = useState(false);
+
   const selectNavHandler = (string) => {
-    //console.log("네브바 선택::::",string)
-    // const postsString = string;
-    // setNavString(postsString);
-    // history.push("/");
-    return axios.get(`https://localhost:4000`, {
-      // params: { postsString: postsString },
-      withCredentials: true,
-    })
-    .then((res) => {
-      const datas = res.data.data.data;
-      //accesstoken 
-      //localhost:4000/auth
-      //conole.lo(rea.dat) ok 뜨면
-      //setislogedin(true) 로바꿔줘
-      // if(islogedin === true){
-      // return axios.get('')
-      // }
-      setPostsData(datas);
-      history.push("/");
-      console.log(document.cookie);
-    })
-    .catch((err) => alert("정보를 받아오는데 실패하였습니다."));
+    console.log("네브바 선택::::",string)
+    const postsString = string;
+    setNavString(postsString);
+    history.push("/");
   };
 
   const menu = [
@@ -49,15 +31,6 @@ const NavBar = ({
     { name: "search" }, 
     { name: "volunteer" }
   ];
-
-  useEffect(()=>{
-    if(hasAccessToken !== undefined){
-      setIsLogedIn(true)
-    }else{
-      setIsLogedIn(false)
-    }
-  },[hasAccessToken])
-
 
   return (
     <StyledNavBar id="navBar">
@@ -83,7 +56,7 @@ const NavBar = ({
             <li className="post">Post</li>
           </Link>
         </div>
-        {!isLogedIn ? (
+        {isLogedIn === '' ? (
           <div className="rightNav">
             <Link to="/login">
               <button>로그인</button>

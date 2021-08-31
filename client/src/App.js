@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch} from "react-router-dom";
+import { BrowserRouter, Route, Switch, useHistory} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import PostFormPage from "./pages/PostFormPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -12,16 +12,19 @@ import PostEditPage from "./pages/PostEditPage";
 // import { initialPosts } from "./component/dummyData";
 import axios from 'axios';
 
+export const END_POINTS = "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com";
 //루트만 짜기
 function App() {
 
-  const [isLogedIn, setIsLogedIn] = useState(false);
+  const [isLogedIn, setIsLogedIn] = useState("");
   const [hasAccessToken, setHasAccessToken] = useState(undefined);
   const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
-  //let history = useHistory();
+  let history = useHistory();
+
   /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
+  console.log("islogin", isLogedIn);
 
   // console.log("data------", postId);
   useEffect(() => {
@@ -37,7 +40,7 @@ function App() {
     if (navString === "" || navString === "service") {
       return axios
         .get(
-          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/service",
+          `${END_POINTS}/service`,
           { withCredentials: true }
         )
         .then((res) => {
@@ -47,10 +50,7 @@ function App() {
         });
     }else if (navString === "volunteer") {
       return axios
-        .get(
-          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/volunteer",
-          { withCredentials: true }
-        )
+        .get(`${END_POINTS}/volunteer`, { withCredentials: true })
         .then((res) => {
           // console.log(res.data);
           const data = res.data.data.posts;
@@ -69,13 +69,17 @@ function App() {
   }, []);
   //login핸들러
   const loginHandler = (hasAccessToken) => {
+    setIsLogedIn(hasAccessToken);
     setHasAccessToken(hasAccessToken);
+    console.log("로그인 핸드러", isLogedIn);
+    
   };
   //logout핸들러
   const logoutHandler = () => {
     setHasAccessToken(undefined);
+    setIsLogedIn("");
     window.localStorage.removeItem("accessToken");
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "http://localhost:3000";
   };
 
   return (
@@ -84,8 +88,8 @@ function App() {
         <Switch>
           <Route exact path="/">
             <HomePage
+              setIsLogedIn={setIsLogedIn}
               isLogedIn={isLogedIn}
-              setIsLogedIn = {setIsLogedIn}
               hasAccessToken={hasAccessToken}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
@@ -144,10 +148,12 @@ function App() {
               setPostsData={setPostsData}
               setNavString={setNavString}
               postId={postId}
+              isLogedIn={isLogedIn}
             />
           </Route>
           <Route path="/login">
             <LoginPage
+              isLogedIn={isLogedIn}
               loginHandler={loginHandler}
               setHasAccessToken={setHasAccessToken}
               hasAccessToken={hasAccessToken}

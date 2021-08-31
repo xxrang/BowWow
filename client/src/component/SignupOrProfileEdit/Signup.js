@@ -1,13 +1,12 @@
 import React, { useState, useCallback } from "react";
-import { StyledSignUp} from './StyledSignUp'
-import { ErrorMessage } from '../ErrorMessage';
-import camera from '../../images/bros_blank.jpeg'
-import UserImgUpload from './UserImgUpload';
-import useInput from '../../hooks/useInput';
-import axios from 'axios';
+import { StyledSignUp } from "./StyledSignUp";
+import { ErrorMessage } from "../ErrorMessage";
+import camera from "../../images/bros_blank.jpeg";
+import UserImgUpload from "./UserImgUpload";
+import useInput from "../../hooks/useInput";
+import axios from "axios";
 
 const SignUp = () => {
-  
   //* image preview
   const [userImage, setUserImage] = useState(camera);
   const [imgCheck, setImgCheck] = useState("false");
@@ -35,17 +34,19 @@ const SignUp = () => {
   const [password, onChangePassword] = useInput("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  
   const onChangePasswordCheck = useCallback(
     (e) => {
       setPasswordCheck(e.target.value);
       setPasswordError(e.target.value !== password);
-    },[password]);
-  
+    },
+    [password]
+  );
+
   //* form submit
-  const signupHandler = useCallback((e) => {
+  const signupHandler = useCallback(
+    (e) => {
       if (password !== passwordCheck) {
-        // e.preventDefault();
+        e.preventDefault();
         return setPasswordError(true);
       }
 
@@ -56,7 +57,10 @@ const SignUp = () => {
       userdate.append("password", password);
       userdate.append("input-image", e.target[3].files[0]);
       userdate.append("imgCheck", imgCheck);
-      axios.post("http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",userdate,
+      axios
+        .post(
+          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",
+          userdate,
           {
             headers: { "Content-Type": "multipart/form-data" },
             withCredentials: true,
@@ -64,12 +68,12 @@ const SignUp = () => {
         )
         .then((res) => {
           console.log(res.data);
-          alert("회원가입에 성공하였습니다.")
+          alert("회원가입에 성공하였습니다.");
           window.location.replace("/");
         })
         .catch((err) => {
           console.log(err);
-          alert('중복된 이메일이 있습니다. 다시 입력해주세요.')
+          alert("중복된 이메일이 있습니다. 다시 입력해주세요.");
         });
 
       //중복된 이메일이 있습니다는 뜨는데, 회원가입 완료시에는 다른메시지가 뜨게하고, 홈으로이동
@@ -143,6 +147,6 @@ const SignUp = () => {
       </form>
     </StyledSignUp>
   );
-}
+};
 
 export default SignUp;

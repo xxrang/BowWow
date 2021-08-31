@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from "react";
 import VolunteerList from "./VolunteerList";
 import { StyledVolunteer } from "./StyledVoluteer";
-import {initialPosts} from '../dummyData'
 //  import axios from "axios";
 
 const Volunteer = ({ postsData, navString, setPostId, postId }) => {
