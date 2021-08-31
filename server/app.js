@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cors({
   origin: true,
+  //origin:'http://localhost:4000'
   credentials: true,
   methods: ['GET','POST','OPTIONS','DELETE','PATCH']
 }))
@@ -54,9 +55,8 @@ const volunteer = require('./controllers/posts/Volunteer_list')(app);
 app.use('/volunteer', volunteer);
 
 /* 게시글 보여주기 API */
-app.get('/posts', controllers.posts);
-
-app.delete('/posts', controllers.post_delete); //게시글 삭제
+const posts = require('./controllers/posts/post')(app);
+app.use('/posts', posts);
 
 /** 댓글 API **/
 const comment = require('./controllers/comment/comments')(app);

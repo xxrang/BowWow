@@ -4,7 +4,7 @@ import NavBar from '../component/NavBar'
 import Service from '../component/Service'
 import Volunteer from '../component/Volunteer'
 import Footer from '../component/Footer'
-import Loding from '../component/Loading'
+// import Loding from '../component/Loading'
 import Search from '../component/Search'
 
 function HomePage({

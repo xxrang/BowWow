@@ -14,12 +14,11 @@ const image = req.file.location;
      //클라이언트에서 이메일하고 비번 안 넘어온다면
  }
 
- await user.findOne({ where: { email }})
+ await user.findOne({ where: { email : email }})
     .then((duplicate_User) => {
         if(duplicate_User){
             res.status(409).send({message: 'email exists'}) //계정 중복 가입
         } else {
-
             const hashpassword = crypto.createHash('sha512').update(password).digest('hex');
 
             user.create({

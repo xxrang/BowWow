@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import PostFormPage from "./pages/PostFormPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -14,7 +14,7 @@ import axios from 'axios';
 
 //루트만 짜기
 function App() {
-  const [hasAccessToken, setHasAccessToken] = useState(undefined);
+const [hasAccessToken, setHasAccessToken] = useState(undefined);
   const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
@@ -55,7 +55,7 @@ function App() {
           setPostsData(data);
         });
     }
-}, [navString]);
+  }, [navString]);
 
 
   //렌더링이 될때마다 키가 있는지 확인한다.
@@ -123,6 +123,8 @@ function App() {
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
+              setPostId={setPostId}
+              postId={postId}
             />
           </Route>
           <Route path="/posts">

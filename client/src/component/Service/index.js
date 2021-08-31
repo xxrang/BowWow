@@ -11,7 +11,7 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
   const [slice, setSlice] = useState([]);
   // console.log("slice-------", slice);
   //const [ serviceImg, setServiceImg ] = useState(initialPosts.MainPosts);
-
+// console.log(postsData, postId, navString)
   const moreButtonHandler = () => {
     setMaxDogList(maxDogList + 9);
     //console.log(`강아지가 ${maxDogList}마리씩 늘어나고있는중.`);

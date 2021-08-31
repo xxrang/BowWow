@@ -4,13 +4,13 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
   
      // field 추가
-     await queryInterface.addColumn('category_contents', 'categoy_id', Sequelize.INTEGER);
+     await queryInterface.addColumn('category_contents', 'category_id', Sequelize.INTEGER);
 
      // foreign key 연결
      await queryInterface.addConstraint('category_contents', {
-       fields: ['categoy_id'],
+       fields: ['category_id'],
        type: 'foreign key',
-       name: 'FK_category_categoy_id',
+       name: 'FK_category_category_id',
        references: {
          table: 'categories',
          field: 'id'

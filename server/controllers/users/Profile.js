@@ -1,6 +1,6 @@
 module.exports = (app) => {
 
-    const { user } = require('../../models')
+    const { user, post } = require('../../models')
     const router = require('express').Router();
     const upload = require('../../module/multer');
     const crypto = require('crypto');
@@ -9,25 +9,33 @@ module.exports = (app) => {
     router.get('/', async (req, res) => {
 
         await user.findAll({ 
-            where : { email: req.query.id }})
+            where : { id: req.query.id },
+        include: [{
+            model: post
+        }]})
             .then((data) => {
                 if(data) {
                     //createdAt, updatedAt 삭제하고 보여주기
-                    res.status(200).send({message: 'ok', data})
+                    //delete data.dataValues.password
+                    res.status(200).send({message: 'ok', data: data})
                 } else {
                     res.status(401).send({message: 'fail'})
                 }
             })
     })
 
-    router.patch('/', async (req, res) => {
+    router.patch('/', upload.single('input-image'), async (req, res) => {
         
-        if(req.query.id){
-            const { nickname, password } = req.body
+        
+            const { nickname, password, introduce} = req.body;
+            const image = req.file.location
             const hashpassword = crypto.createHash('sha512').update(password).digest('hex');
             await user.update({ 
                 nickname: nickname,
-                password: hashpassword },
+                password: hashpassword,
+                introduce: introduce,
+                image: image
+                 },
                 { where : {id : req.query.id }} 
                 ).then((data) => {
                     if(data){
@@ -36,8 +44,7 @@ module.exports = (app) => {
                         res.status(403).send({message: 'fail to update'})
                     }
                 })
-        }
-    })
+        })
 
     return router;
 }

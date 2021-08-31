@@ -4,7 +4,6 @@ import ViewPostContent from "./ViewPostContent";
 import ViewPostComment from "./ViewPostComment";
 import { dummyPost } from "../dummyData";
 import axios from "axios";
-// import axios from "axios";
 
 function ViewPost({
   hasAccessToken,
@@ -33,8 +32,8 @@ function ViewPost({
   const [isLogedIn , setIsLogedIn] = useState(false);
   const [showButton, setShowButton] = useState(false);
 
-  console.log("커멘트인포!!!!!!", commentInfo);
-  console.log("포스트 인포:::-----", postInfo);
+  // console.log("커멘트인포!!!!!!", commentInfo);
+  // console.log("포스트 인포:::-----", postInfo);
   
 
   useEffect(() => {
@@ -75,11 +74,12 @@ function ViewPost({
           updatedAt: res.data.data.posts.updatedAt,
         });
         setCommentInfo(res.data.data.comment.reverse());
+        
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [hasAccessToken, postId]);
 
 
 

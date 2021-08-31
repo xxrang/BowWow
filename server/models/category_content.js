@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.category_content.belongsTo(models.post,{foreignKey: "posts_id", sourceKey: 'id'})
-      models.category_content.belongsTo(models.category,{foreignKey: "categoy_id", sourceKey: 'id'})
+      models.category_content.belongsTo(models.category,{foreignKey: "category_id", sourceKey: 'id'})
     }
   };
   category_content.init({}, {
