@@ -14,6 +14,7 @@ import axios from 'axios';
 
 //루트만 짜기
 function App() {
+
   const [isLogedIn, setIsLogedIn] = useState(false);
 const [hasAccessToken, setHasAccessToken] = useState(undefined);
   const [postId, setPostId] = useState("");
@@ -44,14 +45,14 @@ const [hasAccessToken, setHasAccessToken] = useState(undefined);
           const data = res.data.data.posts;
           setPostsData(data);
         });
-    } else if (navString === "volunteer") {
+    }else if (navString === "volunteer") {
       return axios
         .get(
           "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/volunteer",
           { withCredentials: true }
         )
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           const data = res.data.data.posts;
           setPostsData(data);
         });

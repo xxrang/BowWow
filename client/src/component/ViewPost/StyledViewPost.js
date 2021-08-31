@@ -143,6 +143,7 @@ export const StyledViewPostComment = styled.div`
               }
             }
           }
+
           > .post-comment-content {
             //div 안 글자 줄바꿈
             word-break: break-all;

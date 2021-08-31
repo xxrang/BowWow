@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledSignUp = styled.div`
+
   width: 375px;
   margin: 60px auto;
   margin-bottom: 30px;
@@ -8,8 +9,6 @@ export const StyledSignUp = styled.div`
   display: flex;
   flex-direction: column;
   font-family: "Nanum Gothic Coding", monospace;
-  /* justify-content: center; */
-  /* align-items: center; */
   > form {
     height: 800px;
     display: flex;

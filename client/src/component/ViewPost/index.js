@@ -3,6 +3,7 @@ import { StyledViewPost } from "./StyledViewPost";
 import ViewPostContent from "./ViewPostContent";
 import ViewPostComment from "./ViewPostComment";
 import axios from "axios";
+axios.defaults.withCredentials=true;
 
 function ViewPost({
   hasAccessToken,
@@ -30,10 +31,9 @@ function ViewPost({
   
   const [showButton, setShowButton] = useState(false);
 
-  // console.log("커멘트인포!!!!!!", commentInfo);
-  // console.log("포스트 인포:::-----", postInfo);
+  console.log("커멘트인포!!!!!!", commentInfo);
+  console.log("포스트 인포:::-----", postInfo);
   
-
   useEffect(() => {
     inputRef.current.focus();
     // console.log(showButton);
@@ -42,12 +42,12 @@ function ViewPost({
 
     
     console.log(postId);
-    axios
-      .get(
+    axios.get(
         `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
         { withCredentials: true }
       )
       .then((res) => {
+
         console.log("--------res.data-------", res.data);
         //! hasAccessToken에서 유저아이디를 뽑아내고, 포스트의 유저아이디가 같을 경우에 버튼을 보여준다.
         //! 이걸 확인하면 버튼이 보여지면 포스트에딧이나 삭제에도 문제가 없다.
@@ -73,14 +73,19 @@ function ViewPost({
           image: res.data.data.posts.image,
           updatedAt: res.data.data.posts.updatedAt,
         });
+        // console.log(res.data.data.comment.reverse())
         setCommentInfo(res.data.data.comment.reverse());
+
+        //return;
+      })
+      .then(()=>{
+        axios
+        .get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`)
       })
       .catch((err) => {
         console.log(err);
       });
   }, [hasAccessToken, postId]);
-
-
 
   return (
     <StyledViewPost>
