@@ -9,13 +9,13 @@ module.exports = {
     },
 
     generateRefreshToken: (data) => {
-        let token = sign(data, process.env.REFRESH_SECRET, { expiresIn: "10m" })
+        let token = sign(data, process.env.REFRESH_SECRET, { expiresIn: "10s" })
         return token
     },
 
     sendAccessToken: (res, accessToken) => {
         res.cookie('accessToken', accessToken, {
-            sameSite:'none',httpOnly:true,secure:true,path:'/'
+            sameSite:'none',httpOnly:true,secure:true, path:'/'
         })
     },
 
