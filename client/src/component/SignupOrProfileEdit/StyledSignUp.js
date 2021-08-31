@@ -44,6 +44,7 @@ export const StyledSignUp = styled.div`
     flex: none;
     flex-grow: 0;
     font-size: 16px;
+    margin-bottom: 4px;
   }
 
   > form .user-info-content {

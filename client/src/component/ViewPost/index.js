@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { StyledViewPost } from "./StyledViewPost";
 import ViewPostContent from "./ViewPostContent";
 import ViewPostComment from "./ViewPostComment";
-import { dummyPost } from "../dummyData";
 import axios from "axios";
 
 function ViewPost({
@@ -29,7 +28,6 @@ function ViewPost({
   const [postInfo, setPostInfo] = useState({});
   const [commentInfo, setCommentInfo] = useState([]);
   
-  const [isLogedIn , setIsLogedIn] = useState(false);
   const [showButton, setShowButton] = useState(false);
 
   // console.log("커멘트인포!!!!!!", commentInfo);
@@ -38,10 +36,6 @@ function ViewPost({
 
   useEffect(() => {
     inputRef.current.focus();
-
-    if (hasAccessToken !== undefined) {
-      setIsLogedIn(true);
-    }
     // console.log(showButton);
     // console.log('userid :', dummyPost.User.id)
     // console.log('hasAccessToken :', hasAccessToken)
@@ -101,7 +95,6 @@ function ViewPost({
         inputRef={inputRef}
         modal={modal}
         showButton={showButton}
-        isLogedIn={isLogedIn}
         needLoginHandler={needLoginHandler}
         setCommentInfo={setCommentInfo}
         loginModalClick={loginModalClick}

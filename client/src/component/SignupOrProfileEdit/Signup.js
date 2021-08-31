@@ -116,9 +116,6 @@ const SignUp = () => {
           onChange={onChangePassword}
           required
         />
-        {!passwordValidatedCheck ? (
-          <ErrorMessage>대,소문자, 숫자를 8자 이상 입력해주세요.</ErrorMessage>
-        ) : null}
         <label htmlFor="passwordCheck">비밀번호 확인</label>
         <input
           name="passwordCheck"

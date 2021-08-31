@@ -12,12 +12,11 @@ const NavBar = ({
   setNavString,
   handleTop,
   logoutHandler,
+  isLogedIn,
 }) => {
-  const [isLogedIn, setIsLogedIn] = useState(false);
   let history = useHistory();
 
   const selectNavHandler = (string) => {
-    
     //console.log("네브바 선택::::",string)
     const postsString = string;
     setNavString(postsString);
@@ -35,21 +34,9 @@ const NavBar = ({
     // .catch((err) => alert("정보를 받아오는데 실패하였습니다."));
   };
 
-  const menu = [
-    { name: "service" },
-    { name: "search" }, 
-    { name: "volunteer" }
-  ];
+  const menu = [{ name: "service" }, { name: "search" }, { name: "volunteer" }];
 
-  useEffect(() => {
-    if (hasAccessToken !== undefined) {
-      setIsLogedIn(true);
-    } else {
-      setIsLogedIn(false);
-    }
-  }, [hasAccessToken]);
   return (
-
     <StyledNavBar id="navBar">
       <ul>
         <div className="leftNav">
@@ -85,7 +72,13 @@ const NavBar = ({
         ) : (
           <div className="rightNav">
             <Link to="/profile">
-              <button onClick={()=> {history.push('/profile')}}>프로필</button>
+              <button
+                onClick={() => {
+                  history.push("/profile");
+                }}
+              >
+                프로필
+              </button>
             </Link>
 
             <Link to="/">

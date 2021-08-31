@@ -7,7 +7,6 @@ import {calulateDate} from '../../hooks/calulateDate';
 
 function ViewPostComment({
   inputRef,
-  isLogedIn,
   commentInfo,
   setCommentInfo,
   showButton,
@@ -29,44 +28,40 @@ function ViewPostComment({
   const addCommentHandler = useCallback(
     (e) => {
       e.preventDefault();
-      if (isLogedIn) {
-        if (comment !== "") {
-          const data = {
-            userId: hasAccessToken,
-            content: comment,
-            postId: postId,
-          };
-          console.log("data-----", data);
-          axios
-            .post(
-              `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments`,
-              data,
-              {
-                headers: { "Content-Type": "application/json" },
-                withCredentials: true,
-              }
-            )
-            .then((res) => {
-              console.log("댓글추가:", res.data);
-              setComment("");
-              return axios
-                .get(
-                  `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${postId}`,
-                  { withCredentials: true }
-                )
-                .then((res) => {
-                  console.log("댓글 불러오기:", res.data);
-                  setCommentInfo(res.data.data.comment.reverse());
-                });
-            });
-        } else if (comment.length === 0) {
-          alert("댓글을 입력하세요.");
-        }
-      } else {
-        setOpenModal(true);
+      if (comment !== "") {
+        const data = {
+          userId: hasAccessToken,
+          content: comment,
+          postId: postId,
+        };
+        console.log("data-----", data);
+        axios
+          .post(
+            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments`,
+            data,
+            {
+              headers: { "Content-Type": "application/json" },
+              withCredentials: true,
+            }
+          )
+          .then((res) => {
+            console.log("댓글추가:", res.data);
+            setComment("");
+            return axios
+              .get(
+                `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${postId}`,
+                { withCredentials: true }
+              )
+              .then((res) => {
+                console.log("댓글 불러오기:", res.data);
+                setCommentInfo(res.data.data.comment.reverse());
+              });
+          });
+      } else if (comment.length === 0) {
+        alert("댓글을 입력하세요.");
       }
     },
-    [comment, hasAccessToken, isLogedIn, postId, setComment, setCommentInfo]
+    [comment, hasAccessToken, postId, setComment, setCommentInfo]
   );
 
   const removeCommentHandler = useCallback(
