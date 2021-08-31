@@ -7,7 +7,7 @@ const Service = ({ navString, postsData, setPostId, postId }) => {
   
   const [maxDogList, setMaxDogList] = useState(9);
   const [slice, setSlice] = useState([]);
-  console.log("slice-------", slice);
+  // console.log("slice-------", slice);
   //const [ serviceImg, setServiceImg ] = useState(initialPosts.MainPosts);
   const moreButtonHandler = () => {
     setMaxDogList(maxDogList + 9);

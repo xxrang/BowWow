@@ -15,34 +15,25 @@ const NavBar = ({
   logoutHandler,
   isLogedIn,
 }) => {
-
+console.log("navlogin", isLogedIn)
   let history = useHistory();
 
   const selectNavHandler = (string) => {
     //console.log("네브바 선택::::",string)
-    // const postsString = string;
-    // setNavString(postsString);
-    // history.push("/");
-    return axios.get(`https://localhost:4000`, {
-      // params: { postsString: postsString },
-      withCredentials: true,
-    })
-    .then((res) => {
-      const datas = res.data.data.data;
-      //accesstoken 
-      //localhost:4000/auth
-      //conole.lo(rea.dat) ok 뜨면
-      //setislogedin(true) 로바꿔줘
-      // if(islogedin === true){
-      // return axios.get('')
-      // }
-      setPostsData(datas);
-      history.push("/");
-    })
-    .catch((err) => alert("정보를 받아오는데 실패하였습니다."));
+    const postsString = string;
+    setNavString(postsString);
+    history.push("/");
+    //   setPostsData(datas);
+    //   history.push("/");
   };
 
   const menu = [{ name: "service" }, { name: "search" }, { name: "volunteer" }];
+
+  // const accessPost = () => {
+  //   if (isLogedIn) {
+  //     axios.get(" ")
+  //   }
+  // }
 
 
   return (
@@ -65,11 +56,13 @@ const NavBar = ({
               </li>
             );
           })}
-          <Link to="/postform">
+          <Link
+            // onClick={accessPost}
+          >
             <li className="post">Post</li>
           </Link>
         </div>
-        {/* {!isLogedIn ? ( */}
+        {isLogedIn === "" ? (
           <div className="rightNav">
             <Link to="/login">
               <button>로그인</button>

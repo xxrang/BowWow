@@ -10,13 +10,18 @@ function LoginPage({
   setPostsData,
   setNavString,
   setIsLogedIn,
+  isLogedIn,
 }) {
   // curNav = { curNav };
   // selectNavHandler = { selectNavHandler };
   // handleTop = { handleTop };
   return (
     <>
-      <NavBar setPostsData={setPostsData} setNavString={setNavString} />
+      <NavBar
+        setPostsData={setPostsData}
+        setNavString={setNavString}
+        isLogedIn={isLogedIn}
+      />
       <Login
         loginHandler={loginHandler}
         setHasAccessToken={setHasAccessToken}

@@ -1,11 +1,12 @@
 import React,{useState} from 'react'
 import { useForm } from 'react-hook-form';
 import {StyledLogin} from './StyledLogin'
-import { Link} from 'react-router-dom'
+import { Link, useHistory} from 'react-router-dom'
 import axios from 'axios';
 //import { initialState } from '../dummyData'
 
 function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
+  let history = useHistory()
   //? 로그인 완료시 모달 용   
   // const [signinSuccess, setSigninSuccess] = useState(false);
   //formData
@@ -20,15 +21,12 @@ function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
         data,{withCredentials: true,}
       )
       .then((res) => {
-        console.log("첫콘솔", res.data.data.userinfo.id);
-        setHasAccessToken(res.data.data.userinfo.id);
-        
-        return res.data.data.userinfo.id;
-      })
-      .then((userId) => {
-        loginHandler(userId);
-        setIsLogedIn(true);
-        window.location.replace("/");
+        console.log("첫콘솔", res.data.data.userinfo);
+        // setHasAccessToken(res.data);
+        setIsLogedIn(res.data.data.userinfo.id);
+        loginHandler(res.data.data.userinfo.id);
+
+        history.push("/");
       })
       .catch((err) => {
         console.log("login에러", err);
