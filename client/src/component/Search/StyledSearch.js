@@ -46,7 +46,6 @@ align-items: center;
     color : #fff;
   }
 }
-
 `
 export const StyledSearchMapList = styled.div`
   border-radius : ${borderRadius};
@@ -56,20 +55,35 @@ export const StyledSearchMapList = styled.div`
   box-sizing: border-box;
   overflow: hidden;
   overflow-y: auto;
-  >.searchMapListWrapper{
+  >.search-maplist-wrapper{
     border-radius: ${borderRadius};
+    padding : 10px;
     margin : 4px;
     background: #fff;
-    padding : 10px;
+    cursor: pointer;
+    text-align: left;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     &:hover{
         transform : scale(1.05);
         transition: all 0.3s ease-in-out;
       }
-      >h1,p{
-      margin : 0;
-      padding : 5px 10px;
-      text-align: left;
+      >h2{
+        /* color : ${searchMainColor} */
+        font-weight : 500;
+        font-size: 20px;
+      }
+      >div{
+        padding : 0 10px;
+        margin-top: 10px;
+        >span{
+        font-size: 12px;
+        }
+        >.search-location,>.search-mobile{
+          font-weight: 700;
+          font-size: 14px;
+          color : ${searchMainColor}; 
+          margin-right: 10px;
+        }
       }
   }
 

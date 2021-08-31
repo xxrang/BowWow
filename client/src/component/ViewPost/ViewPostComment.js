@@ -153,7 +153,9 @@ function ViewPostComment({
           </ul>
         </div>
       </div>
-      <NeedLogin openModal={openModal} closeModal={closeModal}></NeedLogin>
+      <NeedLogin 
+      openModal={openModal} 
+      closeModal={closeModal}></NeedLogin>
     </StyledViewPostComment>
   );
 }

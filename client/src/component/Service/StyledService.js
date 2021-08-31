@@ -2,15 +2,36 @@ import styled from "styled-components";
 
 const mainColor = '#48cfad';
 
+// const anima = keyframes `
+//   from {
+//       margin-top: -50px;
+//       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+//       filter: alpha(opacity=0);
+//       opacity: 0
+//   }
+//   to {
+//       margin: auto;
+//       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+//       filter: alpha(opacity=100);
+//       opacity: 1
+//   }
+// }
+// `
+
+  /* animation: ${anima} 2s; */
+
 export const StyledService = styled.section`
+    
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding : 100px 200px 50px;
+
   >.btn-box{
     text-align: center;
-    margin-top : 30px;
     > .buttons, a>.buttons {
     background: ${mainColor};
     border: none;
@@ -19,7 +40,7 @@ export const StyledService = styled.section`
     width: 100px;
     height: 40px;
     font-size: 16px;
-    margin : 5px 5px 50px;
+    margin-top : 30px; 
   }
   >a>.buttons{
     background: #fff;
@@ -41,54 +62,68 @@ export const StyledService = styled.section`
 }
 `;
 export const StyledServiceList = styled.div`
-  /*display:flex;
-  flex-wrap: wrap;
-  */
-    margin: 100px 200px 0px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 220px 220px 220px;
+
+  column-width: 200px;
+  column-gap: 10px;
 `;
 
 export const ServiceListWrapper = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  padding: 15px;
-  overflow: hidden;
-  box-sizing: border-box;
-  width: 300px;
-  border-radius: 8px;
-  background: #fff;
-  margin-bottom: 12px;
+ //figure === pic
+    >figure{
+  display : inline-block;
+  //box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
+  border: none;
   cursor: pointer;
-  transition: all 0.4s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  display: flex;
-  flex-direction: column;
-  
-  &:hover {
-    background : rgba(0, 0, 0, 0.1);
-    overflow:hidden;
-    opacity : 0.9;
-  }
-`;
-export const ServiceListP = styled.p`
-margin-top: 24px;
-padding-left: 5px;
-font-size: 20px;
-font-weight : 500;
-text-align : left;
-`;
-export const ServiceListImg = styled.img`
-  width: 100%;
-  height: 70%;
-  object-fit: contain;
-  background: rgba(0,0,0,0.1);
-  padding : 10px 0;
+  overflow: hidden;
   border-radius: 5px;
-  &:hover {
-    transform: scale(1.1);
-    backface-visibility: hidden;
-    transition: all 0.4s ease-in-out;
+
+  position: relative;
+  margin: 10px;
+  backface-visibility: hidden;
+  transition: all 0.5s ease;
+} 
+  >figure > .pic-caption {
+    top: 30%;
+    left: 0;
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    text-align: center;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    &:hover{
+      transition: all 0.5s ease;
+      top: -6px;
+      left: 0;
+      -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=($opacity * 100))";
+      filter: alpha(opacity=100);
+      opacity: 1;
+      user-select: none;
+    }
+    >.title{
+    color : #fff;
+    letter-spacing: -1px;
+    margin-top : 20px;
+    background-image: linear-gradient(transparent calc(100% - 3px), #000 3px);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size 0.8s;
+    background-image: linear-gradient(transparent 60%, #F8CD07 40%);
+    &:hover{
+      transition: all 0.3s ease-in-out;
+      background-size: 100% 100%;
+    }
   }
-`;
+  }
+  >figure > img{
+    width : 100%;
+    transform:scale(1);
+    transition:.3s;
+    &:hover{
+    transform:scale(1.1);
+    }
+  }
+`

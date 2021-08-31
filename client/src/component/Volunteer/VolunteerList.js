@@ -1,6 +1,7 @@
 import React from 'react'
 import {StyledVolunteerList,ServiceVolunteerWrapper } from './StyledVoluteer'
 import { useHistory } from 'react-router-dom'
+import Fade from "react-reveal/Fade"
 
 const VolunteerList = ({slice ,setPostId }) => {
   let history = useHistory();
@@ -15,13 +16,18 @@ const VolunteerList = ({slice ,setPostId }) => {
     <StyledVolunteerList className = 'volunteer-list-container'>
       {slice.map((el) => {
         return (
-          <ServiceVolunteerWrapper
+          <ServiceVolunteerWrapper 
             onClick= {() => {postClickHandler(el.id)}}
             key={el.id}
+            id = 'columns'
             className={"service-img-" + el.id}>
-            <img src={el.Image} alt="dog-img" />
-            <h1>{el.title}</h1>
-            <p>{el.updatedAt}</p>
+              <Fade top>
+            <figure>  
+              <img src={el.Image} alt="dog-img" />
+              <figcaption className = 'title'>{el.title}</figcaption>
+              <figcaption className = 'updated-at'>{el.updatedAt}</figcaption>
+            </figure>
+            </Fade>
           </ServiceVolunteerWrapper>
         );
       })}
