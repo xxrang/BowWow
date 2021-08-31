@@ -34,7 +34,6 @@ const SignUp = () => {
   const [password, onChangePassword] = useInput("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-
   const onChangePasswordCheck = useCallback(
     (e) => {
       setPasswordCheck(e.target.value);
@@ -46,8 +45,8 @@ const SignUp = () => {
   //* form submit
   const signupHandler = useCallback(
     (e) => {
+      e.preventDefault();
       if (password !== passwordCheck) {
-        e.preventDefault();
         return setPasswordError(true);
       }
 

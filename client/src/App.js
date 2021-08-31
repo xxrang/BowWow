@@ -70,7 +70,6 @@ const [hasAccessToken, setHasAccessToken] = useState(undefined);
     setIsLogedIn(hasAccessToken);
     setHasAccessToken(hasAccessToken);
     console.log("로그인 핸드러", isLogedIn);
-    
   };
   //logout핸들러
   const logoutHandler = () => {
@@ -104,6 +103,7 @@ const [hasAccessToken, setHasAccessToken] = useState(undefined);
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
+              isLogedIn={isLogedIn}
             />
           </Route>
           <Route path="/postedit">

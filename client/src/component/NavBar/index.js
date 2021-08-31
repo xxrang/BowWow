@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StyledNavBar } from "./StyledNavBar";
 import { Link, useHistory } from "react-router-dom";
 import axios from 'axios'
-
+axios.defaults.withCredentials = true;
 // import axios from "axios";
 //setPostsData : 데이터를 가져왔을 때 응답받았을 떄 데이터. -> 응답받으면 상태변화를 준다.
 //setPostsString : 스트링으로 데이터 요청을 보내고
@@ -29,11 +29,30 @@ console.log("navlogin", isLogedIn)
 
   const menu = [{ name: "service" }, { name: "search" }, { name: "volunteer" }];
 
-  // const accessPost = () => {
-  //   if (isLogedIn) {
-  //     axios.get(" ")
-  //   }
-  // }
+  const accessPost = useCallback(() => {
+    if (isLogedIn) {
+      axios
+        .get(
+          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth",
+          {
+            headers: {
+              accesstoken: document.cookie.split(" ")[1].split("=")[1],
+              refreshtoken: document.cookie.split(" ")[2].split("=")[1],
+            },
+          }
+        )
+        .then((res) => {
+          console.log("포스트 눌렀을때 요청 받는거,", res.data.data.userinfo);
+          window.location.replace("/postform");
+          if (res.data.message === "fail") {
+            window.location.replace("/");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  },[isLogedIn])
 
 
   return (
@@ -44,7 +63,7 @@ console.log("navlogin", isLogedIn)
           <Link to="/">
             <img onClick={handleTop} src="../images/logo.png" alt="logo img" />
           </Link>
-          {}
+          
           {menu.map((menuItem, idx) => {
             return (
               <li
@@ -56,11 +75,11 @@ console.log("navlogin", isLogedIn)
               </li>
             );
           })}
-          <Link
-            // onClick={accessPost}
+          <button
+            onClick={accessPost}
           >
             <li className="post">Post</li>
-          </Link>
+          </button>
         </div>
         {isLogedIn === "" ? (
           <div className="rightNav">

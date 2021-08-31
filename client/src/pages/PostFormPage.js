@@ -8,6 +8,7 @@ const PostFormPage = ({
   logoutHandler,
   setPostsData,
   setNavString,
+  isLogedIn,
 }) => {
   return (
     <>
@@ -16,8 +17,9 @@ const PostFormPage = ({
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setNavString={setNavString}
+        isLogedIn={isLogedIn}
       />
-      <PostForm hasAccessToken={hasAccessToken} />
+      <PostForm hasAccessToken={hasAccessToken} isLogedIn={isLogedIn} />
       <Footer />
     </>
   );

@@ -10,7 +10,7 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-const PostForm = ({ hasAccessToken }) => {
+const PostForm = ({ hasAccessToken, isLogedIn }) => {
   const history = useHistory();
 
   const [title, onChangeTitle] = useInput("");
@@ -23,7 +23,7 @@ const PostForm = ({ hasAccessToken }) => {
   const [image, setImage] = useState("");
   const [imgCheck, setImgCheck] = useState("true");
   // console.log(image);
-  
+
   const imageHandler = (e) => {
     const reader = new FileReader();
 
@@ -38,51 +38,74 @@ const PostForm = ({ hasAccessToken }) => {
     setImgCheck("true");
   };
   //*데이터 편집 후 전송
-  
-  const postHandler = useCallback((e) => {
-    const inputImage = e.target[0].files[0];
-    console.log(e);
-    console.log(inputImage);
-    // console.log(location);
-    // console.log("타켓", e.target[0]);
-    e.preventDefault();
-    const userdata = new FormData();
-    userdata.append("userId", hasAccessToken);
-    userdata.append("title", title);
-    userdata.append("category", category);
-    userdata.append("date", date);
-    userdata.append("location", location);
-    userdata.append("input-image", inputImage);
-    userdata.append("content", content);
-    userdata.append("mobile", mobile);
-    userdata.append("imgCheck", imgCheck);
-    // 하나로 합쳐줘서 보내준다.
-    axios
-      .post(
-        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts`,
-        userdata,
-        {
-          headers: { "Content-Type": "multipart/form-data" }
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        alert("게시글이 작성되었습니다.");
-        window.location.replace("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("게시글 작성에 실패했습니다. 다시 시도해주세요.");
-      });
-  },
-    [category, content, date, hasAccessToken, imgCheck, location, mobile, title]
+
+  const postHandler = useCallback(
+    (e) => {
+      const inputImage = e.target[0].files[0];
+      // console.log(e);
+      // console.log(inputImage);
+      // console.log(location);
+      // console.log("타켓", e.target[0]);
+      e.preventDefault();
+
+      // 하나로 합쳐줘서 보내준다.
+      
+      axios
+        .get(
+          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+          {
+            headers: {
+              accesstoken: document.cookie.split(" ")[1].split("=")[1],
+              refreshtoken: document.cookie.split(" ")[2].split("=")[1],
+            },
+          }
+        )
+        .then((res) => {
+          console.log("postform/auth:", res.data.data.userinfo);
+          return res.data.data;
+        })
+        .then((data) => {
+          const userdata = new FormData();
+          userdata.append("userId", data.userinfo);
+          userdata.append("title", title);
+          userdata.append("category", category);
+          userdata.append("date", date);
+          userdata.append("location", location);
+          userdata.append("input-image", inputImage);
+          userdata.append("content", content);
+          userdata.append("mobile", mobile);
+          userdata.append("imgCheck", imgCheck);
+
+          return axios
+            .post(
+              `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts`,
+              userdata,
+              {
+                headers: { "Content-Type": "multipart/form-data" },
+              }
+            )
+            .then((res) => {
+              console.log("포스트폼 작성 완료버튼", res.data);
+              alert("게시글이 작성되었습니다.");
+              window.location.replace("/");
+            })
+            .catch((err) => {
+              console.log(err);
+              alert("게시글 작성에 실패했습니다. 다시 시도해주세요.");
+            });
+        })
+        .catch((err) => {
+          console.log("auth에러:", err);
+        });
+    },
+    [category, content, date, imgCheck, location, mobile, title]
   );
 
-const cancelHandler = () => {
-  alert("게시글 작성이 취소되었습니다.");
-  history.goBack();
-};
-  
+  const cancelHandler = () => {
+    alert("게시글 작성이 취소되었습니다.");
+    history.goBack();
+  };
+
   return (
     <StyledPostForm>
       <form
@@ -169,6 +192,6 @@ const cancelHandler = () => {
       </form>
     </StyledPostForm>
   );
-}
+};
 
 export default PostForm;

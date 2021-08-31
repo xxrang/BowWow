@@ -21,18 +21,20 @@ function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
         data,{withCredentials: true,}
       )
       .then((res) => {
-        console.log("첫콘솔", res.data.data.userinfo);
+        console.log("첫콘솔", res.data.data.accesstoken);
+        console.log("refresh", res.data.data.refreshtoken)
         // setHasAccessToken(res.data);
         setIsLogedIn(res.data.data.userinfo.id);
         loginHandler(res.data.data.userinfo.id);
-
+        document.cookie = "accesstoken" + "=" + res.data.data.accesstoken;
+        document.cookie = "refreshtoken" + "=" + res.data.data.refreshtoken;
+        console.log(document.cookie.split(" "));
         history.push("/");
       })
       .catch((err) => {
         console.log("login에러", err);
         alert("로그인에 실패하였습니다.")
       });
-
   };
 
   return (
