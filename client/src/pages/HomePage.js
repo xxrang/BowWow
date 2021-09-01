@@ -30,7 +30,7 @@ function HomePage({
     window.scrollTo({
       top: navBar.offsetTop,
       behavior: "smooth",
-    });
+    })
     setScrollY(navBar); // ScrollY 의 값을 초기화
   };
   /*로고 scroll 구현*/

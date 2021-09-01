@@ -26,7 +26,7 @@ const tickle = keyframes`
     transform: translateX(10%);
   }
 `
-export const StyledNeedLogin = styled.section`
+export const StyledModal = styled.section`
 >.modal {
   top: 0;
   right: 0;

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import NeedLogin from '../NeedLogin'
+import Modal from '../Modal'
 import useInput from '../../hooks/useInput'
 import { StyledViewPostComment } from './StyledViewPost';
 import axios from 'axios';
@@ -10,68 +10,69 @@ function ViewPostComment({
   inputRef,
   commentInfo,
   setCommentInfo,
-  showButton,
   postId,
-  userInfo,
-  hasUserId
+  userId,
+  isLogedIn
 }) {
-
-  console.log(commentInfo)
-
+  
   const [comment, onChangeComment, setComment] = useInput("");
   // 모달
   const [openModal, setOpenModal] = useState(false);
+  const [modalSuccess , setModalSuccess] = useState(false);
   const closeModal = () => {
-    setOpenModal((prev) => !prev);
+    setOpenModal(false);
   };
 
-  const addCommentHandler = useCallback((e) => {
+  const addCommentHandler = useCallback(
+    async (e) => {
       e.preventDefault();
-      if(comment !==''){
-        axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,{
-          headers: {
-              accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
-              refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
-              },
-          })
-          .then((res)=>{
-            const userData = {
-              userId : res.data.data.userinfo,
-              content : comment,
-              postId : postId ,
-            }
-            // 잘 받아오면 userData 에 유저코멘트 정보를 담아주는거임. 이거를 포스트요청 보내.
-            return axios.post( `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments`,
-              userData,
+
+      if (comment !== "") {
+        const userData = {
+          userId: userId,
+          content: comment,
+          postId: postId,
+        };
+        // console.log("userData", userData);
+        return await axios
+          .post(
+            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments`,
+            userData,
             {
               headers: { "Content-Type": "application/json" },
-            },)
-            .then((res)=>{
-              setComment("");
-              return axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${res.data.data.posts_id}`
+            }
+          )
+          .then((res) => {
+            // console.log("res::::", res.data);
+            setComment("");
+            // console.log("postId,,,", postId);
+            axios
+              .get(
+                `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${postId}`
               )
-              .then((data)=>{
-                console.log(data.data.data);
-                setCommentInfo(data.data.data.comment.user);
+              .then((res) => {
+                // console.log("postsComments", res.data.data.comment);
+                setCommentInfo(res.data.data.comment.reverse());
               })
-              .catch((err)=>{
-                console.log('comment 작성 후 get 요청 실패===', err)
-              })
-            })
-            .catch((err)=>{
-              console.log('post 요청 댓글 실패 ======' ,err)
-            })
+              .catch((err) => {
+                console.log(err);
+              });
           })
-        .catch((err)=>{
-          console.log('댓글 auth 실패=======' , err)
-        })
+          .catch((err) => {
+            console.log("post 요청 댓글 실패 ======", err);
+          });
       }
-},[comment, postId, setComment, setCommentInfo]);
+      // 잘 받아오면 userData 에 유저코멘트 정보를 담아주는거임. 이거를 포스트요청 보내.
+      // setCommentInfo([…commentInfo, res.data.data]);
+    },
+    [comment, postId, setComment, setCommentInfo, userId]
+  );
 
   //댓글삭제
   const removeCommentHandler = useCallback((id,comment_id) => {
     // console.log(id,comment_id);
     // console.log('===삭제코멘트',commentId);
+    setOpenModal(true);
       return axios.get(
         `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
         {
@@ -97,7 +98,7 @@ function ViewPostComment({
             setCommentInfo(filtered);
           })
           .catch((err)=>{
-            alert('본인이 작성한 글만 삭제가능합니다.')
+            setModalSuccess(true)
             console.log('remove comment오류',err)
           })
         }
@@ -121,25 +122,22 @@ function ViewPostComment({
                     <div className="post-commnet-flexbox">
                       <img
                         className="profile-img"
-                        // src={el.user.image}
+                        src={el.user.image}
                         alt="img"
                       />
                       <div>
                         <p className="post-comment-nickname">
-                          {/* {el.user.nickname} */}
+                          {el.user.nickname}
                         </p>
                         <p className="post-comment-date">
-                          {/* {el.updatedAt.split('T')[0].replaceAll('-','.')} */}
+                          {el.updatedAt.split('T')[0].replaceAll('-','.')}
                         </p>
                       </div>
-                      <button
-                        onClick={() => {
+                      <button onClick={() => {
                           removeCommentHandler(el.user_id, el.id);
                         }}
-                        className="remove-button"
-                      >
-                        삭제
-                      </button>
+                        className="remove-button">
+                        삭제</button>
                     </div>
                     <div className="post-comment-content">{el.content}</div>
                   </li>
@@ -148,7 +146,7 @@ function ViewPostComment({
           </ul>
         </div>
 
-                <form
+          <form
           className="flex-box"
           onSubmit={(e) => {
             addCommentHandler(e);
@@ -164,13 +162,22 @@ function ViewPostComment({
             className="post-comment-text"
             placeholder="100자 이내로 댓글 입력해주세요."
           />
-
-          <button className="post-comment-text-submit">입력</button>
+          <button onClick = {()=>{setOpenModal(true)}} className="post-comment-text-submit">입력</button>
         </form>
       </div>
-      <NeedLogin 
+
+      {!isLogedIn ? 
+      <Modal 
       openModal={openModal} 
-      closeModal={closeModal}></NeedLogin>
+      closeModal={closeModal}
+      modalSuccess = {modalSuccess}
+      modalText = '로그인이 필요한 서비스입니다.'
+      >
+      </Modal>
+      :
+      null
+      }
+
     </StyledViewPostComment>
   );
 }

@@ -95,7 +95,7 @@ const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
         });
     },
 
-    [title, mobile, content]
+    [imageFile, title, category, date, location, content, mobile, imgCheck]
   );
 
   const cancelHandler = () => {
