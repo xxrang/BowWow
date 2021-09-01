@@ -6,7 +6,7 @@ const ProfileList = ({ userPosts }) => {
   console.log("프로파일 리스트:", userPosts)
   // if (userPosts.length === 0) return null;
   if (userPosts.length === 0) return null;
-  
+  // const update = (updatedAt || "").split("T")[0].replaceAll("-", ".");
   return (
     <StyledProfileList>
       <h2>내 글 목록</h2>
@@ -17,7 +17,7 @@ const ProfileList = ({ userPosts }) => {
               <StyledProfileListItem key={post.id}>
                 <div className="list-item-wrapper">
                   <h4>{post.title}</h4>
-                  <div>{post.updatedAt}</div>
+                  <div>{(post.updatedAt || "").split("T")[0].replaceAll("-",".")}</div>
                 </div>
                 <p>{post.content}</p>
               </StyledProfileListItem>

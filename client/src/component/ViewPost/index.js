@@ -6,9 +6,8 @@ import axios from "axios";
 axios.defaults.withCredentials=true;
 
 function ViewPost({ 
-  hasAccessToken, 
-  logoutHandler, postId, isLogedIn ,
-  hasUserId,setHasUserId }) {
+  postId, isLogedIn ,
+  setHasUserId }) {
   const needLoginHandler = () => {
     console.log("no");
   };
@@ -56,12 +55,6 @@ const getAuth = async () => {
         { withCredentials: true }
       )
       .then((res) => {
-        // console.log("--------res.data-------", res.data);
-        // ! hasAccessToken에서 유저아이디를 뽑아내고, 포스트의 유저아이디가 같을 경우에 버튼을 보여준다.
-        // ! 이걸 확인하면 버튼이 보여지면 포스트에딧이나 삭제에도 문제가 없다.
-        // ! 다른 사람은 버튼을 보지못하니까
-        // ! 이건 언제 하느냐....? get요청하고, 거기서 유저정보 받아오면
-
         setUserInfo({
           userId: res.data.data.posts.user.id,
           nickname: res.data.data.posts.user.nickname,
@@ -101,8 +94,6 @@ const getAuth = async () => {
             } else {
               setShowButton(false);
             }
-            // console.log("auth 유저정보", res.data.data.userinfo);
-            // console.log("유저인포-유저아이디", userInfo.userId);
           })
           .catch((err) => {
             console.log("auth에러", err);
@@ -118,7 +109,6 @@ const getAuth = async () => {
   return (
     <StyledViewPost>
       <ViewPostContent
-        hasAccessToken={hasAccessToken}
         postId={postId}
         userInfo={userInfo}
         postInfo={postInfo}
@@ -132,7 +122,6 @@ const getAuth = async () => {
         needLoginHandler={needLoginHandler}
         setCommentInfo={setCommentInfo}
         loginModalClick={loginModalClick}
-        hasAccessToken={hasAccessToken}
         commentInfo={commentInfo}
         postId={postId}
         userInfo={userInfo}

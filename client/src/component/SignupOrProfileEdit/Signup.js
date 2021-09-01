@@ -6,7 +6,10 @@ import UserImgUpload from "./UserImgUpload";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
 
+
 const SignUp = () => {
+
+
   //* image preview
   const [userImage, setUserImage] = useState(camera);
   const [imgCheck, setImgCheck] = useState("false");
@@ -31,9 +34,18 @@ const SignUp = () => {
   const [introduce, onChangeIntroduce] = useInput("");
 
   //*user data password
-  const [password, onChangePassword] = useInput("");
+  const [password, setPassword] = useState("");
+  const [passwordRegError, setPasswordRegError] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  
+  const onChangePassword = useCallback((e) => {
+    setPassword(e.target.value);
+    let pwRegExp = /^[a-zA-Z0-9]{6,16}$/;
+    console.log(pwRegExp.test(e.target.value));
+    setPasswordRegError(!pwRegExp.test(e.target.value));
+},[])
+
   const onChangePasswordCheck = useCallback(
     (e) => {
       setPasswordCheck(e.target.value);
@@ -106,6 +118,11 @@ const SignUp = () => {
           onChange={onChangePassword}
           required
         />
+        {passwordRegError ? (
+          <ErrorMessage>
+            "비밀번호는 최소 6자리에서 16자리의 영문,숫자 조합이어야 한다."
+          </ErrorMessage>
+        ) : null}
         <label htmlFor="passwordCheck">비밀번호 확인</label>
         <input
           name="passwordCheck"

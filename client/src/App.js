@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch, useHistory} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import PostFormPage from "./pages/PostFormPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -10,6 +10,7 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import PostEditPage from "./pages/PostEditPage";
 import axios from 'axios';
+
 
 export const END_POINTS = "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com";
 //루트만 짜기
@@ -103,6 +104,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        
         <Switch>
           <Route exact path="/">
             <HomePage
@@ -156,14 +158,14 @@ function App() {
               setNavString={setNavString}
               setPostId={setPostId}
               postId={postId}
+              isLogedIn={isLogedIn}
               setIsLogedIn={setIsLogedIn}
             />
           </Route>
           <Route path="/posts">
             <ViewPostPage
-              hasUserId = {hasUserId}
+              hasUserId={hasUserId}
               setHasUserId={setHasUserId}
-              
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}

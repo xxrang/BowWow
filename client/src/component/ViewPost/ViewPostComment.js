@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
-import NeedLogin from '../NeedLogin'
 import useInput from '../../hooks/useInput'
 import { StyledViewPostComment } from './StyledViewPost';
 import axios from 'axios';
+import Modal from "../Modal";
 axios.default.withCredentials = true
 // import userPic from "../../images/bros_blank.jpeg";
 
@@ -182,7 +182,7 @@ function ViewPostComment({
           </ul>
         </div>
       </div>
-      <NeedLogin openModal={openModal} closeModal={closeModal}></NeedLogin>
+      <Modal openModal={openModal} closeModal={closeModal}></Modal>
     </StyledViewPostComment>
   );
 }

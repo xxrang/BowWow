@@ -24,6 +24,8 @@ function ViewPostContent({
   const { nickname, userImage } = userInfo;
 
   const { title, mobile, content, date, updatedAt, location, image, userId } = postInfo;
+  const update = (updatedAt || "").split("T")[0].replaceAll("-", ".");
+    // console.log(update);
   // console.log("포스트컨텐트에:", postInfo);
   // console.log(updatedAt);
   // let newDate = calulateDate(updatedAt).then((res) => res);
@@ -67,7 +69,6 @@ function ViewPostContent({
       alert("로그인이 필요합니다.")
     }
   };
-  // console.log(updatedAt)
   return (
     <StyledViewPostContent>
       <StyledViewPostProfile>
@@ -79,7 +80,7 @@ function ViewPostContent({
             <h2>{title}</h2>
             <p>
               {nickname}
-              <span>{updatedAt}</span>
+              <span>{update}</span>
             </p>
           </div>
           {showButton ? (
