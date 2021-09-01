@@ -28,6 +28,7 @@ const ServiceList = ({ setPostId, slice }) => {
             id="columns"
             className={"service-img-" + el.post.id}
           >
+
             <Fade top>
               <figure className="pic">
                 <img src={el.post.image} alt="dog-img" />

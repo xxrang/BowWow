@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage";
 import PostEditPage from "./pages/PostEditPage";
 // import { initialPosts } from "./component/dummyData";
 import axios from 'axios';
+
 export const END_POINTS = "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com";
 //루트만 짜기
 function App() {
@@ -21,6 +22,7 @@ const [hasUserId, setHasUserId] = useState(undefined);
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
   let history = useHistory();
+
   /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
   console.log("islogin", isLogedIn);
 
@@ -60,6 +62,7 @@ const [hasUserId, setHasUserId] = useState(undefined);
 
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {
+
     // console.log("다큐먼트 쿠키", document.cookie);
     // console.log("accesstoken", document.cookie.split(" ")[1].split("=")[1].split(";")[0])
     // console.log("refreshtoken", document.cookie.split(" ")[2].split("=")[1]);
@@ -79,6 +82,7 @@ const [hasUserId, setHasUserId] = useState(undefined);
     }).catch((err) => {
       console.log("쿠키오류",err);
     })
+
 
     // const storageSavedAccessToken =
     //   window.localStorage.getItem("accessToken") || undefined;
@@ -125,6 +129,7 @@ const [hasUserId, setHasUserId] = useState(undefined);
               setNavString={setNavString}
               isLogedIn={isLogedIn}
               setIsLogedIn={setIsLogedIn}
+
             />
           </Route>
           <Route path="/postedit">
@@ -134,6 +139,7 @@ const [hasUserId, setHasUserId] = useState(undefined);
               setPostsData={setPostsData}
               setNavString={setNavString}
               postId={postId}
+              isLogedIn = {isLogedIn}
             />
           </Route>
           <Route path="/profile">
@@ -142,16 +148,20 @@ const [hasUserId, setHasUserId] = useState(undefined);
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
+              isLogedIn = {isLogedIn}
+              setIsLogedIn ={setIsLogedIn}
             />
           </Route>
           <Route path="/profileedit">
             <ProfileEditPage
               setHasUserId={setHasUserId}
+
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
               setPostId={setPostId}
               postId={postId}
+              setIsLogedIn ={setIsLogedIn}
             />
           </Route>
           <Route path="/posts">
@@ -162,6 +172,7 @@ const [hasUserId, setHasUserId] = useState(undefined);
               setNavString={setNavString}
               postId={postId}
               isLogedIn={isLogedIn}
+              setIsLogedIn = {setIsLogedIn}
             />
           </Route>
           <Route path="/login">

@@ -10,7 +10,7 @@ import axios from "axios";
 
 axios.defaults.withCredentials = true;
 
-const PostForm = ({ hasAccessToken, isLogedIn, setIsLogedIn }) => {
+const PostForm = ({ hasAccessToken, isLogedIn ,setIsLogedIn }) => {
   const history = useHistory();
 
   const [title, onChangeTitle] = useInput("");
@@ -87,7 +87,6 @@ const PostForm = ({ hasAccessToken, isLogedIn, setIsLogedIn }) => {
             .then((res) => {
               console.log("포스트폼 작성 완료버튼", res.data.data);
               alert("게시글이 작성되었습니다.");
-              setIsLogedIn(res.data.data.posts);
               window.location.replace("/");
               
             })
@@ -101,6 +100,7 @@ const PostForm = ({ hasAccessToken, isLogedIn, setIsLogedIn }) => {
         });
     },
     [category, content, date, imgCheck, location, mobile, setIsLogedIn, title]
+
   );
 
   const cancelHandler = () => {

@@ -10,6 +10,7 @@ const PostFormPage = ({
   setNavString,
   isLogedIn,
   setIsLogedIn,
+
 }) => {
   return (
     <>
@@ -19,11 +20,12 @@ const PostFormPage = ({
         setPostsData={setPostsData}
         setNavString={setNavString}
         isLogedIn={isLogedIn}
+        setIsLogedIn = {setIsLogedIn}
       />
-      <PostForm
-        hasAccessToken={hasAccessToken}
-        isLogedIn={isLogedIn}
-        setIsLogedIn={setIsLogedIn}
+      <PostForm 
+      hasAccessToken={hasAccessToken} 
+      isLogedIn={isLogedIn} 
+      setIsLogedIn = {setIsLogedIn}
       />
       <Footer />
     </>

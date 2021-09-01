@@ -14,18 +14,16 @@ const NavBar = ({
   handleTop,
   logoutHandler,
   isLogedIn,
-  
 }) => {
 // console.log("navlogin", isLogedIn)
+
   let history = useHistory();
 
   const selectNavHandler = (string) => {
-    //console.log("네브바 선택::::",string)
+    console.log("네브바 선택::::",string)
     const postsString = string;
     setNavString(postsString);
     history.push("/");
-    //   setPostsData(datas);
-    //   history.push("/");
   };
 
   const menu = [{ name: "service" }, { name: "search" }, { name: "volunteer" }];
@@ -35,9 +33,9 @@ const NavBar = ({
       history.push('/postform')
     } else {
       alert("로그인이 필요한 서비스입니다.");
+
     }
   },[history, isLogedIn])
-
 
   return (
     <StyledNavBar id="navBar">
@@ -66,6 +64,7 @@ const NavBar = ({
           </button>
         </div>
         {!isLogedIn ? (
+
           <div className="rightNav">
             <Link to="/login">
               <button>로그인</button>
