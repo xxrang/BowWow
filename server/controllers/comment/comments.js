@@ -23,15 +23,14 @@ module.exports = (app) => {
     }),
     
     router.post('/', async (req, res) => {
-        await comment.create({
+        const data = await comment.create({
             content: req.body.content,
             user_id: req.body.userId,
-            //user_id 관계키 시퀄라이즈 수정하기
             posts_id: req.body.postId
-            }).then((data) => {
-            res.status(201).send({message: 'ok', data})
+            , attributes: { exclude: ['content','user_id']}
         })
-    })
+            res.status(201).send({message: 'ok', data})
+    }),
 
     router.delete('/', async (req, res) => {
         await comment.destroy({

@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
     //const refresh = req.headers['refreshtoken'];
     
     const check = checkAccess(access);
-    console.log("***************",req.headers)
+    console.log("***************",res.headers)
     if(check){ //액세스 토큰이 유효하면
         res.status(200).send({message: 'token ok', data: {userinfo: check.id}})
     } else { //액세스 토큰이 유효하지 않으면
@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         } else {
             delete userdata.password
             const accessToken = generateAccessToken(userdata);
-            sendAccessToken(res, accessToken);
+            res.cookie('accessToken',accessToken,{httpOnly:true})
             res.status(200).send({message: 'token request ok', data: { userInfo : userdata}})
         }
     }

@@ -4,25 +4,23 @@ require('dotenv').config();
 module.exports = {
 
     generateAccessToken: (data) => {
-        let token = sign(data, process.env.ACCESS_SECRET, { expiresIn: "3s" })
+        let token = sign(data, process.env.ACCESS_SECRET, { expiresIn: "1m" })
         return token;
     },
 
     generateRefreshToken: (data) => {
-        let token = sign(data, process.env.REFRESH_SECRET, { expiresIn: "5s" })
+        let token = sign(data, process.env.REFRESH_SECRET, { expiresIn: "5m" })
         return token
     },
 
     sendAccessToken: (res, accessToken) => {
-        res.cookie('accessToken', accessToken, {
-            domain:'localhost',sameSite:'none',httpOnly:true,maxAge:`${500*60*60*24*30}`,overwrite:true,secure:true,authorized:true,path:'/'
-        }).set({'Access-Control-Allow-Credentials':true})
+        res.cookie('accessToken', accessToken, { httpOnly: true })
     },
 
     sendRefreshToken : (res, refreshToken) => {
-       res.cookie('refreshToken', refreshToken, {
-           domain:'localhost',sameSite:'none',httpOnly:true,maxAge:`${1000*60*60*24*30}`,overwrite:true,secure:true,authorized:true,path: '/'
-       }).set({'Access-Control-Allow-Credentials':true})
+    //    res.cookie('refreshToken', refreshToken, {
+    //        domain:'localhost',sameSite:'none',httpOnly:true,maxAge:`${1000*60*60*24*30}`,overwrite:true,secure:true,authorized:true,path: '/'})
+        res.cookie('refreshToken', refreshToken, { httpOnly: true })
     },
 
     checkRefresh: (refreshToken) => {

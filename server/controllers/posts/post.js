@@ -11,7 +11,7 @@ const application = app;
                 include : [{model: user}, {model: category_content}]})
             const data2 = await comment.findAll({ where: { posts_id: id },
                 include: [{ model: user }]})
-                delete data1.password
+                delete data1.dataValues.password
                 if(data2.length === 1){
                 res.status(200).send({message: 'ok', data : { posts: data1, comment: [ data2 ]}})
                 } else {
@@ -24,54 +24,36 @@ const application = app;
             
             if(!title || !mobile || !content){
                 res.status(422).send({message: 'insufficient parameters supplied'})
-            }
-            if(req.body.category === 'service' ){
-                if(req.body.imgCheck === 'false'){ //이미지 없으면?
-              const data = await post.create({
-                    image: defaultImage, //기본이미지
-                    title: title,
-                    mobile: mobile,
-                    content: content,
-                    user_id: req.body.userId
-                    })
-                const data2 = await category_content.create({
-                        category_id: 1,
-                        posts_id: data.id
-                    })
-                    res.status(201).send({messsage: 'post write success', data, data2})
-                } else { //이미지 있으면
+            } else {
+            if(req.body.category === 'service'){
+            //     if(req.body.imgCheck === 'false'){ //이미지 없으면?
+            //   const data = await post.create({
+            //         image: defaultImage, //기본이미지
+            //         title: title,
+            //         mobile: mobile,
+            //         content: content,
+            //         user_id: req.body.userId,
+            //         attributes: { exclude : ['date','location']}})
+            //     const data2 = await category_content.create({
+            //             category_id: 1,
+            //             posts_id: data.id
+            //         })
+            //         res.status(201).send({messsage: 'post write success', data, data2})
+            //     } else { //이미지 있으면
                 const data = await post.create({
                         image: req.file.location,
                         title: title,
                         mobile: mobile,
                         content: content,
-                        user_id: req.body.userId
-                        })
+                        user_id: req.body.userId,
+                        attributes: { exclude : ['date','location']}})
                 const data2 = await category_content.create({
                         category_id: 1,
                         posts_id: data.id
                     })
                     res.status(201).send({message: "post write success", data, data2})
-                } 
-                
-                if(req.body.category === 'volunteer'){
-                    if(req.body.imgCheck === 'false'){ //이미지 없으면?
-                const data = await post.create({
-                        image: defaultImage, //기본이미지
-                        title: title,
-                        mobile: mobile,
-                        content: content,
-                        date: date,
-                        location: location,
-                        user_id: req.body.userId
-                        })
-                const data2 = await category_content.create({
-                            category_id: 2,
-                            posts_id: data.id
-                        })
-                        res.status(201).send({messsage: 'post write success', data, data2})
-                    } else { //이미지 있으면
-                const data = await post.create({
+                } else {
+                    const data = await post.create({
                         image: req.file.location,
                         title: title,
                         mobile: mobile,
@@ -86,8 +68,27 @@ const application = app;
                         })
                         res.status(201).send({message: "post write success", data, data2})
                     }}
-                }}
-            ),
+                } 
+                
+                
+                //     if(req.body.imgCheck === 'false'){ //이미지 없으면?
+                // const data = await post.create({
+                //         image: defaultImage, //기본이미지
+                //         title: title,
+                //         mobile: mobile,
+                //         content: content,
+                //         date: date,
+                //         location: location,
+                //         user_id: req.body.userId
+                //         })
+                // const data2 = await category_content.create({
+                //             category_id: 2,
+                //             posts_id: data.id
+                //         })
+                //         res.status(201).send({messsage: 'post write success', data, data2})
+                //     } else { //이미지 있으면
+                
+              ),
 
         router.patch('/', upload.single('input-image'), async (req, res) => {
             const {title, date, location, content, mobile} = req.body;
@@ -101,7 +102,15 @@ const application = app;
                 mobile: mobile,
                 image: image
             }, {where : {id : req.query.id}})
-            .then((data) => {
+            .then( async () => {
+            if(req.body.category === 'service'){
+                await category_content.update({
+                    category_id: 1}, {where: { posts_id: req.query.id}})
+                } else {
+                    await category_content.update({
+                        category_id: 2}, {where: { posts_id: req.query.id}})
+                }
+            }).then((data) =>{
                 if(data){
                     res.status(200).send({message: 'success to update'})
                 } else {
