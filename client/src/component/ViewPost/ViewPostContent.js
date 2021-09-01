@@ -23,7 +23,9 @@ function ViewPostContent({
   }
   const { nickname, userImage } = userInfo;
 
-  const { title, mobile, content, date, updatedAt, location, image, userId } = postInfo;
+  const { title, mobile, content, date, updatedAt ,location, image, userId } = postInfo;
+  // const changeTypeDate = postInfo.updatedAt.split('T')[0].replaceAll('-','.');
+  console.log(postInfo)
   // console.log("포스트컨텐트에:", postInfo);
   // console.log(updatedAt);
   // let newDate = calulateDate(updatedAt).then((res) => res);
@@ -67,7 +69,7 @@ function ViewPostContent({
       alert("로그인이 필요합니다.")
     }
   };
-  // console.log(updatedAt)
+  
   return (
     <StyledViewPostContent>
       <StyledViewPostProfile>

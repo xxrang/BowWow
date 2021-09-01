@@ -16,6 +16,8 @@ function ViewPostComment({
   hasUserId
 }) {
 
+  console.log(commentInfo)
+
   const [comment, onChangeComment, setComment] = useInput("");
   // 모달
   const [openModal, setOpenModal] = useState(false);
@@ -49,8 +51,8 @@ function ViewPostComment({
               return axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${res.data.data.posts_id}`
               )
               .then((data)=>{
-                // console.log(data);
-                setCommentInfo(data.data.data.comment.reverse());
+                console.log(data.data.data);
+                setCommentInfo(data.data.data.comment.user);
               })
               .catch((err)=>{
                 console.log('comment 작성 후 get 요청 실패===', err)
@@ -64,7 +66,7 @@ function ViewPostComment({
           console.log('댓글 auth 실패=======' , err)
         })
       }
-});
+},[comment, postId, setComment, setCommentInfo]);
 
   //댓글삭제
   const removeCommentHandler = useCallback((id,comment_id) => {
@@ -88,8 +90,6 @@ function ViewPostComment({
           }
           )
           .then((res)=>{
-            // console.log(res.data);
-            // console.log(commentInfo)
             const filtered = commentInfo.filter(
               (comment) => comment_id !== comment.id
             );
@@ -112,7 +112,43 @@ function ViewPostComment({
       <div className="post-comment-form-wrapper">
         <i className="fas fa-comment-dots"> 댓글 </i>
 
-        <form
+        <div className="list-item-scroll">
+          <ul className="post-comment-wrapper">
+            {commentInfo &&
+              commentInfo.map((el) => {
+                return (
+                  <li key={el.id} className="post-comment-list">
+                    <div className="post-commnet-flexbox">
+                      <img
+                        className="profile-img"
+                        // src={el.user.image}
+                        alt="img"
+                      />
+                      <div>
+                        <p className="post-comment-nickname">
+                          {/* {el.user.nickname} */}
+                        </p>
+                        <p className="post-comment-date">
+                          {/* {el.updatedAt.split('T')[0].replaceAll('-','.')} */}
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => {
+                          removeCommentHandler(el.user_id, el.id);
+                        }}
+                        className="remove-button"
+                      >
+                        삭제
+                      </button>
+                    </div>
+                    <div className="post-comment-content">{el.content}</div>
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
+
+                <form
           className="flex-box"
           onSubmit={(e) => {
             addCommentHandler(e);
@@ -131,42 +167,6 @@ function ViewPostComment({
 
           <button className="post-comment-text-submit">입력</button>
         </form>
-
-        <div className="list-item-scroll">
-          <ul className="post-comment-wrapper">
-            {commentInfo &&
-              commentInfo.map((el) => {
-                return (
-                  <li key={el.id} className="post-comment-list">
-                    <div className="post-commnet-flexbox">
-                      <img
-                        className="profile-img"
-                        // src={el.user.image}
-                        alt="img"
-                      />
-                      <div>
-                        <p className="post-comment-nickname">
-                          {el.user.nickname}
-                        </p>
-                        <p className="post-comment-date">
-                          {el.updatedAt.split('T')[0].replaceAll('-','.')}
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          removeCommentHandler(el.user_id, el.id);
-                        }}
-                        className="remove-button"
-                      >
-                        삭제
-                      </button>
-                    </div>
-                    <div className="post-comment-content">{el.content}</div>
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
       </div>
       <NeedLogin 
       openModal={openModal} 
