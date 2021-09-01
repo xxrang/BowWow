@@ -9,7 +9,6 @@ import {
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
-// import { calulateDate } from '../../hooks/calulateDate';
 
 function ViewPostContent({
   postId,
@@ -28,32 +27,45 @@ function ViewPostContent({
   // console.log("포스트컨텐트에:", postInfo);
   // console.log(updatedAt);
   // let newDate = calulateDate(updatedAt).then((res) => res);
-  const deletePostHandler = () => {
-    axios.get(
-      `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
-      {
-        headers: {
-          accesstoken: document.cookie.split(" ")[1].split("=")[1],
-          refreshtoken: document.cookie.split(" ")[2].split("=")[1],
-        },
-      }
-    ).then(async (res) => {
-      console.log("viewpost-content-auth--", res.data.data);
-      if (res.data.data.userinfo === userId) {
-        return await axios.delete(
-            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`
-        ).then((res) => {
-            console.log("삭제", res.data);
-            alert("삭제되었습니다.");
-            window.location.replace("/");
-          })
-      } else {
-        alert("게시물을 삭제할 수 없습니다.")
-      }
-    }).catch((err) => {
-        console.log(err);
-        alert("게시글 삭제에 실패했습니다.");
-      });
+  const deletePostHandler = async () => {
+    if (isLogedIn) {
+      return axios
+        .get(
+          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+          {
+            headers: {
+              accesstoken: document.cookie
+                .split("accesstoken=")[1]
+                .split(";")[0],
+              refreshtoken: document.cookie
+                .split("refreshtoken=")[1]
+                .split(";")[0],
+            },
+          }
+        )
+        .then((res) => {
+          console.log("viewpost-content-auth--", res.data.data);
+          if (res.data.data.userinfo === userId) {
+            return axios
+              .delete(
+                `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`
+              )
+              .then((res) => {
+                console.log("삭제", res.data);
+                alert("삭제되었습니다.");
+                window.location.replace("/");
+              });
+          } else {
+            alert("게시물을 삭제할 수 없습니다.");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("게시글 삭제에 실패했습니다.");
+        });
+    } else {
+      alert("로그인이 필요합니다.")
+    }
   };
   // console.log(updatedAt)
   return (
@@ -88,7 +100,7 @@ function ViewPostContent({
       </StyledViewPostProfile>
       <StyledViewPostContentOne>
         <div className="img-wrapper">
-          <img src={image} alt="백구" />
+          <img src={image} alt="post-info-pic" />
         </div>
         <div className="post-info-all">
           <div className="post-info-two">

@@ -4,13 +4,12 @@ import Login from '../component/Login';
 import Footer from '../component/Footer';
 
 function LoginPage({
-  setHasAccessToken,
-  hasAccessToken,
   loginHandler,
   setPostsData,
   setNavString,
   setIsLogedIn,
   isLogedIn,
+  setHasUserId,
 }) {
   // curNav = { curNav };
   // selectNavHandler = { selectNavHandler };
@@ -24,8 +23,8 @@ function LoginPage({
       />
       <Login
         loginHandler={loginHandler}
-        setHasAccessToken={setHasAccessToken}
         setIsLogedIn={setIsLogedIn}
+        setHasUserId={setHasUserId}
       />
       <Footer />
     </>

@@ -4,24 +4,24 @@ import Footer from "../component/Footer";
 import PostEdit from "../component/PostFormOrEdit/PostEdit";
 
 const PostEditPage = ({
-  hasAccessToken,
   logoutHandler,
   setPostsData,
   setNavString,
   postId,
+  hasUserId,
+  isLogedIn,
+  
 }) => {
   return (
     <>
       <NavBar
-        hasAccessToken={hasAccessToken}
+        hasUserId={hasUserId}
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setNavString={setNavString}
+        isLogedIn={isLogedIn}
       />
-      <PostEdit
-        hasAccessToken={hasAccessToken}
-        postId={postId}
-      />
+      <PostEdit hasAccessToken={hasUserId} postId={postId} />
       <Footer />
     </>
   );

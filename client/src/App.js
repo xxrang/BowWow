@@ -23,20 +23,13 @@ function App() {
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
   // let history = useHistory();
 
+  console.log("hasUserId- app.js", hasUserId);
   /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
-  console.log("islogin", isLogedIn);
+  // console.log("islogin", isLogedIn);
 
   // console.log("data------", postId);
   useEffect(() => {
-    // const { service, volunteer } = initialPosts; //데이터를 받아왔다 친다.
-    // console.log("app1:", postsData);
-    // console.log("app2:", navString);
-    // if (navString === "service" || navString === "") {
-    //   setPostsData(service);
-    // } else if (navString === "volunteer") {
-    //   setNavString("volunteer");
-    //   setPostsData(volunteer);
-    // }
+    
     if (navString === "" || navString === "service") {
       return axios
         .get(
@@ -48,7 +41,7 @@ function App() {
           const data = res.data.data.posts;
           setPostsData(data);
         });
-    }else if (navString === "volunteer") {
+    } else if (navString === "volunteer") {
       return axios
         .get(`${END_POINTS}/volunteer`, { withCredentials: true })
         .then((res) => {
@@ -89,18 +82,22 @@ function App() {
     // // console.log(storageSavedAccessToken);
     // setHasAccessToken(storageSavedAccessToken);
   }, [hasUserId]);
+  
+  
   //login핸들러
-  const loginHandler = (hasAccessToken) => {
+  const loginHandler = (userInfoId) => {
     setIsLogedIn(true);
-    setHasUserId(hasAccessToken);
+    setHasUserId(userInfoId);
     console.log("로그인 핸드러", isLogedIn);
   };
   //logout핸들러
   const logoutHandler = () => {
     setHasUserId(undefined);
     setIsLogedIn(false);
-    document.cookie = "accesstoken" + "=" + null;
-    document.cookie = "refreshtoken" + "=" + null;
+
+    document.cookie = `accesstoken=${null}`;
+    document.cookie = `refreshtoken=${null}`;
+
     window.location.href = "http://localhost:3000";
   };
 
@@ -130,7 +127,6 @@ function App() {
               setNavString={setNavString}
               isLogedIn={isLogedIn}
               setIsLogedIn={setIsLogedIn}
-
             />
           </Route>
           <Route path="/postedit">
@@ -140,7 +136,7 @@ function App() {
               setPostsData={setPostsData}
               setNavString={setNavString}
               postId={postId}
-              isLogedIn = {isLogedIn}
+              isLogedIn={isLogedIn}
             />
           </Route>
           <Route path="/profile">
@@ -149,20 +145,19 @@ function App() {
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
-              isLogedIn = {isLogedIn}
-              setIsLogedIn ={setIsLogedIn}
+              isLogedIn={isLogedIn}
+              setIsLogedIn={setIsLogedIn}
             />
           </Route>
           <Route path="/profileedit">
             <ProfileEditPage
               setHasUserId={setHasUserId}
-
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
               setPostId={setPostId}
               postId={postId}
-              setIsLogedIn ={setIsLogedIn}
+              setIsLogedIn={setIsLogedIn}
             />
           </Route>
           <Route path="/posts">
@@ -175,15 +170,15 @@ function App() {
               setNavString={setNavString}
               postId={postId}
               isLogedIn={isLogedIn}
-              setIsLogedIn = {setIsLogedIn}
+              setIsLogedIn={setIsLogedIn}
             />
           </Route>
           <Route path="/login">
             <LoginPage
               isLogedIn={isLogedIn}
               loginHandler={loginHandler}
-              setHasUserId={setHasUserId}
               hasUserId={hasUserId}
+              setHasUserId={setHasUserId}
               setPostsData={setPostsData}
               setNavString={setNavString}
               setIsLogedIn={setIsLogedIn}

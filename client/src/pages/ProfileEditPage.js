@@ -10,6 +10,7 @@ const ProfileEditPage = ({
   setPostId,
   setPostsData,
   setNavString,
+  isLogedIn,
 }) => {
   return (
     <>
@@ -18,6 +19,7 @@ const ProfileEditPage = ({
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setNavString={setNavString}
+        isLogedIn={isLogedIn}
       />
       <ProfileEdit
         hasAccessToken={hasAccessToken}

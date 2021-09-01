@@ -30,7 +30,7 @@ function ViewPost({
 
   // console.log("커멘트인포!!!!!!", commentInfo);
   // console.log("포스트 인포:::-----", postInfo);
-  // console.log("postId",postId);
+
 
   useEffect(() => {
     inputRef.current.focus();
@@ -82,8 +82,8 @@ function ViewPost({
             } else {
               setShowButton(false);
             }
-            console.log("auth 유저정보", res.data.data.userinfo);
-            console.log("유저인포-유저아이디", userInfo.userId);
+            // console.log("auth 유저정보", res.data.data.userinfo);
+            // console.log("유저인포-유저아이디", userInfo.userId);
           })
           .catch((err) => {
             console.log("auth에러", err);

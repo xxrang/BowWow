@@ -4,28 +4,27 @@ import Footer from '../component/Footer';
 import PostForm from '../component/PostFormOrEdit/PostForm';
 
 const PostFormPage = ({
-  hasAccessToken,
   logoutHandler,
   setPostsData,
   setNavString,
   isLogedIn,
   setIsLogedIn,
-
+  hasUserId,
 }) => {
   return (
     <>
       <NavBar
-        hasAccessToken={hasAccessToken}
+        hasUserId={hasUserId}
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setNavString={setNavString}
         isLogedIn={isLogedIn}
-        setIsLogedIn = {setIsLogedIn}
+        setIsLogedIn={setIsLogedIn}
       />
-      <PostForm 
-      hasAccessToken={hasAccessToken} 
-      isLogedIn={isLogedIn} 
-      setIsLogedIn = {setIsLogedIn}
+      <PostForm
+        hasUserId={hasUserId}
+        isLogedIn={isLogedIn}
+        setIsLogedIn={setIsLogedIn}
       />
       <Footer />
     </>
