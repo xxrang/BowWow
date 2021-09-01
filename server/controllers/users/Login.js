@@ -1,6 +1,6 @@
 const { user } = require('../../models');
 const crypto = require('crypto');
-const { generateAccessToken, generateRefreshToken } = require('../tokenFunctions')
+const { generateAccessToken, generateRefreshToken, sendAccessToken, sendRefreshToken } = require('../tokenFunctions')
 require('dotenv').config();
 module.exports = async (req, res) => {
     
@@ -19,8 +19,8 @@ module.exports = async (req, res) => {
         // delete data.dataValues.nickname
         const accesstoken = generateAccessToken(data.dataValues); //id, email, createdAt
         const refreshtoken = generateRefreshToken(data.dataValues);
-        res.cookie('accessToken',accesstoken,{httpOnly:true,secure:true})
-        res.cookie('refreshToken',refreshtoken,{httpOnly:true,secure:true})
+        sendAccessToken(res, accesstoken);
+        sendRefreshToken(res, refreshtoken);
         res.status(200).send({message: 'login ok', data: {userinfo: data.dataValues, accesstoken: accesstoken, refreshtoken: refreshtoken}})
     }
 
