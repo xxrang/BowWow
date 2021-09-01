@@ -25,12 +25,27 @@ function ViewPost({
   const [userInfo, setUserInfo] = useState({});
   const [postInfo, setPostInfo] = useState({});
   const [commentInfo, setCommentInfo] = useState([]);
-
+const [userId, setUserId] = useState("");
   const [showButton, setShowButton] = useState(false);
 
   // console.log("커멘트인포!!!!!!", commentInfo);
   // console.log("포스트 인포:::-----", postInfo);
-
+const getAuth = async () => {
+  return await axios
+    .get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`, {
+      headers: {
+        accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+        refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+      },
+    })
+    .then((res) => {
+      console.log("auth", res.data.data);
+      setUserId(res.data.data.userinfo);
+    })
+    .catch((err) => {
+      console.log("auth에러", err);
+    });
+};
 
   useEffect(() => {
     inputRef.current.focus();
@@ -61,9 +76,9 @@ function ViewPost({
           date: res.data.data.posts.date,
           image: res.data.data.posts.image,
           updatedAt: res.data.data.posts.updatedAt,
-          userId: res.data.data.posts.user.id
+          userId: res.data.data.posts.user.id,
         });
-        // console.log('======왜안됨?===', res.data.data.comment.reverse())
+        console.log('======왜안됨?===', res.data.data.comment)
         setCommentInfo(res.data.data.comment.reverse());
 
         return axios
@@ -71,8 +86,12 @@ function ViewPost({
             `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
             {
               headers: {
-                accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
-                refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+                accesstoken: document.cookie
+                  .split("accesstoken=")[1]
+                  .split(";")[0],
+                refreshtoken: document.cookie
+                  .split("refreshtoken=")[1]
+                  .split(";")[0],
               },
             }
           )
@@ -92,8 +111,9 @@ function ViewPost({
       .catch((err) => {
         console.log("포스트보기요청 에러", err);
       });
-          
-  }, [hasAccessToken, postId, userInfo.userId]);
+    
+    getAuth()
+  }, [postId, setCommentInfo, userInfo.userId]);
 
   return (
     <StyledViewPost>
@@ -116,8 +136,8 @@ function ViewPost({
         commentInfo={commentInfo}
         postId={postId}
         userInfo={userInfo}
-        hasUserId = {hasUserId}
-        setHasUserId = {setHasUserId}
+        userId={userId}
+        setHasUserId={setHasUserId}
       />
     </StyledViewPost>
   );
