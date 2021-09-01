@@ -97,6 +97,7 @@ function ViewPostComment({
             setCommentInfo(filtered);
           })
           .catch((err)=>{
+            alert('본인이 작성한 글만 삭제가능합니다.')
             console.log('remove comment오류',err)
           })
         }
