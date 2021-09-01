@@ -25,7 +25,7 @@ function ViewPostContent({
   const { nickname, userImage } = userInfo;
 
   const { title, mobile, content, date, updatedAt, location, image, userId } = postInfo;
-  console.log("포스트컨텐트에:", postInfo);
+  // console.log("포스트컨텐트에:", postInfo);
   // console.log(updatedAt);
   // let newDate = calulateDate(updatedAt).then((res) => res);
   const deletePostHandler = () => {

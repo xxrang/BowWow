@@ -64,7 +64,6 @@ const NavBar = ({
           </button>
         </div>
         {!isLogedIn ? (
-
           <div className="rightNav">
             <Link to="/login">
               <button>로그인</button>

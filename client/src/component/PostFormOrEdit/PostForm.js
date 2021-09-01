@@ -47,7 +47,6 @@ const PostForm = ({ hasAccessToken, isLogedIn ,setIsLogedIn }) => {
       // console.log(location);
       // console.log("타켓", e.target[0]);
       e.preventDefault();
-
       // 하나로 합쳐줘서 보내준다.
 
       axios
@@ -55,13 +54,13 @@ const PostForm = ({ hasAccessToken, isLogedIn ,setIsLogedIn }) => {
           `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
           {
             headers: {
-              accesstoken: document.cookie.split(" ")[1].split("=")[1],
-              refreshtoken: document.cookie.split(" ")[2].split("=")[1],
+              accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+              refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
             },
           }
         )
         .then((res) => {
-          console.log("postform/auth:", res.data.data.userinfo);
+          // console.log("postform/auth:", res.data.data.userinfo);
           return res.data.data;
         })
         .then((data) => {
@@ -85,7 +84,7 @@ const PostForm = ({ hasAccessToken, isLogedIn ,setIsLogedIn }) => {
               }
             )
             .then((res) => {
-              console.log("포스트폼 작성 완료버튼", res.data.data);
+              // console.log("포스트폼 작성 완료버튼", res.data.data);
               alert("게시글이 작성되었습니다.");
               window.location.replace("/");
               
@@ -99,7 +98,11 @@ const PostForm = ({ hasAccessToken, isLogedIn ,setIsLogedIn }) => {
           console.log("auth에러:", err);
         });
     },
-    [category, content, date, imgCheck, location, mobile, setIsLogedIn, title]
+    [ 
+      category, content, date, 
+      imgCheck, location, mobile, 
+      title
+    ]
 
   );
 

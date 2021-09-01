@@ -43,7 +43,11 @@ export const StyledNavBar = styled.nav`
         background-size: 100% 100%;
       }
     }
-    >a>.post{
+    >button{
+      border : none;
+      background: none;
+    }
+    >button > .post{
         background-image: linear-gradient(transparent calc(100% - 3px), #000 3px);
         background-repeat: no-repeat;
         background-size: 0% 100%;

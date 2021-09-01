@@ -17,11 +17,11 @@ export const END_POINTS = "http://ec2-15-165-235-48.ap-northeast-2.compute.amazo
 function App() {
 
   const [isLogedIn, setIsLogedIn] = useState(false);
-const [hasUserId, setHasUserId] = useState(undefined);
+  const [hasUserId, setHasUserId] = useState(undefined);
   const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
-  let history = useHistory();
+  // let history = useHistory();
 
   /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
   console.log("islogin", isLogedIn);
@@ -59,20 +59,21 @@ const [hasUserId, setHasUserId] = useState(undefined);
     }
   }, [navString]);
 
-
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {
 
-    // console.log("다큐먼트 쿠키", document.cookie);
-    // console.log("accesstoken", document.cookie.split(" ")[1].split("=")[1].split(";")[0])
-    // console.log("refreshtoken", document.cookie.split(" ")[2].split("=")[1]);
+    let accesstoken = document.cookie.includes('accesstoken')
+    let refreshtoken = document.cookie.includes('refreshtoken')
 
+    if (!accesstoken || !refreshtoken) {
+      return;
+    } else {
     axios.get(
       `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
       {
         headers: {
-          accesstoken: document.cookie.split(" ")[1].split("=")[1],
-          refreshtoken: document.cookie.split(" ")[2].split("=")[1],
+          accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+          refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
         },
       }
     ).then((res) => {
@@ -81,9 +82,8 @@ const [hasUserId, setHasUserId] = useState(undefined);
       }
     }).catch((err) => {
       console.log("쿠키오류",err);
-    })
-
-
+    });
+  }
     // const storageSavedAccessToken =
     //   window.localStorage.getItem("accessToken") || undefined;
     // // console.log(storageSavedAccessToken);
@@ -99,7 +99,8 @@ const [hasUserId, setHasUserId] = useState(undefined);
   const logoutHandler = () => {
     setHasUserId(undefined);
     setIsLogedIn(false);
-    window.localStorage.removeItem("accessToken");
+    document.cookie = "accesstoken" + "=" + null;
+    document.cookie = "refreshtoken" + "=" + null;
     window.location.href = "http://localhost:3000";
   };
 
@@ -166,7 +167,9 @@ const [hasUserId, setHasUserId] = useState(undefined);
           </Route>
           <Route path="/posts">
             <ViewPostPage
+              hasUserId = {hasUserId}
               setHasUserId={setHasUserId}
+              
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}

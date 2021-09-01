@@ -21,8 +21,8 @@ function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
         data,{withCredentials: true,}
       )
       .then((res) => {
-        console.log("첫콘솔", res.data.data.accesstoken);
-        console.log("refresh", res.data.data.refreshtoken)
+        // console.log("첫콘솔", res.data.data.accesstoken);
+        // console.log("refresh", res.data.data.refreshtoken)
         // setHasAccessToken(res.data);
         // setIsLogedIn(res.data.data.userinfo.id);
         loginHandler(res.data.data.userinfo.id);
