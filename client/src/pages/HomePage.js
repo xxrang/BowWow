@@ -8,7 +8,7 @@ import Footer from '../component/Footer'
 import Search from '../component/Search'
 
 function HomePage({
-  hasAccessToken,
+  hasUserId,
   logoutHandler,
   setPostsData,
   postsData,
@@ -72,12 +72,11 @@ function HomePage({
         curNav={curNav}
         selectNavHandler={selectNavHandler}
         handleTop={handleTop}
-        hasAccessToken={hasAccessToken}
+        hasUserId={hasUserId}
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setNavString={setNavString}
         isLogedIn={isLogedIn}
-        setIsLogedIn={setIsLogedIn}
       />
       {navString === "service" || navString === "" ? (
         <Service

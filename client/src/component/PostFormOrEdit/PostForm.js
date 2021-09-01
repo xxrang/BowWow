@@ -49,6 +49,7 @@ const PostForm = ({ hasAccessToken, isLogedIn ,setIsLogedIn }) => {
       e.preventDefault();
 
       // 하나로 합쳐줘서 보내준다.
+
       axios
         .get(
           `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
@@ -84,10 +85,10 @@ const PostForm = ({ hasAccessToken, isLogedIn ,setIsLogedIn }) => {
               }
             )
             .then((res) => {
-              console.log("포스트폼 작성 완료버튼", res.data);
+              console.log("포스트폼 작성 완료버튼", res.data.data);
               alert("게시글이 작성되었습니다.");
-              setIsLogedIn(res.data.data.post);
               window.location.replace("/");
+              
             })
             .catch((err) => {
               console.log(err);
@@ -98,8 +99,8 @@ const PostForm = ({ hasAccessToken, isLogedIn ,setIsLogedIn }) => {
           console.log("auth에러:", err);
         });
     },
-    [category, content, date, imgCheck, 
-      location, mobile, title, setIsLogedIn]
+    [category, content, date, imgCheck, location, mobile, setIsLogedIn, title]
+
   );
 
   const cancelHandler = () => {

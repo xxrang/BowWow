@@ -3,7 +3,7 @@ import NeedLogin from '../NeedLogin'
 import useInput from '../../hooks/useInput'
 import { StyledViewPostComment } from './StyledViewPost';
 import axios from 'axios';
-import {calulateDate} from '../../hooks/calulateDate';
+import userPic from "../../images/bros_blank.jpeg";
 
 function ViewPostComment({
   inputRef,
@@ -129,7 +129,8 @@ function ViewPostComment({
                           {el.user.nickname}
                         </p>
                         <p className="post-comment-date">
-                          {el.user.updatedAt}
+                          {el.updatedAt}
+
                         </p>
                       </div>
                       <button

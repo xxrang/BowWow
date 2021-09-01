@@ -16,8 +16,8 @@ export const END_POINTS = "http://ec2-15-165-235-48.ap-northeast-2.compute.amazo
 //루트만 짜기
 function App() {
 
-  const [isLogedIn, setIsLogedIn] = useState("");
-  const [hasUserId, setHasUserId] = useState(undefined);
+  const [isLogedIn, setIsLogedIn] = useState(false);
+const [hasUserId, setHasUserId] = useState(undefined);
   const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
@@ -63,24 +63,27 @@ function App() {
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {
 
-    console.log(document.cookie)
-    console.log('accesstoken',document.cookie.split(" ")[1].split("=")[1])
-    console.log('refreshtoken', document.cookie.split(" ")[2].split("=")[1])
+    // console.log("다큐먼트 쿠키", document.cookie);
+    // console.log("accesstoken", document.cookie.split(" ")[1].split("=")[1].split(";")[0])
+    // console.log("refreshtoken", document.cookie.split(" ")[2].split("=")[1]);
 
-    axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,{
-      headers : {
-        accesstoken : document.cookie.split(" ")[1].split("=")[1],
-        refreshtoken : document.cookie.split(" ")[1].split("=")[1],
+    axios.get(
+      `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+      {
+        headers: {
+          accesstoken: document.cookie.split(" ")[1].split("=")[1],
+          refreshtoken: document.cookie.split(" ")[2].split("=")[1],
+        },
       }
-    })
-    .then((res)=>{
-      if(hasUserId === res.data.data.userinfo){
+    ).then((res) => {
+      if (hasUserId === res.data.data.userinfo.id) {
         setIsLogedIn(true);
       }
+    }).catch((err) => {
+      console.log("쿠키오류",err);
     })
-    .catch(()=>{
 
-    })
+
     // const storageSavedAccessToken =
     //   window.localStorage.getItem("accessToken") || undefined;
     // // console.log(storageSavedAccessToken);
@@ -88,14 +91,14 @@ function App() {
   }, [hasUserId]);
   //login핸들러
   const loginHandler = (hasAccessToken) => {
-    setIsLogedIn(hasAccessToken);
-    setHasAccessToken(hasAccessToken);
+    setIsLogedIn(true);
+    setHasUserId(hasAccessToken);
     console.log("로그인 핸드러", isLogedIn);
   };
   //logout핸들러
   const logoutHandler = () => {
-    setHasAccessToken(undefined);
-    setIsLogedIn("");
+    setHasUserId(undefined);
+    setIsLogedIn(false);
     window.localStorage.removeItem("accessToken");
     window.location.href = "http://localhost:3000";
   };
@@ -108,7 +111,7 @@ function App() {
             <HomePage
               setIsLogedIn={setIsLogedIn}
               isLogedIn={isLogedIn}
-              hasAccessToken={hasAccessToken}
+              setHasUserId={setHasUserId}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
@@ -120,17 +123,18 @@ function App() {
           </Route>
           <Route path="/postform">
             <PostFormPage
-              hasAccessToken={hasAccessToken}
+              setHasUserId={setHasUserId}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
               isLogedIn={isLogedIn}
-              setIsLogedIn = {setIsLogedIn}
+              setIsLogedIn={setIsLogedIn}
+
             />
           </Route>
           <Route path="/postedit">
             <PostEditPage
-              hasAccessToken={hasAccessToken}
+              hasUserId={hasUserId}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
@@ -140,7 +144,7 @@ function App() {
           </Route>
           <Route path="/profile">
             <ProfilePage
-              hasAccessToken={hasAccessToken}
+              setHasUserId={setHasUserId}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
@@ -150,8 +154,8 @@ function App() {
           </Route>
           <Route path="/profileedit">
             <ProfileEditPage
-              isLogedIn = {isLogedIn}
-              hasAccessToken={hasAccessToken}
+              setHasUserId={setHasUserId}
+
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
@@ -162,7 +166,7 @@ function App() {
           </Route>
           <Route path="/posts">
             <ViewPostPage
-              hasAccessToken={hasAccessToken}
+              setHasUserId={setHasUserId}
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
@@ -175,8 +179,8 @@ function App() {
             <LoginPage
               isLogedIn={isLogedIn}
               loginHandler={loginHandler}
-              setHasAccessToken={setHasAccessToken}
-              hasAccessToken={hasAccessToken}
+              setHasUserId={setHasUserId}
+              hasUserId={hasUserId}
               setPostsData={setPostsData}
               setNavString={setNavString}
               setIsLogedIn={setIsLogedIn}

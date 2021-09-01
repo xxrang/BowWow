@@ -14,8 +14,8 @@ const NavBar = ({
   handleTop,
   logoutHandler,
   isLogedIn,
-  setIsLogedIn
 }) => {
+// console.log("navlogin", isLogedIn)
 
   let history = useHistory();
 
@@ -30,13 +30,12 @@ const NavBar = ({
 
   const accessPost = useCallback(() => {
     if (isLogedIn) {
-      // alert("게시글이 작성되었습니다.");
-      // window.location.replace('/postform')
-      // history.push('/postform')
-    }else{
-      alert('로그인이 필요한 서비스입니다.')
+      history.push('/postform')
+    } else {
+      alert("로그인이 필요한 서비스입니다.");
+
     }
-  },[isLogedIn])
+  },[history, isLogedIn])
 
   return (
     <StyledNavBar id="navBar">
@@ -58,11 +57,14 @@ const NavBar = ({
               </li>
             );
           })}
-          <button onClick={accessPost}>
+          <button
+            onClick={ accessPost}
+          >
             <li className="post">Post</li>
           </button>
         </div>
-        {isLogedIn === '' ? (
+        {!isLogedIn ? (
+
           <div className="rightNav">
             <Link to="/login">
               <button>로그인</button>

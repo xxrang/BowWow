@@ -9,7 +9,8 @@ const PostFormPage = ({
   setPostsData,
   setNavString,
   isLogedIn,
-  setIsLogedIn
+  setIsLogedIn,
+
 }) => {
   return (
     <>
