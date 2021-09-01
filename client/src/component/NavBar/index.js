@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { StyledNavBar } from "./StyledNavBar";
 import { Link, useHistory } from "react-router-dom";
+import Modal from '../Modal'
 import axios from 'axios'
 axios.defaults.withCredentials = true;
 // import axios from "axios";
@@ -16,6 +17,10 @@ const NavBar = ({
   isLogedIn,
 }) => {
 // console.log("navlogin", isLogedIn)
+  const [openModal, setOpenModal] = useState(false);
+  const closeModal = () => {
+    setOpenModal((prev) => !prev);
+  };
 
   let history = useHistory();
 
@@ -33,7 +38,6 @@ const NavBar = ({
       history.push('/postform')
     } else {
       alert("로그인이 필요한 서비스입니다.");
-
     }
   },[history, isLogedIn])
 
@@ -58,7 +62,7 @@ const NavBar = ({
             );
           })}
           <button
-            onClick={ accessPost}
+            onClick={isLogedIn ? accessPost : closeModal}
           >
             <li className="post">Post</li>
           </button>
@@ -90,6 +94,19 @@ const NavBar = ({
           </div>
         )}
       </ul>
+
+      {
+      !isLogedIn ? 
+      <Modal 
+      openModal={openModal} 
+      closeModal={closeModal}
+      modalText = '로그인이 필요한 서비스입니다.'
+      >
+      </Modal>
+      :
+      null
+      }
+
     </StyledNavBar>
   );
 };

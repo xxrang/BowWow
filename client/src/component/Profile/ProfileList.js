@@ -17,7 +17,7 @@ const ProfileList = ({ userPosts }) => {
               <StyledProfileListItem key={post.id}>
                 <div className="list-item-wrapper">
                   <h4>{post.title}</h4>
-                  <div>{post.updatedAt}</div>
+                  <div>{post.updatedAt.split('T')[0]}</div>
                 </div>
                 <p>{post.content}</p>
               </StyledProfileListItem>

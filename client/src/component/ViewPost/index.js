@@ -9,13 +9,10 @@ function ViewPost({
   hasAccessToken, 
   logoutHandler, postId, isLogedIn ,
   hasUserId,setHasUserId }) {
-  const needLoginHandler = () => {
-    console.log("no");
-  };
+  
   //모달
   const [modal, setModal] = useState(false);
   const loginModalClick = () => {
-    //setModal(modal ? false : true)
     setModal((prev) => !prev);
   };
 
@@ -25,7 +22,7 @@ function ViewPost({
   const [userInfo, setUserInfo] = useState({});
   const [postInfo, setPostInfo] = useState({});
   const [commentInfo, setCommentInfo] = useState([]);
-const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState("");
   const [showButton, setShowButton] = useState(false);
 
   // console.log("커멘트인포!!!!!!", commentInfo);
@@ -128,8 +125,8 @@ const getAuth = async () => {
       <ViewPostComment
         inputRef={inputRef}
         modal={modal}
+        isLogedIn = {isLogedIn}
         showButton={showButton}
-        needLoginHandler={needLoginHandler}
         setCommentInfo={setCommentInfo}
         loginModalClick={loginModalClick}
         hasAccessToken={hasAccessToken}
