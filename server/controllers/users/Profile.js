@@ -6,27 +6,39 @@ module.exports = (app) => {
     const crypto = require('crypto');
     const application = app;
 
-    router.get('/', async (req, res) => {
+    router.get('/info', async (req, res) => {
 
-        await user.findAll({ 
+       const data =  await user.findOne({ 
             where : { id: req.query.id },
-        include: [{
-            model: post
-        }]})
-            .then((data) => {
-                if(data) {
-                    //createdAt, updatedAt 삭제하고 보여주기
-                    //delete data.dataValues.password
-                    res.status(200).send({message: 'ok', data: data})
-                } else {
-                    res.status(401).send({message: 'fail'})
-                }
-            })
-    })
+            include: [{ model: post, attributes : { exclude: ['mobile', 'date', 'image', 'createdAt']} 
+            }]
+        })
 
-    router.patch('/', upload.single('input-image'), async (req, res) => {
-        
-        
+        if(data) {
+            delete data.dataValues.password
+            res.status(200).send({message: 'ok', data: data})
+            } else {
+            res.status(401).send({message: 'fail'})
+            }
+        }),
+
+        router.get('/', async (req, res) => {
+
+            const data =  await user.findOne({ 
+                 where : { id: req.query.id },
+                attributes:{ exclude:['createdAt', 'password']}
+            })
+
+             if(data) {
+                 //delete data.dataValues.password
+                 res.status(200).send({message: 'ok', data: data})
+                 } else {
+                 res.status(401).send({message: 'fail'})
+                 }
+             }),
+
+        router.patch('/', upload.single('input-image'), async (req, res) => {
+
             const { nickname, password, introduce} = req.body;
             const image = req.file.location
             const hashpassword = crypto.createHash('sha512').update(password).digest('hex');

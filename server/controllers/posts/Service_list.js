@@ -5,7 +5,7 @@ module.exports = (app) => {
     const application = app;
 
      router.get('/', async (req, res) => {
-            category_content.findAll({
+            await category_content.findAll({
                 include : [{
                     model: post
                 }], where : { category_id : 1}
