@@ -1,36 +1,27 @@
 import React from 'react'
 import {StyledSearchMapList} from './StyledSearch'
 
-function SearchMapList() {
+
+function SearchMapList({mapData,setKeyword}) {
+  
+  function clickChange(e){
+   let clickWord = e.currentTarget.children[0].textContent
+   setKeyword(clickWord)
+  }
+
   return (
     <StyledSearchMapList>
-      <div className = 'searchMapListWrapper'>
-      <h1>유기견 보호소1</h1>
-      <hr/>
-      <p>Location_<span>경기도 김포시 걸포2로</span></p>
-      <p>Mobile_<span>010.1234.1234</span></p>
-      </div>
+    {mapData.map((el) => {
+        return(
+        <div key={el.id} className = 'searchMapListWrapper' onClick={clickChange}>
+          <h1>{el.place_name}</h1>
+          <hr/>
+          <p>Location_<span>{el.address_name}</span></p>
+          <p>Mobile_<span>{el.phone}</span></p>
+        </div>
+        )
 
-      <div className = 'searchMapListWrapper'>
-      <h1>유기견 보호소2</h1>
-      <hr/>
-      <p>주소</p>
-      <p>전화번호</p>
-      </div>
-
-      <div className = 'searchMapListWrapper'>
-      <h1>유기견 보호소3</h1>
-      <hr/>
-      <p>주소</p>
-      <p>전화번호</p>
-      </div>
-
-      <div className = 'searchMapListWrapper'>
-      <h1>유기견 보호소4</h1>
-      <hr/>
-      <p>주소</p>
-      <p>전화번호</p>
-      </div>
+      })}
     </StyledSearchMapList>
   )
 }

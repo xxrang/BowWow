@@ -10,6 +10,8 @@ import axios from "axios";
 
 const PostForm = ({ hasAccessToken }) => {
   const history = useHistory();
+  let imageFile;
+
 
   const [title, onChangeTitle] = useInput("");
   const [category, onChangeCategory] = useInput("");
@@ -30,19 +32,22 @@ const PostForm = ({ hasAccessToken }) => {
         setImage(reader.result);
       }
     };
-    // console.log(e.target.files);
+    console.log(e.target.files);
     reader.readAsDataURL(e.target.files[0]);
+    imageFile = e.target.files;
+    
     setImage(e.target.files[0]);
     setImgCheck("true");
   };
   //*데이터 편집 후 전송
   
   const postHandler = useCallback((e) => {
-    const inputImage = e.target[0].files[0];
-    console.log(e);
-    console.log(inputImage);
-    // console.log(location);
-    // console.log("타켓", e.target[0]);
+    //const inputImage = e.target[0].files[0];
+    //const inputImage = document.getElementById("input-image");
+    // console.log(e);
+    // console.log(inputImage);
+    // console.log(InmageFile);
+
     e.preventDefault();
     const userdata = new FormData();
     userdata.append("userId", hasAccessToken);
@@ -50,7 +55,7 @@ const PostForm = ({ hasAccessToken }) => {
     userdata.append("category", category);
     userdata.append("date", date);
     userdata.append("location", location);
-    userdata.append("input-image", inputImage);
+    userdata.append("input-image", imageFile[0]);
     userdata.append("content", content);
     userdata.append("mobile", mobile);
     userdata.append("imgCheck", imgCheck);
@@ -76,7 +81,7 @@ const PostForm = ({ hasAccessToken }) => {
 
     // console.log("userdata", userdata);
   },
-    [category, content, date, hasAccessToken, imgCheck, location, mobile, title]
+    [category, content, date, hasAccessToken, imageFile,imgCheck, location, mobile, title]
   );
 
 const cancelHandler = () => {

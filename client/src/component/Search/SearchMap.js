@@ -9,9 +9,9 @@ const options = {
   level: 3, //지도의 레벨(확대, 축소 정도)
 };
 
+function SearchMap({Keyword, dataSet}) {
 
-function SearchMap(Keyword) {
-
+  
   //const container = useRef(null); //지도를 담을 영역의 DOM 레퍼런스
 
   useEffect(() => {
@@ -21,8 +21,9 @@ function SearchMap(Keyword) {
   //     let el = document.getElementById('map');
   //     let map = new kakao.maps.Map(el, options)
   // })
-  console.log(Keyword.Keyword)
-  search(Keyword.Keyword)
+  console.log(Keyword)
+  console.log("타입1234",typeof(dataSet))
+  search(Keyword,dataSet)
   },[Keyword]);
 
   

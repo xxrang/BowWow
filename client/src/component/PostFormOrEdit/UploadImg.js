@@ -32,7 +32,7 @@ const UploadImg = ({ image, imageHandler }) => {
               type="file"
               name="img"
               id="input-image"
-              accept="image/jpeg,jpg,svg"
+              accept="image/*"
               onChange={imageHandler}
             />
             <p>권장 사항: 20MB 이하 고화질 .jpg 파일</p>

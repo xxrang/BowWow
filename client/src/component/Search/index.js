@@ -10,16 +10,25 @@ function Search() {
     inputRef.current.focus();
   })
 
-  const [Keyword, setKeyword] = useState("이태원맛집");
+  const [Keyword, setKeyword] = useState("유기견 보호소");
+  const [mapData, setmapData] = useState([]);
+ 
+
+  const dataSet = (e) => {
+   setmapData(e)
+  } 
+
 //  const [Keyword123213, setKeyword] = useState([data]);
   const submitHandler = (e) => {
     e.preventDefault();
+    let word = e.target[0].value;
     console.log(e.target[0].value)
     console.log('지도찾기')
-    setKeyword(e.target[0].value)
-  }
-
-  
+    if(word === ''){
+      word = '유기견 보호소'
+    }
+    setKeyword(word)
+  } 
 
   return <StyledSearch className="search-page">
       <div className = 'searchWrapper'>
@@ -28,9 +37,15 @@ function Search() {
         inputRef={inputRef}
         submitHandler = {submitHandler}
         />
-        <SearchMapList/>
+        <SearchMapList 
+        mapData={mapData}
+        setKeyword = {setKeyword}
+        />
       </div>
-      <SearchMap Keyword={Keyword}/>
+      <SearchMap 
+      Keyword = { Keyword }
+      dataSet = { dataSet }
+      />
 
   </StyledSearch>;
 }
