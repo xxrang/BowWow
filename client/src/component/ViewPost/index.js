@@ -39,7 +39,7 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
         { withCredentials: true }
       )
       .then((res) => {
-        console.log("--------res.data-------", res.data);
+        //console.log("--------res.data-------", res.data);
         // ! hasAccessToken에서 유저아이디를 뽑아내고, 포스트의 유저아이디가 같을 경우에 버튼을 보여준다.
         // ! 이걸 확인하면 버튼이 보여지면 포스트에딧이나 삭제에도 문제가 없다.
         // ! 다른 사람은 버튼을 보지못하니까
@@ -60,8 +60,8 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
           image: res.data.data.posts.image,
           updatedAt: res.data.data.posts.updatedAt,
         });
-        // console.log(res.data.data.comment.reverse())
-        setCommentInfo(res.data.data.comment.reverse());
+        console.log('======왜안됨?===',res.data.data)
+        setCommentInfo(res.data.data.comment[0].user.reverse());
 
         return axios
           .get(

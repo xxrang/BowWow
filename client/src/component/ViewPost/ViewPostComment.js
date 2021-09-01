@@ -15,7 +15,6 @@ function ViewPostComment({
   hasAccessToken,
 }) {
   // const comments = commentInfo.pop();
-  console.log("1번코멘트:", commentInfo);
   // console.log("user--------", commentInfo.user.image);
   //초기 코멘트
   const [comment, onChangeComment, setComment] = useInput("");
@@ -34,10 +33,8 @@ function ViewPostComment({
           content: comment,
           postId: postId,
         };
-        console.log("data-----", data);
-        axios
-          .post(
-            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments`,
+        //console.log("data-----", data);
+        axios.post(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments`,
             data,
             {
               headers: { "Content-Type": "application/json" },
@@ -53,7 +50,8 @@ function ViewPostComment({
                 { withCredentials: true }
               )
               .then((res) => {
-                console.log("댓글 불러오기:", res.data);
+                //console.log("댓글 불러오기:", res.data.data.comment);
+                console.log(comment.info)
                 setCommentInfo(res.data.data.comment.reverse());
               });
           });
@@ -123,15 +121,15 @@ function ViewPostComment({
                     <div className="post-commnet-flexbox">
                       <img
                         className="profile-img"
-                        // src={el.user.image}
+                        src={el.user.image}
                         alt="img"
                       />
                       <div>
                         <p className="post-comment-nickname">
-                          {/* {el.user.nickname} */}
+                          {el.user.nickname}
                         </p>
                         <p className="post-comment-date">
-                          {calulateDate(el.updatedAt)}
+                          {el.user.updatedAt}
                         </p>
                       </div>
                       <button

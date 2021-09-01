@@ -21,8 +21,8 @@ const ServiceList = ({ setPostId, slice }) => {
       {slice.map((el) => {
         return (
           <ServiceListWrapper
-            onClick={() => { postClickHandler(el.id)}}
-            key={el.id}
+            onClick={() => { postClickHandler(el.post.id)}}
+            key={el.post.id}
             id = 'columns'
             className={"service-img-" + el.id}>
             <Fade top>

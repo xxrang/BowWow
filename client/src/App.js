@@ -17,7 +17,7 @@ export const END_POINTS = "http://ec2-15-165-235-48.ap-northeast-2.compute.amazo
 function App() {
 
   const [isLogedIn, setIsLogedIn] = useState("");
-  const [hasAccessToken, setHasAccessToken] = useState(undefined);
+  const [hasUserId, setHasUserId] = useState(undefined);
   const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
@@ -62,11 +62,30 @@ function App() {
 
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {
-    const storageSavedAccessToken =
-      window.localStorage.getItem("accessToken") || undefined;
-    // console.log(storageSavedAccessToken);
-    setHasAccessToken(storageSavedAccessToken);
-  }, []);
+
+    console.log(document.cookie)
+    console.log('accesstoken',document.cookie.split(" ")[1].split("=")[1])
+    console.log('refreshtoken', document.cookie.split(" ")[2].split("=")[1])
+
+    axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,{
+      headers : {
+        accesstoken : document.cookie.split(" ")[1].split("=")[1],
+        refreshtoken : document.cookie.split(" ")[1].split("=")[1],
+      }
+    })
+    .then((res)=>{
+      if(hasUserId === res.data.data.userinfo){
+        setIsLogedIn(true);
+      }
+    })
+    .catch(()=>{
+
+    })
+    // const storageSavedAccessToken =
+    //   window.localStorage.getItem("accessToken") || undefined;
+    // // console.log(storageSavedAccessToken);
+    // setHasAccessToken(storageSavedAccessToken);
+  }, [hasUserId]);
   //login핸들러
   const loginHandler = (hasAccessToken) => {
     setIsLogedIn(hasAccessToken);
@@ -106,6 +125,7 @@ function App() {
               setPostsData={setPostsData}
               setNavString={setNavString}
               isLogedIn={isLogedIn}
+              setIsLogedIn = {setIsLogedIn}
             />
           </Route>
           <Route path="/postedit">
@@ -148,6 +168,7 @@ function App() {
               setNavString={setNavString}
               postId={postId}
               isLogedIn={isLogedIn}
+              setIsLogedIn = {setIsLogedIn}
             />
           </Route>
           <Route path="/login">
