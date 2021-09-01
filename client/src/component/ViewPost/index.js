@@ -34,14 +34,14 @@ function ViewPost({
 
   useEffect(() => {
     inputRef.current.focus();
-    //console.log("선택한 포스트 아이디", postId);
+    console.log("선택한 포스트 아이디", postId);
     axios
       .get(
         `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
         { withCredentials: true }
       )
       .then((res) => {
-        //console.log("--------res.data-------", res.data);
+        // console.log("--------res.data-------", res.data);
         // ! hasAccessToken에서 유저아이디를 뽑아내고, 포스트의 유저아이디가 같을 경우에 버튼을 보여준다.
         // ! 이걸 확인하면 버튼이 보여지면 포스트에딧이나 삭제에도 문제가 없다.
         // ! 다른 사람은 버튼을 보지못하니까

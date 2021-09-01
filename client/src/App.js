@@ -9,7 +9,6 @@ import ViewPostPage from "./pages/ViewPostPage";
 import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import PostEditPage from "./pages/PostEditPage";
-// import { initialPosts } from "./component/dummyData";
 import axios from 'axios';
 
 export const END_POINTS = "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com";

@@ -6,7 +6,7 @@ import Fade from "react-reveal/Fade"
 const VolunteerList = ({slice ,setPostId }) => {
   let history = useHistory();
   //console.log(serviceImg)
-  // console.log('=========',slice)
+  console.log('=========',slice)
 
   const postClickHandler = (id) => {
     const dataId = id;
@@ -19,8 +19,8 @@ const VolunteerList = ({slice ,setPostId }) => {
       {slice.map((el) => {
         return (
           <ServiceVolunteerWrapper 
-            onClick= {() => {postClickHandler(el.id)}}
-            key={el.id}
+            onClick= {() => {postClickHandler(el.post.id)}}
+            key={el.post.id}
             id = 'columns'
             className={"service-img-" + el.post.id}>
               <Fade top>
