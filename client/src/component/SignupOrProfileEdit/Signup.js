@@ -43,9 +43,10 @@ const SignUp = () => {
   );
 
   //* form submit
-  const signupHandler = useCallback(
-    (e) => {
-      e.preventDefault();
+
+  const signupHandler = useCallback((e) => {
+    e.preventDefault();
+
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }

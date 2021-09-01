@@ -13,7 +13,6 @@ axios.defaults.withCredentials = true;
 const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
   const history = useHistory();
   let imageFile;
-
   const [title, onChangeTitle] = useInput("");
   const [category, onChangeCategory] = useInput("");
   const [date, onChangeDate] = useInput("");
@@ -33,15 +32,14 @@ const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
         setImage(reader.result);
       }
     };
-    console.log("e.target.files", e.target.files);
+
+    console.log(e.target.files);
     reader.readAsDataURL(e.target.files[0]);
     imageFile = e.target.files;
-    console.log("imageFile", imageFile);
     setImage(e.target.files[0]);
     setImgCheck("true");
   };
   //*데이터 편집 후 전송
-
   const postHandler = useCallback(
     (e) => {
       e.preventDefault();
@@ -98,7 +96,6 @@ const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
     },
 
     [title, mobile, content]
-
   );
 
   const cancelHandler = () => {

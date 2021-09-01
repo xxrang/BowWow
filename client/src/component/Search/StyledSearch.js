@@ -32,7 +32,7 @@ align-items: center;
   border-radius : 5px 0 0 5px;
   border:none;
 }
->button{
+>form > button{
   background: #fff;
   width : 50px;
   height : 42px;
