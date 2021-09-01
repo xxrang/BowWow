@@ -9,7 +9,6 @@ import {
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
-// import { calulateDate } from '../../hooks/calulateDate';
 
 function ViewPostContent({
   postId,
