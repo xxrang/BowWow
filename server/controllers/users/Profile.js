@@ -15,8 +15,7 @@ module.exports = (app) => {
         }]})
             .then((data) => {
                 if(data) {
-                    //createdAt, updatedAt 삭제하고 보여주기
-                    //delete data.dataValues.password
+                    delete data.dataValues.password
                     res.status(200).send({message: 'ok', data: data})
                 } else {
                     res.status(401).send({message: 'fail'})

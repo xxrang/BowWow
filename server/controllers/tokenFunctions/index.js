@@ -15,14 +15,14 @@ module.exports = {
 
     sendAccessToken: (res, accessToken) => {
         res.cookie('accessToken', accessToken, {
-            sameSite:'none',httpOnly:true,secure:true, path:'/'
-        })
+            domain:'localhost',sameSite:'none',httpOnly:true,maxAge:`${500*60*60*24*30}`,overwrite:true,secure:true,authorized:true,path:'/'
+        }).set({'Access-Control-Allow-Credentials':true})
     },
 
     sendRefreshToken : (res, refreshToken) => {
        res.cookie('refreshToken', refreshToken, {
-           sameSite:'none', httpOnly:true, secure:true, path: '/'
-       })
+           domain:'localhost',sameSite:'none',httpOnly:true,maxAge:`${1000*60*60*24*30}`,overwrite:true,secure:true,authorized:true,path: '/'
+       }).set({'Access-Control-Allow-Credentials':true})
     },
 
     checkRefresh: (refreshToken) => {

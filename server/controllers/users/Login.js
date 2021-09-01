@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
         const refreshtoken = generateRefreshToken(data.dataValues);
         sendAccessToken(res, accesstoken);
         sendRefreshToken(res, refreshtoken);
-        res.status(200).send({message: 'login ok', data: {userinfo: data.dataValues}})
+        res.status(200).send({message: 'login ok', data: {userinfo: data.dataValues, accesstoken: accesstoken, refreshtoken: refreshtoken}})
     }
 
 }

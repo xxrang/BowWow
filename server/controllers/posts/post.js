@@ -1,5 +1,5 @@
 module.exports = (app) => {
-
+const defaultImage = 'https://bowwow-resource.s3.ap-northeast-2.amazonaws.com/bros_blank.jpeg'
 const { post, user, category_content, comment } = require('../../models');
 const upload = require('../../module/multer')
 const router = require('express').Router();
@@ -11,72 +11,104 @@ const application = app;
                 include : [{model: user}, {model: category_content}]})
             const data2 = await comment.findAll({ where: { posts_id: id },
                 include: [{ model: user }]})
-                
+                delete data1.password
                 if(data2.length === 1){
-                res.status(200).send({message: 'ok', data : { posts: data1, comment: [...[], data2 ]}})
+                res.status(200).send({message: 'ok', data : { posts: data1, comment: [ data2 ]}})
                 } else {
-                    res.status(200).send({message: 'ok', data : { posts: data1, comment: data2 }})
+                    res.status(200).send({message: 'ok', data : { posts: data1 , comment: data2  }})
                 }
         }),
             
         router.post('/', upload.single('input-image'), async (req, res) => {
             const {title, date, content, mobile, location} = req.body;
-            const image = req.file.location;
             
-                /* 클라이언트 axios request.body에 category(dogs || volunteer)로 담겨 들어오니까
-                category === 'dogs'로 들어오면 */ 
             if(!title || !mobile || !content){
                 res.status(422).send({message: 'insufficient parameters supplied'})
-            } else if(req.body.category === 'service'){
+            }
+            if(req.body.category === 'service' ){
+                if(req.body.imgCheck === 'false'){ //이미지 없으면?
               const data = await post.create({
-                    image: image,
+                    image: defaultImage, //기본이미지
                     title: title,
                     mobile: mobile,
                     content: content,
                     user_id: req.body.userId
-                })
-               const data2 = await category_content.create({
+                    })
+                const data2 = await category_content.create({
                         category_id: 1,
                         posts_id: data.id
                     })
-                return res.status(201).send({message: 'post write success', data, data2})
-
-            } else if(req.body.category === 'volunteer'){
-                const data2 = await post.create({
-                    image: image,
-                    title: title,
-                    mobile: mobile,
-                    content: content,
-                    location: location,
-                    date: date,
-                    user_id: req.body.userId
-             })
-                await category_content.create({
-                    category_id: 2,
-                    posts_id: data2.id
-                }).then((data) => res.status(201).send({message: 'post write success', data}))
-            }}),
+                    res.status(201).send({messsage: 'post write success', data, data2})
+                } else { //이미지 있으면
+                const data = await post.create({
+                        image: req.file.location,
+                        title: title,
+                        mobile: mobile,
+                        content: content,
+                        user_id: req.body.userId
+                        })
+                const data2 = await category_content.create({
+                        category_id: 1,
+                        posts_id: data.id
+                    })
+                    res.status(201).send({message: "post write success", data, data2})
+                } 
+                
+                if(req.body.category === 'volunteer'){
+                    if(req.body.imgCheck === 'false'){ //이미지 없으면?
+                const data = await post.create({
+                        image: defaultImage, //기본이미지
+                        title: title,
+                        mobile: mobile,
+                        content: content,
+                        date: date,
+                        location: location,
+                        user_id: req.body.userId
+                        })
+                const data2 = await category_content.create({
+                            category_id: 2,
+                            posts_id: data.id
+                        })
+                        res.status(201).send({messsage: 'post write success', data, data2})
+                    } else { //이미지 있으면
+                const data = await post.create({
+                        image: req.file.location,
+                        title: title,
+                        mobile: mobile,
+                        date: date,
+                        location: location,
+                        content: content,
+                        user_id: req.body.userId
+                        })
+                const data2 = await category_content.create({
+                            category_id: 2,
+                            posts_id: data.id
+                        })
+                        res.status(201).send({message: "post write success", data, data2})
+                    }}
+                }}
+            ),
 
         router.patch('/', upload.single('input-image'), async (req, res) => {
             const {title, date, location, content, mobile} = req.body;
             const image = req.file.location;
-
-        await post.update({
-            title: title,
-            date: date,
-            location: location,
-            content: content,
-            mobile: mobile,
-            image: image
-        }, {where : {id : req.query.id}})
-        .then((data) => {
-            if(data){
-                res.status(200).send({message: 'success to update'})
-            } else {
-                res.status(404).send({message: 'fail to update'})
-            }
-        })
-    }),    
+            
+            await post.update({
+                title: title,
+                date: date,
+                location: location,
+                content: content,
+                mobile: mobile,
+                image: image
+            }, {where : {id : req.query.id}})
+            .then((data) => {
+                if(data){
+                    res.status(200).send({message: 'success to update'})
+                } else {
+                    res.status(404).send({message: 'fail to update'})
+                }
+            })
+        }),    
 
         router.delete('/', async (req, res) => {
             await post.destroy({where : {id : req.query.id}})
