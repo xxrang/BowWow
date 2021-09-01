@@ -1,55 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StyledNavBar } from "./StyledNavBar";
 import { Link, useHistory } from "react-router-dom";
-
+import axios from 'axios'
+axios.defaults.withCredentials = true;
 // import axios from "axios";
 //setPostsData : 데이터를 가져왔을 때 응답받았을 떄 데이터. -> 응답받으면 상태변화를 준다.
 //setPostsString : 스트링으로 데이터 요청을 보내고
-//
+
 const NavBar = ({
   hasAccessToken,
   setPostsData,
   setNavString,
   handleTop,
   logoutHandler,
+  isLogedIn,
 }) => {
-  const [isLogedIn, setIsLogedIn] = useState(false);
+// console.log("navlogin", isLogedIn)
+
   let history = useHistory();
 
   const selectNavHandler = (string) => {
-    
-    //console.log("네브바 선택::::",string)
+    console.log("네브바 선택::::",string)
     const postsString = string;
     setNavString(postsString);
     history.push("/");
-    // return axios;
-    // .get(`https://localhost:4000`, {
-    //   params: { postsString: postsString },
-    //   withCredentials: true,
-    // })
-    // .then((res) => {
-    //   const datas = res.data.data.data;
-    //   setPostsData(datas);
-    //   history.push("/");
-    // })
-    // .catch((err) => alert("정보를 받아오는데 실패하였습니다."));
   };
 
-  const menu = [
-    { name: "service" },
-    { name: "search" }, 
-    { name: "volunteer" }
-  ];
+  const menu = [{ name: "service" }, { name: "search" }, { name: "volunteer" }];
 
-  useEffect(() => {
-    if (hasAccessToken !== undefined) {
-      setIsLogedIn(true);
+  const accessPost = useCallback(() => {
+    if (isLogedIn) {
+      history.push('/postform')
     } else {
-      setIsLogedIn(false);
-    }
-  }, [hasAccessToken]);
-  return (
+      alert("로그인이 필요한 서비스입니다.");
 
+    }
+  },[history, isLogedIn])
+
+  return (
     <StyledNavBar id="navBar">
       <ul>
         <div className="leftNav">
@@ -57,7 +45,7 @@ const NavBar = ({
           <Link to="/">
             <img onClick={handleTop} src="../images/logo.png" alt="logo img" />
           </Link>
-          {}
+          
           {menu.map((menuItem, idx) => {
             return (
               <li
@@ -69,9 +57,11 @@ const NavBar = ({
               </li>
             );
           })}
-          <Link to="/postform">
+          <button
+            onClick={ accessPost}
+          >
             <li className="post">Post</li>
-          </Link>
+          </button>
         </div>
         {!isLogedIn ? (
           <div className="rightNav">
@@ -85,7 +75,13 @@ const NavBar = ({
         ) : (
           <div className="rightNav">
             <Link to="/profile">
-              <button onClick={()=> {history.push('/profile')}}>프로필</button>
+              <button
+                onClick={() => {
+                  history.push("/profile");
+                }}
+              >
+                프로필
+              </button>
             </Link>
 
             <Link to="/">

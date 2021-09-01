@@ -4,42 +4,42 @@ import {StyledLogin} from './StyledLogin'
 import { Link, useHistory} from 'react-router-dom'
 import axios from 'axios';
 //import { initialState } from '../dummyData'
-
-function Login({ setHasAccessToken, hasAccessToken, loginHandler }) {
+axios.defaults.baseURL = "http://localhost:3000";
+function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
   let history = useHistory();
-  // const [signinSucc, setSigninSucc] = useState(true);
+  //? 로그인 완료시 모달 용
+  // const [signinSuccess, setSigninSuccess] = useState(false);
   //formData
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit =  (data) => {
-    /*axios.post(
+  const onSubmit = (data) => {
+    axios
+      .post(
         "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/login",
-        data,{withCredentials: true,}
+        data,
+        { withCredentials: true }
       )
       .then((res) => {
-        console.log("첫콘솔", res.data);
-        console.log(res.data.data.accesstoken);
-        setHasAccessToken(res.data.data.accesstoken);
-        return res.data.data.accesstoken
-      })
-      .then((accessToken) => {
-        loginHandler(accessToken);
-        window.localStorage.setItem("accessToken", accessToken);
-        history.push('/');
+
+        // console.log("첫콘솔", res.data.data.accesstoken);
+        // console.log("refresh", res.data.data.refreshtoken)
+        // setHasAccessToken(res.data);
+
+        // setIsLogedIn(res.data.data.userinfo.id);
+        loginHandler(res.data.data.userinfo.id);
+        setHasUserId(res.data.data.userinfo.id);
+        document.cookie = "accesstoken" + "=" + res.data.data.accesstoken;
+        document.cookie = "refreshtoken" + "=" + res.data.data.refreshtoken;
+        // console.log(document.cookie.split(" "));
+        history.push("/");
       })
       .catch((err) => {
-        console.log(err);
-      });*/
-
-     console.log("data:", data);
-     const accessToken = 1;
-     setHasAccessToken(accessToken);
-     loginHandler(accessToken);
-     window.localStorage.setItem("accessToken", accessToken);
-     history.push("/");
+        console.log("login에러", err);
+        alert("로그인에 실패하였습니다.");
+      });
   };
 
   return (

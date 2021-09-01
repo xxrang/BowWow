@@ -8,11 +8,11 @@ import { useHistory } from "react-router-dom";
 import useInput from "../../hooks/useInput";
 import axios from "axios";
 
-const PostForm = ({ hasAccessToken }) => {
+axios.defaults.withCredentials = true;
+
+const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
   const history = useHistory();
   let imageFile;
-
-
   const [title, onChangeTitle] = useInput("");
   const [category, onChangeCategory] = useInput("");
   const [date, onChangeDate] = useInput("");
@@ -21,9 +21,9 @@ const PostForm = ({ hasAccessToken }) => {
   const [content, onChangeContent] = useInput("");
   //* 이미지 미리보기
   const [image, setImage] = useState("");
-  const [imgCheck, setImgCheck] = useState("true");
+  const [imgCheck, setImgCheck] = useState("false");
   // console.log(image);
-  
+
   const imageHandler = (e) => {
     const reader = new FileReader();
 
@@ -32,63 +32,77 @@ const PostForm = ({ hasAccessToken }) => {
         setImage(reader.result);
       }
     };
+
     console.log(e.target.files);
     reader.readAsDataURL(e.target.files[0]);
     imageFile = e.target.files;
-    
     setImage(e.target.files[0]);
     setImgCheck("true");
   };
   //*데이터 편집 후 전송
-  
-  const postHandler = useCallback((e) => {
-    //const inputImage = e.target[0].files[0];
-    //const inputImage = document.getElementById("input-image");
-    // console.log(e);
-    // console.log(inputImage);
-    // console.log(InmageFile);
+  const postHandler = useCallback(
+    (e) => {
+      e.preventDefault();
+      
+      axios
+        .get(
+          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+          {
+            headers: {
 
-    e.preventDefault();
-    const userdata = new FormData();
-    userdata.append("userId", hasAccessToken);
-    userdata.append("title", title);
-    userdata.append("category", category);
-    userdata.append("date", date);
-    userdata.append("location", location);
-    userdata.append("input-image", imageFile[0]);
-    userdata.append("content", content);
-    userdata.append("mobile", mobile);
-    userdata.append("imgCheck", imgCheck);
-    // 하나로 합쳐줘서 보내준다.
-    axios
-      .post(
-        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts`,
-        userdata,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        alert("게시글이 작성되었습니다.");
-        window.location.replace("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("게시글 작성에 실패했습니다. 다시 시도해주세요.");
-      });
+              accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+              refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
 
-    // console.log("userdata", userdata);
-  },
-    [category, content, date, hasAccessToken, imageFile,imgCheck, location, mobile, title]
+            },
+          }
+        )
+        .then((res) => {
+
+          console.log("postform/auth:", res.data.data.userinfo);
+          console.log("image", e.target[0].files[0]);
+          console.log("imagefile", imageFile);
+
+          const userdata = new FormData();
+
+          userdata.append("title", title);
+          userdata.append("category", category);
+          userdata.append("date", date);
+          userdata.append("location", location);
+          userdata.append("input-image", imageFile[0]);
+          userdata.append("content", content);
+          userdata.append("mobile", mobile);
+          userdata.append("imgCheck", imgCheck);
+          userdata.append("userId", res.data.data.userinfo);
+
+          axios
+            .post(
+              `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts`,
+              userdata,
+              { headers: { "Content-Type": "multipart/form-data" } }
+            )
+            .then((res) => {
+              // console.log("포스트폼 작성 완료버튼", res.data.data);
+              alert("게시글이 작성되었습니다.");
+              window.location.replace("/");
+            })
+            .catch((err) => {
+              console.log(err);
+              alert("게시글 작성에 실패했습니다. 다시 시도해주세요.");
+            });
+        })
+        .catch((err) => {
+          console.log("auth에러:", err);
+        });
+    },
+
+    [title, mobile, content]
   );
 
-const cancelHandler = () => {
-  alert("게시글 작성이 취소되었습니다.");
-  history.goBack();
-};
-  
+  const cancelHandler = () => {
+    alert("게시글 작성이 취소되었습니다.");
+    history.goBack();
+  };
+
   return (
     <StyledPostForm>
       <form
@@ -98,7 +112,9 @@ const cancelHandler = () => {
       >
         <UploadImg image={image} imageHandler={imageHandler} />
         <div className="form-data">
-          <label htmlFor="title">제목</label>
+          <label htmlFor="title">
+            제목<span> (필수)</span>
+          </label>
           <input
             type="text"
             value={title}
@@ -108,7 +124,9 @@ const cancelHandler = () => {
             name="title"
           />
 
-          <label htmlFor="category">카테고리</label>
+          <label htmlFor="category">
+            카테고리<span> (필수)</span>
+          </label>
           <select
             required
             name="categoty"
@@ -121,16 +139,20 @@ const cancelHandler = () => {
             <option value="volunteer">봉사 일정 공유</option>
           </select>
 
-          <label htmlFor="date">날짜</label>
+          <label htmlFor="date">
+            날짜<span> (카테고리가 봉사일 경우 필수)</span>
+          </label>
           <input
             id="date-picker"
             name="date"
             value={date}
             onChange={onChangeDate}
-            type="date"
+            type="datetime-local"
           />
 
-          <label htmlFor="location">보호소 위치</label>
+          <label htmlFor="location">
+            위치 <span> (카테고리가 봉사일 경우 필수)</span>
+          </label>
           <input
             name="location"
             value={location}
@@ -138,12 +160,16 @@ const cancelHandler = () => {
             type="text"
           />
 
-          <label htmlFor="mobile">연락처</label>
+          <label htmlFor="mobile">
+            연락처<span> (필수)</span>
+          </label>
           <input
             name="mobile"
             value={mobile}
             onChange={onChangeMobile}
             type="text"
+            placeholder="Ex) 010-0000-0000"
+            id="mobile"
           />
 
           <label htmlFor="content">컨텐츠</label>
@@ -163,6 +189,6 @@ const cancelHandler = () => {
       </form>
     </StyledPostForm>
   );
-}
+};
 
 export default PostForm;

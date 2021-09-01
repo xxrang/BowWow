@@ -3,47 +3,59 @@ import { StyeldProfile } from "./StyledProfile";
 import ProfileInfo from './ProfileInfo';
 import ProfileList from './ProfileList';
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
-const Profile = ({hasAccessToken }) => {
-  // console.log("profile:", hasAccessToken);
+const Profile = ({ hasAccessToken , isLogedIn ,setIsLogedIn }) => {
+
+  // console.logconsole.log(showTime(date));("profile:", hasAccessToken);
   // console.log("dummyuser:", dummyUser)
   const [userInfo, setUserInfo] = useState({})
   const [userPosts, setUserPosts] = useState([]);
   console.log("userInfo-------", userInfo);
   console.log("userPosts------", userPosts);
   useEffect(() => {
-    // if (hasAccessToken !== undefined) {
-    axios
-      .get(
-        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=1`,
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log("프로파일", res.data);
-        return res.data;
-      })
-      .then((profile) => {
-        console.log("프로파일.데이터", profile.data);
-      setUserInfo({
-        id: profile.data[0].id,
-        image: profile.data[0].image,
-        introduce: profile.data[0].introduce,
-        email: profile.data[0].email,
-        nickname: profile.data[0].nickname,
-      });
-      setUserPosts(profile.data[0].posts);
-    }).catch((err) => {
-      console.log(err);
-      // alert("데이터 불러오기를 실패했습ㄴ디ㅏ.")
-    })
-  }, [hasAccessToken]);
-    //accessToken을 가지고 userId 확인해야함
     
+    if (isLogedIn) {
+      axios.get(
+        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+        {
+          headers: {
+            accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+            refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+          },
+        }
+      ).then((res) => {
+        console.log("프로파일 auth:/userinfo.id", res.data.data.userinfo);
+        return axios.get(
+            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile/info?id=${res.data.data.userinfo}`,
+            { withCredentials: true }
+          )
+          .then((res) => {
+            console.log("프로파일.데이터", res.data.data);
+            
 
+            setUserInfo({
+              id: res.data.data.id,
+              image: res.data.data.image,
+              introduce: res.data.data.introduce,
+              email: res.data.data.email,
+              nickname: res.data.data.nickname,
+            });
+            setUserPosts(res.data.data.posts);
+          })
+          .catch((err) => {
+            console.log("프로파일 get요청 에러", err);
+          });
+      }).catch((err) => {
+        console.log("프로파일 get/auth요청 에러", err);
+      });
+    }
+    }, [hasAccessToken, isLogedIn]);
+    
   return (
     <StyeldProfile>
-      <ProfileInfo userInfo={userInfo} />
-      <ProfileList userPosts={userPosts} />
+      <ProfileInfo userInfo={userInfo} isLogedIn={isLogedIn} />
+      <ProfileList userPosts={userPosts} isLogedIn={isLogedIn} />
     </StyeldProfile>
   );
 }

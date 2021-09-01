@@ -8,10 +8,19 @@ const ProfileEditPage = ({
   logoutHandler,
   postId,
   setPostId,
+  setPostsData,
+  setNavString,
+  isLogedIn,
 }) => {
   return (
     <>
-      <NavBar hasAccessToken={hasAccessToken} logoutHandler={logoutHandler} />
+      <NavBar
+        hasAccessToken={hasAccessToken}
+        logoutHandler={logoutHandler}
+        setPostsData={setPostsData}
+        setNavString={setNavString}
+        isLogedIn={isLogedIn}
+      />
       <ProfileEdit
         hasAccessToken={hasAccessToken}
         postId={postId}

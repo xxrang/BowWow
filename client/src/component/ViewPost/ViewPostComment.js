@@ -3,21 +3,19 @@ import NeedLogin from '../NeedLogin'
 import useInput from '../../hooks/useInput'
 import { StyledViewPostComment } from './StyledViewPost';
 import axios from 'axios';
+axios.default.withCredentials = true
+// import userPic from "../../images/bros_blank.jpeg";
 
 function ViewPostComment({
   inputRef,
-  isLogedIn,
   commentInfo,
   setCommentInfo,
   showButton,
   postId,
   userInfo,
-  hasAccessToken,
+  hasUserId
 }) {
-  // const comments = commentInfo.pop();
-  // console.log("1번코멘트:", commentInfo);
-  // console.log("user--------", commentInfo.user.image);
-  //초기 코멘트
+
   const [comment, onChangeComment, setComment] = useInput("");
   // 모달
   const [openModal, setOpenModal] = useState(false);
@@ -25,74 +23,88 @@ function ViewPostComment({
     setOpenModal((prev) => !prev);
   };
 
-  const addCommentHandler = useCallback(
-    (e) => {
+  const addCommentHandler = useCallback((e) => {
       e.preventDefault();
-      if (isLogedIn) {
-        if (comment !== "") {
-          const data = {
-            userId: hasAccessToken,
-            content: comment,
-            postId: postId,
-          };
-          console.log("data-----", data);
-          axios
-            .post(
-              `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments`,
-              data,
-              {
-                headers: { "Content-Type": "application/json" },
-                withCredentials: true,
-              }
-            )
-            .then((res) => {
-              console.log("댓글추가:", res.data);
+      if(comment !==''){
+        axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,{
+          headers: {
+              accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+              refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+              },
+          })
+          .then((res)=>{
+            const userData = {
+              userId : res.data.data.userinfo,
+              content : comment,
+              postId : postId ,
+            }
+            // 잘 받아오면 userData 에 유저코멘트 정보를 담아주는거임. 이거를 포스트요청 보내.
+            return axios.post( `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments`,
+              userData,
+            {
+              headers: { "Content-Type": "application/json" },
+            },)
+            .then((res)=>{
               setComment("");
-              return axios
-                .get(
-                  `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${postId}`,
-                  { withCredentials: true }
-                )
-                .then((res) => {
-                  console.log("댓글 불러오기:", res.data);
-                  setCommentInfo(res.data.data.comment.reverse());
-                });
-            });
-        } else if (comment.length === 0) {
-          //모달로 해야할..꽈 ?
-          alert("댓글을 입력하세요.");
-        }
-      } else {
-        setOpenModal(true);
-      }
-    },
-    [comment, hasAccessToken, isLogedIn, postId, setComment, setCommentInfo]
-  );
-
-  const removeCommentHandler = useCallback(
-    (id) => {
-      const commentId = id;
-      axios
-        .delete(
-          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${commentId}`,
-          { withCredentials: true }
-        )
-        .then((res) => {
-          console.log(res.data);
-          console.log("삭제되었습니다.");
+              return axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${res.data.data.posts_id}`
+              )
+              .then((data)=>{
+                // console.log(data);
+                setCommentInfo(data.data.data.comment.reverse());
+              })
+              .catch((err)=>{
+                console.log('comment 작성 후 get 요청 실패===', err)
+              })
+            })
+            .catch((err)=>{
+              console.log('post 요청 댓글 실패 ======' ,err)
+            })
+          })
+        .catch((err)=>{
+          console.log('댓글 auth 실패=======' , err)
         })
-        .catch((err) => {
-          console.log(err);
-        });
-      console.log("2번째코멘트인포:", commentInfo);
-      const filtered = commentInfo.filter(
-        (comment) => commentId !== comment.id
-      );
-      console.log("filtered:", filtered);
-      setCommentInfo(filtered);
-    },
-    [commentInfo, setCommentInfo]
-  );
+      }
+});
+
+  //댓글삭제
+  const removeCommentHandler = useCallback((id,comment_id) => {
+    // console.log(id,comment_id);
+    // console.log('===삭제코멘트',commentId);
+      return axios.get(
+        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+        {
+          headers: {
+            accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+            refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data.data.userinfo) //2
+        if(res.data.data.userinfo === id){
+          return axios.delete(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${comment_id}`,
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+          )
+          .then((res)=>{
+            // console.log(res.data);
+            // console.log(commentInfo)
+            const filtered = commentInfo.filter(
+              (comment) => comment_id !== comment.id
+            );
+            // console.log('filterd : ', filtered)
+            setCommentInfo(filtered);
+          })
+          .catch((err)=>{
+            console.log('remove comment오류',err)
+          })
+        }
+
+      }).catch((err) => {
+        console.log("remove오류",err);
+      });
+    },[commentInfo, setCommentInfo]);
 
   return (
     <StyledViewPostComment>
@@ -128,18 +140,20 @@ function ViewPostComment({
                     <div className="post-commnet-flexbox">
                       <img
                         className="profile-img"
-                        src={el.user.image}
+                        // src={el.user.image}
                         alt="img"
                       />
                       <div>
                         <p className="post-comment-nickname">
                           {el.user.nickname}
                         </p>
-                        <p className="post-comment-date">{el.updatedAt}</p>
+                        <p className="post-comment-date">
+                          {el.updatedAt.split('T')[0].replaceAll('-','.')}
+                        </p>
                       </div>
                       <button
                         onClick={() => {
-                          removeCommentHandler(el.id);
+                          removeCommentHandler(el.user_id, el.id);
                         }}
                         className="remove-button"
                       >
@@ -153,7 +167,9 @@ function ViewPostComment({
           </ul>
         </div>
       </div>
-      <NeedLogin openModal={openModal} closeModal={closeModal}></NeedLogin>
+      <NeedLogin 
+      openModal={openModal} 
+      closeModal={closeModal}></NeedLogin>
     </StyledViewPostComment>
   );
 }

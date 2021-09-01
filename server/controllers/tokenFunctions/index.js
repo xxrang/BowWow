@@ -1,37 +1,41 @@
 const {sign, verify} = require('jsonwebtoken');
-const {user} = require('../../models');
 require('dotenv').config();
 
 module.exports = {
 
     generateAccessToken: (data) => {
-        let token = sign(data, process.env.ACCESS_SECRET, {expiresIn: "15s"})
+        let token = sign(data, process.env.ACCESS_SECRET, { expiresIn: "5s" })
         return token;
     },
 
+    generateRefreshToken: (data) => {
+        let token = sign(data, process.env.REFRESH_SECRET, { expiresIn: "10m" })
+        return token
+    },
+
     sendAccessToken: (res, accessToken) => {
-        res.cookie('accessToken',accessToken,{
+        res.cookie('accessToken', accessToken, {
             sameSite:'none',httpOnly:true,secure:true,path:'/'
         })
     },
 
-    sendRefreshToken : async (res, refreshToken) => {
-       await user.create({
-           refreshToken : refreshToken
-       }).then(()=> {
-           res.send({message: 'ok'})
+    sendRefreshToken : (res, refreshToken) => {
+       res.cookie('refreshToken', refreshToken, {
+           sameSite:'none', httpOnly:true, secure:true, path: '/'
        })
     },
 
-    isAuthorized: (req) => {
-        const authorization = req.headers['cookie']
-
-        if(!authorization){
-            return null
-        }
-        const token = authorization.split(' ')[1];
+    checkRefresh: (refreshToken) => {
         try {
-            return verify(token, process.env.ACCESS_SECRET);
+            return verify(refreshToken, process.env.REFRESH_SECRET);
+        } catch (err) {
+            return null;
+        }
+    },
+
+    checkAccess: (accessToken) => {
+        try {
+            return verify(accessToken, process.env.ACCESS_SECRET);
         } catch (err) {
             return null;
         }

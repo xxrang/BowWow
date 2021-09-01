@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
-const upload = require('./module/multer');
 //express의 req객체에 cookies 속성 부여
 const app = express();
 const port = 4000;

@@ -1,24 +1,18 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const StyledSignUp = styled.div`
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  height: 100vh;
+
   width: 375px;
-  margin: 20px auto;
+  margin: 60px auto;
+  margin-bottom: 30px;
   /* border: 1px solid gray; */
   display: flex;
   flex-direction: column;
   font-family: "Nanum Gothic Coding", monospace;
-  /* justify-content: center; */
-  /* align-items: center; */
   > form {
-    height: 900px;
+    height: 800px;
     display: flex;
     flex-direction: column;
-    padding-top: 40px;
   }
 
   > form .image-container > input {
@@ -49,13 +43,14 @@ export const StyledSignUp = styled.div`
     flex: none;
     flex-grow: 0;
     font-size: 16px;
+    margin-bottom: 4px;
   }
 
   > form .user-info-content {
     padding: 0;
     margin: 0;
     position: static;
-    padding-top:10px;
+    padding-top: 10px;
     padding-left: 14px;
     width: 360px;
     height: 40px;
@@ -65,7 +60,7 @@ export const StyledSignUp = styled.div`
     flex-grow: 0;
     font-size: 16px;
     height: 80px;
-    resize:none;
+    resize: none;
   }
 
   > form > .button-wapper {
@@ -97,40 +92,27 @@ export const StyledSignUp = styled.div`
     border: 2px solid #48cfad;
     background: #48cfad;
     color: #fff;
+
+    &:last-child {
+      border: 2px solid #48cfad;
+      background: #fff;
+      color: #48cfad;
+      margin-right:15px;
+    }
     &:hover {
       background: #fff;
       color: #48cfad;
       border: 2px solid #48cfad;
+
+      &:last-child {
+        border: 2px solid #48cfad;
+        background: #48cfad;
+        color: #fff;
+      }
     }
   }
 `;
 
-export const BtnLink = styled(Link)`
-  box-sizing: border-box;
-
-  background: #fff;
-  color: #48cfad;
-  border: 2px solid #48cfad;
-  border-radius: 10px;
-  text-align: center;
-  white-space: nowrap;
-  padding: 10px 30px;
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1.5rem;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.5s ease-in-out;
-  width: 100px;
-  height: 48px;
-  text-decoration: none;
-
-  &:hover {
-    background: #48cfad;
-    color: #fff;
-    border: 2px solid #fff;
-  }
-`;
 
 export const StyledUserImgUpload = styled.div`
   width: 375px;
@@ -184,10 +166,6 @@ export const StyledUserImgUpload = styled.div`
   }
 `;
 
-export const ErrorMessage = styled.p`
-  color: red;
-  margin-top: 8px;
-`;
 
 export const InputReadOnly = styled.input`
   padding: 0;

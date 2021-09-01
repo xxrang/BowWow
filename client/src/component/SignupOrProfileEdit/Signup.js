@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from "react";
-import {StyledSignUp, BtnLink,ErrorMessage } from './StyledSignUp'
-import camera from '../../images/bros_blank.jpeg'
-import UserImgUpload from './UserImgUpload';
-import useInput from '../../hooks/useInput';
-import axios from 'axios';
+import { StyledSignUp } from "./StyledSignUp";
+import { ErrorMessage } from "../ErrorMessage";
+import camera from "../../images/bros_blank.jpeg";
+import UserImgUpload from "./UserImgUpload";
+import useInput from "../../hooks/useInput";
+import axios from "axios";
 
 const SignUp = () => {
   //* image preview
@@ -37,11 +38,15 @@ const SignUp = () => {
     (e) => {
       setPasswordCheck(e.target.value);
       setPasswordError(e.target.value !== password);
-    },[password]);
+    },
+    [password]
+  );
 
   //* form submit
+
   const signupHandler = useCallback((e) => {
     e.preventDefault();
+
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
@@ -64,12 +69,12 @@ const SignUp = () => {
         )
         .then((res) => {
           console.log(res.data);
-          alert("회원가입에 성공하였습니다.")
+          alert("회원가입에 성공하였습니다.");
           window.location.replace("/");
         })
         .catch((err) => {
           console.log(err);
-          alert('중복된 이메일이 있습니다. 다시 입력해주세요.')
+          alert("중복된 이메일이 있습니다. 다시 입력해주세요.");
         });
 
       //중복된 이메일이 있습니다는 뜨는데, 회원가입 완료시에는 다른메시지가 뜨게하고, 홈으로이동
@@ -79,7 +84,11 @@ const SignUp = () => {
 
   return (
     <StyledSignUp>
-      <form onSubmit={(e) => { signupHandler(e) }}>
+      <form
+        onSubmit={(e) => {
+          signupHandler(e);
+        }}
+      >
         <label htmlFor="email">이메일</label>
         <input
           name="email"
@@ -88,6 +97,7 @@ const SignUp = () => {
           required
           onChange={onChangeEmail}
         />
+
         <label htmlFor="password">비밀번호</label>
         <input
           name="password"
@@ -126,14 +136,18 @@ const SignUp = () => {
           onChange={onChangeIntroduce}
         />
         <div className="button-wapper">
-          <button type="submit">
-            확인
+          <button type="submit">확인</button>
+          <button
+            onClick={() => {
+              window.history.back();
+            }}
+          >
+            취소
           </button>
-          <BtnLink to="/">취소</BtnLink>
         </div>
       </form>
     </StyledSignUp>
   );
-}
+};
 
 export default SignUp;

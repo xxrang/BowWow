@@ -8,6 +8,8 @@ const ProfilePage = ({
   logoutHandler,
   setPostsData,
   setNavString,
+  isLogedIn,
+  setIsLogedIn 
 }) => {
   return (
     <>
@@ -16,8 +18,13 @@ const ProfilePage = ({
         logoutHandler={logoutHandler}
         setPostsData={setPostsData}
         setNavString={setNavString}
+        isLogedIn = {isLogedIn}
+        setIsLogedIn ={setIsLogedIn}
       />
-      <Profile hasAccessToken={hasAccessToken} />
+      <Profile 
+      hasAccessToken={hasAccessToken} 
+      isLogedIn = {isLogedIn}
+      setIsLogedIn ={setIsLogedIn}/>
       <Footer />
     </>
   );

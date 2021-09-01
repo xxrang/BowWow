@@ -8,6 +8,7 @@ export const StyledVolunteer = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding : 100px 200px 50px;
 
 >.more-btn{
   border :none;
@@ -18,7 +19,7 @@ export const StyledVolunteer = styled.section`
   border-radius: 5px;
   background-color: #48cfad;
   color : white;
-  margin : 50px 0;
+  margin-top : 30px; 
   :hover{
     background: #fff;
     border: 1px solid #48CFAD;
@@ -28,45 +29,50 @@ export const StyledVolunteer = styled.section`
 }
 `
 export const StyledVolunteerList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin : 100px 200px 0;
+
+column-width: 200px;
+column-gap: 10px;
+  
 `
 export const ServiceVolunteerWrapper = styled.div`
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  padding: 15px;
-  box-sizing: border-box;
-  /* width: 450px; */
-  height: 220px;
-  border-radius: 8px;
-  background: #fff;
-  margin-bottom: 12px;
+  >figure{
+  display : inline-block;
+  border : 1px solid rgba(0,0,0,0.2);
+  //box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px;
+  border: none;
   cursor: pointer;
-  transition: all 0.4s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  &:hover {
-    background : rgba(0, 0, 0, 0.1);
-    overflow:hidden;
-    opacity : 0.9;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-bottom: 10px;
   }
-  >img {
-    width: 50%;
-    height: 100%;
-    object-fit: contain;  
-    background: rgba(0,0,0,0.1);
-    padding : 10px 0;
-    overflow: hidden;
+  >figure > img{
+    width : 100%;
+    transform:scale(1);
+    transition:.3s;
     &:hover{
-      transform: scale(1.1);
-      backface-visibility: hidden;
-      transition: all 0.4s ease-in-out;
+    transform:scale(1.1);
     }
   }
-  >h1{
-    margin: 10px 20px;
-    font-size: 30px;
-  } 
+  >figure > .title{
+    font-size: 18px;
+    margin : 10px 0;
+    padding : 0 5px;
+    letter-spacing: -1px;
+    background-image: linear-gradient(transparent calc(100% - 3px), #000 3px);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    transition: background-size 0.8s;
+    color: #000;
+    background-image: linear-gradient(transparent 60%, #F8CD07 40%);
+    &:hover{
+      transition: all 0.3s ease-in-out;
+      background-size: 100% 100%;
+    }
+  }
+  >figure>.updated-at{
+    text-align :right;
+    color : grey;
+    font-size: 14px;
+    padding : 0 5px;
+  }
 `

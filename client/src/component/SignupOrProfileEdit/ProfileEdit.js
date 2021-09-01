@@ -1,21 +1,17 @@
 import React, { useState, useCallback, useEffect } from "react";
 import {
   StyledSignUp,
-  BtnLink,
-  ErrorMessage,
   InputReadOnly,
 } from "./StyledSignUp";
-// import camera from '../../images/bros_blank.jpeg'
+import { ErrorMessage } from "../ErrorMessage";
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
-// import { dummyUser } from "../dummyData";
 
-const ProfileEdit = ({ hasAccessToken }) => {
-
+const ProfileEdit = ({ hasAccessToken, postId }) => {
   //이미지 상태관리
   const [userImage, setUserImage] = useState("");
-  const [imgCheck, setImgCheck] = useState("true"); // true로 바꿈
+  const [imgCheck, setImgCheck] = useState("false"); // true로 바꿈
   //* image previe
   const imageHandler = (e) => {
     const reader = new FileReader();
@@ -46,7 +42,7 @@ const ProfileEdit = ({ hasAccessToken }) => {
     },
     [password]
   );
-    
+
   //! form submit
   const profileEditHandler = useCallback(
     (e) => {
@@ -55,60 +51,86 @@ const ProfileEdit = ({ hasAccessToken }) => {
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
-      const userdate = new FormData();
-      userdate.append("email", email);
-      userdate.append("nickname", nickname);
-      userdate.append("introduce", introduce);
-      userdate.append("password", password);
-      userdate.append("input-image", e.target[3].files[0]);
-      userdate.append("imgCheck", imgCheck);
+      const userdata = new FormData();
+      userdata.append("email", email);
+      userdata.append("nickname", nickname);
+      userdata.append("introduce", introduce);
+      userdata.append("password", password);
+      userdata.append("input-image", e.target[3].files[0]);
+      userdata.append("imgCheck", imgCheck);
 
-      axios.patch(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=1`
-        //id에 어세스토큰 해독하고 유저아이들
-        ,userdate, {headers: {'Content-Type': 'multipart/form-data',},
-          withCredentials: true,
-        })
-        .then((res)=>{
-          console.log(res.data)
-          alert("게시글이 수정되었습니다.")
+      axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+        {
+          headers: {
+            accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+            refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+          },
+        }
+      ).then((res) => {
+        console.log("프로필 수정 버튼 클릭시: auth", res.data.data);
+
+        return axios.patch(
+          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=${res.data.data.userinfo}`,
+          //id에 어세스토큰 해독하고 유저아이들
+          userdata,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+            withCredentials: true,
+          }
+        ).then((res) => {
+          console.log(res.data);
+          alert("게시글이 수정되었습니다.");
           window.location.replace("/");
-        })
-        .catch((err)=>{
-          console.log(err)
-          alert("게시글 수정에 실패했습니다. 다시 시도해주세요.")
-        })
+        }).catch((err) => {
+          console.log("게시글 수정 patch요청",err);
+          alert("게시글 수정에 실패했습니다. 다시 시도해주세요.");
+        });
+      }).catch((err) => {
+        console.log("프로필 수정버튼 클릭 에러::: auth", err)
+      })
     },
     [password, passwordCheck, email, nickname, introduce, imgCheck]
   );
-  
+
   //! data 불러 오기
   //로그인 상태관리
   // console.log(email, nickname, introduce, userImage);
-  const [isLogedIn, setIsLogedIn] = useState(false);
   useEffect(() => {
-    if (hasAccessToken !== undefined) {
-      setIsLogedIn(true);
-    } else {
-      setIsLogedIn(false);
-    }
-    axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=1`, {
-      withCredentials: true
-    }).then((res) => {
-      console.log("프로필수정", res.data); //데이터 받아옴
-    // id, email, nickname image, introduce data 들어옴
-      setEmail(res.data.data[0].email);
-      setIntroduce(res.data.data[0].introduce);
-      setUserImage(res.data.data[0].image);
-      setNickname(res.data.data[0].nickname);
+
+    axios.get(
+      `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+      {
+        headers: {
+          accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+          refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+        },
+      }
+    ).then((res) => {
+      console.log("프로파일에딧 auth/get :::", res.data.data);
+
+      return axios.get(
+        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=${res.data.data.userinfo}`,
+        {
+          withCredentials: true,
+        }
+      ).then((res) => {
+        console.log("프로필수정", res.data); //데이터 받아옴
+
+        setEmail(res.data.data.email);
+        setIntroduce(res.data.data.introduce);
+        setUserImage(res.data.data.image);
+        setNickname(res.data.data.nickname);
+      }).catch((err) => {
+        console.log("프로파일 에딧,,get:::", err)
+      }) 
+    }).catch((err) => {
+      console.log("프로파일 에딧/get/auth", err)
     })
-      
-  }, [
-    hasAccessToken,
-    isLogedIn,
-    setEmail,
-    setIntroduce,
-    setNickname,
-  ]);
+    
+        
+        // id, email, nickname image, introduce data 들어옴
+        
+  }, [hasAccessToken, postId, setEmail, setIntroduce, setNickname]);
 
   return (
     <StyledSignUp>
@@ -164,7 +186,13 @@ const ProfileEdit = ({ hasAccessToken }) => {
         />
         <div className="button-wapper">
           <button type="submit">확인</button>
-          <BtnLink to="/">취소</BtnLink>
+          <button
+            onClick={() => {
+              window.location.replace('/');
+            }}
+          >
+            취소
+          </button>
         </div>
       </form>
     </StyledSignUp>

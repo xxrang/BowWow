@@ -8,3 +8,4 @@ export default (initValue = null) => {
   }, []);
   return [value, handler, setter];
 };
+

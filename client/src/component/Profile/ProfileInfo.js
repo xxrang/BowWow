@@ -16,7 +16,7 @@ const ProfileInfo = ({ userInfo }) => {
             <ProfileBtnLink to="/profileedit">프로필 수정</ProfileBtnLink>
           </div>
 
-          <p>{email}</p>
+          <div className="profile-info-email">{email}</div>
         </div>
       </div>
       <div className="profile-info-content">{introduce}</div>

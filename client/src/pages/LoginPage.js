@@ -4,22 +4,27 @@ import Login from '../component/Login';
 import Footer from '../component/Footer';
 
 function LoginPage({
-  setHasAccessToken,
-  hasAccessToken,
   loginHandler,
   setPostsData,
   setNavString,
+  setIsLogedIn,
+  isLogedIn,
+  setHasUserId,
 }) {
   // curNav = { curNav };
   // selectNavHandler = { selectNavHandler };
   // handleTop = { handleTop };
   return (
     <>
-      <NavBar setPostsData={setPostsData} setNavString={setNavString} />
+      <NavBar
+        setPostsData={setPostsData}
+        setNavString={setNavString}
+        isLogedIn={isLogedIn}
+      />
       <Login
         loginHandler={loginHandler}
-        setHasAccessToken={setHasAccessToken}
-        hasAccessToken={hasAccessToken}
+        setIsLogedIn={setIsLogedIn}
+        setHasUserId={setHasUserId}
       />
       <Footer />
     </>

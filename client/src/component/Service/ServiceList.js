@@ -3,13 +3,13 @@ import { useHistory } from 'react-router-dom';
 import {
   StyledServiceList,
   ServiceListWrapper,
-  ServiceListP,
-  ServiceListImg,
 } from "./StyledService";
+
+import Fade from "react-reveal/Fade"
 
 const ServiceList = ({ setPostId, slice }) => {
   let history = useHistory();
-  //console.log(serviceImg)
+  // console.log(slice)
 
   const postClickHandler = (id) => {
     const dataId = id;
@@ -17,18 +17,26 @@ const ServiceList = ({ setPostId, slice }) => {
     return history.push(`/posts/${id}`);
   };
   return (
-    <StyledServiceList>
+    <StyledServiceList className = 'service-list-container'>
       {slice.map((el) => {
         return (
           <ServiceListWrapper
-            onClick=
-            {() => {
-              postClickHandler(el.id);
+            onClick={() => {
+              postClickHandler(el.post.id);
             }}
-            key={el.id}
-            className={"service-img-" + el.id}>
-            <ServiceListImg src={el.image} alt="dog-img" />
-            <ServiceListP>{el.title}</ServiceListP>
+            key={el.post.id}
+            id="columns"
+            className={"service-img-" + el.post.id}
+          >
+
+            <Fade top>
+              <figure className="pic">
+                <img src={el.post.image} alt="dog-img" />
+                <figcaption className="pic-caption bottom-to-top">
+                  <h1 className="title">{el.post.title}</h1>
+                </figcaption>
+              </figure>
+            </Fade>
           </ServiceListWrapper>
         );
       })}
@@ -37,3 +45,4 @@ const ServiceList = ({ setPostId, slice }) => {
 };
 
 export default ServiceList
+
