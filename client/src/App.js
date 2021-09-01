@@ -21,7 +21,7 @@ function App() {
   const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
-  let history = useHistory();
+  // let history = useHistory();
 
   console.log("hasUserId- app.js", hasUserId);
   /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
@@ -52,40 +52,38 @@ function App() {
     }
   }, [navString]);
 
-
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {
-    console.log("다큐먼트 쿠키", document.cookie.split("accesstoken="));
-    let accesstoken = document.cookie.includes("accesstoken")
-    let refreshtoken = document.cookie.includes("refreshtoken");
+
+    let accesstoken = document.cookie.includes('accesstoken')
+    let refreshtoken = document.cookie.includes('refreshtoken')
+
     if (!accesstoken || !refreshtoken) {
-      axios
-        .get(
-          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
-          {
-            headers: {
-              accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
-              refreshtoken: document.cookie
-                .split("refreshtoken=")[1]
-                .split(";")[0],
-            },
-          }
-        )
-        .then((res) => {
-          if (hasUserId === res.data.data.userinfo.id) {
-            setIsLogedIn(true);
-          }
-        })
-        .catch((err) => {
-          console.log("쿠키오류", err);
-        });
-    } else {
-// console.log("accesstoken",document.cookie.split("accesstoken=")[1].split(";")[0]);
-// console.log("refreshtoken",document.cookie.split("refreshtoken=")[1].split(";")[0]);
       return;
-    }
-    
+    } else {
+    axios.get(
+      `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+      {
+        headers: {
+          accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+          refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+        },
+      }
+    ).then((res) => {
+      if (hasUserId === res.data.data.userinfo.id) {
+        setIsLogedIn(true);
+      }
+    }).catch((err) => {
+      console.log("쿠키오류",err);
+    });
+  }
+    // const storageSavedAccessToken =
+    //   window.localStorage.getItem("accessToken") || undefined;
+    // // console.log(storageSavedAccessToken);
+    // setHasAccessToken(storageSavedAccessToken);
   }, [hasUserId]);
+  
+  
   //login핸들러
   const loginHandler = (userInfoId) => {
     setIsLogedIn(true);
@@ -96,8 +94,10 @@ function App() {
   const logoutHandler = () => {
     setHasUserId(undefined);
     setIsLogedIn(false);
+
     document.cookie = `accesstoken=${null}`;
     document.cookie = `refreshtoken=${null}`;
+
     window.location.href = "http://localhost:3000";
   };
 
@@ -162,7 +162,9 @@ function App() {
           </Route>
           <Route path="/posts">
             <ViewPostPage
+              hasUserId = {hasUserId}
               setHasUserId={setHasUserId}
+              
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}

@@ -5,7 +5,10 @@ import ViewPostComment from "./ViewPostComment";
 import axios from "axios";
 axios.defaults.withCredentials=true;
 
-function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
+function ViewPost({ 
+  hasAccessToken, 
+  logoutHandler, postId, isLogedIn ,
+  hasUserId,setHasUserId }) {
   const needLoginHandler = () => {
     console.log("no");
   };
@@ -28,11 +31,10 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
   // console.log("커멘트인포!!!!!!", commentInfo);
   // console.log("포스트 인포:::-----", postInfo);
 
-  console.log("postId",postId)
+
   useEffect(() => {
     inputRef.current.focus();
-
-    console.log("선택한 포스트 아이디", postId);
+    //console.log("선택한 포스트 아이디", postId);
     axios
       .get(
         `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
@@ -61,9 +63,8 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
           updatedAt: res.data.data.posts.updatedAt,
           userId: res.data.data.posts.user.id
         });
-        console.log('======왜안됨?===', res.data.data.comment.reverse())
+        // console.log('======왜안됨?===', res.data.data.comment.reverse())
         setCommentInfo(res.data.data.comment.reverse());
-
 
         return axios
           .get(
@@ -115,6 +116,8 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
         commentInfo={commentInfo}
         postId={postId}
         userInfo={userInfo}
+        hasUserId = {hasUserId}
+        setHasUserId = {setHasUserId}
       />
     </StyledViewPost>
   );

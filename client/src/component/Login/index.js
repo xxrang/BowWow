@@ -23,9 +23,11 @@ function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
         { withCredentials: true }
       )
       .then((res) => {
-        // console.log("res.data.data.userinfo", res.data.data.userinfo);
+
         // console.log("첫콘솔", res.data.data.accesstoken);
-        // console.log("refresh", res.data.data.refreshtoken);
+        // console.log("refresh", res.data.data.refreshtoken)
+        // setHasAccessToken(res.data);
+
         // setIsLogedIn(res.data.data.userinfo.id);
         loginHandler(res.data.data.userinfo.id);
         setHasUserId(res.data.data.userinfo.id);

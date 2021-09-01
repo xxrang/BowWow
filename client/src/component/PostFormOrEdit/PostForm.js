@@ -45,22 +45,21 @@ const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
   const postHandler = useCallback(
     (e) => {
       e.preventDefault();
-
+      
       axios
         .get(
           `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
           {
             headers: {
-              accesstoken: document.cookie
-                .split("accesstoken=")[1]
-                .split(";")[0],
-              refreshtoken: document.cookie
-                .split("refreshtoken=")[1]
-                .split(";")[0],
+
+              accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+              refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+
             },
           }
         )
         .then((res) => {
+
           console.log("postform/auth:", res.data.data.userinfo);
           console.log("image", e.target[0].files[0]);
           console.log("imagefile", imageFile);
@@ -84,7 +83,7 @@ const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
               { headers: { "Content-Type": "multipart/form-data" } }
             )
             .then((res) => {
-              console.log("포스트폼 작성 완료버튼", res.data.data);
+              // console.log("포스트폼 작성 완료버튼", res.data.data);
               alert("게시글이 작성되었습니다.");
               window.location.replace("/");
             })
@@ -97,7 +96,9 @@ const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
           console.log("auth에러:", err);
         });
     },
+
     [title, mobile, content]
+
   );
 
   const cancelHandler = () => {

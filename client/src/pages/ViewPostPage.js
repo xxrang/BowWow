@@ -10,6 +10,8 @@ function ViewPostPage({
   setNavString,
   postId,
   isLogedIn,
+  hasUserId,
+  setHasUserId
 }) {
   return (
     <div>
@@ -24,6 +26,8 @@ function ViewPostPage({
         hasAccessToken={hasAccessToken}
         postId={postId}
         isLogedIn={isLogedIn}
+        hasUserId = {hasUserId}
+        setHasUserId={setHasUserId}
       />
       <Footer />
     </div>
