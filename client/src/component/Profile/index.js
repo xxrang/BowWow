@@ -7,12 +7,12 @@ axios.defaults.withCredentials = true;
 
 const Profile = ({ hasAccessToken , isLogedIn ,setIsLogedIn }) => {
 
+
+  
   // console.logconsole.log(showTime(date));("profile:", hasAccessToken);
   // console.log("dummyuser:", dummyUser)
   const [userInfo, setUserInfo] = useState({})
   const [userPosts, setUserPosts] = useState([]);
-  console.log("userInfo-------", userInfo);
-  console.log("userPosts------", userPosts);
   useEffect(() => {
     
     if (isLogedIn) {
@@ -33,7 +33,6 @@ const Profile = ({ hasAccessToken , isLogedIn ,setIsLogedIn }) => {
           .then((res) => {
             console.log("프로파일.데이터", res.data.data);
             
-
             setUserInfo({
               id: res.data.data.id,
               image: res.data.data.image,

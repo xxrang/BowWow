@@ -6,9 +6,18 @@ import {
 import { ErrorMessage } from "../ErrorMessage";
 import UserImgUpload from './UserImgUpload';
 import useInput from '../../hooks/useInput';
+import Modal from '../Modal'
 import axios from 'axios';
 
 const ProfileEdit = ({ hasAccessToken, postId }) => {
+
+  //모달
+  const [modalSuccess , setModalSuccess] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+
   //이미지 상태관리
   const [userImage, setUserImage] = useState("");
   const [imgCheck, setImgCheck] = useState("false"); // true로 바꿈
@@ -48,6 +57,8 @@ const ProfileEdit = ({ hasAccessToken, postId }) => {
     (e) => {
       //accesstoken으로 유저 아이디 만들어서 마지막에 같이 전달
       e.preventDefault();
+      setOpenModal(true)
+      
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
@@ -79,11 +90,11 @@ const ProfileEdit = ({ hasAccessToken, postId }) => {
           }
         ).then((res) => {
           console.log(res.data);
-          alert("게시글이 수정되었습니다.");
-          window.location.replace("/");
+          //성공했을때 모달창여부가 true로 바뀐다.
+          setModalSuccess(true);
         }).catch((err) => {
           console.log("게시글 수정 patch요청",err);
-          alert("게시글 수정에 실패했습니다. 다시 시도해주세요.");
+          setModalSuccess(false);
         });
       }).catch((err) => {
         console.log("프로필 수정버튼 클릭 에러::: auth", err)
@@ -127,9 +138,8 @@ const ProfileEdit = ({ hasAccessToken, postId }) => {
       console.log("프로파일 에딧/get/auth", err)
     })
     
-        
-        // id, email, nickname image, introduce data 들어옴
-        
+      // id, email, nickname image, introduce data 들어옴
+
   }, [hasAccessToken, postId, setEmail, setIntroduce, setNickname]);
 
   return (
@@ -195,8 +205,15 @@ const ProfileEdit = ({ hasAccessToken, postId }) => {
           </button>
         </div>
       </form>
+
+      <Modal 
+      openModal = {openModal}
+      closeModal = {closeModal}
+      modalSuccess = {modalSuccess}
+      modalText = {modalSuccess===true ? '프로필이 수정되었습니다.' : '프로필 수정에 실패했습니다.'}
+      />
     </StyledSignUp>
   );
-};;;;
+};
 
 export default ProfileEdit;

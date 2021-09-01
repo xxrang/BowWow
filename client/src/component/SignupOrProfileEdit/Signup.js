@@ -4,11 +4,21 @@ import { ErrorMessage } from "../ErrorMessage";
 import camera from "../../images/bros_blank.jpeg";
 import UserImgUpload from "./UserImgUpload";
 import useInput from "../../hooks/useInput";
+import Modal from '../Modal'
 import axios from "axios";
 
 
 const SignUp = () => {
 
+<<<<<<< HEAD
+=======
+  // 모달
+  const [modalSuccess , setModalSuccess] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+>>>>>>> 25b04bcc38c0466cf7967b86e9d717c98bb95c9f
 
   //* image preview
   const [userImage, setUserImage] = useState(camera);
@@ -57,7 +67,8 @@ const SignUp = () => {
   //* form submit
 
   const signupHandler = useCallback((e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    setOpenModal(true)
 
       if (password !== passwordCheck) {
         return setPasswordError(true);
@@ -70,7 +81,7 @@ const SignUp = () => {
       userdate.append("password", password);
       userdate.append("input-image", e.target[3].files[0]);
       userdate.append("imgCheck", imgCheck);
-      axios
+      return axios
         .post(
           "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",
           userdate,
@@ -81,12 +92,11 @@ const SignUp = () => {
         )
         .then((res) => {
           console.log(res.data);
-          alert("회원가입에 성공하였습니다.");
-          window.location.replace("/");
+          setModalSuccess(true)
         })
         .catch((err) => {
           console.log(err);
-          alert("중복된 이메일이 있습니다. 다시 입력해주세요.");
+          setModalSuccess(false);
         });
 
       //중복된 이메일이 있습니다는 뜨는데, 회원가입 완료시에는 다른메시지가 뜨게하고, 홈으로이동
@@ -154,7 +164,7 @@ const SignUp = () => {
         />
         <div className="button-wapper">
           <button type="submit">확인</button>
-          <button
+          <button 
             onClick={() => {
               window.history.back();
             }}
@@ -163,6 +173,13 @@ const SignUp = () => {
           </button>
         </div>
       </form>
+
+      <Modal 
+      openModal = {openModal}
+      closeModal = {closeModal}
+      modalSuccess = {modalSuccess ===false ? '' : '본인이 작성한 글만 삭제가능합니다.'}
+      modalText = {modalSuccess===true ? '회원가입에 성공하셨습니다' : '회원가입에 실패했습니다.'}
+      />
     </StyledSignUp>
   );
 };

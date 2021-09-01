@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { StyledNavBar } from "./StyledNavBar";
 import { Link, useHistory } from "react-router-dom";
-import Modal from "../Modal";
-import axios from "axios";
+import Modal from '../Modal'
+import axios from 'axios'
 axios.defaults.withCredentials = true;
 // import axios from "axios";
 //setPostsData : 데이터를 가져왔을 때 응답받았을 떄 데이터. -> 응답받으면 상태변화를 준다.
@@ -15,8 +15,7 @@ const NavBar = ({
   isLogedIn,
   handleClickSignup,
 }) => {
-  // console.log("navlogin", isLogedIn)
-
+// console.log("navlogin", isLogedIn)
   const [openModal, setOpenModal] = useState(false);
   const closeModal = () => {
     setOpenModal((prev) => !prev);
@@ -93,13 +92,18 @@ const NavBar = ({
         )}
       </ul>
 
-      {!isLogedIn ? (
-        <Modal
-          openModal={openModal}
-          closeModal={closeModal}
-          modalText="로그인이 필요한 서비스입니다."
-        ></Modal>
-      ) : null}
+      {
+      !isLogedIn ? 
+      <Modal 
+      openModal={openModal} 
+      closeModal={closeModal}
+      modalText = '로그인이 필요한 서비스입니다.'
+      >
+      </Modal>
+      :
+      null
+      }
+
     </StyledNavBar>
   );
 };

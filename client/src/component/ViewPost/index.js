@@ -6,15 +6,21 @@ import axios from "axios";
 axios.defaults.withCredentials=true;
 
 function ViewPost({ 
+<<<<<<< HEAD
   postId, isLogedIn ,
   setHasUserId }) {
   const needLoginHandler = () => {
     console.log("no");
   };
+=======
+  hasAccessToken, 
+  logoutHandler, postId, isLogedIn ,
+  hasUserId,setHasUserId }) {
+  
+>>>>>>> 25b04bcc38c0466cf7967b86e9d717c98bb95c9f
   //모달
   const [modal, setModal] = useState(false);
   const loginModalClick = () => {
-    //setModal(modal ? false : true)
     setModal((prev) => !prev);
   };
 
@@ -24,7 +30,7 @@ function ViewPost({
   const [userInfo, setUserInfo] = useState({});
   const [postInfo, setPostInfo] = useState({});
   const [commentInfo, setCommentInfo] = useState([]);
-const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState("");
   const [showButton, setShowButton] = useState(false);
 
   // console.log("커멘트인포!!!!!!", commentInfo);
@@ -118,8 +124,8 @@ const getAuth = async () => {
       <ViewPostComment
         inputRef={inputRef}
         modal={modal}
+        isLogedIn = {isLogedIn}
         showButton={showButton}
-        needLoginHandler={needLoginHandler}
         setCommentInfo={setCommentInfo}
         loginModalClick={loginModalClick}
         commentInfo={commentInfo}
