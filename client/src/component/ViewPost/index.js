@@ -25,8 +25,8 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
 
   const [showButton, setShowButton] = useState(false);
 
-  console.log("커멘트인포!!!!!!", commentInfo);
-  console.log("포스트 인포:::-----", postInfo);
+  // console.log("커멘트인포!!!!!!", commentInfo);
+  // console.log("포스트 인포:::-----", postInfo);
 
   console.log("postId",postId)
   useEffect(() => {
@@ -70,8 +70,8 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
             `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
             {
               headers: {
-                accesstoken: document.cookie.split(" ")[1].split("=")[1],
-                refreshtoken: document.cookie.split(" ")[2].split("=")[1],
+                accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+                refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
               },
             }
           )
@@ -81,8 +81,8 @@ function ViewPost({ hasAccessToken, logoutHandler, postId, isLogedIn }) {
             } else {
               setShowButton(false);
             }
-            console.log("auth 유저정보", res.data.data.userinfo);
-            console.log("유저인포-유저아이디", userInfo.userId);
+            // console.log("auth 유저정보", res.data.data.userinfo);
+            // console.log("유저인포-유저아이디", userInfo.userId);
           })
           .catch((err) => {
             console.log("auth에러", err);

@@ -1,13 +1,13 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form';
 import {StyledLogin} from './StyledLogin'
 import { Link, useHistory} from 'react-router-dom'
 import axios from 'axios';
 //import { initialState } from '../dummyData'
 axios.defaults.baseURL = "http://localhost:3000";
-function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
-  let history = useHistory()
-  //? 로그인 완료시 모달 용   
+function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
+  let history = useHistory();
+  //? 로그인 완료시 모달 용
   // const [signinSuccess, setSigninSuccess] = useState(false);
   //formData
   const {
@@ -15,17 +15,20 @@ function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit =  (data) => {
-    axios.post(
+  const onSubmit = (data) => {
+    axios
+      .post(
         "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/login",
-        data,{withCredentials: true,}
+        data,
+        { withCredentials: true }
       )
       .then((res) => {
-        console.log("첫콘솔", res.data.data.accesstoken);
-        console.log("refresh", res.data.data.refreshtoken)
-        // setHasAccessToken(res.data);
+        // console.log("res.data.data.userinfo", res.data.data.userinfo);
+        // console.log("첫콘솔", res.data.data.accesstoken);
+        // console.log("refresh", res.data.data.refreshtoken);
         // setIsLogedIn(res.data.data.userinfo.id);
         loginHandler(res.data.data.userinfo.id);
+        setHasUserId(res.data.data.userinfo.id);
         document.cookie = "accesstoken" + "=" + res.data.data.accesstoken;
         document.cookie = "refreshtoken" + "=" + res.data.data.refreshtoken;
         // console.log(document.cookie.split(" "));
@@ -33,7 +36,7 @@ function Login({ setHasAccessToken, setIsLogedIn, loginHandler }) {
       })
       .catch((err) => {
         console.log("login에러", err);
-        alert("로그인에 실패하였습니다.")
+        alert("로그인에 실패하였습니다.");
       });
   };
 

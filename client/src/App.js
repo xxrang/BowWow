@@ -17,26 +17,19 @@ export const END_POINTS = "http://ec2-15-165-235-48.ap-northeast-2.compute.amazo
 function App() {
 
   const [isLogedIn, setIsLogedIn] = useState(false);
-const [hasUserId, setHasUserId] = useState(undefined);
+  const [hasUserId, setHasUserId] = useState(undefined);
   const [postId, setPostId] = useState("");
   const [postsData, setPostsData] = useState(""); //홈 네브바에 따른 컨텐츠 보여주시
   const [navString, setNavString] = useState(""); //홈 네브바 선택 이름
   let history = useHistory();
 
+  console.log("hasUserId- app.js", hasUserId);
   /*로그인 성공했을때 네브바에 프로필 , 로그아웃 버튼 만들어야해 */ // undefined
-  console.log("islogin", isLogedIn);
+  // console.log("islogin", isLogedIn);
 
   // console.log("data------", postId);
   useEffect(() => {
-    // const { service, volunteer } = initialPosts; //데이터를 받아왔다 친다.
-    // console.log("app1:", postsData);
-    // console.log("app2:", navString);
-    // if (navString === "service" || navString === "") {
-    //   setPostsData(service);
-    // } else if (navString === "volunteer") {
-    //   setNavString("volunteer");
-    //   setPostsData(volunteer);
-    // }
+    
     if (navString === "" || navString === "service") {
       return axios
         .get(
@@ -48,7 +41,7 @@ const [hasUserId, setHasUserId] = useState(undefined);
           const data = res.data.data.posts;
           setPostsData(data);
         });
-    }else if (navString === "volunteer") {
+    } else if (navString === "volunteer") {
       return axios
         .get(`${END_POINTS}/volunteer`, { withCredentials: true })
         .then((res) => {
@@ -62,44 +55,49 @@ const [hasUserId, setHasUserId] = useState(undefined);
 
   //렌더링이 될때마다 키가 있는지 확인한다.
   useEffect(() => {
-
-    // console.log("다큐먼트 쿠키", document.cookie);
-    // console.log("accesstoken", document.cookie.split(" ")[1].split("=")[1].split(";")[0])
-    // console.log("refreshtoken", document.cookie.split(" ")[2].split("=")[1]);
-
-    axios.get(
-      `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
-      {
-        headers: {
-          accesstoken: document.cookie.split(" ")[1].split("=")[1],
-          refreshtoken: document.cookie.split(" ")[2].split("=")[1],
-        },
-      }
-    ).then((res) => {
-      if (hasUserId === res.data.data.userinfo.id) {
-        setIsLogedIn(true);
-      }
-    }).catch((err) => {
-      console.log("쿠키오류",err);
-    })
-
-
-    // const storageSavedAccessToken =
-    //   window.localStorage.getItem("accessToken") || undefined;
-    // // console.log(storageSavedAccessToken);
-    // setHasAccessToken(storageSavedAccessToken);
+    console.log("다큐먼트 쿠키", document.cookie.split("accesstoken="));
+    let accesstoken = document.cookie.includes("accesstoken")
+    let refreshtoken = document.cookie.includes("refreshtoken");
+    if (!accesstoken || !refreshtoken) {
+      axios
+        .get(
+          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+          {
+            headers: {
+              accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+              refreshtoken: document.cookie
+                .split("refreshtoken=")[1]
+                .split(";")[0],
+            },
+          }
+        )
+        .then((res) => {
+          if (hasUserId === res.data.data.userinfo.id) {
+            setIsLogedIn(true);
+          }
+        })
+        .catch((err) => {
+          console.log("쿠키오류", err);
+        });
+    } else {
+// console.log("accesstoken",document.cookie.split("accesstoken=")[1].split(";")[0]);
+// console.log("refreshtoken",document.cookie.split("refreshtoken=")[1].split(";")[0]);
+      return;
+    }
+    
   }, [hasUserId]);
   //login핸들러
-  const loginHandler = (hasAccessToken) => {
+  const loginHandler = (userInfoId) => {
     setIsLogedIn(true);
-    setHasUserId(hasAccessToken);
+    setHasUserId(userInfoId);
     console.log("로그인 핸드러", isLogedIn);
   };
   //logout핸들러
   const logoutHandler = () => {
     setHasUserId(undefined);
     setIsLogedIn(false);
-    window.localStorage.removeItem("accessToken");
+    document.cookie = `accesstoken=${null}`;
+    document.cookie = `refreshtoken=${null}`;
     window.location.href = "http://localhost:3000";
   };
 
@@ -129,7 +127,6 @@ const [hasUserId, setHasUserId] = useState(undefined);
               setNavString={setNavString}
               isLogedIn={isLogedIn}
               setIsLogedIn={setIsLogedIn}
-
             />
           </Route>
           <Route path="/postedit">
@@ -139,7 +136,7 @@ const [hasUserId, setHasUserId] = useState(undefined);
               setPostsData={setPostsData}
               setNavString={setNavString}
               postId={postId}
-              isLogedIn = {isLogedIn}
+              isLogedIn={isLogedIn}
             />
           </Route>
           <Route path="/profile">
@@ -148,20 +145,19 @@ const [hasUserId, setHasUserId] = useState(undefined);
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
-              isLogedIn = {isLogedIn}
-              setIsLogedIn ={setIsLogedIn}
+              isLogedIn={isLogedIn}
+              setIsLogedIn={setIsLogedIn}
             />
           </Route>
           <Route path="/profileedit">
             <ProfileEditPage
               setHasUserId={setHasUserId}
-
               logoutHandler={logoutHandler}
               setPostsData={setPostsData}
               setNavString={setNavString}
               setPostId={setPostId}
               postId={postId}
-              setIsLogedIn ={setIsLogedIn}
+              setIsLogedIn={setIsLogedIn}
             />
           </Route>
           <Route path="/posts">
@@ -172,15 +168,15 @@ const [hasUserId, setHasUserId] = useState(undefined);
               setNavString={setNavString}
               postId={postId}
               isLogedIn={isLogedIn}
-              setIsLogedIn = {setIsLogedIn}
+              setIsLogedIn={setIsLogedIn}
             />
           </Route>
           <Route path="/login">
             <LoginPage
               isLogedIn={isLogedIn}
               loginHandler={loginHandler}
-              setHasUserId={setHasUserId}
               hasUserId={hasUserId}
+              setHasUserId={setHasUserId}
               setPostsData={setPostsData}
               setNavString={setNavString}
               setIsLogedIn={setIsLogedIn}
