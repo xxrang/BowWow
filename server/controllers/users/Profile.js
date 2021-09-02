@@ -30,7 +30,6 @@ module.exports = (app) => {
             })
 
              if(data) {
-                 //delete data.dataValues.password
                  res.status(200).send({message: 'ok', data: data})
                  } else {
                  res.status(401).send({message: 'fail'})
