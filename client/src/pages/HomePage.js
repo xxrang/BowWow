@@ -8,7 +8,6 @@ import Footer from '../component/Footer'
 import Search from '../component/Search'
 
 function HomePage({
-  hasUserId,
   logoutHandler,
   setPostsData,
   postsData,
@@ -22,17 +21,16 @@ function HomePage({
   /*스크롤 상태저장*/
   const [ScrollY, setScrollY] = useState(0);
   /*맨 위로 이동*/
+
+  const navBar = document.getElementById("navBar")
   const handleClickForService = () => {
     window.scrollTo({
-      top: 940,
+      top: navBar.offsetTop,
       behavior: "smooth",
     });
-    // window.scrollTo({
-    //   top: service.offsetTop,
-    //   behavior: "smooth",
-    // });
-    setScrollY(940); // ScrollY 의 값을 초기화
+    setScrollY("navBar"); // ScrollY 의 값을 초기화
   };
+
   const handleClickSignup = () => {
     window.scrollTo({
       top: 0,
@@ -55,41 +53,22 @@ function HomePage({
     //console.log("ScrollY is ", ScrollY); // ScrollY가 변화할때마다 값을 콘솔에 출력
   }, [ScrollY]);
 
-  const [curNav, setCurNav] = useState(0);
-  const selectNavHandler = (idx) => {
-    setCurNav(idx);
-    //console.log(curNav)
-    console.log(idx);
-  };
+  
   //
   return (
     <>
       <Main handleClickForService={handleClickForService} />
       <NavBar
-        curNav={curNav}
-        selectNavHandler={selectNavHandler}
-        hasUserId={hasUserId}
         logoutHandler={logoutHandler}
-        setPostsData={setPostsData}
         setNavString={setNavString}
         isLogedIn={isLogedIn}
         handleTop={handleTop}
         handleClickSignup={handleClickSignup}
       />
       {navString === "service" || navString === "" ? (
-        <Service
-          postsData={postsData}
-          navString={navString}
-          setPostId={setPostId}
-          postId={postId}
-        />
+        <Service postsData={postsData} setPostId={setPostId} />
       ) : navString === "volunteer" ? (
-        <Volunteer
-          postsData={postsData}
-          navString={navString}
-          setPostId={setPostId}
-          postId={postId}
-        />
+        <Volunteer postsData={postsData} setPostId={setPostId} />
       ) : (
         <Search />
       )}

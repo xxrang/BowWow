@@ -10,7 +10,7 @@ function Modal({
   modalText
 }) {
   let history = useHistory();
-  
+  // console.log(modalSuccess);
   return (
     <>
     {openModal ? 
@@ -24,7 +24,7 @@ function Modal({
           <hr></hr>
           <button 
           className = 'modal-btn' 
-          onClick = {()=>{ modalSuccess===true ? window.location.replace('/') : history.go(-1) }}>
+                onClick={() => { modalSuccess === undefined ? closeModal() : modalSuccess===true ? window.location.replace('/') : history.go(-1) }}>
           확인</button>
         </div>
       </div>
