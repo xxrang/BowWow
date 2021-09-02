@@ -4,8 +4,16 @@ import UploadImg from "./UploadImg";
 import axios from "axios";
 import useInput from '../../hooks/useInput';
 import { useHistory } from "react-router-dom";
+import Modal from "../Modal";
 
-const PostEdit = ({ hasUserId, postId, setPostId }) => {
+const PostEdit = ({ postId, setPostId }) => {
+  const [modalSuccess, setModalSuccess] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+
+
   let history = useHistory();
   const [title, onChangeTitle, setTitle] = useInput("");
   const [category, onChangeCategory, setCategory] = useInput("");
@@ -30,7 +38,7 @@ const PostEdit = ({ hasUserId, postId, setPostId }) => {
   };
 
   //*데이터 편집 후 전송
-console.log("hasUserId", hasUserId);
+
   const patchHandler = useCallback(
     (e) => {
       // console.log(data)
@@ -48,7 +56,7 @@ console.log("hasUserId", hasUserId);
           },
         }
       ).then((res) => {
-        console.log("프로필에딧의 res.data:::", res.data);
+        // console.log("프로필에딧의 res.data:::", res.data);
           const userdata = new FormData();
                 userdata.append("title", title);
                 userdata.append("category", category);
@@ -60,7 +68,7 @@ console.log("hasUserId", hasUserId);
                 userdata.append("mobile", mobile);
                 userdata.append("userId", res.data.data.userinfo);
 
-        return axios
+        axios
           .patch(
             `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
             userdata,
@@ -70,24 +78,26 @@ console.log("hasUserId", hasUserId);
             }
           )
           .then((res) => {
-            console.log(res.data);
-            alert("게시글이 수정되었습니다.");
-            window.location.replace("/");
+            console.log("패치완료", res.data);
+            setModalSuccess(true);
+            setOpenModal(true);
+            // window.location.replace("/");
           })
           .catch((err) => {
             console.log("포스트 수정 patch오류:::", err);
-            alert(
-              "게시글 수정이 실패했습니다. 새로고침 후 다시 시도 해 주세요"
-            );
+            setModalSuccess(true);
+            setOpenModal(true);
           });
       }).catch((err) => {
         console.log("포스트 수정 auth오류:::", err);
+        setModalSuccess(false);
+        setOpenModal(true);
       })
 
       
         
     },
-    [title, category, date, location, imgCheck, content, mobile, postId]
+    [title, category, content, mobile]
   );
 
   const cancelHandler = () => {
@@ -98,6 +108,11 @@ console.log("hasUserId", hasUserId);
   // console.log("content", content)
   // console.log("postId", postId)
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+
+
     axios
       .get(
         `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
@@ -219,6 +234,16 @@ console.log("hasUserId", hasUserId);
           </div>
         </div>
       </form>
+      <Modal
+        openModal={openModal}
+        closeModal={closeModal}
+        modalSuccess={modalSuccess}
+        modalText={
+          modalSuccess === true
+            ? "게시물이 수정되었습니다."
+            : "게시글 수정에 실패했습니다."
+        }
+      />
     </StyledPostForm>
   );
 };

@@ -1,7 +1,5 @@
-import React, { useState, useCallback} from "react";
-import {
-  StyledPostForm,
-  TextArea,
+import React, { useState, useCallback, useEffect } from "react";
+import {StyledPostForm,TextArea,
 } from "./StyledPostForm";
 import UploadImg from './UploadImg';
 import { useHistory } from "react-router-dom";
@@ -9,10 +7,10 @@ import useInput from "../../hooks/useInput";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
+let imageFile;
 
-const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
+const PostForm = () => {
   const history = useHistory();
-  let imageFile;
   const [title, onChangeTitle] = useInput("");
   const [category, onChangeCategory] = useInput("");
   const [date, onChangeDate] = useInput("");
@@ -22,8 +20,7 @@ const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
   //* 이미지 미리보기
   const [image, setImage] = useState("");
   const [imgCheck, setImgCheck] = useState("false");
-  // console.log(image);
-
+  
   const imageHandler = (e) => {
     const reader = new FileReader();
 
@@ -39,25 +36,27 @@ const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
     setImage(e.target.files[0]);
     setImgCheck("true");
   };
+  
   //*데이터 편집 후 전송
   const postHandler = useCallback(
     (e) => {
       e.preventDefault();
-      
+
       axios
         .get(
           `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
           {
             headers: {
-
-              accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
-              refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
-
+              accesstoken: document.cookie
+                .split("accesstoken=")[1]
+                .split(";")[0],
+              refreshtoken: document.cookie
+                .split("refreshtoken=")[1]
+                .split(";")[0],
             },
           }
         )
         .then((res) => {
-
           console.log("postform/auth:", res.data.data.userinfo);
           console.log("image", e.target[0].files[0]);
           console.log("imagefile", imageFile);
@@ -95,13 +94,19 @@ const PostForm = ({ hasUserId, isLogedIn, setIsLogedIn }) => {
         });
     },
 
-    [title, mobile, content]
+    [title, mobile, content, category]
   );
 
   const cancelHandler = () => {
     alert("게시글 작성이 취소되었습니다.");
     history.goBack();
   };
+
+  useEffect(() => {
+      window.scrollTo({
+        top: 0
+      });
+  }, [])
 
   return (
     <StyledPostForm>

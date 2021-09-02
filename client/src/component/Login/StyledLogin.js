@@ -59,9 +59,9 @@ export const StyledLogin = styled.div`
     font-size: 16px;
     }
     >p{
-      width : 100%;
-      margin : 0;
-      padding : 0 0 0 12px;
+      width : 300px;
+      margin : 0 auto;
+      padding : 10px 0 0;
       text-align: left;
       color : red;
     }

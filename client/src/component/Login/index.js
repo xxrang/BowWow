@@ -1,22 +1,28 @@
-import React from 'react'
+import React , {useState} from 'react'
 import { useForm } from 'react-hook-form';
 import {StyledLogin} from './StyledLogin'
 import { Link, useHistory} from 'react-router-dom'
+import Modal  from '../Modal'
 import axios from 'axios';
-//import { initialState } from '../dummyData'
+
 axios.defaults.baseURL = "http://localhost:3000";
-function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
+function Login({ setIsLogedIn, loginHandler }) {
+  
+  // 모달
+  const [modalSuccess , setModalSuccess] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const closeModal = () => {
+    setOpenModal(false);
+  };
   let history = useHistory();
-  //? 로그인 완료시 모달 용
-  // const [signinSuccess, setSigninSuccess] = useState(false);
-  //formData
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    axios
+
+    return axios
       .post(
         "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/login",
         data,
@@ -27,18 +33,17 @@ function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
         // console.log("첫콘솔", res.data.data.accesstoken);
         // console.log("refresh", res.data.data.refreshtoken)
         // setHasAccessToken(res.data);
-
         // setIsLogedIn(res.data.data.userinfo.id);
         loginHandler(res.data.data.userinfo.id);
-        setHasUserId(res.data.data.userinfo.id);
-        document.cookie = "accesstoken" + "=" + res.data.data.accesstoken;
+        setIsLogedIn(true);
+        document.cookie = `accesstoken=${res.data.data.accesstoken}`;
         document.cookie = "refreshtoken" + "=" + res.data.data.refreshtoken;
-        // console.log(document.cookie.split(" "));
         history.push("/");
       })
       .catch((err) => {
         console.log("login에러", err);
-        alert("로그인에 실패하였습니다.");
+        setOpenModal(true)
+        setModalSuccess(false)
       });
   };
 
@@ -73,6 +78,14 @@ function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
           </Link>
         </form>
       </div>
+
+      <Modal 
+      openModal = {openModal}
+      closeModal = {closeModal}
+      modalSuccess = {modalSuccess}
+      modalText ={modalSuccess===true ? 
+        '로그인에 성공했습니다.' : '로그인에 실패했습니다.'}
+      />
     </StyledLogin>
   );
 }
