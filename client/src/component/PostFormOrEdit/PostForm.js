@@ -52,19 +52,12 @@ const PostForm = () => {
           `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
           {
             headers: {
-              accesstoken: document.cookie
-                .split("accesstoken=")[1]
-                .split(";")[0],
-              refreshtoken: document.cookie
-                .split("refreshtoken=")[1]
-                .split(";")[0],
+              accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+              refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
             },
           }
         )
         .then((res) => {
-          console.log("postform/auth:", res.data.data.userinfo);
-          console.log("image", e.target[0].files[0]);
-          console.log("imagefile", imageFile);
 
           const userdata = new FormData();
           userdata.append("title", title);
@@ -96,6 +89,7 @@ const PostForm = () => {
     },
 
     [title, mobile, content, category]
+
   );
 
   const cancelHandler = () => {
