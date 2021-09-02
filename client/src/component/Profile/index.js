@@ -5,12 +5,8 @@ import ProfileList from './ProfileList';
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const Profile = ({ hasAccessToken , isLogedIn ,setIsLogedIn }) => {
+const Profile = ({ hasAccessToken , isLogedIn }) => {
 
-
-  
-  // console.logconsole.log(showTime(date));("profile:", hasAccessToken);
-  // console.log("dummyuser:", dummyUser)
   const [userInfo, setUserInfo] = useState({})
   const [userPosts, setUserPosts] = useState([]);
   useEffect(() => {
@@ -25,14 +21,11 @@ const Profile = ({ hasAccessToken , isLogedIn ,setIsLogedIn }) => {
           },
         }
       ).then((res) => {
-        console.log("프로파일 auth:/userinfo.id", res.data.data.userinfo);
         return axios.get(
             `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile/info?id=${res.data.data.userinfo}`,
             { withCredentials: true }
           )
           .then((res) => {
-            console.log("프로파일.데이터", res.data.data);
-            
             setUserInfo({
               id: res.data.data.id,
               image: res.data.data.image,
@@ -43,10 +36,10 @@ const Profile = ({ hasAccessToken , isLogedIn ,setIsLogedIn }) => {
             setUserPosts(res.data.data.posts);
           })
           .catch((err) => {
-            console.log("프로파일 get요청 에러", err);
+            console.err(err);
           });
       }).catch((err) => {
-        console.log("프로파일 get/auth요청 에러", err);
+        console.err(err);
       });
     }
     }, [hasAccessToken, isLogedIn]);

@@ -19,7 +19,7 @@ function Modal({
         <div className = 'popup-box'>
           <button className = 'close-btn-x' 
           onClick = {closeModal}
-          >❌</button>
+          >X</button>
           <h1>{modalText}</h1>
           <hr></hr>
           <button 

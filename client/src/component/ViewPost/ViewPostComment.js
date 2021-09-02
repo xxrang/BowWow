@@ -1,8 +1,4 @@
 import React, { useCallback, useState } from "react";
-<<<<<<< HEAD
-=======
-import Modal from '../Modal'
->>>>>>> 25b04bcc38c0466cf7967b86e9d717c98bb95c9f
 import useInput from '../../hooks/useInput'
 import { StyledViewPostComment } from './StyledViewPost';
 import axios from 'axios';
@@ -56,7 +52,12 @@ function ViewPostComment({
               )
               .then((res) => {
                 // console.log("postsComments", res.data.data.comment);
+                if(res.data.data.comment.length === 1){
+                  console.log(res.data.data.comment)
+                setCommentInfo(res.data.data.comment[0].reverse());
+                }else{
                 setCommentInfo(res.data.data.comment.reverse());
+                }
               })
               .catch((err) => {
                 console.log(err);
@@ -116,6 +117,26 @@ function ViewPostComment({
     <StyledViewPostComment>
       <div className="post-comment-form-wrapper">
         <i className="fas fa-comment-dots"> 댓글 </i>
+        
+        <form
+          className="flex-box"
+          onSubmit={(e) => {
+            addCommentHandler(e);
+          }}
+        >
+          <textarea
+            required
+            ref={inputRef}
+            type="text"
+            name="comment"
+            onChange={onChangeComment}
+            value={comment}
+            className="post-comment-text"
+            placeholder="100자 이내로 댓글 입력해주세요."
+          />
+          <button onClick = {()=>{setOpenModal(true)}} 
+          className="post-comment-text-submit">입력</button>
+        </form>
 
         <div className="list-item-scroll">
           <ul className="post-comment-wrapper">
@@ -149,29 +170,7 @@ function ViewPostComment({
               })}
           </ul>
         </div>
-
-          <form
-          className="flex-box"
-          onSubmit={(e) => {
-            addCommentHandler(e);
-          }}
-        >
-          <textarea
-            required
-            ref={inputRef}
-            type="text"
-            name="comment"
-            onChange={onChangeComment}
-            value={comment}
-            className="post-comment-text"
-            placeholder="100자 이내로 댓글 입력해주세요."
-          />
-          <button onClick = {()=>{setOpenModal(true)}} className="post-comment-text-submit">입력</button>
-        </form>
       </div>
-<<<<<<< HEAD
-      <Modal openModal={openModal} closeModal={closeModal}></Modal>
-=======
 
       {!isLogedIn ? 
       <Modal 
@@ -185,10 +184,8 @@ function ViewPostComment({
       null
       }
 
->>>>>>> 25b04bcc38c0466cf7967b86e9d717c98bb95c9f
     </StyledViewPostComment>
   );
 }
 
 export default ViewPostComment
-

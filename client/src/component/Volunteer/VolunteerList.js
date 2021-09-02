@@ -6,7 +6,6 @@ import Fade from "react-reveal/Fade"
 const VolunteerList = ({slice ,setPostId }) => {
   let history = useHistory();
   //console.log(serviceImg)
-  console.log('=========',slice)
 
   const postClickHandler = (id) => {
     const dataId = id;

@@ -17,7 +17,7 @@ function HomePage({
   setPostId,
   postId,
   isLogedIn,
-  setIsLogedIn,
+  logutOpenModal
 }) {
   /*스크롤 상태저장*/
   const [ScrollY, setScrollY] = useState(0);
@@ -75,6 +75,7 @@ function HomePage({
         isLogedIn={isLogedIn}
         handleTop={handleTop}
         handleClickSignup={handleClickSignup}
+        logutOpenModal = {logutOpenModal}
       />
       {navString === "service" || navString === "" ? (
         <Service

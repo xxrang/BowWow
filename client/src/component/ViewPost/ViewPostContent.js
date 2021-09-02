@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { 
   StyledViewPostContent,
   StyledViewPostProfile,
@@ -8,27 +8,30 @@ import {
   from './StyledViewPost'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Modal from "../Modal";
 axios.defaults.withCredentials = true;
 
 function ViewPostContent({
-  postId,
   postInfo,
   userInfo,
   showButton,
   isLogedIn,
 }) {
+  const [modalSuccess, setModalSuccess] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+
   let history = useHistory();
   if (!postInfo && !userInfo && !postInfo) {
     return null;
   }
   const { nickname, userImage } = userInfo;
-
-  const { title, mobile, content, date, updatedAt, location, image, userId } = postInfo;
+  console.log('=========',postInfo)
+  const { post_id, title, mobile, content, date, updatedAt, location, image, userId } = postInfo;
   const update = (updatedAt || "").split("T")[0].replaceAll("-", ".");
-    // console.log(update);
-  // console.log("포스트컨텐트에:", postInfo);
-  // console.log(updatedAt);
-  // let newDate = calulateDate(updatedAt).then((res) => res);
+
   const deletePostHandler = async () => {
     if (isLogedIn) {
       return axios
@@ -50,24 +53,23 @@ function ViewPostContent({
           if (res.data.data.userinfo === userId) {
             return axios
               .delete(
-                `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`
+                `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${post_id}`
               )
               .then((res) => {
-                console.log("삭제", res.data);
-                alert("삭제되었습니다.");
-                window.location.replace("/");
+                setModalSuccess(true);
+                setOpenModal(true);
               });
           } else {
-            alert("게시물을 삭제할 수 없습니다.");
+            setModalSuccess(false);
+            setOpenModal(true);
           }
         })
         .catch((err) => {
           console.log(err);
-          alert("게시글 삭제에 실패했습니다.");
+          setModalSuccess(false);
+          setOpenModal(true);
         });
-    } else {
-      alert("로그인이 필요합니다.")
-    }
+    } 
   };
   return (
     <StyledViewPostContent>
@@ -118,6 +120,16 @@ function ViewPostContent({
           <div className="post-info-content">{content}</div>
         </div>
       </StyledViewPostContentOne>
+      <Modal
+        openModal={openModal}
+        closeModal={closeModal}
+        modalSuccess={modalSuccess}
+        modalText={
+          modalSuccess === true
+            ? "게시물이 삭제되었습니다."
+            : "게시글 삭제에 실패했습니다."
+        }
+      />
     </StyledViewPostContent>
   );
 }

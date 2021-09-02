@@ -29,20 +29,14 @@ function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
         { withCredentials: true }
       )
       .then((res) => {
-
-        // console.log("첫콘솔", res.data.data.accesstoken);
-        // console.log("refresh", res.data.data.refreshtoken)
-        // setHasAccessToken(res.data);
-        // setIsLogedIn(res.data.data.userinfo.id);
         loginHandler(res.data.data.userinfo.id);
         setHasUserId(res.data.data.userinfo.id);
         document.cookie = "accesstoken" + "=" + res.data.data.accesstoken;
         document.cookie = "refreshtoken" + "=" + res.data.data.refreshtoken;
-        // console.log(document.cookie.split(" "));
         history.push("/");
       })
       .catch((err) => {
-        console.log("login에러", err);
+        console.err(err);
         setOpenModal(true)
         setModalSuccess(false)
       });
@@ -69,7 +63,6 @@ function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
             type="password"
           />
           {errors.password && <p>정확한 비밀번호를 작성해주세요.</p>}
-          <button className="oath-btn">카카오</button>
 
           <button className="modal-btn" type="submit">
             로그인
@@ -84,11 +77,11 @@ function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
       openModal = {openModal}
       closeModal = {closeModal}
       modalSuccess = {modalSuccess}
-      modalText ={modalSuccess===true ? 
+      modalText ={ modalSuccess===true ? 
         '로그인에 성공했습니다.' : '로그인에 실패했습니다.'}
       />
     </StyledLogin>
-  );
+  );  
 }
 
 export default Login;

@@ -17,26 +17,28 @@ const NavBar = ({
 }) => {
 // console.log("navlogin", isLogedIn)
   const [openModal, setOpenModal] = useState(false);
+  const modalSuccess = true;
   const closeModal = () => {
-    setOpenModal((prev) => !prev);
+    setOpenModal(false);
   };
+
+  const logOut = () => {
+    logoutHandler();
+  }
 
   let history = useHistory();
 
   const selectNavHandler = (string) => {
-    console.log("네브바 선택::::", string);
     const postsString = string;
     setNavString(postsString);
     history.push("/");
   };
-
   const menu = [{ name: "service" }, { name: "search" }, { name: "volunteer" }];
-
   const accessPost = useCallback(() => {
     if (isLogedIn) {
       history.push("/postform");
     } else {
-      alert("로그인이 필요한 서비스입니다.");
+      setOpenModal(true);
     }
   }, [history, isLogedIn]);
 
@@ -60,7 +62,7 @@ const NavBar = ({
               </li>
             );
           })}
-          <button onClick={isLogedIn ? accessPost : closeModal}>
+          <button onClick={accessPost}>
             <li className="post">Post</li>
           </button>
         </div>
@@ -86,7 +88,7 @@ const NavBar = ({
             </Link>
 
             <Link to="/">
-              <button onClick={logoutHandler}>로그아웃</button>
+              <button onClick={logOut}>로그아웃</button>
             </Link>
           </div>
         )}
@@ -97,6 +99,8 @@ const NavBar = ({
       <Modal 
       openModal={openModal} 
       closeModal={closeModal}
+      modalSuccess  = {modalSuccess}
+      logOut = {logOut}
       modalText = '로그인이 필요한 서비스입니다.'
       >
       </Modal>

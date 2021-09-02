@@ -2,11 +2,8 @@ import React from 'react'
 import { StyledProfileList, StyledProfileListItem } from "./StyledProfile";
 
 const ProfileList = ({ userPosts }) => {
-
-  console.log("프로파일 리스트:", userPosts)
-  // if (userPosts.length === 0) return null;
+  
   if (userPosts.length === 0) return null;
-  // const update = (updatedAt || "").split("T")[0].replaceAll("-", ".");
   return (
     <StyledProfileList>
       <h2>내 글 목록</h2>
