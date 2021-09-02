@@ -15,23 +15,6 @@ function ViewPost({ postId, isLogedIn}) {
   const [userId, setUserId] = useState("");
   const [showButton, setShowButton] = useState(false);
 
-const getAuth = async () => {
-  return await axios
-    .get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`, {
-      headers: {
-        accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
-        refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
-      },
-    })
-    .then((res) => {
-      // console.log("auth", res.data.data);
-      setUserId(res.data.data.userinfo);
-    })
-    .catch((err) => {
-      console.log("auth에러", err);
-    });
-};
-
   useEffect(() => {
     inputRef.current.focus();
     axios
@@ -56,45 +39,46 @@ const getAuth = async () => {
           updatedAt: res.data.data.posts.updatedAt,
           userId: res.data.data.posts.user.id,
         });
-        // console.log('======왜안됨?===', res.data.data.comment)
-        if(res.data.data.comment.length === 1){
-          console.log(res.data.data.comment)
-        setCommentInfo(res.data.data.comment[0].reverse());
-        }else{
-        setCommentInfo(res.data.data.comment.reverse());
+        
+        if (res.data.data.comment.length === 1) {
+          setCommentInfo(res.data.data.comment[0].reverse());
+        } else {
+          setCommentInfo(res.data.data.comment.reverse());
         }
+        
+        let accesstoken = document.cookie.includes("accesstoken");
+        let refreshtoken = document.cookie.includes("refreshtoken");
 
-        return axios
-          .get(
-            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
-            {
+        if (!accesstoken || !refreshtoken) {
+          return;
+        } else {
+          axios
+            .get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`, {
               headers: {
-                accesstoken: document.cookie
-                  .split("accesstoken=")[1]
-                  .split(";")[0],
-                refreshtoken: document.cookie
-                  .split("refreshtoken=")[1]
-                  .split(";")[0],
+                accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
+                refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
               },
-            }
-          )
-          .then((res) => {
-            if (res.data.data.userinfo === userInfo.userId) {
-              setShowButton(true);
-            } else {
-              setShowButton(false);
-            }
-          })
-          .catch((err) => {
-            console.log("auth에러", err);
-          });
+            })
+            .then((res) => {
+              setUserId(res.data.data.userinfo);
+              if (res.data.data.userinfo === userInfo.userId) {
+                setShowButton(true);
+              } else {
+                setShowButton(false);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
       })
       .catch((err) => {
-        console.log("포스트보기요청 에러", err);
+        console.log(err)
       });
     
-    getAuth()
-  }, [postId, setCommentInfo, userInfo.userId]);
+
+  
+  }, [postId, userInfo.userId]);
 
   return (
     <StyledViewPost>

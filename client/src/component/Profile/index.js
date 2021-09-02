@@ -5,19 +5,25 @@ import ProfileList from './ProfileList';
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const Profile = ({ hasAccessToken , isLogedIn }) => {
-
-  const [userInfo, setUserInfo] = useState({})
+const Profile = ({ isLogedIn, setPostId }) => {
+  // console.logconsole.log(showTime(date));("profile:", hasAccessToken);
+  // console.log("dummyuser:", dummyUser)
+  const [userInfo, setUserInfo] = useState({});
   const [userPosts, setUserPosts] = useState([]);
-  useEffect(() => {
-    
-    if (isLogedIn) {
-      axios.get(
+      useEffect(() => {
+        window.scrollTo({
+          top: 0,
+      });
+
+    axios
+      .get(
         `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
         {
           headers: {
             accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
-            refreshtoken: document.cookie.split("refreshtoken=")[1].split(";")[0],
+            refreshtoken: document.cookie
+              .split("refreshtoken=")[1]
+              .split(";")[0],
           },
         }
       ).then((res) => {
@@ -41,15 +47,14 @@ const Profile = ({ hasAccessToken , isLogedIn }) => {
       }).catch((err) => {
         console.err(err);
       });
-    }
-    }, [hasAccessToken, isLogedIn]);
-    
+  }, []);
+
   return (
     <StyeldProfile>
-      <ProfileInfo userInfo={userInfo} isLogedIn={isLogedIn} />
-      <ProfileList userPosts={userPosts} isLogedIn={isLogedIn} />
+      <ProfileInfo userInfo={userInfo} />
+      <ProfileList userPosts={userPosts} setPostId={setPostId} />
     </StyeldProfile>
   );
-}
+};
 
 export default Profile

@@ -4,9 +4,9 @@ import {StyledLogin} from './StyledLogin'
 import { Link, useHistory} from 'react-router-dom'
 import Modal  from '../Modal'
 import axios from 'axios';
-//import { initialState } from '../dummyData'
+
 axios.defaults.baseURL = "http://localhost:3000";
-function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
+function Login({ setIsLogedIn, loginHandler }) {
   
   // 모달
   const [modalSuccess , setModalSuccess] = useState(false);
@@ -30,8 +30,8 @@ function Login({ setHasUserId, setIsLogedIn, loginHandler }) {
       )
       .then((res) => {
         loginHandler(res.data.data.userinfo.id);
-        setHasUserId(res.data.data.userinfo.id);
-        document.cookie = "accesstoken" + "=" + res.data.data.accesstoken;
+        setIsLogedIn(true);
+        document.cookie = `accesstoken=${res.data.data.accesstoken}`;
         document.cookie = "refreshtoken" + "=" + res.data.data.refreshtoken;
         history.push("/");
       })

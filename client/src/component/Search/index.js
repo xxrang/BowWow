@@ -6,7 +6,12 @@ import SearchMapList from './SearchMapList'
 
 function Search() {
   const inputRef = useRef();
-  useEffect(()=>{
+  useEffect(() => {
+    window.scrollTo({
+      top: 940,
+      behavior: "smooth",
+    });
+
     inputRef.current.focus();
   })
 

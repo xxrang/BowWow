@@ -4,13 +4,12 @@ import { ErrorMessage } from "../ErrorMessage";
 import camera from "../../images/bros_blank.jpeg";
 import UserImgUpload from "./UserImgUpload";
 import useInput from "../../hooks/useInput";
-import Modal from '../Modal'
+import Modal from "../Modal";
 import axios from "axios";
 
 const SignUp = () => {
-
-  // // 모달
-  const [modalSuccess , setModalSuccess] = useState(false);
+  // 모달
+  const [modalSuccess, setModalSuccess] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const closeModal = () => {
     setOpenModal(false);
@@ -27,7 +26,6 @@ const SignUp = () => {
         setUserImage(reader.result);
       }
     };
-    console.log(e.target.files);
     reader.readAsDataURL(e.target.files[0]);
     setUserImage(e.target.files[0]);
     setImgCheck("true");
@@ -44,13 +42,12 @@ const SignUp = () => {
   const [passwordRegError, setPasswordRegError] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  
+
   const onChangePassword = useCallback((e) => {
     setPassword(e.target.value);
     let pwRegExp = /^[a-zA-Z0-9]{6,16}$/;
-    console.log(pwRegExp.test(e.target.value));
     setPasswordRegError(!pwRegExp.test(e.target.value));
-},[])
+  }, []);
 
   const onChangePasswordCheck = useCallback(
     (e) => {
@@ -86,15 +83,13 @@ const SignUp = () => {
           }
         )
         .then((res) => {
-          console.log(res.data);
-          // alert("회원가입에 성공하였습니다.");
-          // window.location.replace("/");
           setModalSuccess(true)
         })
         .catch((err) => {
           console.log(err);
           alert("중복된 이메일이 있습니다. 다시 입력해주세요.");
           setModalSuccess(false);
+          setOpenModal(true);
         });
 
       //중복된 이메일이 있습니다는 뜨는데, 회원가입 완료시에는 다른메시지가 뜨게하고, 홈으로이동
@@ -106,7 +101,7 @@ const SignUp = () => {
     <StyledSignUp>
       <form
         onSubmit={(e) => {
-          signupHandler(e);
+          signupHandler(e)
         }}
       >
         <label htmlFor="email">이메일</label>
@@ -162,7 +157,7 @@ const SignUp = () => {
         />
         <div className="button-wapper">
           <button type="submit">확인</button>
-          <button 
+          <button
             onClick={() => {
               window.history.back();
             }}

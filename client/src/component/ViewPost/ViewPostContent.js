@@ -11,6 +11,7 @@ import axios from 'axios';
 import Modal from "../Modal";
 axios.defaults.withCredentials = true;
 
+
 function ViewPostContent({
   postInfo,
   userInfo,
@@ -28,7 +29,6 @@ function ViewPostContent({
     return null;
   }
   const { nickname, userImage } = userInfo;
-  console.log('=========',postInfo)
   const { post_id, title, mobile, content, date, updatedAt, location, image, userId } = postInfo;
   const update = (updatedAt || "").split("T")[0].replaceAll("-", ".");
 
@@ -49,7 +49,6 @@ function ViewPostContent({
           }
         )
         .then((res) => {
-          console.log("viewpost-content-auth--", res.data.data);
           if (res.data.data.userinfo === userId) {
             return axios
               .delete(
@@ -65,7 +64,6 @@ function ViewPostContent({
           }
         })
         .catch((err) => {
-          console.log(err);
           setModalSuccess(false);
           setOpenModal(true);
         });
