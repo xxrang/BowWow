@@ -14,9 +14,6 @@ const ProfileList = ({ userPosts, setPostId }) => {
       </StyledProfileList>
     );
   }
-  // const update = (updatedAt || "").split("T")[0].replaceAll("-", ".");
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const postClickHandler = (id) => {
     const dataId = id;
     setPostId(dataId);

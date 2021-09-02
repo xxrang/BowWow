@@ -24,6 +24,7 @@ export const StyledService = styled.section`
     
   width: 100%;
   height: 90vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;

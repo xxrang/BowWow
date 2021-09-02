@@ -58,6 +58,7 @@ const PostForm = () => {
           }
         )
         .then((res) => {
+
           const userdata = new FormData();
           userdata.append("title", title);
           userdata.append("category", category);
@@ -87,7 +88,8 @@ const PostForm = () => {
         });
     },
 
-    [title, mobile, content ]
+    [title, mobile, content, category]
+
   );
 
   const cancelHandler = () => {
