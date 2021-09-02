@@ -41,11 +41,11 @@ const Profile = ({ isLogedIn, setPostId }) => {
             });
             setUserPosts(res.data.data.posts);
           })
-          .catch((err) => {
-            console.err(err);
+          .catch((err) => { 
+            console.log(err);
           });
       }).catch((err) => {
-        console.err(err);
+          console.log(err);
       });
   }, []);
 
