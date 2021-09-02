@@ -1,4 +1,4 @@
-const { checkRefresh, generateAccessToken, sendAccessToken, checkAccess, generateRefreshToken, sendRefreshToken } = require('../../controllers/tokenFunctions');
+const { checkRefresh, generateAccessToken, sendAccessToken, checkAccess} = require('../../controllers/tokenFunctions');
 
 module.exports = async (req, res) => {
     

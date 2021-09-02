@@ -14,11 +14,11 @@ module.exports = {
     },
 
     sendAccessToken: (res, accessToken) => {
-        res.cookie('accessToken', accessToken, {domain:'.eteammerge',httpOnly:true,path:'/',secure:true,sameSite:'none' })
+        res.cookie('accessToken', accessToken, {httpOnly:true,path:'/',secure:true,sameSite:'none' })
     },
 
     sendRefreshToken : (res, refreshToken) => {
-        res.cookie('refreshToken', refreshToken, {domain:'.eteammerge',httpOnly:true,path:'/',secure:true,sameSite:'none' })
+        res.cookie('refreshToken', refreshToken, {httpOnly:true,path:'/',secure:true,sameSite:'none' })
     },
 
     checkRefresh: (refreshToken) => {

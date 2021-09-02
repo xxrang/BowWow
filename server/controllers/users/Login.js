@@ -13,10 +13,6 @@ module.exports = async (req, res) => {
         res.status(404).send({message: 'invalid user'})
     } else {
         delete data.dataValues.password
-        // delete data.dataValues.image
-        // delete data.dataValues.introduce
-        // delete data.dataValues.updatedAt
-        // delete data.dataValues.nickname
         const accesstoken = generateAccessToken(data.dataValues); //id, email, createdAt
         const refreshtoken = generateRefreshToken(data.dataValues);
         sendAccessToken(res, accesstoken);
