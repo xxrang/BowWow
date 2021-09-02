@@ -83,7 +83,7 @@ const PostForm = () => {
             });
         })
         .catch((err) => {
-          console.err(err);
+          console.log(err);
         });
     },
 
