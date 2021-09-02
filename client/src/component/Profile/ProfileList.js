@@ -2,11 +2,6 @@ import React from 'react'
 import { useHistory } from 'react-router-dom';
 import { StyledProfileList, StyledProfileListItem } from "./StyledProfile";
 
-<<<<<<< HEAD
-const ProfileList = ({ userPosts }) => {
-  
-  if (userPosts.length === 0) return null;
-=======
 const ProfileList = ({ userPosts, setPostId }) => {
   let history = useHistory();
   // console.log("프로파일 리스트:", userPosts);
@@ -27,7 +22,6 @@ const ProfileList = ({ userPosts, setPostId }) => {
     setPostId(dataId);
     return history.push(`/posts/${id}`);
   };
->>>>>>> 1497b9376901e1cd5947c60cc045599807ca52c9
   return (
     <StyledProfileList>
       <h2>내 글 목록</h2>
