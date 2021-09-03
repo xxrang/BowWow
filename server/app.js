@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cors({
   origin: true,
-  //origin:'http://localhost:4000'
+  //origin:'https://eteammerge.ga'
   credentials: true,
   'Access-Control-Expose-Headers': 'Set-Cookie',
   methods: ['GET','POST','OPTIONS','DELETE','PATCH']
@@ -32,19 +32,13 @@ app.get("/", (req, res) => {
 /** 유저 관련 API **/
 app.use('/users/signup',controllers.signup); //회원가입
 app.post('/users/login', controllers.login); //로그인
-app.post('/users/logout', controllers.signout); //로그아웃
-app.get('/email_check', controllers.email_check); //이메일 중복확인
-app.get('/nickname', controllers.nickname); //닉네임 중복확인
 
-/** 유저 d 마이페이지 API **/
+/** 유저 마이페이지 API **/
 const profile = require('./controllers/users/Profile')(app);
 app.use('/profile', profile);
 
 /** 인증 API **/
 app.get('/auth', controllers.auth); //토큰 인증 관련
-
-/** 지도 API **/
-app.get('/shelter', controllers.search); //지도 API
 
 /** 유기견 관련 API */
 const service = require('./controllers/posts/Service_list')(app);

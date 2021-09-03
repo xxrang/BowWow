@@ -5,10 +5,9 @@ const router = require('express').Router();
 const defaultImage = 'https://bowwow-resource.s3.ap-northeast-2.amazonaws.com/bros_blank.jpeg';
 
  module.exports =
-// = async (req, res) => {
 router.post('/', upload.single('input-image'), async (req, res) => { 
 const { email, nickname, password, introduce} = req.body;
-console.log(req.body)
+
  if(!email || !password ){
      return res.status(422).json({message: 'insufficient parameters supplied'});
      //클라이언트에서 이메일하고 비번 안 넘어온다면
