@@ -48,11 +48,9 @@ function ViewPostComment({
                 `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${postId}`
               )
               .then((res) => {
-                if (res.data.data.comment.length === 1) {
-                  setCommentInfo(res.data.data.comment[0].reverse());
-                } else {
+             
                   setCommentInfo(res.data.data.comment.reverse());
-                }
+           
               })
               .catch((err) => {
               });

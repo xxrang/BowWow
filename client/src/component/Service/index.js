@@ -3,7 +3,7 @@ import { StyledService } from "./StyledService";
 import ServiceList from "./ServiceList";
 // import axios from "axios";
 
-const Service = ({ postsData, setPostId}) => {
+const Service = ({ postsData, setPostId, navString}) => {
   
   const [maxDogList, setMaxDogList] = useState(9);
   const [slice, setSlice] = useState([]);
@@ -14,10 +14,11 @@ const Service = ({ postsData, setPostId}) => {
   };
 
   useEffect(() => {
+   if(navString === 'service')
     window.scrollTo({
-      top: 1100,
+      top: 0,
       behavior: "smooth",
-    });
+    }, [navString]);
 
     if (postsData) {
       setSlice(postsData.slice(0, maxDogList));
