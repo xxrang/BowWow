@@ -17,7 +17,6 @@ app.use(cors({
   origin: true,
   //origin:'https://eteammerge.ga'
   credentials: true,
-  'Access-Control-Expose-Headers': 'Set-Cookie',
   methods: ['GET','POST','OPTIONS','DELETE','PATCH']
 }))
 
@@ -26,7 +25,6 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
 
 /** 유저 관련 API **/
 app.use('/users/signup',controllers.signup); //회원가입
