@@ -36,7 +36,7 @@ function ViewPostContent({
     if (isLogedIn) {
       return axios
         .get(
-          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+          `https://bowapi.shop/auth`,
           {
             headers: {
               accesstoken: document.cookie
@@ -52,7 +52,7 @@ function ViewPostContent({
           if (res.data.data.userinfo === userId) {
             return axios
               .delete(
-                `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${post_id}`
+                `https://bowapi.shop/posts?id=${post_id}`
               )
               .then((res) => {
                 setModalSuccess(true);

@@ -17,7 +17,7 @@ const Profile = ({ isLogedIn, setPostId }) => {
 
     axios
       .get(
-        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+        `https://bowapi.shop/auth`,
         {
           headers: {
             accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
@@ -28,7 +28,7 @@ const Profile = ({ isLogedIn, setPostId }) => {
         }
       ).then((res) => {
         return axios.get(
-            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile/info?id=${res.data.data.userinfo}`,
+            `https://bowapi.shop/profile/info?id=${res.data.data.userinfo}`,
             { withCredentials: true }
           )
           .then((res) => {

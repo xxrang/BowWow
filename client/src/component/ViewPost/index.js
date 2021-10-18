@@ -22,7 +22,7 @@ function ViewPost({ postId, isLogedIn}) {
     });
     axios
       .get(
-        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
+        `https://bowapi.shop/posts?id=${postId}`,
         { withCredentials: true }
       )
       .then((res) => {

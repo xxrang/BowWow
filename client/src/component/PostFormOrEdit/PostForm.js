@@ -49,7 +49,7 @@ const PostForm = () => {
 
       axios
         .get(
-          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+          `https://bowapi.shop/auth`,
           {
             headers: {
               accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
@@ -72,7 +72,7 @@ const PostForm = () => {
 
           axios
             .post(
-              `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts`,
+              `https://bowapi.shop/posts`,
               userdata,
               { headers: { "Content-Type": "multipart/form-data" } }
             )

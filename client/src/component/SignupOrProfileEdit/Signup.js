@@ -75,7 +75,7 @@ const SignUp = () => {
       userdate.append("imgCheck", imgCheck);
       axios
         .post(
-          "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/signup",
+          "https://bowapi.shop/users/signup",
           userdate,
           {
             headers: { "Content-Type": "multipart/form-data" },

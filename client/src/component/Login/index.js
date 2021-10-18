@@ -5,7 +5,7 @@ import { Link, useHistory} from 'react-router-dom'
 import Modal  from '../Modal'
 import axios from 'axios';
 
-axios.defaults.baseURL = "http://localhost:3000";
+//axios.defaults.baseURL = "http://localhost:3000";
 function Login({ setIsLogedIn, loginHandler }) {
   
   // 모달
@@ -24,7 +24,7 @@ function Login({ setIsLogedIn, loginHandler }) {
 
     return axios
       .post(
-        "http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/users/login",
+        "https://bowapi.shop/users/login",
         data,
         { withCredentials: true }
       )

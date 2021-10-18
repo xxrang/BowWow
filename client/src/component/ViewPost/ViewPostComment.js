@@ -35,7 +35,7 @@ function ViewPostComment({
         };
         axios
           .post(
-            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments`,
+            `https://bowapi.shop/comments`,
             userData,
             {
               headers: { "Content-Type": "application/json" },
@@ -45,7 +45,7 @@ function ViewPostComment({
             setComment("");
             axios
               .get(
-                `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${postId}`
+                `https://bowapi.shop/comments?id=${postId}`
               )
               .then((res) => {
              
@@ -69,7 +69,7 @@ function ViewPostComment({
 
       return axios
         .get(
-          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+          `https://bowapi.shop/auth`,
           {
             headers: {
               accesstoken: document.cookie
@@ -85,7 +85,7 @@ function ViewPostComment({
           if (res.data.data.userinfo === id) {
             return axios
               .delete(
-                `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/comments?id=${comment_id}`,
+                `https://bowapi.shop/comments?id=${comment_id}`,
                 {
                   headers: { "Content-Type": "application/json" },
                 }

@@ -39,7 +39,7 @@ const PostEdit = ({ postId, setPostId }) => {
     (e) => {
       e.preventDefault();
       axios.get(
-        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+        `https://bowapi.shop/auth`,
         {
           headers: {
             accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
@@ -62,7 +62,7 @@ const PostEdit = ({ postId, setPostId }) => {
 
         axios
           .patch(
-            `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
+            `https://bowapi.shop/posts?id=${postId}`,
             userdata,
             {
               headers: { "Content-Type": "multipart/form-data" },
@@ -99,7 +99,7 @@ const PostEdit = ({ postId, setPostId }) => {
 
     axios
       .get(
-        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/posts?id=${postId}`,
+        `https://bowapi.shop/posts?id=${postId}`,
         { withCredentials: true }
       )
       .then((res) => {

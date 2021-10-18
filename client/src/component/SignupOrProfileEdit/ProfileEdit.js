@@ -77,7 +77,7 @@ const ProfileEdit = () => {
       userdata.append("input-image", e.target[3].files[0]);
       userdata.append("imgCheck", imgCheck);
 
-      axios.get(`http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+      axios.get(`https://bowapi.shop/auth`,
         {
           headers: {
             accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
@@ -86,7 +86,7 @@ const ProfileEdit = () => {
         }
       ).then((res) => {
         return axios.patch(
-          `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=${res.data.data.userinfo}`,
+          `https://bowapi.shop/profile?id=${res.data.data.userinfo}`,
           //id에 어세스토큰 해독하고 유저아이들
           userdata,
           {
@@ -112,7 +112,7 @@ const ProfileEdit = () => {
         top: 0,
       });
     axios.get(
-      `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/auth`,
+      `https://bowapi.shop/auth`,
       {
         headers: {
           accesstoken: document.cookie.split("accesstoken=")[1].split(";")[0],
@@ -121,7 +121,7 @@ const ProfileEdit = () => {
       }
     ).then((res) => {
       return axios.get(
-        `http://ec2-15-165-235-48.ap-northeast-2.compute.amazonaws.com/profile?id=${res.data.data.userinfo}`,
+        `https://bowapi.shop/profile?id=${res.data.data.userinfo}`,
         {
           withCredentials: true,
         }
